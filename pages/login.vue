@@ -28,6 +28,9 @@
 
 <script>
 export default {
+  async fetch (context) {
+    await context.store.dispatch('getNavigationData')
+  },
   computed: {
     welcomeMsg () {
       return this.entries[Math.floor(Math.random() * this.entries.length)]
@@ -74,6 +77,9 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    fetch () {
+      this.$store.dispatch('getNavigationData')
     }
   }
 }

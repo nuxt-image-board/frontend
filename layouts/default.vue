@@ -22,6 +22,9 @@ export default {
     NavbarUp,
     NavbarUpNoLogin,
     NavbarDown
+  },
+  serverPrefetch () {
+    return this.$store.dispatch('getNavigations')
   }
 }
 </script>

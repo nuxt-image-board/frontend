@@ -29,7 +29,7 @@
                   </div>
               </div>
               <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-                  <nuxt-link to="/search" class="navbar-item is-hoverable has-text-white">
+                  <nuxt-link to="/search/list" class="navbar-item is-hoverable has-text-white">
                       <span class="icon"><i class="fas fa-list"></i></span>
                       <span>一覧から探す</span>
                   </nuxt-link>
@@ -39,11 +39,11 @@
                         <span>キャラから探す</span>
                     </a>
                     <div class="navbar-dropdown is-boxed" v-bind:class="{'is-hidden-mobile': !openChara}">
-                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="chara in characters"  :key="chara.name" to="/">
+                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="chara in characters"  :key="chara.name" :to='"/search/chara?id="+chara.id'>
                         {{chara.name}} <span class="tag is-light">{{chara.count}}</span>
                       </nuxt-link>
                       <hr class="navbar-divider">
-                      <nuxt-link to="/characters" class="navbar-item has-text-white">
+                      <nuxt-link to="/list/character" class="navbar-item has-text-white">
                         もっと見る
                       </nuxt-link>
                     </div>
@@ -54,11 +54,11 @@
                       <span>タグから探す</span>
                     </a>
                     <div class="navbar-dropdown is-boxed" v-bind:class="{'is-hidden-mobile': !openTag}">
-                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="tag in tags" :key="tag.name" to="/">
+                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="tag in tags" :key="tag.name" :to='"/search/tag?id="+tag.id'>
                         {{tag.name}} <span class="tag is-light">{{tag.count}}</span>
                       </nuxt-link>
                       <hr class="navbar-divider">
-                      <nuxt-link to="/tags" class="navbar-item has-text-white">
+                      <nuxt-link to="/list/tag" class="navbar-item has-text-white">
                         もっと見る
                       </nuxt-link>
                     </div>
@@ -69,11 +69,11 @@
                       <span>絵師から探す</span>
                     </a>
                     <div class="navbar-dropdown is-boxed has-text-white" v-bind:class="{'is-hidden-mobile': !openArtist}">
-                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="artist in artists" :key="artist.name" to="/">
+                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="artist in artists" :key="artist.name" :to='"/search/artist?id="+artist.id'>
                         {{artist.name}} <span class="tag is-light">{{artist.count}}</span>
                       </nuxt-link>
                       <hr class="navbar-divider">
-                      <nuxt-link to="/artists" class="navbar-item has-text-white">
+                      <nuxt-link to="/list/artist" class="navbar-item has-text-white">
                         もっと見る
                       </nuxt-link>
                     </div>
@@ -83,7 +83,7 @@
                 <div class="navbar-item">
                     <div class="field is-grouped">
                       <p class="control">
-                        <nuxt-link to="/mypage" class="button is-outlined">
+                        <nuxt-link to="/profile" class="button is-outlined">
                           <span class="icon">
                             <i class="fas fa-users"></i>
                           </span>
@@ -101,25 +101,23 @@
 
 <script>
 export default {
-  async mounted () {
-    const [characters, artists, tags] = await Promise.all([
-      this.$axios.get('http://localhost:5000/navigations/characters', { useCache: true }),
-      this.$axios.get('http://localhost:5000/navigations/artists', { useCache: true }),
-      this.$axios.get('http://localhost:5000/navigations/tags', { useCache: true })
-    ])
-    this.characters = characters.data.data
-    this.artists = artists.data.data
-    this.tags = tags.data.data
-  },
   data () {
     return {
       openMenu: false,
       openChara: false,
       openTag: false,
-      openArtist: false,
-      characters: [],
-      artists: [],
-      tags: []
+      openArtist: false
+    }
+  },
+  computed: {
+    characters () {
+      return this.$store.state.characters
+    },
+    tags () {
+      return this.$store.state.tags
+    },
+    artists () {
+      return this.$store.state.artists
     }
   }
 }

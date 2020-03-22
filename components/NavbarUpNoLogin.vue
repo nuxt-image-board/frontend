@@ -3,9 +3,9 @@
 <nav class="navbar">
   <div class="container">
     <div class="navbar-brand">
-      <a class="navbar-item has-text-white" href="index.html" style="font-weight:bold;">
+      <nuxt-link class="navbar-item has-text-white" to="/login" style="font-weight:bold;">
         ***REMOVED***
-      </a>
+      </nuxt-link>
       <span class="navbar-burger burger has-text-white" data-target="navMenu">
         <span></span>
         <span></span>

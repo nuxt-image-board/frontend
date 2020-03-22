@@ -1,36 +1,42 @@
+import axios from 'axios'
+
 // 状態管理したい要素に名前をつけて、stateとしてexportする
 export const state = () => ({
-  navigations: {
-    characters: '',
-    tags: '',
-    artists: ''
-  }
+  // 'hogeFromStore' という名前の状態を管理する
+  characters: []
 })
 
 // 状態を変更する処理は mutationとしてexportする
 export const mutations = {
   // ここでは hogeFromStore の状態（値）を変更する処理を定義
-  setCharactersNavigationData (state, value) {
-    state.navigations.characters = value
-  },
-  setTagsNavigationData (state, value) {
-    state.navigations.tags = value
-  },
-  setArtistsNavigationData (state, value) {
-    state.navigations.artists = value
+  setNavigations (state, payload) {
+    state.characters = payload.characters
+    state.tags = payload.tags
+    state.artists = payload.artists
   }
 }
 
 // 実際に各コンポーネントから呼び出す処理をactionとしてexportする
 export const actions = {
-  async getNavigationData ({ commit }) {
+  async getNavigations ({ commit }) {
+    const client = axios.create({
+      baseURL: 'http://localhost:5000/',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ***REMOVED***'
+      },
+      data: {}
+    })
+    // コミットすることで状態変更が反映される
     const [characters, tags, artists] = await Promise.all([
-      this.$axios.get('/navigations/characters'),
-      this.$axios.get('/navigations/tags'),
-      this.$axios.get('/navigations/artists')
+      client.get('navigations/characters'),
+      client.get('navigations/tags'),
+      client.get('navigations/artists')
     ])
-    commit('setCharactersNavigationData', characters)
-    commit('setTagsNavigationData', tags)
-    commit('setArtistsNavigationData', artists)
+    commit('setNavigations', {
+      characters: characters.data.data,
+      tags: tags.data.data,
+      artists: artists.data.data
+    })
   }
 }
