@@ -34,7 +34,7 @@ export default {
   ],
   data () {
     return {
-      artAddress: '/search/' + this.pageType + '?id=' + this.result.id
+      artAddress: '/search/' + this.pageType + '/' + this.result.id
     }
   }
 }

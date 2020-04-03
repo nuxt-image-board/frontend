@@ -6,7 +6,6 @@
 :SelectedPageFromProps="SelectedPage"
 :totalPage="totalPage"
 :isSearchPage="isSearchPage"
-:pageType="pageType"
 :SelectedSortFromProps="SelectedSort" />
 </template>
 
@@ -18,25 +17,25 @@ export default {
     List
   },
   async asyncData ({ $axios, route }) {
-    const endpoint = '/catalog/tags'
+    const endpoint = '/search/artist'
+    const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortNum = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
     const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
     const sort = (sortNum <= 1) ? 'd'
       : (sortNum <= 3) ? 'c'
         : 'l'
-    const params = { sort, order, page }
+    const params = { sort, order, page, id }
     const response = await $axios.get(endpoint, { params })
     const data = response.data.data
     return {
       endpoint,
-      NotificationTitle: 'タグから検索',
-      results: data,
+      NotificationTitle: '作者さんから検索 ' + data.title + ' ' + data.count + '件',
+      results: data.imgs,
       SelectedPage: page,
       totalPage: data.pages,
-      pageType: 'tag',
       SelectedSort: sortNum,
-      isSearchPage: false
+      isSearchPage: true
     }
   },
   async fetch (context) {

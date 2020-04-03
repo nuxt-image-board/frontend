@@ -5,11 +5,13 @@
 :resultsFromProps="results"
 :SelectedPageFromProps="SelectedPage"
 :totalPage="totalPage"
+:isSearchPage="isSearchPage"
+:pageType="pageType"
 :SelectedSortFromProps="SelectedSort" />
 </template>
 
 <script>
-import List from '~/components/page/list/List.vue'
+import List from '~/components/page/List.vue'
 
 export default {
   components: {
@@ -32,7 +34,9 @@ export default {
       results: data,
       SelectedPage: page,
       totalPage: data.pages,
-      SelectedSort: sortNum
+      pageType: 'character',
+      SelectedSort: sortNum,
+      isSearchPage: false
     }
   },
   async fetch (context) {

@@ -5,7 +5,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_name || '',
+    title: '***REMOVED***' || process.env.npm_package_name,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -52,44 +52,30 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/auth',
-    '@nuxtjs/apollo'
+    '@nuxtjs/auth'
   ],
   /*
   ** Authorization
   */
   auth: {
-    strategies: {
-        auth0: {
-          domain: 'dev-chino.auth0.com',  // 追加
-          client_id: 'aLKpGIP4XakfRSsNwwBaDSlaiN9XIFPb'  // 追加
-        }
-    },
     redirect: {
       login: '/login',  // 未ログイン時のリダイレクト先
-      logout: '/logout',  // ログアウト処理を実行した直後のリダイレクト先
-      callback: '/callback',  // コールバックURL
+      logout: '/login',  // ログアウト処理を実行した直後のリダイレクト先
+      callback: false,  // コールバックURL
       home: '/',  // ログイン後に遷移するページ
     },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'accounts/login/form', method: 'post', propertyName: 'apiKey' },
+          user: { url: 'accounts/me', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
+    }
   },
   router: {
     middleware: 'auth'
-  },
-  /*
-  ** Apollo GraphQL connecter
-  ** See https://takumon.com/nuxt-apollo-with-graphpack/
-  */
-  apollo: {
-    clientConfigs: {
-      default: {
-        // Graphpack側のエンドポイントを指定します。
-        httpEndpoint: 'http://localhost:1337/graphql',
-        /* Subscription用にWebSocketの設定も追加します。
-        ** wsEndpoint: 'ws://localhost:1337/graphql',
-        ** websocketsOnly: true
-		*/
-      }
-    }
   },
   /*
   ** Axios module configuration

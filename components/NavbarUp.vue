@@ -39,7 +39,7 @@
                         <span>キャラから探す</span>
                     </a>
                     <div class="navbar-dropdown is-boxed" v-bind:class="{'is-hidden-mobile': !openChara}">
-                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="chara in characters"  :key="chara.name" :to='"/search/chara?id="+chara.id'>
+                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="chara in characters"  :key="chara.name" :to='"/search/character/"+chara.id'>
                         {{chara.name}} <span class="tag is-light">{{chara.count}}</span>
                       </nuxt-link>
                       <hr class="navbar-divider">
@@ -54,7 +54,7 @@
                       <span>タグから探す</span>
                     </a>
                     <div class="navbar-dropdown is-boxed" v-bind:class="{'is-hidden-mobile': !openTag}">
-                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="tag in tags" :key="tag.name" :to='"/search/tag?id="+tag.id'>
+                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="tag in tags" :key="tag.name" :to='"/search/tag/"+tag.id'>
                         {{tag.name}} <span class="tag is-light">{{tag.count}}</span>
                       </nuxt-link>
                       <hr class="navbar-divider">
@@ -69,7 +69,7 @@
                       <span>絵師から探す</span>
                     </a>
                     <div class="navbar-dropdown is-boxed has-text-white" v-bind:class="{'is-hidden-mobile': !openArtist}">
-                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="artist in artists" :key="artist.name" :to='"/search/artist?id="+artist.id'>
+                      <nuxt-link class="dropdown-item has-text-white pl-3" v-for="artist in artists" :key="artist.name" :to='"/search/artist/"+artist.id'>
                         {{artist.name}} <span class="tag is-light">{{artist.count}}</span>
                       </nuxt-link>
                       <hr class="navbar-divider">

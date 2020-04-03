@@ -7,14 +7,14 @@
         </div>
         <div class="column is-half">
             <div class="container has-text-centered is-vcentered">
-                <h3 class="title has-text-centered">Login</h3>
+                <h3 class="title has-text-centered">Sign Up</h3>
                 <h3 class="subtitle has-text-centered">{{welcomeMsg}}</h3>
-                <div class="box">
+                <form class="box">
                   <div class="field">
                       <div class="control has-icons-left">
                         <input
                         type="text"
-                        v-model="form.id"
+                        v-model="id"
                         placeholder="Your userID"
                         pattern="[a-zA-Z0-9]+"
                         class="input"
@@ -28,7 +28,7 @@
                     <div class="control has-icons-left">
                       <input
                       type="password"
-                      v-model="form.password"
+                      v-model="password"
                       placeholder="Your password"
                       pattern="[a-zA-Z0-9]+"
                       class="input"
@@ -39,19 +39,40 @@
                     </div>
                   </div>
                   <div class="field">
-                    <div class="columns">
-                        <div class="column is-6">
-                            <button @click="login" class="button is-block is-info is-medium is-fullwidth">Login <i class="fas fa-sign-in-alt"></i></button>
-                        </div>
-                        <div class="column is-6">
-                            <a :href="LINE_LOGIN_URL" class="button is-block is-success is-medium is-fullwidth">LINE Login <i class="fas fa-sign-in-alt"></i></a>
-                        </div>
+                    <div class="control has-icons-left">
+                      <input
+                      type="password"
+                      id="confirmPW"
+                      v-model="password_re"
+                      placeholder="Your password (Re)"
+                      class="input"
+                      required>
+                      <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                      </span>
                     </div>
                   </div>
-                </div>
+                  <div class="field">
+                    <div class="control has-icons-left">
+                      <input
+                      type="text"
+                      v-model="code"
+                      placeholder="Invite code"
+                      pattern="[a-zA-Z0-9]+"
+                      class="input"
+                      required>
+                      <span class="icon is-small is-left">
+                        <i class="fas fa-ticket-alt"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <h5>Alphabet and numbers are allowed.</h5>
+                  <div class="field">
+                    <button type="submit" @click="signup" :disabled="isFormInvalid" class="button is-block is-info is-medium is-fullwidth">Sign up <i class="fas fa-sign-in-alt"></i></button>
+                  </div>
+                </form>
                 <p class="has-text-grey">
-                  <nuxt-link to="/register">Sign Up</nuxt-link> &nbsp;·&nbsp;
-                  <a href="mailto:***REMOVED***">Forgot Password</a> &nbsp;·&nbsp;
+                  <a href="http://localhost:3000/login">Login</a> &nbsp;·&nbsp;
                   <a href="mailto:***REMOVED***">Need Help?</a>
                 </p>
             </div>
@@ -73,27 +94,17 @@ export default {
   auth: false,
   created () {
     if (process.client) {
-      const CSRF = Math.random().toString(36).slice(-8)
-      const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
-      const REDIRECT_URI = 'http://127.0.0.1:3000/line_callback'
-      const LINE_PARAMS = new URLSearchParams()
-      LINE_PARAMS.append('response_type', 'code')
-      LINE_PARAMS.append('client_id', '***REMOVED***')
-      LINE_PARAMS.append('state', CSRF)
-      LINE_PARAMS.append('scope', 'profile openid')
-      LINE_PARAMS.append('redirect_uri', REDIRECT_URI)
-      this.LINE_LOGIN_URL = LINE_ENDPOINT + '?' + LINE_PARAMS.toString()
       this.welcomeMsg = this.entries[Math.floor(Math.random() * this.entries.length)]
     }
   },
   data () {
     return {
-      LINE_LOGIN_URL: '',
       welcomeMsg: '　',
-      form: {
-        id: '',
-        password: ''
-      },
+      id: '',
+      password: '',
+      password_re: '',
+      code: '',
+      isFormInvalid: true,
       entries: [
         'ようこそ彩りが集約されし図書館、***REMOVED***へ',
         'ここから入らんとする者は一切の希望を放棄せよ',
@@ -126,14 +137,25 @@ export default {
       ]
     }
   },
-  methods: {
-    async login () {
-      try {
-        await this.$auth.loginWith('local', { data: this.form })
-        this.$router.push({ path: '/' })
-      } catch (error) {
-        console.log(error)
+  watch: {
+    password () {
+      if (this.password !== this.password_re || this.password === '') {
+        this.isFormInvalid = true
+      } else {
+        this.isFormInvalid = false
       }
+    },
+    password_re () {
+      if (this.password !== this.password_re || this.password_re === '') {
+        this.isFormInvalid = true
+      } else {
+        this.isFormInvalid = false
+      }
+    }
+  },
+  methods: {
+    signup () {
+      console.log('axios')
     }
   }
 }

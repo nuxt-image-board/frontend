@@ -11,7 +11,8 @@
          <div class="column is-12">
             <nuxt-link :to="artAddress">
                <p class="image">
-                  <img :src="previewAddress">
+                  <img v-if="!result.nsfw" :src="previewAddress">
+                  <img v-else class="blur" :src="previewAddress">
                </p>
             </nuxt-link>
          </div>
@@ -22,7 +23,7 @@
             <span class="icon is-small">
                 <i class="fas fa-heart"></i>
             </span>
-            <span class="animated" v-bind:class='{heartBeat:result.doAnime}' v-bind:animationend="result.doAnime = true">
+            <span class="animated">
                 x{{result.like}}
             </span>
         </a>
@@ -50,8 +51,10 @@ export default {
     }
   },
   methods: {
-    addStar () {
-      this.like += 1
+    async addStar () {
+      const endpoint = '/arts/' + this.result.illustID + '/likes'
+      this.result.like += 1
+      await this.$axios.put(endpoint)
     },
     toggleBookmark () {
       console.log('hoge')
@@ -59,3 +62,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.blur{
+  -ms-filter: blur(20px);
+  filter: blur(20px);
+}
+</style>

@@ -6,7 +6,6 @@
 :SelectedPageFromProps="SelectedPage"
 :totalPage="totalPage"
 :isSearchPage="isSearchPage"
-:pageType="pageType"
 :SelectedSortFromProps="SelectedSort" />
 </template>
 
@@ -18,7 +17,7 @@ export default {
     List
   },
   async asyncData ({ $axios, route }) {
-    const endpoint = '/catalog/tags'
+    const endpoint = '/search/all'
     const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortNum = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
     const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
@@ -30,13 +29,12 @@ export default {
     const data = response.data.data
     return {
       endpoint,
-      NotificationTitle: 'タグから検索',
-      results: data,
+      NotificationTitle: '一覧から検索 ' + data.count + '件',
+      results: data.imgs,
       SelectedPage: page,
       totalPage: data.pages,
-      pageType: 'tag',
       SelectedSort: sortNum,
-      isSearchPage: false
+      isSearchPage: true
     }
   },
   async fetch (context) {
