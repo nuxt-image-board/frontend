@@ -1,85 +1,95 @@
 <template>
-<section class="section">
-<div class="container">
-    <div class="columns is-centered is-vcentered">
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
-            <img src="logo.png">
+          <img src="logo.png">
         </div>
         <div class="column is-half">
-            <div class="container has-text-centered is-vcentered">
-                <h3 class="title has-text-centered">Sign Up</h3>
-                <h3 class="subtitle has-text-centered">{{welcomeMsg}}</h3>
-                <form class="box">
-                  <div class="field">
-                      <div class="control has-icons-left">
-                        <input
-                        type="text"
-                        v-model="id"
-                        placeholder="Your userID"
-                        pattern="[a-zA-Z0-9]+"
-                        class="input"
-                        required>
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-id-card"></i>
-                          </span>
-                      </div>
-                  </div>
-                  <div class="field">
-                    <div class="control has-icons-left">
-                      <input
-                      type="password"
-                      v-model="password"
-                      placeholder="Your password"
-                      pattern="[a-zA-Z0-9]+"
-                      class="input"
-                      required>
-                      <span class="icon is-small is-left">
-                        <i class="fa fa-lock"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <div class="control has-icons-left">
-                      <input
-                      type="password"
-                      id="confirmPW"
-                      v-model="password_re"
-                      placeholder="Your password (Re)"
-                      class="input"
-                      required>
-                      <span class="icon is-small is-left">
-                        <i class="fa fa-lock"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <div class="control has-icons-left">
-                      <input
-                      type="text"
-                      v-model="code"
-                      placeholder="Invite code"
-                      pattern="[a-zA-Z0-9]+"
-                      class="input"
-                      required>
-                      <span class="icon is-small is-left">
-                        <i class="fas fa-ticket-alt"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <h5>Alphabet and numbers are allowed.</h5>
-                  <div class="field">
-                    <button type="submit" @click="signup" :disabled="isFormInvalid" class="button is-block is-info is-medium is-fullwidth">Sign up <i class="fas fa-sign-in-alt"></i></button>
-                  </div>
-                </form>
-                <p class="has-text-grey">
-                  <a href="http://localhost:3000/login">Login</a> &nbsp;·&nbsp;
-                  <a href="mailto:***REMOVED***">Need Help?</a>
-                </p>
-            </div>
+          <div class="container has-text-centered is-vcentered">
+            <h3 class="title has-text-centered">
+              Sign Up
+            </h3>
+            <h3 class="subtitle has-text-centered">
+              {{ welcomeMsg }}
+            </h3>
+            <form class="box">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    v-model="id"
+                    type="text"
+                    placeholder="Your userID"
+                    pattern="[a-zA-Z0-9]+"
+                    class="input"
+                    required
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-id-card" />
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    v-model="password"
+                    type="password"
+                    placeholder="Your password"
+                    pattern="[a-zA-Z0-9]+"
+                    class="input"
+                    required
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-lock" />
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    id="confirmPW"
+                    v-model="password_re"
+                    type="password"
+                    placeholder="Your password (Re)"
+                    class="input"
+                    required
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-lock" />
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    v-model="code"
+                    type="text"
+                    placeholder="Invite code"
+                    pattern="[a-zA-Z0-9]+"
+                    class="input"
+                    required
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-ticket-alt" />
+                  </span>
+                </div>
+              </div>
+              <h5>Alphabet and numbers are allowed.</h5>
+              <div class="field">
+                <button type="submit" :disabled="isFormInvalid" class="button is-block is-info is-medium is-fullwidth" @click="signup">
+                  Sign up <i class="fas fa-sign-in-alt" />
+                </button>
+              </div>
+            </form>
+            <p class="has-text-grey">
+              <a href="http://localhost:3000/login">Login</a> &nbsp;·&nbsp;
+              <a href="mailto:***REMOVED***">Need Help?</a>
+            </p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</section>
+  </section>
 </template>
 
 <style>
@@ -92,11 +102,6 @@
 <script>
 export default {
   auth: false,
-  created () {
-    if (process.client) {
-      this.welcomeMsg = this.entries[Math.floor(Math.random() * this.entries.length)]
-    }
-  },
   data () {
     return {
       welcomeMsg: '　',
@@ -153,9 +158,14 @@ export default {
       }
     }
   },
+  created () {
+    if (process.client) {
+      this.welcomeMsg = this.entries[Math.floor(Math.random() * this.entries.length)]
+    }
+  },
   methods: {
     signup () {
-      console.log('axios')
+      // pass
     }
   }
 }

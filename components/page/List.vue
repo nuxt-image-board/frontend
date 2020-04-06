@@ -1,23 +1,23 @@
 <template>
-<section class="section">
-   <div class="container is-widescreen">
+  <section class="section">
+    <div class="container is-widescreen">
       <div class="columns is-centered">
-         <div class="column is-two-third">
-            <Notification :title="NotificationTitle" />
-         </div>
-         <div class="column is-one-third">
-            <SelectForm @onSelectChanged="updateSelect" :options="SortOptions" :sendMounted="0"/>
-         </div>
+        <div class="column is-two-third">
+          <Notification :title="NotificationTitle" />
+        </div>
+        <div class="column is-one-third">
+          <SelectForm :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+        </div>
       </div>
       <div class="columns is-centered is-multiline is-mobile">
-         <div class="column is-12-mobile is-6-touch is-3-desktop" v-for="result in results" v-bind:key="result.illustID">
-            <SearchResult v-if="isSearchPage" :result="result" />
-            <ListResult v-else :pageType="pageType" :result="result" />
-         </div>
+        <div v-for="result in results" :key="result.illustID" class="column is-12-mobile is-6-touch is-3-desktop">
+          <SearchResult v-if="isSearchPage" :accept-r18="acceptR18" :result="result" />
+          <ListResult v-else :accept-r18="acceptR18" :page-type="pageType" :result="result" />
+        </div>
       </div>
-      <Pagination @onPageChanged="updatePage" :currentPageFromProp="SelectedPage" :totalPage="totalPage" :sendMounted="0"/>
-   </div>
-</section>
+      <Pagination :current-page-from-prop="SelectedPage" :total-page="totalPage" :send-mounted="false" @onPageChanged="updatePage" />
+    </div>
+  </section>
 </template>
 
 <script>
@@ -28,16 +28,6 @@ import ListResult from '~/components/page/list/Result.vue'
 import SearchResult from '~/components/page/search/Result.vue'
 
 export default {
-  props: [
-    'endpoint',
-    'NotificationTitle',
-    'SelectedPageFromProps',
-    'SelectedSortFromProps',
-    'totalPage',
-    'resultsFromProps',
-    'pageType',
-    'isSearchPage'
-  ],
   components: {
     Notification,
     SelectForm,
@@ -45,11 +35,65 @@ export default {
     ListResult,
     SearchResult
   },
+  props: {
+    endpoint: {
+      type: String,
+      default: ''
+    },
+    // eslint-disable-next-line
+    NotificationTitle: {
+      type: String,
+      default: ''
+    },
+    // eslint-disable-next-line
+    SelectedPageFromProps: {
+      type: Number,
+      default: 0
+    },
+    // eslint-disable-next-line
+    SelectedSortFromProps: {
+      type: Number,
+      default: 0
+    },
+    totalPage: {
+      type: Number,
+      default: 1
+    },
+    resultsFromProps: {
+      type: Array,
+      default: () => {
+        return [
+          {
+            id: 0,
+            illustID: 0,
+            name: 'NoData',
+            lcount: 0,
+            count: 0,
+            date: '2020-12-04',
+            like: 0,
+            nsfw: false,
+            artist: {
+              name: 'NoData'
+            }
+          }
+        ]
+      }
+    },
+    pageType: {
+      type: String,
+      default: 'NoData'
+    },
+    isSearchPage: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       SelectedPage: this.SelectedPageFromProps,
       SelectedSort: this.SelectedSortFromProps,
       results: this.resultsFromProps,
+      acceptR18: this.$cookies.get('acceptR18'),
       SortOptions: [
         { text: '投稿が新しい順', value: 0 },
         { text: '投稿が古い順', value: 1 },
@@ -91,13 +135,11 @@ export default {
       }
     },
     updateSelect (newSort) {
-      console.log('updateSelect')
       this.SelectedSort = newSort
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, sort: newSort } })
       this.getData()
     },
     updatePage (newPage) {
-      console.log('updatePage')
       this.SelectedPage = newPage
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
       this.getData()

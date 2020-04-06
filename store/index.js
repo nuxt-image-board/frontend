@@ -20,7 +20,7 @@ export const mutations = {
 export const actions = {
   async getNavigations ({ commit }) {
     const client = axios.create({
-      baseURL: 'http://localhost:5000/',
+      baseURL: 'http://***REMOVED***:5000/',
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ***REMOVED***'

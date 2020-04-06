@@ -1,13 +1,14 @@
 <template>
-<List
-:endpoint="endpoint"
-:NotificationTitle="NotificationTitle"
-:resultsFromProps="results"
-:SelectedPageFromProps="SelectedPage"
-:totalPage="totalPage"
-:isSearchPage="isSearchPage"
-:pageType="pageType"
-:SelectedSortFromProps="SelectedSort" />
+  <List
+    :endpoint="endpoint"
+    :notification-title="NotificationTitle"
+    :results-from-props="results"
+    :selected-page-from-props="SelectedPage"
+    :total-page="totalPage"
+    :is-search-page="isSearchPage"
+    :page-type="pageType"
+    :selected-sort-from-props="SelectedSort"
+  />
 </template>
 
 <script>
@@ -16,6 +17,9 @@ import List from '~/components/page/List.vue'
 export default {
   components: {
     List
+  },
+  async fetch (context) {
+    await context.store.dispatch('getNavigations')
   },
   async asyncData ({ $axios, route }) {
     const endpoint = '/catalog/characters'
@@ -38,9 +42,6 @@ export default {
       SelectedSort: sortNum,
       isSearchPage: false
     }
-  },
-  async fetch (context) {
-    await context.store.dispatch('getNavigationData')
   }
 }
 </script>

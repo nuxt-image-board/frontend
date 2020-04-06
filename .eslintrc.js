@@ -11,6 +11,12 @@ module.exports = {
     '@nuxtjs',
     'plugin:nuxt/recommended'
   ],
+  'ignorePatterns': [
+    'node_modules/',
+    'dist/',
+    'public/',
+    'static/'
+  ],
   // add your custom rules here
   rules: {
   }

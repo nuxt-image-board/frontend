@@ -1,32 +1,45 @@
 <template>
-   <div>
-      <main>
-         <section class="section">
-            <div class="container is-widescreen has-text-centered error-screen">
-               <div class="notification is-danger">
-                  <p class="title is-1">{{error.statusCode}}</p>
-                  <p class="subtitle is-3" v-if="error.statusCode === 404">{{error404Msg}}</p>
-                  <p class="subtitle is-3" v-else-if="error.statusCode === 401">認証に失敗しました</p>
-                  <p class="subtitle is-3" v-else-if="error.statusCode === 500">{{error500Msg}}</p>
-                  <p class="subtitle is-3" v-else>エラーが発生しました</p>
-               </div>
-               <img class="error-img" src="~/static/error.jpg">
-               <nuxt-link class="button is-primary is-large is-fullwidth" to="/">トップページへ</nuxt-link>
-            </div>
-         </section>
-      </main>
+  <div>
+    <main>
+      <section class="section">
+        <div class="container is-widescreen has-text-centered error-screen">
+          <div class="notification is-danger">
+            <p class="title is-1">
+              {{ error.statusCode }}
+            </p>
+            <p v-if="error.statusCode === 404" class="subtitle is-3">
+              {{ error404Msg }}
+            </p>
+            <p v-else-if="error.statusCode === 401" class="subtitle is-3">
+              認証に失敗しました
+            </p>
+            <p v-else-if="error.statusCode === 500" class="subtitle is-3">
+              {{ error500Msg }}
+            </p>
+            <p v-else class="subtitle is-3">
+              エラーが発生しました
+            </p>
+          </div>
+          <img class="error-img" src="~/static/error.jpg">
+          <nuxt-link class="button is-primary is-large is-fullwidth" to="/">
+            トップページへ
+          </nuxt-link>
+        </div>
+      </section>
+    </main>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['error'],
-  computed: {
-    error500Msg () {
-      return this.error500[Math.floor(Math.random() * this.error500.length)]
-    },
-    error404Msg () {
-      return this.error404[Math.floor(Math.random() * this.error404.length)]
+  props: {
+    error: {
+      type: Object,
+      default: () => {
+        return {
+          statusCode: 200
+        }
+      }
     }
   },
   data () {
@@ -46,6 +59,14 @@ export default {
         'ファイルを入れ忘れちゃったっぽいです',
         'そのファイルは***REMOVED***に存在しません'
       ]
+    }
+  },
+  computed: {
+    error500Msg () {
+      return this.error500[Math.floor(Math.random() * this.error500.length)]
+    },
+    error404Msg () {
+      return this.error404[Math.floor(Math.random() * this.error404.length)]
     }
   }
 }

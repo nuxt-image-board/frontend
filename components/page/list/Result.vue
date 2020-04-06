@@ -1,37 +1,72 @@
 <template>
-<div class="card">
-   <div class="card-header">
+  <div class="card" :class="{'has-background-grey': result.nsfw, 'has-background-light': !result.nsfw}">
+    <div class="card-header">
       <p class="card-header-title">
-         <nuxt-link style="color: inherit;" :to="artAddress">{{result.name}}</nuxt-link>
+        <nuxt-link style="color: inherit;" :to="artAddress">
+          {{ result.name }}
+        </nuxt-link>
       </p>
-   </div>
-   <div class="card-content">
+    </div>
+    <div class="card-content">
       <nuxt-link style="color: inherit;" :to="artAddress">
-         <nav class="level">
-            <div class="level-item has-text-centered">
-               <div>
-                  <p class="heading">Total Arts</p>
-                  <p class="subtitle">{{result.count}}</p>
-               </div>
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">
+                Total Arts
+              </p>
+              <p class="subtitle">
+                {{ result.count }}
+              </p>
             </div>
-            <div class="level-item has-text-centered">
-               <div>
-                  <p class="heading">Total Likes</p>
-                  <p class="subtitle">{{result.lcount}}</p>
-               </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">
+                Total Likes
+              </p>
+              <p class="subtitle">
+                {{ result.lcount }}
+              </p>
             </div>
-         </nav>
+          </div>
+        </nav>
       </nuxt-link>
-   </div>
-</div>
+    </div>
+  </div>
 </template>
+
+<style>
+.blur{
+  -ms-filter: blur(20px);
+  filter: blur(20px);
+}
+</style>
 
 <script>
 export default {
-  props: [
-    'result',
-    'pageType'
-  ],
+  props: {
+    result: {
+      type: Object,
+      default: () => {
+        return {
+          id: 0,
+          name: 'NoData',
+          count: 0,
+          lcount: 0,
+          nsfw: false
+        }
+      }
+    },
+    pageType: {
+      type: String,
+      default: 'NoData'
+    },
+    acceptR18: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       artAddress: '/search/' + this.pageType + '/' + this.result.id

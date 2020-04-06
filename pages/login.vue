@@ -1,64 +1,74 @@
 <template>
-<section class="section">
-<div class="container">
-    <div class="columns is-centered is-vcentered">
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
-            <img src="logo.png">
+          <img src="logo.png">
         </div>
         <div class="column is-half">
-            <div class="container has-text-centered is-vcentered">
-                <h3 class="title has-text-centered">Login</h3>
-                <h3 class="subtitle has-text-centered">{{welcomeMsg}}</h3>
-                <div class="box">
-                  <div class="field">
-                      <div class="control has-icons-left">
-                        <input
-                        type="text"
-                        v-model="form.id"
-                        placeholder="Your userID"
-                        pattern="[a-zA-Z0-9]+"
-                        class="input"
-                        required>
-                          <span class="icon is-small is-left">
-                            <i class="fas fa-id-card"></i>
-                          </span>
-                      </div>
+          <div class="container has-text-centered is-vcentered">
+            <h3 class="title has-text-centered">
+              Login
+            </h3>
+            <h3 class="subtitle has-text-centered">
+              {{ welcomeMsg }}
+            </h3>
+            <div class="box">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    v-model="form.id"
+                    type="text"
+                    placeholder="Your userID"
+                    pattern="[a-zA-Z0-9]+"
+                    class="input"
+                    required
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-id-card" />
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    v-model="form.password"
+                    type="password"
+                    placeholder="Your password"
+                    pattern="[a-zA-Z0-9]+"
+                    class="input"
+                    required
+                  >
+                  <span class="icon is-small is-left">
+                    <i class="fa fa-lock" />
+                  </span>
+                </div>
+              </div>
+              <div class="field">
+                <div class="columns">
+                  <div class="column is-6">
+                    <button class="button is-block is-info is-medium is-fullwidth" @click="login">
+                      Login <i class="fas fa-sign-in-alt" />
+                    </button>
                   </div>
-                  <div class="field">
-                    <div class="control has-icons-left">
-                      <input
-                      type="password"
-                      v-model="form.password"
-                      placeholder="Your password"
-                      pattern="[a-zA-Z0-9]+"
-                      class="input"
-                      required>
-                      <span class="icon is-small is-left">
-                        <i class="fa fa-lock"></i>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <div class="columns">
-                        <div class="column is-6">
-                            <button @click="login" class="button is-block is-info is-medium is-fullwidth">Login <i class="fas fa-sign-in-alt"></i></button>
-                        </div>
-                        <div class="column is-6">
-                            <a :href="LINE_LOGIN_URL" class="button is-block is-success is-medium is-fullwidth">LINE Login <i class="fas fa-sign-in-alt"></i></a>
-                        </div>
-                    </div>
+                  <div class="column is-6">
+                    <a :href="LINE_LOGIN_URL" class="button is-block is-success is-medium is-fullwidth">LINE Login <i class="fas fa-sign-in-alt" /></a>
                   </div>
                 </div>
-                <p class="has-text-grey">
-                  <nuxt-link to="/register">Sign Up</nuxt-link> &nbsp;·&nbsp;
-                  <a href="mailto:***REMOVED***">Forgot Password</a> &nbsp;·&nbsp;
-                  <a href="mailto:***REMOVED***">Need Help?</a>
-                </p>
+              </div>
             </div>
+            <p class="has-text-grey">
+              <nuxt-link to="/register">
+                Sign Up
+              </nuxt-link> &nbsp;·&nbsp;
+              <a href="mailto:***REMOVED***">Forgot Password</a> &nbsp;·&nbsp;
+              <a href="mailto:***REMOVED***">Need Help?</a>
+            </p>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</section>
+  </section>
 </template>
 
 <style>
@@ -71,21 +81,6 @@
 <script>
 export default {
   auth: false,
-  created () {
-    if (process.client) {
-      const CSRF = Math.random().toString(36).slice(-8)
-      const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
-      const REDIRECT_URI = 'http://127.0.0.1:3000/line_callback'
-      const LINE_PARAMS = new URLSearchParams()
-      LINE_PARAMS.append('response_type', 'code')
-      LINE_PARAMS.append('client_id', '***REMOVED***')
-      LINE_PARAMS.append('state', CSRF)
-      LINE_PARAMS.append('scope', 'profile openid')
-      LINE_PARAMS.append('redirect_uri', REDIRECT_URI)
-      this.LINE_LOGIN_URL = LINE_ENDPOINT + '?' + LINE_PARAMS.toString()
-      this.welcomeMsg = this.entries[Math.floor(Math.random() * this.entries.length)]
-    }
-  },
   data () {
     return {
       LINE_LOGIN_URL: '',
@@ -126,13 +121,28 @@ export default {
       ]
     }
   },
+  created () {
+    if (process.client) {
+      const CSRF = Math.random().toString(36).slice(-8)
+      const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
+      const REDIRECT_URI = 'http://***REMOVED***:3000/line_callback'
+      const LINE_PARAMS = new URLSearchParams()
+      LINE_PARAMS.append('response_type', 'code')
+      LINE_PARAMS.append('client_id', '***REMOVED***')
+      LINE_PARAMS.append('state', CSRF)
+      LINE_PARAMS.append('scope', 'profile openid')
+      LINE_PARAMS.append('redirect_uri', REDIRECT_URI)
+      this.LINE_LOGIN_URL = LINE_ENDPOINT + '?' + LINE_PARAMS.toString()
+      this.welcomeMsg = this.entries[Math.floor(Math.random() * this.entries.length)]
+    }
+  },
   methods: {
     async login () {
       try {
         await this.$auth.loginWith('local', { data: this.form })
         this.$router.push({ path: '/' })
       } catch (error) {
-        console.log(error)
+        // console.log(error)
       }
     }
   }

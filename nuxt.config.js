@@ -14,12 +14,12 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-	  { rel: 'stylesheet', href:"https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css"},
-	  { rel: 'stylesheet', href:"https://fonts.googleapis.com/css?family=Arvo|Noto+Sans&display=swap"}
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Arvo|Noto+Sans&display=swap' }
     ],
-	script:[
-	  {src:"https://use.fontawesome.com/releases/v5.12.0/js/all.js"},
-	]
+    script: [
+      { src: 'https://use.fontawesome.com/releases/v5.12.0/js/all.js' }
+    ]
   },
   /*
   ** Customize the progress-bar color
@@ -35,6 +35,7 @@ export default {
   */
   plugins: [
     '~plugins/axios',
+    { src: '@/plugins/vue-input-tag', ssr: false }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -49,20 +50,36 @@ export default {
   modules: [
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    'nuxt-fontawesome',
+    'cookie-universal-nuxt'
   ],
+  /*
+  ** Nuxt-fontawesome
+  */
+  fontawesome: {
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons', // Solid icons
+        icons: ['faCalendar', 'faHeart', 'faBookmark', 'faPenFancy', 'faUserEdit', 'faBroadcastTower']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons', // Brand icons
+        icons: ['faTwitterSquare', 'faLine']
+      }
+    ]
+  },
   /*
   ** Authorization
   */
   auth: {
     redirect: {
-      login: '/login',  // 未ログイン時のリダイレクト先
-      logout: '/login',  // ログアウト処理を実行した直後のリダイレクト先
-      callback: false,  // コールバックURL
-      home: '/',  // ログイン後に遷移するページ
+      login: '/login', // 未ログイン時のリダイレクト先
+      logout: '/login', // ログアウト処理を実行した直後のリダイレクト先
+      callback: false, // コールバックURL
+      home: '/' // ログイン後に遷移するページ
     },
     strategies: {
       local: {
@@ -82,7 +99,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://localhost:5000/'
+    baseURL: 'http://***REMOVED***:5000/'
   },
   /*
   ** Build configuration
