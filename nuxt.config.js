@@ -1,3 +1,4 @@
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -9,6 +10,7 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'robots', content: 'noindex,nofollow,noarchive' },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
@@ -16,10 +18,21 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Arvo|Noto+Sans&display=swap' }
-    ],
-    script: [
-      { src: 'https://use.fontawesome.com/releases/v5.12.0/js/all.js' }
     ]
+  },
+  /*
+  ** PWA Config
+  */
+  manifest: {
+    name: "***REMOVED***",
+    short_name: "***REMOVED***",
+    description: '神絵師が突然神絵を消して泣いた日々。この絵師誰だよとキレた日々。そんな日々をなくしたい。***REMOVED***の神絵を永久に。',
+    lang: 'ja',
+    theme_color: "#7b5544",
+    background_color: "#7b5544",
+    display: "standalone",
+    scope: "/",
+    start_url: "/"
   },
   /*
   ** Customize the progress-bar color
@@ -53,6 +66,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
+    '@nuxtjs/dotenv',
     'nuxt-fontawesome',
     'cookie-universal-nuxt'
   ],
@@ -63,7 +77,27 @@ export default {
     imports: [
       {
         set: '@fortawesome/free-solid-svg-icons', // Solid icons
-        icons: ['faCalendar', 'faHeart', 'faBookmark', 'faPenFancy', 'faUserEdit', 'faBroadcastTower']
+        icons: [
+            'faCalendar',
+            'faHeart',
+            'faBookmark',
+            'faPenFancy',
+            'faUserEdit',
+            'faBroadcastTower',
+            'faSearch',
+            'faUser',
+            'faUsers',
+            'faTags',
+            'faPaintBrush',
+            'faIdCard',
+            'faLock',
+            'faSignInAlt',
+            'faTicketAlt',
+            'faHome',
+            'faInfo',
+            'faQuestionCircle',
+            'faSitemap'
+        ]
       },
       {
         set: '@fortawesome/free-brands-svg-icons', // Brand icons
@@ -99,7 +133,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: 'http://***REMOVED***:5000/'
+    baseURL: process.env.API_ENDPOINT
   },
   /*
   ** Build configuration

@@ -78,7 +78,7 @@
                 <div class="control">
                   <div class="tags has-addons">
                     <span class="tag">
-                      <i class="fas fa-broadcast-tower" />
+                      <Fas i="broadcast-tower" />
                     </span>
                     <a class="tag is-link" :href="result.originUrl">{{ result.originService }}</a>
                   </div>
@@ -129,10 +129,13 @@ export default {
   async fetch (context) {
     await context.store.dispatch('getNavigations')
   },
-  async asyncData ({ $axios, route }) {
+  async asyncData ({ $axios, route, error }) {
     const endpoint = '/arts/'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const response = await $axios.get(endpoint + id)
+    if (response.data.status !== 200) {
+      return error({ statusCode: 404, message: 'err' })
+    }
     const data = response.data.data
     return {
       result: data
@@ -150,10 +153,10 @@ export default {
   },
   computed: {
     ImgAddress () {
-      return '/illusts/small/' + this.result.illustID + '.webp'
+      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.result.illustID + '.webp'
     },
     ImgOrigAddress () {
-      return '/illusts/orig/' + this.result.illustID + '.webp'
+      return process.env.CDN_ENDPOINT + 'illusts/orig/' + this.result.illustID + '.png'
     },
     TwitterShareAddress () {
       const base = 'https://twitter.com/intent/tweet'

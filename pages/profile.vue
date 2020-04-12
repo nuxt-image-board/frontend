@@ -48,6 +48,9 @@
         <div class="column is-6 is-vcentered has-text-centered">
           <div class="columns is-multiline">
             <div class="column is-12">
+              <nuxt-link to="/guide" class="button is-large is-primary">利用ガイド</nuxt-link>
+            </div>
+            <div class="column is-12">
               <a href="#" class="button is-large is-primary" disabled>ブックマーク</a>
             </div>
             <div class="column is-12">
@@ -144,7 +147,7 @@ export default {
     if (process.client) {
       const CSRF = Math.random().toString(36).slice(-8)
       const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
-      const REDIRECT_URI = 'http://127.0.0.1:3000/line_connect'
+      const REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_connect'
       const LINE_PARAMS = new URLSearchParams()
       LINE_PARAMS.append('response_type', 'code')
       LINE_PARAMS.append('client_id', '***REMOVED***')

@@ -11,7 +11,7 @@
       </div>
       <div class="columns is-centered is-multiline is-mobile">
         <div v-for="result in results" :key="result.illustID" class="column is-12-mobile is-6-touch is-3-desktop">
-          <SearchResult v-if="isSearchPage" :accept-r18="acceptR18" :result="result" />
+          <SearchResult v-if="isSearchPage" :isPC="isPC" :accept-r18="acceptR18" :result="result" />
           <ListResult v-else :accept-r18="acceptR18" :page-type="pageType" :result="result" />
         </div>
       </div>
@@ -94,6 +94,7 @@ export default {
       SelectedSort: this.SelectedSortFromProps,
       results: this.resultsFromProps,
       acceptR18: this.$cookies.get('acceptR18'),
+      isPC: this.$cookies.get('isPC'),
       SortOptions: [
         { text: '投稿が新しい順', value: 0 },
         { text: '投稿が古い順', value: 1 },

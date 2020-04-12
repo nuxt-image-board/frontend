@@ -1,17 +1,15 @@
 <template>
   <div>
-    <NavbarUp v-if="$store.state.auth.loggedIn" />
-    <NavbarUpNoLogin v-if="!$store.state.auth.loggedIn" />
+    <NavbarUp />
     <main>
       <nuxt />
     </main>
-    <NavbarDown v-if="$store.state.auth.loggedIn" />
+    <NavbarDown />
   </div>
 </template>
 
 <script>
 import NavbarUp from '~/components/NavbarUp.vue'
-import NavbarUpNoLogin from '~/components/NavbarUpNoLogin.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
 
 export default {
@@ -20,7 +18,6 @@ export default {
   ],
   components: {
     NavbarUp,
-    NavbarUpNoLogin,
     NavbarDown
   },
   serverPrefetch () {
@@ -37,7 +34,7 @@ export default {
     font-family: 'Arvo', serif;
 }
 main {
-    min-height:86.5vh;
+    min-height:87vh;
 }
 .navbar,.navbar-menu,.navbar-link:hover,.navbar-item:focus,.navbar-dropdown,.dropdown-item:hover,.navbar-item:hover{
     background-color: #7b5544 !important;
@@ -65,36 +62,7 @@ main {
 必要なページに後で移動する
 */
 
-.star{
-    user-select: none; /* CSS3 */
-    -moz-user-select: none; /* Firefox */
-    -webkit-user-select: none; /* Safari、Chromeなど */
-    -ms-user-select: none; /* IE10かららしい */
-}
 a:hover{
     color: #0000FF !important;
-}
-
-.graydisplay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  max-width: 100%!important;
-  height: 100vh;
-  min-height: 100vh;
-  background: rgba(0,0,0,0.45);
-}
-.graydisplay img {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  max-width: 90%;
-  max-height: 90%;
-  height: auto;
 }
 </style>

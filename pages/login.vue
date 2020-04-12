@@ -1,6 +1,14 @@
 <template>
   <section class="section">
     <div class="container">
+      <Notification
+        icon="info"
+        :deletable="notificationDeletable"
+        :title="notificationText"
+        :classes="notificationClasses"
+        :deleted="notificationDeleted"
+        @deleted-event="deletedEvent"
+      />
       <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
           <img src="logo.png">
@@ -13,19 +21,20 @@
             <h3 class="subtitle has-text-centered">
               {{ welcomeMsg }}
             </h3>
-            <div class="box">
+            <form class="box" onsubmit="return false">
               <div class="field">
                 <div class="control has-icons-left">
                   <input
                     v-model="form.id"
                     type="text"
-                    placeholder="Your userID"
+                    placeholder="ユーザーID"
                     pattern="[a-zA-Z0-9]+"
                     class="input"
+                    autocomplete="username"
                     required
                   >
                   <span class="icon is-small is-left">
-                    <i class="fas fa-id-card" />
+                    <Fas i="id-card" />
                   </span>
                 </div>
               </div>
@@ -34,13 +43,14 @@
                   <input
                     v-model="form.password"
                     type="password"
-                    placeholder="Your password"
+                    placeholder="パスワード"
                     pattern="[a-zA-Z0-9]+"
                     class="input"
+                    autocomplete="password"
                     required
                   >
                   <span class="icon is-small is-left">
-                    <i class="fa fa-lock" />
+                    <Fas i="lock" />
                   </span>
                 </div>
               </div>
@@ -48,21 +58,21 @@
                 <div class="columns">
                   <div class="column is-6">
                     <button class="button is-block is-info is-medium is-fullwidth" @click="login">
-                      Login <i class="fas fa-sign-in-alt" />
+                      ログイン <Fas i="sign-in-alt" />
                     </button>
                   </div>
                   <div class="column is-6">
-                    <a :href="LINE_LOGIN_URL" class="button is-block is-success is-medium is-fullwidth">LINE Login <i class="fas fa-sign-in-alt" /></a>
+                    <a :href="LINE_LOGIN_URL" class="button is-block is-success is-medium is-fullwidth">LINEログイン <Fas i="sign-in-alt" /></a>
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
             <p class="has-text-grey">
               <nuxt-link to="/register">
-                Sign Up
+                Register
               </nuxt-link> &nbsp;·&nbsp;
-              <a href="mailto:***REMOVED***">Forgot Password</a> &nbsp;·&nbsp;
-              <a href="mailto:***REMOVED***">Need Help?</a>
+              <a :href="CONTACT">Forgot Password</a> &nbsp;·&nbsp;
+              <a :href="CONTACT">Need Help?</a>
             </p>
           </div>
         </div>
@@ -79,53 +89,75 @@
 </style>
 
 <script>
+import Fas from '~/components/ui/Fas.vue'
+import Notification from '~/components/ui/Notification.vue'
+
 export default {
   auth: false,
+  components: {
+    Fas,
+    Notification
+  },
+  asyncData (context) {
+    const entries = [
+      'ようこそ彩りが集約されし図書館、***REMOVED***へ',
+      'ここから入らんとする者は一切の希望を放棄せよ',
+      'ご注文はイラストですか?',
+      '本当にしょうがない***REMOVED***さんです',
+      '物語の続きを君と描こう',
+      '「どこまでだって行くんだよ！」',
+      '「夢とともに」',
+      '僕らの明日はいつだってプロローグ',
+      '何度でも塗り替える　本当の色に',
+      '導きの灯りは心の中に',
+      '旅立ちはいつだって君を待ってた',
+      '心の向かうままに　走り出そう',
+      'できるよきっとね　キミとなら',
+      '明日へとあせらないでね',
+      'ゆっくり遊ぼう',
+      'なんとかなるさと上向いて',
+      '簡単には教えないっ',
+      'ふわふわどきどき内緒ですよ',
+      '扉開けたとたん',
+      '見知らぬ世界へと',
+      'それがありえるかも',
+      'ミルク色の異次元',
+      '一緒なら素敵だーい!',
+      'いたずら笑顔でぴょんぴょん',
+      'いまから楽しい楽しいコトばかり',
+      'わくわくしてきた?',
+      '期待してるこんなにね',
+      'キミは夢のなかだよと',
+      '夢を 夢を 語ろうよ',
+      'だからね楽しい楽しいキミになって',
+      '誰に会いたいの？会いたいの？'
+    ]
+    const welcomeMsg = entries[Math.floor(Math.random() * entries.length)]
+    return { welcomeMsg }
+  },
   data () {
     return {
       LINE_LOGIN_URL: '',
-      welcomeMsg: '　',
+      notificationText: '',
+      notificationClasses: 'is-success',
+      notificationDeleted: true,
+      notificationDeletable: true,
       form: {
         id: '',
         password: ''
-      },
-      entries: [
-        'ようこそ彩りが集約されし図書館、***REMOVED***へ',
-        'ここから入らんとする者は一切の希望を放棄せよ',
-        'ご注文はイラストですか?',
-        '本当にしょうがない***REMOVED***さんです',
-        '物語の続きを君と描こう',
-        '「どこまでだって行くんだよ！」',
-        '「夢とともに」',
-        '僕らの明日はいつだってプロローグ',
-        '何度でも塗り替える　本当の色に',
-        '導きの灯りは心の中に',
-        '旅立ちはいつだって君を待ってた',
-        '心の向かうままに　走り出そう',
-        'できるよきっとね　キミとなら',
-        '明日へとあせらないでね　ゆっくり遊ぼう(よろしくね)',
-        'なんとかなるさと上向いて',
-        '簡単には教えないっ',
-        'ふわふわどきどき内緒ですよ',
-        '扉開けたとたん　見知らぬ世界へと',
-        'それがありえるかも　ミルク色の異次元',
-        '一緒なら素敵だーい!',
-        'いたずら笑顔でぴょんぴょん',
-        'いまから楽しい楽しいコトばかり',
-        'わくわくしてきた? 期待してるこんなにね',
-        '(キミは夢のなかだよと)',
-        '夢を 夢を 語ろうよ',
-        'だからね楽しい楽しいキミになって',
-        '誰に会いたいの？会いたいの？',
-        'みんなはこんな時どうする　(聞いてみる)'
-      ]
+      }
+    }
+  },
+  computed: {
+    CONTACT () {
+      return process.env.CONTACT
     }
   },
   created () {
     if (process.client) {
       const CSRF = Math.random().toString(36).slice(-8)
       const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
-      const REDIRECT_URI = 'http://***REMOVED***:3000/line_callback'
+      const REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_callback'
       const LINE_PARAMS = new URLSearchParams()
       LINE_PARAMS.append('response_type', 'code')
       LINE_PARAMS.append('client_id', '***REMOVED***')
@@ -133,7 +165,6 @@ export default {
       LINE_PARAMS.append('scope', 'profile openid')
       LINE_PARAMS.append('redirect_uri', REDIRECT_URI)
       this.LINE_LOGIN_URL = LINE_ENDPOINT + '?' + LINE_PARAMS.toString()
-      this.welcomeMsg = this.entries[Math.floor(Math.random() * this.entries.length)]
     }
   },
   methods: {
@@ -142,8 +173,13 @@ export default {
         await this.$auth.loginWith('local', { data: this.form })
         this.$router.push({ path: '/' })
       } catch (error) {
-        // console.log(error)
+        this.notificationDeleted = false
+        this.notificationClasses = 'is-danger'
+        this.notificationText = '一致するユーザーがいません!'
       }
+    },
+    deletedEvent () {
+      this.notificationDeleted = true
     }
   }
 }

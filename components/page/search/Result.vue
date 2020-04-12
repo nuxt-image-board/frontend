@@ -1,26 +1,22 @@
 <template>
   <div class="card">
-    <div class="card-content">
-      <div class="columns is-multiline">
-        <div class="column is-hidden-touch is-8-fullhd is-8-desktop is-6-widescreen is-v-centered">
-          <span class="tag is-link">{{ result.date }}</span>
-          <nuxt-link :to="artAddress">
-            <span class="tag is-info">{{ result.artist.name }}</span>
-          </nuxt-link>
-        </div>
-        <div class="column is-12">
-          <nuxt-link :to="artAddress">
-            <p class="image">
-              <img :src="previewAddress" :class="{'blur': result.nsfw && !acceptR18}">
-            </p>
-          </nuxt-link>
-        </div>
+    <div class="card-image">
+      <div v-if="isPC" class="column is-hidden-touch is-8-fullhd is-8-desktop is-6-widescreen is-v-centered">
+        <span class="tag is-link">{{ result.date }}</span><br>
+        <nuxt-link :to="artistAddress">
+          <span class="tag is-info">{{ result.artist.name }}</span>
+        </nuxt-link>
       </div>
+      <nuxt-link :to="artAddress">
+        <figure class="image">
+          <img :src="previewAddress" :class="{'blur': result.nsfw && !acceptR18}">
+        </figure>
+      </nuxt-link>
     </div>
     <div class="card-footer">
       <a onselectstart="return false;" unselectable="on" class="star card-footer-item" @click="addStar()">
         <span class="icon is-small">
-          <i class="fas fa-heart" />
+          <Fas i="heart" />
         </span>
         <span class="animated">
           x{{ result.like }}
@@ -28,10 +24,10 @@
       </a>
       <a class="card-footer-item" @click="toggleBookmark()">
         <span v-if="result.bookmarked" class="icon is-medium">
-          <i class="far fa-2x fa-bookmark" />
+          <Far i="bookmark" classes="fa-2x" />
         </span>
         <span v-else class="icon is-medium">
-          <i class="fas fa-2x fa-bookmark" />
+          <Fas i="bookmark" classes="fa-2x" />
         </span>
       </a>
     </div>
@@ -39,7 +35,14 @@
 </template>
 
 <script>
+import Fas from '~/components/ui/Fas.vue'
+import Far from '~/components/ui/Far.vue'
+
 export default {
+  components: {
+    Fas,
+    Far
+  },
   props: {
     result: {
       type: Object,
@@ -58,12 +61,17 @@ export default {
     acceptR18: {
       type: Boolean,
       default: false
+    },
+    isPC: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
     return {
-      previewAddress: '/thumb/' + this.result.illustID + '.webp',
-      artAddress: '/arts/' + this.result.illustID
+      previewAddress: process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.webp',
+      artAddress: '/arts/' + this.result.illustID,
+      artistAddress: '/search/artist/' + this.result.artistID
     }
   },
   methods: {

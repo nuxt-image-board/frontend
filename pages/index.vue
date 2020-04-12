@@ -12,7 +12,7 @@
                 ***REMOVED***
               </p>
               <div class="content">
-                Built at 2019/12/27 01:47:20
+                α1 20/04/12 Build
               </div>
             </article>
           </div>
@@ -23,10 +23,7 @@
                   Danger
                 </p>
                 <div class="content">
-                  <p>現状未完成のサイトです。表示崩れや大量のデータ転送量消費等が発生する可能性があります。何か気になることがあればお気軽にご連絡ください。</p>
-                  <p class="button is-success is-pulled-right" href="#">
-                    お問い合わせ
-                  </p>
+                  <p>未完成のサイトです。表示崩れがバグが発生する可能性があります。何か気になることがあれば<a :href="CONTACT">問い合わせ等</a>より、ご連絡ください。</p>
                 </div>
               </article>
               <article class="tile is-child notification" style="background-color: #ffffb2;">
@@ -45,7 +42,7 @@
                         <p>
                           <strong>***REMOVED***</strong>
                           <br>
-                          うるさいですね...
+                          XSSとかあったらつらい
                         </p>
                       </div>
                     </div>
@@ -74,34 +71,36 @@
               <div class="content">
                 <article class="message">
                   <div class="message-header">
-                    <p>XX/YY/ZZ ABCDE</p>
+                    <p>20/04/22 α1開始</p>
                   </div>
                   <div class="message-body">
-                    HOGEHOGE
+                    バージョンはアルファ、ベータ、リリースの順で上がります。
+                    アルファということはすごく未完成ってことです。まだやるべきことがあります。
                   </div>
                 </article>
                 <article class="message">
                   <div class="message-header">
-                    <p>XX/YY/ZZ ABCDE</p>
+                    <p>20/04/22 ちなみに</p>
                   </div>
                   <div class="message-body">
-                    HOGEHOGE
+                    これは手動入力です。
+                    後でちゃんとDBから取れるようにしたいです...
                   </div>
                 </article>
                 <article class="message">
                   <div class="message-header">
-                    <p>XX/YY/ZZ ABCDE</p>
+                    <p>20/04/12 既知のバグ</p>
                   </div>
                   <div class="message-body">
-                    HOGEHOGE
+                    リンク集ページのレイアウト崩れ 画像登録時の画像選択無視 画像登録時の記号エスケープ
                   </div>
                 </article>
                 <article class="message">
                   <div class="message-header">
-                    <p>XX/YY/ZZ ABCDE</p>
+                    <p>20/04/12 TODOリスト</p>
                   </div>
                   <div class="message-body">
-                    HOGEHOGE
+                    画像の重複確認処理を書く 不要なCSSをSCSSに変える 管理画面の実装 同意義タグをまとめて検索 画像グループの実装 アップロードキュー 上に戻るボタン バグ修正 いいね音声を鳴らす トップページを完成させる 招待コードを発行可能に
                   </div>
                 </article>
               </div>
@@ -113,3 +112,13 @@
     </div>
   </section>
 </template>
+
+<script>
+export default {
+  computed: {
+    CONTACT () {
+      return process.env.CONTACT
+    }
+  }
+}
+</script>

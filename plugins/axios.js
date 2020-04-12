@@ -14,7 +14,7 @@ export default function ({ $axios, store }) {
     defaultCache
   })
   $axios.onRequest((config) => {
-    config.headers.common.Authorization = 'Bearer ***REMOVED***'
+    config.headers.common.Authorization = 'Bearer ' + process.env.API_KEY
     if (store.$auth.loggedIn) {
       config.headers.common.Authorization = 'Bearer ' + store.$auth.user.apiKey
     }
