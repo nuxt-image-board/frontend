@@ -26,7 +26,7 @@ export default {
   manifest: {
     name: "***REMOVED***",
     short_name: "***REMOVED***",
-    description: '神絵師が突然神絵を消して泣いた日々。この絵師誰だよとキレた日々。そんな日々をなくしたい。***REMOVED***の神絵を永久に。',
+    description: '突然の神絵の消失に泣いた日々。この絵師誰だよとキレた日々。そんな日々をなくしたい。',
     lang: 'ja',
     theme_color: "#7b5544",
     background_color: "#7b5544",

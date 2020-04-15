@@ -1,8 +1,8 @@
 {
   "name": "***REMOVED***",
   "version": "1.0.0",
-  "description": "***REMOVED*** web side",
-  "author": "Dosugamea@SourceTree",
+  "description": "***REMOVED***イラストまとめサイト",
+  "author": "Omado",
   "private": true,
   "scripts": {
     "dev": "nuxt --hostname ***REMOVED***",
