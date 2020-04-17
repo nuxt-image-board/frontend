@@ -17,9 +17,8 @@ module.exports = {
     'public/',
     'static/'
   ],
-  // add your custom rules here
   rules: {
-    'vue/attribute-hyphenation': 'off'
+    'vue/attribute-hyphenation': 'off',
     'vue/no-v-html': 'off'
   }
 }

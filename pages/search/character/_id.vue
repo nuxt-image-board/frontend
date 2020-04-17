@@ -17,9 +17,6 @@ export default {
   components: {
     List
   },
-  async fetch (context) {
-    await context.store.dispatch('getNavigations')
-  },
   async asyncData ({ $axios, route }) {
     const endpoint = '/search/character'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1

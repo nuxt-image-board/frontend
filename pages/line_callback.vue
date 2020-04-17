@@ -24,8 +24,12 @@ export default {
     if (process.client) {
       if (this.$route.query.code) {
         this.form.code = this.$route.query.code
-        await this.$auth.loginWith('local', { data: this.form })
-        this.$router.push({ path: '/' })
+        try {
+          await this.$auth.loginWith('local', { data: this.form })
+          this.$router.push({ path: '/' })
+        } catch (error) {
+          this.$router.push({ path: '/login' })
+        }
       } else {
         this.$router.push({ path: '/login' })
       }

@@ -1,7 +1,7 @@
 <template>
   <nav class="level">
     <div v-if="imageSource.length > 1 && !isButtonDisabled" class="level-item is-vcentered has-text-centered is-hidden-touch">
-      <button class="button is-large is-primary" :disabled="isDecreaseDisabled" @click="decreasePage">
+      <button class="button is-large is-primary" :disabled="isDecreaseDisabledC" @click="decreasePage">
         &lt;
       </button>
     </div>
@@ -9,15 +9,15 @@
       <img class="image is-128x128" :src="selectedImage">
     </div>
     <div v-if="imageSource.length > 1 && !isButtonDisabled" class="level-item is-vcentered has-text-centered is-hidden-touch">
-      <button class="button is-large is-primary" :disabled="isIncreaseDisabled" @click="increasePage">
+      <button class="button is-large is-primary" :disabled="isIncreaseDisabledC" @click="increasePage">
         &gt;
       </button>
     </div>
     <div v-if="imageSource.length > 1 && !isButtonDisabled" class="level-item is-vcentered has-text-centered is-hidden-desktop">
-      <button class="button is-large is-primary" :disabled="isDecreaseDisabled" @click="decreasePage">
+      <button class="button is-large is-primary" :disabled="isDecreaseDisabledC" @click="decreasePage">
         &lt;
       </button>
-      <button class="button is-large is-primary" :disabled="isIncreaseDisabled" @click="increasePage">
+      <button class="button is-large is-primary" :disabled="isIncreaseDisabledC" @click="increasePage">
         &gt;
       </button>
     </div>
@@ -68,18 +68,22 @@ export default {
       this.currentPage += 1
       this.$emit('onSelectedImageChanged', this.currentPage)
       if (this.currentPage === this.imageSource.length - 1) {
-        this.isIncreaseDisabled = true
+        this.isIncreaseDisabledC = true
       }
-      this.isDecreaseDisabled = false
+      this.isDecreaseDisabledC = false
     },
     decreasePage () {
       this.currentPage -= 1
       this.$emit('onSelectedImageChanged', this.currentPage)
       if (this.currentPage === 0) {
-        this.isDecreaseDisabled = true
+        this.isDecreaseDisabledC = true
       }
-      this.isIncreaseDisabled = false
+      this.isIncreaseDisabledC = false
     }
+  },
+  created () {
+    this.isIncreaseDisabledC = this.isIncreaseDisabled
+    this.isDecreaseDisabledC = this.isDecreaseDisabled
   }
 }
 </script>

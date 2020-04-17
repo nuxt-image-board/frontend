@@ -126,9 +126,6 @@ export default {
     Fas,
     Fab
   },
-  async fetch (context) {
-    await context.store.dispatch('getNavigations')
-  },
   async asyncData ({ $axios, route, error }) {
     const endpoint = '/arts/'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
@@ -171,12 +168,14 @@ export default {
       return 'https://line.me/R/msg/text?' + this.result.title + '\n' + this.result.originUrl
     }
   },
+  /*
   mounted () {
     this.starSound = new Audio('star.wav')
     this.starSound.load()
     this.bookmarkSound = new Audio('bookmark.wav')
     this.bookmarkSound.load()
-  },
+  }
+  */
   methods: {
     openSocialShare (addr) {
       if (!this.isPC) {
@@ -189,12 +188,12 @@ export default {
       const endpoint = '/arts/' + this.result.illustID + '/likes'
       this.result.like += 1
       await this.$axios.put(endpoint)
-      this.starSound.play()
+      // this.starSound.play()
     },
     toggleBookmark () {
       // const endpoint = '/arts/' + this.result.illustID + '/bookmark'
       // await this.$axios.post(endpoint)
-      this.bookmarkSound.play()
+      // this.bookmarkSound.play()
       alert('まだ未実装です > <')
     }
   }

@@ -17,9 +17,6 @@ export default {
   components: {
     List
   },
-  async fetch (context) {
-    await context.store.dispatch('getNavigations')
-  },
   async asyncData ({ $axios, route, error }) {
     const endpoint = '/search/all'
     const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1

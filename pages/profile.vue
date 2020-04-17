@@ -48,7 +48,9 @@
         <div class="column is-6 is-vcentered has-text-centered">
           <div class="columns is-multiline">
             <div class="column is-12">
-              <nuxt-link to="/guide" class="button is-large is-primary">利用ガイド</nuxt-link>
+              <nuxt-link to="/guide" class="button is-large is-primary">
+                利用ガイド
+              </nuxt-link>
             </div>
             <div class="column is-12">
               <a href="#" class="button is-large is-primary" disabled>ブックマーク</a>
@@ -166,5 +168,10 @@ export default {
       }
     }
   }
+  /*
+  async fetch (context) {
+    await context.store.dispatch('getNavigations')
+  }
+  */
 }
 </script>

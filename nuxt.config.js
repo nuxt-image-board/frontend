@@ -96,7 +96,9 @@ export default {
             'faHome',
             'faInfo',
             'faQuestionCircle',
-            'faSitemap'
+            'faSitemap',
+            'faCloudUploadAlt',
+            'faExternalLinkAlt'
         ]
       },
       {
