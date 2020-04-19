@@ -12,7 +12,7 @@
                 ***REMOVED***
               </p>
               <div class="content">
-                α1 20/04/12 Build
+                α2 20/04/18 Build
               </div>
             </article>
           </div>
@@ -42,7 +42,7 @@
                         <p>
                           <strong>***REMOVED***</strong>
                           <br>
-                          XSSとかあったらつらい
+                          SQLインジェクションとかあったらつらい
                         </p>
                       </div>
                     </div>
@@ -56,7 +56,9 @@
                   Recommend
                 </p>
                 <figure class="image is-4by3">
-                  <img src="***REMOVED***">
+                  <a :href="RANDOM_ILLUST">
+                    <img :src="RANDOM_ILLUST_SRC">
+                  </a>
                 </figure>
               </article>
             </div>
@@ -71,25 +73,7 @@
               <div class="content">
                 <article class="message">
                   <div class="message-header">
-                    <p>20/04/22 α1開始</p>
-                  </div>
-                  <div class="message-body">
-                    バージョンはアルファ、ベータ、リリースの順で上がります。
-                    アルファということはすごく未完成ってことです。まだやるべきことがあります。
-                  </div>
-                </article>
-                <article class="message">
-                  <div class="message-header">
-                    <p>20/04/22 ちなみに</p>
-                  </div>
-                  <div class="message-body">
-                    これは手動入力です。
-                    後でちゃんとDBから取れるようにしたいです...
-                  </div>
-                </article>
-                <article class="message">
-                  <div class="message-header">
-                    <p>20/04/12 既知のバグ</p>
+                    <p>20/04/18 既知のバグ</p>
                   </div>
                   <div class="message-body">
                     リンク集ページのレイアウト崩れ 画像登録時の画像選択無視 画像登録時の記号エスケープ
@@ -97,10 +81,10 @@
                 </article>
                 <article class="message">
                   <div class="message-header">
-                    <p>20/04/12 TODOリスト</p>
+                    <p>20/04/18 TODOリスト</p>
                   </div>
                   <div class="message-body">
-                    画像の重複確認処理を書く 不要なCSSをSCSSに変える 管理画面の実装 同意義タグをまとめて検索 画像グループの実装 アップロードキュー 上に戻るボタン バグ修正 いいね音声を鳴らす トップページを完成させる 招待コードを発行可能に
+                    不要なCSSをSCSSに変える 管理画面の実装 同意義タグをまとめて検索 画像グループの実装 アップロードキュー バグ修正 いいね音声を鳴らす トップページを完成させる 招待コードを発行可能に
                   </div>
                 </article>
               </div>
@@ -109,15 +93,30 @@
         </div>
       </div>
     </div>
-    </div>
   </section>
 </template>
 
 <script>
 export default {
+  async asyncData ({ $axios, $auth, params }) {
+    const resp = await $axios.get('/search/random')
+    let randomIllustID = 1
+    if (resp.status === 200) {
+      randomIllustID = resp.data.data.imgs[0].illustID
+    }
+    return {
+      randomIllustID
+    }
+  },
   computed: {
     CONTACT () {
       return process.env.CONTACT
+    },
+    RANDOM_ILLUST_SRC () {
+      return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllustID + '.webp'
+    },
+    RANDOM_ILLUST () {
+      return 'arts/' + this.randomIllustID
     }
   }
 }

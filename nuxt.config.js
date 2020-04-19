@@ -24,15 +24,15 @@ export default {
   ** PWA Config
   */
   manifest: {
-    name: "***REMOVED***",
-    short_name: "***REMOVED***",
+    name: '***REMOVED***',
+    short_name: '***REMOVED***',
     description: '突然の神絵の消失に泣いた日々。この絵師誰だよとキレた日々。そんな日々をなくしたい。',
     lang: 'ja',
-    theme_color: "#7b5544",
-    background_color: "#7b5544",
-    display: "standalone",
-    scope: "/",
-    start_url: "/"
+    theme_color: '#7b5544',
+    background_color: '#7b5544',
+    display: 'standalone',
+    scope: '/',
+    start_url: '/'
   },
   /*
   ** Customize the progress-bar color
@@ -48,6 +48,8 @@ export default {
   */
   plugins: [
     '~plugins/axios',
+    '~plugins/vue-scrollto',
+    '~plugins/vue2-touch-events',
     { src: '@/plugins/vue-input-tag', ssr: false }
   ],
   /*
@@ -78,27 +80,32 @@ export default {
       {
         set: '@fortawesome/free-solid-svg-icons', // Solid icons
         icons: [
-            'faCalendar',
-            'faHeart',
-            'faBookmark',
-            'faPenFancy',
-            'faUserEdit',
-            'faBroadcastTower',
-            'faSearch',
-            'faUser',
-            'faUsers',
-            'faTags',
-            'faPaintBrush',
-            'faIdCard',
-            'faLock',
-            'faSignInAlt',
-            'faTicketAlt',
-            'faHome',
-            'faInfo',
-            'faQuestionCircle',
-            'faSitemap',
-            'faCloudUploadAlt',
-            'faExternalLinkAlt'
+          'faCalendar',
+          'faHeart',
+          'faBookmark',
+          'faPenFancy',
+          'faUserEdit',
+          'faBroadcastTower',
+          'faSearch',
+          'faUser',
+          'faUsers',
+          'faTags',
+          'faPaintBrush',
+          'faIdCard',
+          'faLock',
+          'faSignInAlt',
+          'faTicketAlt',
+          'faHome',
+          'faInfo',
+          'faQuestionCircle',
+          'faSitemap',
+          'faCloudUploadAlt',
+          'faExternalLinkAlt',
+          'faAngleUp',
+          'faImage',
+          'faBell',
+          'faKeyboard',
+          'faUpload'
         ]
       },
       {

@@ -10,19 +10,19 @@
       />
       <Accordion
         title="ユーザーページの見方"
-        text="<img src='http://***REMOVED***:3000/guide/user.png'><img src='http://***REMOVED***:3000/guide/user2.png'>"
+        text="<img src='http://***REMOVED***/guide/user.png'><img src='http://***REMOVED***/guide/user2.png'>"
       />
       <Accordion
         title="検索結果の見方"
-        text="<img src='http://***REMOVED***:3000/guide/search.png'>"
+        text="<img src='http://***REMOVED***/guide/search.png'>"
       />
       <Accordion
         title="作品ページの見方"
-        text="<img src='http://***REMOVED***:3000/guide/art.png'>"
+        text="<img src='http://***REMOVED***/guide/art.png'>"
       />
       <Accordion
         title="登録ページの見方"
-        text="<img src='http://***REMOVED***:3000/guide/scrape.png'>"
+        text="<img src='http://***REMOVED***/guide/scrape.png'>"
       />
     </div>
   </section>

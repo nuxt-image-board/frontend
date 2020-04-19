@@ -63,6 +63,10 @@ export default {
       }
     }
   },
+  created () {
+    this.isIncreaseDisabledC = this.isIncreaseDisabled
+    this.isDecreaseDisabledC = this.isDecreaseDisabled
+  },
   methods: {
     increasePage () {
       this.currentPage += 1
@@ -80,10 +84,6 @@ export default {
       }
       this.isIncreaseDisabledC = false
     }
-  },
-  created () {
-    this.isIncreaseDisabledC = this.isIncreaseDisabled
-    this.isDecreaseDisabledC = this.isDecreaseDisabled
   }
 }
 </script>

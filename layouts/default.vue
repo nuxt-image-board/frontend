@@ -1,24 +1,72 @@
 <template>
-  <div>
-    <NavbarUp />
-    <main>
+  <div id="top">
+    <NavbarUp v-if="isPC" />
+    <NavbarSmart v-else :openMenu="openSmartNav" v-touch:swipe.left="hideSmartNav" />
+    <main v-touch:swipe.right="showSmartNav" v-touch:swipe.left="hideSmartNav">
       <nuxt />
     </main>
-    <NavbarDown />
+    <transition name="fade">
+      <a v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">
+        <Fas i="angle-up" classes="scroll-icon" />
+      </a>
+    </transition>
+    <NavbarDown v-if="isPC" />
   </div>
 </template>
 
 <script>
+/*
+上に戻るボタンは 丸パクリ
+
+https://note.com/aliz/n/nfd2bfc514ace
+
+https://helloworld-blog.tech/javascript/vue-js-smooth-scroll%E3%81%A7top%E3%81%AB%E6%88%BB%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3%E3%82%92%E5%AE%9F%E8%A3%85%E3%81%99%E3%82%8B
+
+*/
+
 import NavbarUp from '~/components/NavbarUp.vue'
+import NavbarSmart from '~/components/NavbarSmart.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
+import Fas from '~/components/ui/Fas.vue'
 
 export default {
   middleware: [
     'auth'
   ],
   components: {
+    NavbarSmart,
     NavbarUp,
-    NavbarDown
+    NavbarDown,
+    Fas
+  },
+  data () {
+    return {
+      scrollY: 0,
+      openSmartNav: false,
+      isPC: this.$cookies.get('isPC')
+    }
+  },
+  computed: {
+    showJump () {
+      return Boolean(this.scrollY > 200)
+    }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.onScroll)
+    window.addEventListener('load', () => {
+      this.onScroll()
+    })
+  },
+  methods: {
+    onScroll () {
+      this.scrollY = window.pageYOffset
+    },
+    showSmartNav () {
+      this.openSmartNav = true
+    },
+    hideSmartNav () {
+      this.openSmartNav = false
+    }
   },
   serverPrefetch () {
     return this.$store.dispatch('getNavigations')
@@ -33,6 +81,10 @@ export default {
 .title {
     font-family: 'Arvo', serif;
 }
+.margin-fixed-navbar{
+    margin-top:50px;
+}
+
 main {
     min-height:87vh;
 }
@@ -58,11 +110,30 @@ main {
     top: 50%;
 }
 
-/*
-必要なページに後で移動する
-*/
-
 a:hover{
     color: #0000FF !important;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #000;
+  padding: 10px 16px;
+  border-radius: 32px;
+}
+.scroll-icon {
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

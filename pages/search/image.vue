@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container">
       <div class="columns is-centered is-vcentered" style="min-height:70vh">
-        <div class="column is-half has-text-centered">
+        <div class="column has-text-centered">
           <h4 class="title">
             画像検索
           </h4>
@@ -44,7 +44,7 @@
             </span>
           </div>
         </div>
-        <div class="column is-half">
+        <div class="column is-half" v-if="results.length !== 0 || naoResults.length !== 0">
           <div class="column">
             <div class="container">
               <div class="columns is-centered is-mobile is-multiline">

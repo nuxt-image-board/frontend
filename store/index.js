@@ -21,6 +21,7 @@ export const mutations = {
 // 実際に各コンポーネントから呼び出す処理をactionとしてexportする
 export const actions = {
   async getNavigations ({ commit, state }) {
+    // この条件があることで初回のみ取得になる
     if (state.characters.length === 0) {
       const client = axios.create({
         baseURL: process.env.API_ENDPOINT,

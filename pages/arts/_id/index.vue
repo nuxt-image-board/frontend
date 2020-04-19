@@ -101,6 +101,9 @@
                 </span>
               </a>
             </div>
+            <div v-if="isEditable" class="column is-12 has-text-centered">
+              <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit'">データ編集</nuxt-link>
+            </div>
           </div>
         </div>
       </div>
@@ -112,7 +115,6 @@
           <img :src="ImgOrigAddress">
         </p>
       </div>
-    </div>
     </div>
   </section>
 </template>
@@ -126,21 +128,27 @@ export default {
     Fas,
     Fab
   },
-  async asyncData ({ $axios, route, error }) {
+  async asyncData ({ $axios, $auth, route, error }) {
     const endpoint = '/arts/'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const response = await $axios.get(endpoint + id)
+    let isEditable = false
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }
     const data = response.data.data
+    if (data.userID === $auth.$state.user.userID) {
+      isEditable = true
+    }
     return {
-      result: data
+      result: data,
+      isEditable
     }
   },
   data () {
     return {
       result: {},
+      isEditable: false,
       starSound: null,
       bookmarkSound: null,
       isPC: this.$cookies.get('isPC'),

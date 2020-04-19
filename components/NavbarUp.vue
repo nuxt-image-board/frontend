@@ -20,7 +20,7 @@
                   <input class="input is-rounded" type="text" placeholder="Find an another god-art">
                 </div>
                 <div class="control">
-                  <nuxt-link to="/search" class="button is-success is-rounded" @click.native="openMenu = !openMenu">
+                  <nuxt-link to="/search/keyword" class="button is-success is-rounded" @click.native="closeAll()">
                     <span><Fas i="search" /></span>
                     <span>検索</span>
                   </nuxt-link>
@@ -31,12 +31,12 @@
           <div v-if="$store.state.auth.loggedIn" class="navbar-start" style="flex-grow: 1; justify-content: center;">
             <nuxt-link to="/search/list" class="navbar-item is-hoverable has-text-white" @click.native="closeAll()">
               <span class="icon"><Fas i="search" /></span>
-              <span>一覧から探す</span>
+              <span>一覧検索</span>
             </nuxt-link>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(1)">
                 <span class="icon"><Fas i="user" /></span>
-                <span>キャラから探す</span>
+                <span>キャラ検索</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 1}">
                 <nuxt-link v-for="chara in characters" :key="chara.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/character/&quot;+chara.id" @click.native="closeAll()">
@@ -51,7 +51,7 @@
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(2)">
                 <span class="icon"><Fas i="tags" /></span>
-                <span>タグから探す</span>
+                <span>タグ検索</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 2}">
                 <nuxt-link v-for="tag in tags" :key="tag.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/tag/&quot;+tag.id" @click.native="closeAll()">
@@ -66,7 +66,7 @@
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(3)">
                 <span class="icon"><Fas i="paint-brush" /></span>
-                <span>絵師から探す</span>
+                <span>絵師検索</span>
               </a>
               <div class="navbar-dropdown is-boxed has-text-white" :class="{'is-hidden-touch': openTab !== 3}">
                 <nuxt-link v-for="artist in artists" :key="artist.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/artist/&quot;+artist.id" @click.native="closeAll()">
@@ -78,8 +78,21 @@
                 </nuxt-link>
               </div>
             </div>
+            <nuxt-link to="/search/image" class="navbar-item is-hoverable has-text-white" @click.native="closeAll()">
+              <span class="icon"><Fas i="image" /></span>
+              <span>画像検索</span>
+            </nuxt-link>
           </div>
           <div v-if="$store.state.auth.loggedIn" class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <nuxt-link to="/news" @click.native="closeAll()">
+                    <span class="icon"><Fas i="bell" classes="has-text-white" /></span>
+                  </nuxt-link>
+                </p>
+              </div>
+            </div>
             <div class="navbar-item">
               <div class="field is-grouped">
                 <p class="control">

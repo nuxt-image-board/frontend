@@ -1,82 +1,138 @@
 <template>
   <section class="section">
-    <div class="container is-widescreen">
-      <div class="columns is-vcentered is-centered">
-        <div class="column is-6 is-vcentered has-text-centered has-image-centered">
+    <div class="container is-widescreen has-text-centered">
+      <div class="columns is-centered">
+        <div class="column is-3">
           <p class="title">
             {{ $auth.$state.user.name }}
           </p>
-          <table class="table is-fullwidth centered-table">
-            <tr><td>UserID</td><td>{{ $auth.$state.user.userID }}</td></tr>
-            <tr><td>DisplayID</td><td>{{ $auth.$state.user.displayID }}</td></tr>
-            <tr><td>推し</td><td>{{ favoriteCharacter }}</td></tr>
-            <tr>
-              <td>R18表示</td>
-              <td>
-                <div class="field">
-                  <input
-                    id="switchRoundedDanger"
-                    v-model="acceptR18"
-                    type="checkbox"
-                    name="switchRoundedDanger"
-                    class="switch is-rounded is-danger"
-                    :checked="acceptR18"
-                  >
-                  <label for="switchRoundedDanger" />
+          <div class="box">
+            <article class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>内部ID: {{ $auth.$state.user.userID }}</p>
+                  <p>表示ID: {{ $auth.$state.user.displayID }}</p>
+                  <p>招待者: -</p>
+                  <p>参加日: 2020</p>
                 </div>
-              </td>
-            </tr>
-            <tr>
-              <td>PC版</td>
-              <td>
-                <div class="field">
-                  <input
-                    id="switchPC"
-                    v-model="isPC"
-                    type="checkbox"
-                    name="switchRoundedDanger"
-                    class="switch is-rounded is-info"
-                    :checked="isPC"
-                  >
-                  <label for="switchPC" />
-                </div>
-              </td>
-            </tr>
-          </table>
-          <img class="is-rounded" src="https://profile.***REMOVED***">
-        </div>
-        <div class="column is-6 is-vcentered has-text-centered">
-          <div class="columns is-multiline">
-            <div class="column is-12">
-              <nuxt-link to="/guide" class="button is-large is-primary">
-                利用ガイド
-              </nuxt-link>
-            </div>
-            <div class="column is-12">
-              <a href="#" class="button is-large is-primary" disabled>ブックマーク</a>
-            </div>
-            <div class="column is-12">
-              <a href="#" class="button is-large is-primary" disabled>パスワード変更</a>
-            </div>
-            <div class="column is-12">
-              <a :href="LINE_CONNECT_URL" class="button is-large is-primary">LINE連携</a>
-            </div>
-            <div class="column is-12">
-              <button class="button is-large is-primary" @click="logout">
-                ログアウト</a>
-              </button>
-            </div>
-            <div class="column is-12">
-              <button class="button is-large is-warning" @click="isModalOpen = !isModalOpen">
-                APIキー
-              </button>
-            </div>
-            <div class="column is-12">
-              <a href="#" class="button is-large is-danger" disabled>退会する</a>
-            </div>
+              </div>
+            </article>
           </div>
         </div>
       </div>
+      <div class="columns is-vcentered is-centered">
+        <div class="column is-4 is-vcentered has-text-centered has-image-centered">
+          <nav class="panel is-info">
+            <p class="panel-heading">
+              ユーザー設定
+            </p>
+            <table class="table is-fullwidth centered-table">
+              <tr><td>推し</td><td>{{ favoriteCharacter }}</td></tr>
+              <tr>
+                <td>R18表示</td>
+                <td>
+                  <div class="field">
+                    <input
+                      id="switchRoundedDanger"
+                      v-model="acceptR18"
+                      type="checkbox"
+                      name="switchRoundedDanger"
+                      class="switch is-rounded is-danger"
+                      :checked="acceptR18"
+                    >
+                    <label for="switchRoundedDanger" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>PC版</td>
+                <td>
+                  <div class="field">
+                    <input
+                      id="switchPC"
+                      v-model="isPC"
+                      type="checkbox"
+                      name="switchRoundedDanger"
+                      class="switch is-rounded is-info"
+                      :checked="isPC"
+                    >
+                    <label for="switchPC" />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>上に戻るボタン表示</td>
+                <td>
+                  切替未実装
+                </td>
+              </tr>
+            </table>
+          </nav>
+        </div>
+        <div class="column is-4 is-vcentered has-text-centered">
+          <nav class="panel is-info">
+            <p class="panel-heading">
+              アカウント設定
+            </p>
+            <a class="panel-block" :href="LINE_CONNECT_URL">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              LINE連携
+            </a>
+            <a class="panel-block">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              パスワード変更
+            </a>
+            <a class="panel-block" @click="isModalOpen = !isModalOpen">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              APIキー確認
+            </a>
+            <a class="panel-block" @click="logout">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              ログアウト
+            </a>
+          </nav>
+        </div>
+        <div class="column is-4 is-vcentered has-text-centered">
+          <nav class="panel is-link">
+            <p class="panel-heading">
+              その他
+            </p>
+            <nuxt-link to="/upload" class="panel-block">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              イラスト投稿
+            </nuxt-link>
+            <a class="panel-block">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              ブックマーク
+            </a>
+            <nuxt-link to="/guide" class="panel-block">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              利用ガイド
+            </nuxt-link>
+            <a class="panel-block">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true"></i>
+              </span>
+              お問い合わせ
+            </a>
+          </nav>
+        </div>
+      </div>
+      <a href="#" class="button is-danger" disabled>退会する</a>
     </div>
     <div class="modal" :class="{'is-active': isModalOpen}">
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
