@@ -4,7 +4,7 @@
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-8">
           <div class="tile is-parent">
-            <article class="tile is-child notification" style="background-color:#b2d8ff;">
+            <article class="tile is-child notification has-background-chino">
               <p class="title">
                 ***REMOVED***
               </p>
@@ -18,7 +18,7 @@
           </div>
           <div class="tile">
             <div class="tile is-parent is-vertical">
-              <article class="tile is-child notification" style="background-color:#d8b2ff;">
+              <article class="tile is-child notification has-background-rize">
                 <p class="title">
                   Danger
                 </p>
@@ -26,7 +26,7 @@
                   <p>未完成のサイトです。表示崩れがバグが発生する可能性があります。何か気になることがあれば<a :href="CONTACT">問い合わせ等</a>より、ご連絡ください。</p>
                 </div>
               </article>
-              <article class="tile is-child notification" style="background-color: #ffffb2;">
+              <article class="tile is-child notification has-background-syaro">
                 <p class="title">
                   Hitokoto
                 </p>
@@ -34,7 +34,7 @@
                   <article class="media s-pulled-right">
                     <figure class="media-left">
                       <p class="image is-64x64">
-                        <img src="https://profile.***REMOVED***">
+                        <img src="logo.png" alt="***REMOVED*** logo">
                       </p>
                     </figure>
                     <div class="media-content">
@@ -51,7 +51,7 @@
               </article>
             </div>
             <div class="tile is-parent">
-              <article class="tile is-child notification" style="background-color: #b2ffd8;">
+              <article class="tile is-child notification has-background-chiya">
                 <p class="title">
                   Recommend
                 </p>
@@ -65,7 +65,7 @@
           </div>
         </div>
         <div class="tile is-parent">
-          <article class="tile is-child notification" style="background-color:#ffd8b2;">
+          <article class="tile is-child notification has-background-cocoa">
             <div class="content">
               <p class="title">
                 News

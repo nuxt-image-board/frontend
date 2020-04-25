@@ -19,6 +19,7 @@ module.exports = {
   ],
   rules: {
     'vue/attribute-hyphenation': 'off',
-    'vue/no-v-html': 'off'
+    'vue/no-v-html': 'off',
+    'no-console': 'off'
   }
 }

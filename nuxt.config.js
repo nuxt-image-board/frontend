@@ -16,9 +16,19 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Arvo|Noto+Sans&display=swap' }
+      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css' }
     ]
+  },
+  /*
+  ** WebFont
+  */
+  webfontloader: {
+    google: {
+      families: [
+        'Arvo',
+        'Noto+Sans&display=swap'
+      ]
+    }
   },
   /*
   ** PWA Config
@@ -42,6 +52,8 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/usagi.css',
+    '@/assets/global.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -70,7 +82,8 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     'nuxt-fontawesome',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    'nuxt-webfontloader'
   ],
   /*
   ** Nuxt-fontawesome
@@ -105,7 +118,9 @@ export default {
           'faImage',
           'faBell',
           'faKeyboard',
-          'faUpload'
+          'faUpload',
+          'faChevronDown',
+          'faChevronUp'
         ]
       },
       {

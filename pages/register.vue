@@ -11,7 +11,7 @@
       />
       <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
-          <img src="logo.png">
+          <img src="logo.png" alt="***REMOVED*** logo">
         </div>
         <div class="column is-half">
           <div class="container has-text-centered is-vcentered">
@@ -21,93 +21,133 @@
             <h3 class="subtitle has-text-centered">
               {{ welcomeMsg }}
             </h3>
-            <form class="box" onsubmit="return false">
-              <div class="field">
-                <div class="control has-icons-left">
-                  <input
-                    v-model="form.username"
-                    type="text"
-                    placeholder="表示名 (日本語可)"
-                    maxlength="20"
-                    class="input"
-                    autocomplete="nickname"
-                    required
-                  >
-                  <span class="icon is-small is-left">
-                    <Fas i="id-card" />
-                  </span>
+            <form class="box" @submit="register">
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label for="display_id" class="label">表示名</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control has-icons-left">
+                      <input
+                        v-model="form.username"
+                        name="display_id"
+                        type="text"
+                        placeholder="***REMOVED***"
+                        maxlength="20"
+                        class="input"
+                        autocomplete="nickname"
+                        required
+                      >
+                      <span class="icon is-small is-left">
+                        <Fas i="id-card" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label for="user_id" class="label">ユーザーID</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control has-icons-left">
+                      <input
+                        v-model="form.displayID"
+                        name="user_id"
+                        type="text"
+                        placeholder="kafuuchino"
+                        pattern="[a-zA-Z0-9]+"
+                        maxlength="20"
+                        class="input"
+                        autocomplete="username"
+                        required
+                      >
+                      <span class="icon is-small is-left">
+                        <Fas i="id-card" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label for="user_passwd" class="label">パスワード</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control has-icons-left">
+                      <input
+                        v-model="form.password"
+                        name="user_passwd"
+                        type="password"
+                        placeholder="Str0nGPAssw0rD"
+                        pattern="[a-zA-Z0-9]+"
+                        maxlength="20"
+                        class="input"
+                        autocomplete="new-password"
+                        required
+                      >
+                      <span class="icon is-small is-left">
+                        <Fas i="lock" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label for="user_passwd_re" class="label">パスワード(再入力)</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control has-icons-left">
+                      <input
+                        v-model="form.password_re"
+                        name="user_passwd_re"
+                        type="password"
+                        placeholder="Str0nGPAssw0rD"
+                        pattern="[a-zA-Z0-9]+"
+                        maxlength="20"
+                        class="input"
+                        autocomplete="new-password"
+                        required
+                      >
+                      <span class="icon is-small is-left">
+                        <Fas i="lock" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                  <label for="inv_code" class="label">招待コード</label>
+                </div>
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control has-icons-left">
+                      <input
+                        v-model="form.inviteCode"
+                        name="inv_code"
+                        type="text"
+                        placeholder="INV_CODE"
+                        pattern="[a-zA-Z0-9]+"
+                        maxlength="10"
+                        class="input"
+                        autocomplete="one-time-code"
+                        required
+                      >
+                      <span class="icon is-small is-left">
+                        <Fas i="ticket-alt" />
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="field">
-                <div class="control has-icons-left">
-                  <input
-                    v-model="form.displayID"
-                    type="text"
-                    placeholder="ユーザーID"
-                    pattern="[a-zA-Z0-9]+"
-                    maxlength="20"
-                    class="input"
-                    autocomplete="username"
-                    required
-                  >
-                  <span class="icon is-small is-left">
-                    <Fas i="id-card" />
-                  </span>
-                </div>
-              </div>
-              <div class="field">
-                <div class="control has-icons-left">
-                  <input
-                    v-model="form.password"
-                    type="password"
-                    placeholder="パスワード"
-                    pattern="[a-zA-Z0-9]+"
-                    maxlength="20"
-                    class="input"
-                    autocomplete="new-password"
-                    required
-                  >
-                  <span class="icon is-small is-left">
-                    <Fas i="lock" />
-                  </span>
-                </div>
-              </div>
-              <div class="field">
-                <div class="control has-icons-left">
-                  <input
-                    v-model="form.password_re"
-                    type="password"
-                    placeholder="パスワード (確認)"
-                    pattern="[a-zA-Z0-9]+"
-                    maxlength="20"
-                    class="input"
-                    autocomplete="new-password"
-                    required
-                  >
-                  <span class="icon is-small is-left">
-                    <Fas i="lock" />
-                  </span>
-                </div>
-              </div>
-              <div class="field">
-                <div class="control has-icons-left">
-                  <input
-                    v-model="form.inviteCode"
-                    type="text"
-                    placeholder="招待コード"
-                    pattern="[a-zA-Z0-9]+"
-                    maxlength="10"
-                    class="input"
-                    autocomplete="one-time-code"
-                    required
-                  >
-                  <span class="icon is-small is-left">
-                    <Fas i="ticket-alt" />
-                  </span>
-                </div>
-              </div>
-              <div class="field">
-                <button class="button is-block is-info is-medium is-fullwidth" @click="register">
+                <button class="button is-block is-info is-medium is-fullwidth">
                   登録 <Fas i="sign-in-alt" />
                 </button>
               </div>
@@ -201,12 +241,37 @@ export default {
     }
   },
   methods: {
-    async register () {
+    async register (e) {
+      e.preventDefault()
       const resp = await this.$axios.post('/accounts', this.form)
       const data = resp.data
       if (data.status === 201) {
         this.form.id = this.form.displayID
         await this.$auth.loginWith('local', { data: this.form })
+        const cookies = {
+          name: '***REMOVED***',
+          value: 'true',
+          opts: {
+            path: '/',
+            domain: '',
+            maxAge: 60 * 60 * 24 * 7
+          }
+        }
+        const domains = [
+          '***REMOVED***',
+          '***REMOVED***',
+          '***REMOVED***',
+          '***REMOVED***',
+          '***REMOVED***',
+          '***REMOVED***',
+          '***REMOVED***'
+        ]
+        const cookieList = []
+        domains.forEach((domain) => {
+          cookies.opts.domain = domain
+          cookieList.push(cookies)
+        })
+        this.$cookies.setAll(cookieList)
         this.$router.push({ path: '/' })
       } else {
         this.notificationDeleted = false

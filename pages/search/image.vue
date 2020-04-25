@@ -44,7 +44,7 @@
             </span>
           </div>
         </div>
-        <div class="column is-half" v-if="results.length !== 0 || naoResults.length !== 0">
+        <div v-if="results.length !== 0 || naoResults.length !== 0" class="column is-half">
           <div class="column">
             <div class="container">
               <div class="columns is-centered is-mobile is-multiline">

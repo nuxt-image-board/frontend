@@ -3,7 +3,7 @@
     <div class="container">
       <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
-          <img src="logo.png">
+          <img src="logo.png" alt="***REMOVED*** logo">
         </div>
         <div class="column is-half">
           <div class="container has-text-centered is-vcentered">

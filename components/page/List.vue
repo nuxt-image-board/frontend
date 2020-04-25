@@ -9,13 +9,24 @@
           <SelectForm :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
         </div>
       </div>
+      <Pagination
+        :current-page-from-prop="SelectedPage"
+        :total-page="totalPage"
+        :send-mounted="false"
+        @onPageChanged="updatePage"
+      />
       <div class="columns is-centered is-multiline is-mobile">
         <div v-for="result in results" :key="result.illustID" class="column is-12-mobile is-6-touch is-3-desktop">
           <SearchResult v-if="isSearchPage" :isPC="isPC" :accept-r18="acceptR18" :result="result" />
           <ListResult v-else :accept-r18="acceptR18" :page-type="pageType" :result="result" />
         </div>
       </div>
-      <Pagination :current-page-from-prop="SelectedPage" :total-page="totalPage" :send-mounted="false" @onPageChanged="updatePage" />
+      <Pagination
+        :current-page-from-prop="SelectedPage"
+        :total-page="totalPage"
+        :send-mounted="false"
+        @onPageChanged="updatePage"
+      />
     </div>
   </section>
 </template>
@@ -105,6 +116,12 @@ export default {
       ]
     }
   },
+  watch: {
+    '$route' (to, from) {
+      this.SelectedPage = isFinite(to.query.page) ? parseInt(to.query.page) : 1
+      this.getData()
+    }
+  },
   mounted () {
     if (this.isSearchPage) {
       this.SortOptions = [
@@ -116,10 +133,8 @@ export default {
     }
   },
   methods: {
-    fetch () {
-      this.$store.dispatch('getNavigationData')
-    },
     async getData () {
+      this.results = []
       const page = this.SelectedPage
       const sortNum = parseInt(this.SelectedSort)
       const id = isFinite(this.$route.params.id) ? parseInt(this.$route.params.id) : 1
@@ -143,6 +158,7 @@ export default {
     updatePage (newPage) {
       this.SelectedPage = newPage
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
+      this.$scrollTo('#top')
       this.getData()
     }
   }
