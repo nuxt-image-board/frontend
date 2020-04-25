@@ -1,12 +1,12 @@
 <template>
   <div id="top">
     <NavbarUp v-if="isPC" />
-    <NavbarSmart v-else :openMenu="openSmartNav" v-touch:swipe.left="hideSmartNav" />
+    <NavbarSmart v-else v-touch:swipe.left="hideSmartNav" :openMenuFromProp="openSmartNav" @menu-event="changeMenu" />
     <main v-touch:swipe.right="showSmartNav" v-touch:swipe.left="hideSmartNav">
       <nuxt />
     </main>
     <transition name="fade">
-      <a v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">
+      <a v-if="isJumpEnabled" v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">
         <Fas i="angle-up" classes="scroll-icon" />
       </a>
     </transition>
@@ -43,7 +43,8 @@ export default {
     return {
       scrollY: 0,
       openSmartNav: false,
-      isPC: this.$cookies.get('isPC')
+      isPC: this.$cookies.get('isPC'),
+      isJumpEnabled: this.$cookies.get('isJumpEnabled')
     }
   },
   computed: {
@@ -57,6 +58,12 @@ export default {
       this.onScroll()
     })
   },
+  created () {
+    if (process.client) {
+      console.log('%c***REMOVED*** α2', 'color: blue; font-size: 30px')
+      console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
+    }
+  },
   methods: {
     onScroll () {
       this.scrollY = window.pageYOffset
@@ -66,6 +73,9 @@ export default {
     },
     hideSmartNav () {
       this.openSmartNav = false
+    },
+    changeMenu (value) {
+      this.openSmartNav = value
     }
   },
   serverPrefetch () {
@@ -75,45 +85,6 @@ export default {
 </script>
 
 <style>
-* {
-    font-family: 'Noto Sans', sans-serif;
-}
-.title {
-    font-family: 'Arvo', serif;
-}
-.margin-fixed-navbar{
-    margin-top:50px;
-}
-
-main {
-    min-height:87vh;
-}
-.navbar,.navbar-menu,.navbar-link:hover,.navbar-item:focus,.navbar-dropdown,.dropdown-item:hover,.navbar-item:hover{
-    background-color: #7b5544 !important;
-}
-.navbar-link::after {
-    border: 1px solid #fff !important;
-    border-right: 0 !important;
-    border-top: 0 !important;
-    content: " ";
-    display: block;
-    height: .5em;
-    pointer-events: none;
-    position: absolute;
-    -webkit-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-    -webkit-transform-origin: center;
-    transform-origin: center;
-    width: .5em;
-    margin-top: -.375em;
-    right: 1.125em;
-    top: 50%;
-}
-
-a:hover{
-    color: #0000FF !important;
-}
-
 .scroll-top {
   position: fixed;
   bottom: 30px;

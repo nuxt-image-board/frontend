@@ -30,7 +30,7 @@
       <h5>About this site</h5>
       <div class="columns is-centered">
         <div class="column is-half">
-          <small>This site is a links collectively site. User can post arts by own,these may include some external links. Site admin don't upload anything. If anyone have a problem, please contact to <a :href="DMCA">here</a>.</small>
+          <small>This site is a links collectively site. User can post arts by own,these may include some external links. Site admin don't upload anything. If anyone have a problem, please contact us from <a :href="DMCA">DMCA form</a>.</small>
         </div>
       </div>
     </div>
