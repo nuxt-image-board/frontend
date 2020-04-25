@@ -102,7 +102,9 @@
               </a>
             </div>
             <div v-if="isEditable" class="column is-12 has-text-centered">
-              <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit'">データ編集</nuxt-link>
+              <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit'">
+                データ編集
+              </nuxt-link>
             </div>
           </div>
         </div>
