@@ -1,4 +1,5 @@
-require('dotenv').config()
+const envPath = `config/.env.${process.env.NODE_ENV || 'local'}`
+require('dotenv').config({ path: envPath })
 
 export default {
   mode: 'universal',
@@ -160,8 +161,15 @@ export default {
     baseURL: process.env.API_ENDPOINT
   },
   /*
+  ** environment configuration
+  */
+  dotenv: {
+    filename: envPath
+  },
+  /*
   ** Build configuration
   */
+  buildDir: 'functions/nuxt',
   build: {
     postcss: {
       preset: {
@@ -177,7 +185,7 @@ export default {
     }
   },
   vue: {
-    devtools: true
+    devtools: (process.env.NODE_ENV !== 'production')
   },
-  dev: true
+  dev: (process.env.NODE_ENV !== 'production')
 }
