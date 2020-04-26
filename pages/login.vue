@@ -211,7 +211,9 @@ export default {
           opts: {
             path: '/',
             domain: '',
-            maxAge: 60 * 60 * 24 * 7
+            maxAge: 60 * 60 * 24 * 7,
+            secure: true,
+            sameSite: 'Lax'
           }
         }
         const domains = [

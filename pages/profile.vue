@@ -17,7 +17,7 @@
               表示ID: {{ $auth.$state.user.displayID }}
             </p>
             <p class="panel-block">
-              参加日: 2020-04-17
+              登録日: {{ $auth.$state.user.registeredDate }}
             </p>
           </nav>
         </div>
@@ -27,17 +27,21 @@
               招待情報
             </p>
             <p class="panel-block">
-              招待者: Nobody
+              招待者: {{ $auth.$state.user.inviter.name }}
             </p>
             <p class="panel-block">
-              招待数: 0
+              招待数:  {{ $auth.$state.user.invite.invited }}
             </p>
             <p class="panel-block">
-              招待可否: 否
+              招待可否: {{ IS_INVITE_ENABLED }}
             </p>
             <p class="panel-block">
-              <button class="button is-link is-outlined is-fullwidth" @click="isInviteModalOpen = !isInviteModalOpen">
-                招待作成
+              <button
+                class="button is-link is-outlined is-fullwidth"
+                :disabled="!$auth.$state.user.invite.enabled"
+                @click="getInviteKey(); isInviteModalOpen = !isInviteModalOpen"
+              >
+                招待する
               </button>
             </p>
           </nav>
@@ -127,7 +131,7 @@
               </span>
               APIキー確認
             </a>
-            <a class="panel-block" @click="logout">
+            <a class="panel-block" @click="$auth.logout()">
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
               </span>
@@ -146,12 +150,12 @@
               </span>
               イラスト投稿
             </nuxt-link>
-            <a href="/404" class="panel-block">
+            <nuxt-link to="/bookmark" class="panel-block">
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
               </span>
               ブックマーク
-            </a>
+            </nuxt-link>
             <nuxt-link to="/guide" class="panel-block">
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
@@ -210,7 +214,7 @@
               あなたの招待コード
             </h2>
             <p class="subtitle has-text-centered" style="word-break:break-all">
-              (INVITE_IS_DISABLED_FOR_NOW)
+              {{ inviteKey }}
             </p>
             <p>
               この招待コードを他の人に伝えることで***REMOVED***に新規登録してもらうことができます。
@@ -236,23 +240,26 @@
         </header>
         <section class="modal-card-body">
           <div class="content">
-            <p class="has-text-centered">
-              現在のパスワード
-              <input v-model="old_password" class="input" type="password">
-            </p>
-            <p class="has-text-centered">
-              新しいパスワード
-              <input v-model="new_password" class="input" type="password">
-            </p>
-            <p class="has-text-centered">
-              新しいパスワード(再入力)
-              <input v-model="new_password_re" class="input" type="password">
-            </p>
-            <p class="has-text-centered">
-              <button class="button is-primary" @click="changePassword">
-                変更
-              </button>
-            </p>
+            <form id="changePW">
+              <input id="userName" class="is-hidden" name="username" autocomplete="username" value="">
+              <p class="has-text-centered">
+                現在のパスワード
+                <input v-model="old_password" class="input" type="password" autocomplete="current-password">
+              </p>
+              <p class="has-text-centered">
+                新しいパスワード
+                <input v-model="new_password" class="input" type="password" autocomplete="new-password">
+              </p>
+              <p class="has-text-centered">
+                新しいパスワード(再入力)
+                <input v-model="new_password_re" class="input" type="password" autocomplete="new-password">
+              </p>
+              <p class="has-text-centered">
+                <button class="button is-primary" @click="changePassword">
+                  変更
+                </button>
+              </p>
+            </form>
           </div>
         </section>
       </div>
@@ -269,7 +276,7 @@
         <section class="modal-card-body">
           <div class="content">
             <h2 class="has-text-centered">
-              連携状態: ?
+              連携状態: {{ IS_LINE_CONNECTED }}
             </h2>
             <p class="subtitle has-text-centered" style="word-break:break-all">
               <a :href="LINE_CONNECT_URL">
@@ -352,6 +359,7 @@ export default {
   data () {
     return {
       favoriteCharacter: '',
+      inviteKey: '',
       LINE_CONNECT_URL: '',
       old_password: '',
       new_password: '',
@@ -370,6 +378,12 @@ export default {
   computed: {
     CONTACT () {
       return process.env.CONTACT
+    },
+    IS_LINE_CONNECTED () {
+      return this.$auth.$state.user.lineConnect ? '連携済み' : '未連携'
+    },
+    IS_INVITE_ENABLED () {
+      return this.$auth.$state.user.invite.enabled ? '可' : '否'
     }
   },
   watch: {
@@ -409,11 +423,14 @@ export default {
     }
   },
   methods: {
-    async logout () {
-      try {
-        await this.$auth.logout()
-      } catch (error) {
-        this.$router.push({ path: '/login' })
+    async getInviteKey () {
+      if (this.$auth.$state.user.invite.code === null) {
+        const resp = await this.$axios.get('/invites')
+        if (resp.data.status === 200) {
+          this.inviteKey = resp.data.data.code
+        }
+      } else {
+        this.inviteKey = this.$auth.$state.user.invite.code
       }
     },
     changePassword () {

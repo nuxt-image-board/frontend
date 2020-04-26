@@ -71,20 +71,18 @@
                 News
               </p>
               <div class="content">
-                <article class="message">
+                <article v-for="n in newsHead" :key="n.id" class="message">
                   <div class="message-header">
-                    <p>20/04/18 既知のバグ</p>
+                    <p>{{ n.date }} {{ n.title }}</p>
                   </div>
                   <div class="message-body">
-                    リンク集ページのレイアウト崩れ 画像登録時の画像選択無視 画像登録時の記号エスケープ
-                  </div>
-                </article>
-                <article class="message">
-                  <div class="message-header">
-                    <p>20/04/18 TODOリスト</p>
-                  </div>
-                  <div class="message-body">
-                    不要なCSSをSCSSに変える 管理画面の実装 同意義タグをまとめて検索 画像グループの実装 アップロードキュー バグ修正 いいね音声を鳴らす トップページを完成させる 招待コードを発行可能に
+                    <p>
+                      {{ n.body }} ...
+                    </p>
+                    <nuxt-link :to="'/news/'+n.id" class="is-pulled-right">
+                      もっと見る
+                    </nuxt-link>
+                    <br>
                   </div>
                 </article>
               </div>
@@ -98,14 +96,20 @@
 
 <script>
 export default {
-  async asyncData ({ $axios, $auth, params }) {
-    const resp = await $axios.get('/search/random')
-    let randomIllustID = 1
-    if (resp.status === 200) {
-      randomIllustID = resp.data.data.imgs[0].illustID
+  async asyncData ({ $axios, $auth, params, error }) {
+    const news = await $axios.get('/news/list?count=2')
+    if (news.status !== 200) {
+      return error({ statusCode: 502, message: 'err' })
     }
+    const newsHead = news.data.data
+    const random = await $axios.get('/search/random')
+    if (random.status !== 200) {
+      return error({ statusCode: 502, message: 'err' })
+    }
+    const randomIllustID = random.data.data.imgs[0].illustID
     return {
-      randomIllustID
+      randomIllustID,
+      newsHead
     }
   },
   computed: {

@@ -15,7 +15,8 @@ module.exports = {
     'node_modules/',
     'dist/',
     'public/',
-    'static/'
+    'static/',
+    'functions/nuxt'
   ],
   rules: {
     'vue/attribute-hyphenation': 'off',

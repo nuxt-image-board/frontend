@@ -71,8 +71,7 @@
                     <span class="tag">
                       <Fas i="user-edit" />
                     </span>
-                    <!-- 申し訳ないがしばらく固定値で -->
-                    <a class="tag is-link" href="#">***REMOVED***収集Bot</a>
+                    <a class="tag is-link" href="#">{{ result.user.name }}</a>
                   </div>
                 </div>
                 <div class="control">
@@ -163,7 +162,7 @@ export default {
       return process.env.CDN_ENDPOINT + 'illusts/large/' + this.result.illustID + '.webp'
     },
     ImgOrigAddress () {
-      return process.env.CDN_ENDPOINT + 'illusts/orig/' + this.result.illustID + '.png'
+      return process.env.CDN_ENDPOINT + 'illusts/orig/' + this.result.illustID + '.' + this.result.extension
     },
     TwitterShareAddress () {
       const base = 'https://twitter.com/intent/tweet'
