@@ -169,8 +169,9 @@ export default {
   /*
   ** Build configuration
   */
-  buildDir: 'functions/nuxt',
+  buildDir: '.nuxt',
   build: {
+    publicPath: '***REMOVED***',
     postcss: {
       preset: {
         features: {
