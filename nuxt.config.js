@@ -13,11 +13,28 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'robots', content: 'noindex,nofollow,noarchive' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'og:title', property: 'og:title', content: '***REMOVED***' },
+      { hid: 'og:description', property: 'og:description', content: '***REMOVED***' },
+      { hid: 'og:site_name', property: 'og:site_name', content: '***REMOVED***' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
+      { hid: 'og:url', property: 'og:url', content: 'https://***REMOVED***' },
+      { hid: 'og:image', property: 'og:image', content: 'https://***REMOVED***/logo.png' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css' }
+      {
+        rel: 'preload',
+        href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css',
+        as: 'style'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css',
+        media: 'print',
+        onload: "this.media='all'"
+      }
     ]
   },
   /*
@@ -37,13 +54,13 @@ export default {
   manifest: {
     name: '***REMOVED***',
     short_name: '***REMOVED***',
-    description: '突然の神絵の消失に泣いた日々。この絵師誰だよとキレた日々。そんな日々をなくしたい。',
+    description: '***REMOVED***',
     lang: 'ja',
     theme_color: '#7b5544',
     background_color: '#7b5544',
     display: 'standalone',
-    scope: '/',
-    start_url: '/'
+    scope: 'https://***REMOVED***',
+    start_url: 'https://***REMOVED***'
   },
   /*
   ** Customize the progress-bar color

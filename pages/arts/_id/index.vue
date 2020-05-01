@@ -138,7 +138,7 @@ export default {
       return error({ statusCode: 404, message: 'err' })
     }
     const data = response.data.data
-    if (data.userID === $auth.$state.user.userID) {
+    if (data.user.id === $auth.$state.user.userID) {
       isEditable = true
     }
     return {
