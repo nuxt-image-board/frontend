@@ -5,8 +5,8 @@
   "author": "Omado",
   "private": true,
   "scripts": {
-    "dev": "nuxt --hostname ***REMOVED***",
-    "dev-vscode": "node --hostname ***REMOVED*** --inspect-brk=9229 node_modules/nuxt/bin/nuxt",
+    "dev": "nuxt --hostname localhost",
+    "dev-vscode": "node --hostname localhost --inspect-brk=9229 node_modules/nuxt/bin/nuxt",
     "build": "nuxt build",
     "analyze": "nuxt build --analyze",
     "start": "nuxt start",
@@ -25,6 +25,7 @@
     "@nuxtjs/bulma": "^1.2.1",
     "@nuxtjs/device": "^1.2.7",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/onesignal": "^3.0.0-beta.16",
     "@nuxtjs/pwa": "^3.0.0-0",
     "axios-extensions": "^3.1.2",
     "bulma-pageloader": "^0.3.0",
