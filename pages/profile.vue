@@ -51,11 +51,10 @@
         <div class="column is-4 is-vcentered has-text-centered has-image-centered">
           <nav class="panel">
             <p class="panel-heading has-text-dark has-background-chiya">
-              ユーザー設定
+              サイト設定
             </p>
             <table class="table is-fullwidth centered-table">
               <tbody>
-                <tr><td>推し</td><td>{{ favoriteCharacter }}</td></tr>
                 <tr>
                   <td>R18表示</td>
                   <td>
@@ -73,7 +72,7 @@
                   </td>
                 </tr>
                 <tr>
-                  <td>PC版</td>
+                  <td>PC版メニュー</td>
                   <td>
                     <div class="field">
                       <input
@@ -88,8 +87,24 @@
                     </div>
                   </td>
                 </tr>
+                <tr v-if="!isPC">
+                  <td>左利きメニュー</td>
+                  <td>
+                    <div class="field">
+                      <input
+                        id="switchLeft"
+                        v-model="isLeftHanded"
+                        type="checkbox"
+                        name="switchLeft"
+                        class="switch is-rounded is-info"
+                        :checked="isLeftHanded"
+                      >
+                      <label for="switchLeft" />
+                    </div>
+                  </td>
+                </tr>
                 <tr>
-                  <td>上に戻るボタン表示</td>
+                  <td>上に戻るボタン</td>
                   <td>
                     <div class="field">
                       <input
@@ -101,6 +116,22 @@
                         :checked="isJumpEnabled"
                       >
                       <label for="switchJump" />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>WebP使用</td>
+                  <td>
+                    <div class="field">
+                      <input
+                        id="switchWebP"
+                        v-model="useWebP"
+                        type="checkbox"
+                        name="switchWebP"
+                        class="switch is-rounded is-info"
+                        :checked="useWebP"
+                      >
+                      <label for="switchWebP" />
                     </div>
                   </td>
                 </tr>
@@ -372,6 +403,8 @@ export default {
       isDeleModalOpen: false,
       acceptR18: this.$cookies.get('acceptR18'),
       isPC: this.$cookies.get('isPC'),
+      isLeftHanded: this.$cookies.get('isLeftHanded'),
+      useWebP: this.$cookies.get('useWebP'),
       isJumpEnabled: this.$cookies.get('isJumpEnabled')
     }
   },
@@ -392,6 +425,19 @@ export default {
         path: '/',
         maxAge: 60 * 60 * 24 * 7
       })
+    },
+    useWebP (val) {
+      this.$cookies.set('useWebP', val, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7
+      })
+    },
+    isLeftHanded (val) {
+      this.$cookies.set('isLeftHanded', val, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7
+      })
+      location.reload()
     },
     isPC (val) {
       this.$cookies.set('isPC', val, {

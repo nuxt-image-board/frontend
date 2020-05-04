@@ -15,13 +15,13 @@
         </div>
         <div class="column is-half">
           <div class="container has-text-centered is-vcentered">
-            <h3 class="title has-text-centered">
-              Register
-            </h3>
-            <h3 class="subtitle has-text-centered">
-              {{ welcomeMsg }}
-            </h3>
-            <form class="box" @submit="register">
+            <form class="box" method="post" @submit="register">
+              <h3 class="title has-text-centered">
+                新規登録
+              </h3>
+              <h3 class="subtitle has-text-centered">
+                {{ welcomeMsg }}
+              </h3>
               <div class="field is-horizontal">
                 <div class="field-label is-normal">
                   <label for="display_id" class="label">表示名</label>
@@ -132,7 +132,7 @@
                         v-model="form.inviteCode"
                         name="inv_code"
                         type="text"
-                        placeholder="INV_CODE"
+                        placeholder="CODE"
                         pattern="[a-zA-Z0-9]+"
                         maxlength="10"
                         class="input"
@@ -154,9 +154,11 @@
             </form>
             <p class="has-text-grey">
               <nuxt-link to="/login">
-                Login
+                ログインはこちら
               </nuxt-link> &nbsp;·&nbsp;
-              <a :href="CONTACT">Need Help?</a>
+              <a :href="CONTACT">
+                問い合わせはこちら
+              </a>
             </p>
           </div>
         </div>
@@ -187,7 +189,7 @@ export default {
       'ようこそ彩りが集約されし図書館、***REMOVED***へ',
       'ここから入らんとする者は一切の希望を放棄せよ',
       'ご注文はイラストですか?',
-      '本当にしょうがない***REMOVED***さんです',
+      '本当にしょうがないココアさんです',
       '物語の続きを君と描こう',
       '「どこまでだって行くんだよ！」',
       '「夢とともに」',

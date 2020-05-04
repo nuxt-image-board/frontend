@@ -87,8 +87,21 @@
             <div class="navbar-item">
               <div class="field is-grouped">
                 <p class="control">
+                  <nuxt-link to="/upload" @click.native="closeAll()">
+                    <span class="icon">
+                      <Fas i="upload" classes="has-text-white" />
+                    </span>
+                  </nuxt-link>
+                </p>
+              </div>
+            </div>
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
                   <nuxt-link to="/news" @click.native="closeAll()">
-                    <span class="icon"><Fas i="bell" classes="has-text-white" /></span>
+                    <span class="icon">
+                      <Fas i="bell" classes="has-text-white" />
+                    </span>
                   </nuxt-link>
                 </p>
               </div>

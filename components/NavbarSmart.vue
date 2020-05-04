@@ -3,13 +3,28 @@
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
+          <a v-if="!isLeftMenu" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
+            ***REMOVED***
+          </a>
+          <a
+            role="button"
+            :class="{'left': isLeftMenu}"
+            class="navbar-burger has-text-white"
+            aria-label="menu"
+            aria-expanded="false"
+            @click="openMenu = !openMenu"
+          >
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+            <span aria-hidden="true" />
+          </a>
+          <a v-if="isLeftMenu" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
             ***REMOVED***
           </a>
         </div>
       </div>
     </nav>
-    <div id="quickviewDefault" class="quickview is-left" :class="{ 'is-active': openMenu }">
+    <div id="quickviewDefault" class="quickview" :class="{ 'is-active': openMenu, 'is-left' : isLeftMenu }">
       <header class="quickview-header">
         <p class="has-text-white">
           <nuxt-link to="/" class="has-text-white" @click.native="openMenu = !openMenu">
@@ -157,6 +172,11 @@
 .quickview-footer {
     border-top: 1px solid #6d3c32;
 }
+
+.navbar-burger.left {
+  margin-right: auto;
+  margin-left: 0;
+}
 </style>
 
 <script>
@@ -177,7 +197,8 @@ export default {
       openMenu: false,
       openSearch: false,
       openOther: false,
-      showBottomNav: false
+      showBottomNav: false,
+      isLeftMenu: this.$cookies.get('isLeftHanded')
     }
   },
   watch: {

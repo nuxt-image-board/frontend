@@ -15,13 +15,13 @@
         </div>
         <div class="column is-half">
           <div class="container has-text-centered is-vcentered">
-            <h3 class="title has-text-centered">
-              Login
-            </h3>
-            <h3 class="subtitle has-text-centered">
-              {{ welcomeMsg }}
-            </h3>
-            <form class="box" @submit="login">
+            <form class="box" method="post" @submit="login">
+              <h3 class="title has-text-centered">
+                ログイン
+              </h3>
+              <h3 class="subtitle has-text-centered">
+                {{ welcomeMsg }}
+              </h3>
               <div class="field is-horizontal">
                 <div class="field-label is-normal">
                   <label for="login_id" class="label">ユーザーID:</label>
@@ -32,6 +32,7 @@
                       <input
                         v-model="form.id"
                         name="login_id"
+                        aria-label="ユーザーID"
                         type="text"
                         :placeholder="placeholdUser"
                         pattern="[a-zA-Z0-9]+"
@@ -57,6 +58,7 @@
                         v-model="form.password"
                         name="login_key"
                         type="password"
+                        aria-label="パスワード"
                         :placeholder="placeholdPasswd"
                         pattern="[a-zA-Z0-9]+"
                         class="input"
@@ -73,22 +75,25 @@
               <div class="field">
                 <div class="columns">
                   <div class="column is-6">
-                    <button class="button is-block is-info is-medium is-fullwidth">
+                    <button class="button is-block is-link is-medium is-fullwidth">
                       ログイン <Fas i="sign-in-alt" />
                     </button>
                   </div>
                   <div class="column is-6">
-                    <a :href="LINE_LOGIN_URL" class="button is-block is-success is-medium is-fullwidth">LINEログイン <Fas i="sign-in-alt" /></a>
+                    <a :href="LINE_LOGIN_URL" class="button is-block has-text-white is-medium is-fullwidth" style="background-color: #1a8607;">
+                      LINEでログイン <Fas i="sign-in-alt" />
+                    </a>
                   </div>
                 </div>
               </div>
             </form>
             <p class="has-text-grey">
               <nuxt-link to="/register">
-                Register
+                新規登録はこちら
               </nuxt-link> &nbsp;·&nbsp;
-              <a :href="CONTACT">Forgot Password</a> &nbsp;·&nbsp;
-              <a :href="CONTACT">Need Help?</a>
+              <a :href="CONTACT" target="_blank" rel="noopener noreferer nofollow">
+                ログイン出来ない場合
+              </a>
             </p>
           </div>
         </div>
@@ -212,8 +217,7 @@ export default {
             path: '/',
             domain: '',
             maxAge: 60 * 60 * 24 * 7,
-            secure: true,
-            sameSite: 'Lax'
+            secure: true
           }
         }
         const domains = [

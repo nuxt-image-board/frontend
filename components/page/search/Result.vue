@@ -65,11 +65,15 @@ export default {
     isPC: {
       type: Boolean,
       default: false
+    },
+    useWebP: {
+      type: Boolean,
+      default: true
     }
   },
   data () {
     return {
-      previewAddress: process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.webp',
+      previewAddress: process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + (this.useWebP ? '.webp' : '.jpg'),
       artAddress: '/arts/' + this.result.illustID,
       artistAddress: '/search/artist/' + this.result.artistID
     }

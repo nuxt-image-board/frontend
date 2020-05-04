@@ -101,7 +101,7 @@ export default {
       return error({ statusCode: 404, message: 'err' })
     }
     const illust = response.data.data
-    if (illust.userID !== $auth.$state.user.userID) {
+    if (illust.user.id !== $auth.$state.user.userID) {
       return error({ statusCode: 401, message: 'err' })
     }
     let vtags = illust.chara.map(tag => ({ text: tag[1] }))

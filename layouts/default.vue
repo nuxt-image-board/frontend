@@ -1,7 +1,7 @@
 <template>
   <div id="top">
     <NavbarUp v-if="isPC" />
-    <NavbarSmart v-else v-touch:swipe.left="hideSmartNav" :openMenuFromProp="openSmartNav" @menu-event="changeMenu" />
+    <NavbarSmart v-else v-touch:swipe.left="hideSmartNav" v-touch:swipe.right="showSmartNav" :openMenuFromProp="openSmartNav" @menu-event="changeMenu" />
     <main v-touch:swipe.right="showSmartNav" v-touch:swipe.left="hideSmartNav">
       <nuxt />
     </main>
@@ -44,6 +44,7 @@ export default {
       scrollY: 0,
       openSmartNav: false,
       isPC: this.$cookies.get('isPC'),
+      isLeftMenu: this.$cookies.get('isLeftHanded'),
       isJumpEnabled: this.$cookies.get('isJumpEnabled')
     }
   },
@@ -69,10 +70,18 @@ export default {
       this.scrollY = window.pageYOffset
     },
     showSmartNav () {
-      this.openSmartNav = true
+      if (!this.isLeftMenu) {
+        this.openSmartNav = false
+      } else {
+        this.openSmartNav = true
+      }
     },
     hideSmartNav () {
-      this.openSmartNav = false
+      if (!this.isLeftMenu) {
+        this.openSmartNav = true
+      } else {
+        this.openSmartNav = false
+      }
     },
     changeMenu (value) {
       this.openSmartNav = value
