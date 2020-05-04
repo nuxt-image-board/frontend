@@ -5,7 +5,7 @@
         <span class="title">{{ LoadingText }}</span>
       </div>
       <div class="columns is-centered is-vcentered" style="min-height:70vh">
-        <div class="column is-half has-text-centered">
+        <div class="column is-7 has-text-centered">
           <h4 class="title">
             イラスト投稿
           </h4>
@@ -15,8 +15,7 @@
           <p class="has-text-weight-bold">
             投稿前には必ずイラスト投稿ルールをご確認ください!
           </p>
-        </div>
-        <div class="column is-half has-text-centered">
+          <br>
           <div v-if="!isScraped">
             <div class="field">
               <label class="label">取得元URL</label>
@@ -93,6 +92,59 @@
             </div>
           </div>
         </div>
+        <div v-if="!isScraped" class="column is-5 has-text-centered">
+          <br>
+          <h4 class="title">
+            投稿履歴
+          </h4>
+          <div class="columns is-centered">
+            <div class="column is-8">
+              <div class="table-container">
+                <table class="table is-hoverable is-striped is-fullwidth">
+                  <thead>
+                    <tr>
+                      <th align="center">
+                        開始時刻
+                      </th>
+                      <th align="center">
+                        ステータス
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="u in uploadHistory" :key="u.uploadID">
+                      <td align="center">
+                        {{ u.started }}
+                      </td>
+                      <td v-if="u.status == 2" class="has-background-primary has-text-white" align="center">
+                        Thumb作成中
+                      </td>
+                      <td v-else-if="u.status == 3" class="has-background-primary has-text-white" align="center">
+                        Large作成中
+                      </td>
+                      <td v-else-if="u.status == 4" class="has-background-primary has-text-white" align="center">
+                        Small作成中
+                      </td>
+                      <td v-else-if="u.status == 5" class="has-background-success has-text-white" align="center">
+                        <nuxt-link :to="'/arts/'+u.illustID">
+                          <p class="has-tetxt-white">
+                            登録完了
+                          </p>
+                        </nuxt-link>
+                      </td>
+                      <td v-else-if="u.status == 8" class="has-background-warning has-text-white-dark" align="center">
+                        イラスト重複エラー
+                      </td>
+                      <td v-else-if="u.status == 9" class="has-background-danger has-text-white" align="center">
+                        サーバー内部エラー
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -115,6 +167,17 @@ import ImageSelecter from '~/components/ui/ImageSelecter.vue'
 export default {
   components: {
     ImageSelecter
+  },
+  async asyncData ({ $axios, $auth, error }) {
+    const resp = await $axios.get(
+      '/accounts/' + $auth.$state.user.userID + '/upload_history'
+    )
+    if (resp.status !== 200) {
+      return error({ statusCode: 502, message: 'err' })
+    }
+    return {
+      uploadHistory: resp.data.data
+    }
   },
   data () {
     return {
@@ -184,7 +247,7 @@ export default {
       }
       if (this.scrapeUrl !== '') {
         isLoading = true
-        const response = await this.$axios.post(endpoint, { scrapeUrl: this.scrapeUrl })
+        const response = await this.$axios.post(endpoint, { url: this.scrapeUrl })
         const data = response.data
         if (response.data.status === '200') {
           illust = data.data.illust

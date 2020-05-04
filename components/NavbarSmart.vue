@@ -76,7 +76,7 @@
               <ul v-if="openSearch">
                 <li>
                   <nuxt-link to="/search/list" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="search" /></span>
+                    <span class="icon"><Fas i="list" /></span>
                     <span>一覧</span>
                   </nuxt-link>
                 </li>
