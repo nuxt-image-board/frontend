@@ -23,18 +23,7 @@ export default {
       { hid: 'og:image', property: 'og:image', content: 'https://***REMOVED***/logo.png' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      {
-        rel: 'preload',
-        href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css',
-        as: 'style'
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://cdn.jsdelivr.net/npm/bulma-extensions@6.2.7/dist/css/bulma-extensions.min.css',
-        media: 'print',
-        onload: "this.media='all'"
-      }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
   /*
@@ -71,7 +60,8 @@ export default {
   */
   css: [
     '@/assets/usagi.css',
-    '@/assets/global.css'
+    '@/assets/global.css',
+    '@/assets/bulma-extensions.min.css'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -99,6 +89,7 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
+    '@nuxtjs/device',
     'nuxt-fontawesome',
     'cookie-universal-nuxt',
     'nuxt-webfontloader'
@@ -175,7 +166,9 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.API_ENDPOINT
+    baseURL: 'http://127.0.0.1:5000',
+    browserBaseURL: process.env.API_ENDPOINT,
+    proxyHeaders: true
   },
   /*
   ** environment configuration
