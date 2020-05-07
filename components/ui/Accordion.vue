@@ -9,7 +9,9 @@
         &#9660;
       </button>
     </div>
-    <div v-if="openAccordion" class="message-body" v-html="text" />
+    <div v-if="openAccordion" class="message-body">
+      <slot />
+    </div>
   </article>
 </template>
 
@@ -17,10 +19,6 @@
 export default {
   props: {
     title: {
-      type: String,
-      default: ''
-    },
-    text: {
       type: String,
       default: ''
     }
