@@ -9,11 +9,15 @@
           <h4 class="title">
             イラスト投稿
           </h4>
-          <p>
+          <p v-if="!isScraped">
             指定されたURLから画像を取得し、投稿します。
           </p>
           <p class="has-text-weight-bold">
-            投稿前には必ずイラスト投稿ルールをご確認ください!
+            投稿前には必ず
+            <nuxt-link to="/rules/illust">
+              イラスト投稿ルール
+            </nuxt-link>
+            をご確認ください!
           </p>
           <br>
           <div v-if="!isScraped">
