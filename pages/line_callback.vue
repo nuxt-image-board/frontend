@@ -26,32 +26,17 @@ export default {
         this.form.code = this.$route.query.code
         try {
           await this.$auth.loginWith('local', { data: this.form })
-          const cookies = {
+          const member = {
             name: '***REMOVED***',
             value: 'true',
             opts: {
               path: '/',
-              domain: '',
+              domain: '***REMOVED***',
               maxAge: 60 * 60 * 24 * 7,
-              secure: true,
-              sameSite: 'Lax'
+              secure: true
             }
           }
-          const domains = [
-            '***REMOVED***',
-            '***REMOVED***',
-            '***REMOVED***',
-            '***REMOVED***',
-            '***REMOVED***',
-            '***REMOVED***',
-            '***REMOVED***'
-          ]
-          const cookieList = []
-          domains.forEach((domain) => {
-            cookies.opts.domain = domain
-            cookieList.push(cookies)
-          })
-          this.$cookies.setAll(cookieList)
+          this.$cookies.set(member)
           this.$router.push({ path: '/' })
         } catch (error) {
           this.$router.push({ path: '/login?err=1' })

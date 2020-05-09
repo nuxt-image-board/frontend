@@ -12,7 +12,7 @@
                 ***REMOVED***
               </p>
               <div class="content">
-                α2 20/04/18 Build
+                α3 20/05/09 Build
               </div>
             </article>
           </div>
@@ -23,7 +23,7 @@
                   Danger
                 </p>
                 <div class="content">
-                  <p>未完成のサイトです。表示崩れがバグが発生する可能性があります。何か気になることがあれば<a :href="CONTACT">問い合わせ等</a>より、ご連絡ください。</p>
+                  <p>表示崩れやバグが発生するかもです。何か気になることがあれば<a :href="CONTACT">問い合わせ等</a>より、ご連絡ください。</p>
                 </div>
               </article>
               <article class="tile is-child notification has-background-syaro">
@@ -42,7 +42,7 @@
                         <p>
                           <strong>***REMOVED***</strong>
                           <br>
-                          SQLインジェクションとかあったらつらい
+                          DDoSとかあったらつらい
                         </p>
                       </div>
                     </div>
