@@ -40,17 +40,8 @@
                 <div class="control">
                   <div class="tags has-addons">
                     <span class="tag">
-                      <Fas i="heart" />
-                    </span>
-                    <span class="tag is-info">{{ result.like }}</span>
-                  </div>
-                </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
                       <Fas i="bookmark" />
                     </span>
-                    <!-- 申し訳ないがしばらく固定値で -->
                     <span class="tag is-info">0</span>
                   </div>
                 </div>
@@ -85,8 +76,50 @@
               </div>
             </div>
             <div class="column is-12 has-text-centered">
-              <a class="button is-primary is-large" @click="addStar()">いいね</a>
+              <a class="button is-primary is-large" @click="addStar()"><Fas i="heart" /> x{{ result.like }}</a>
               <a class="button is-primary is-large" @click="toggleBookmark()"><Fas i="bookmark" /></a>
+              <div v-if="isZoomAllowed" class="column is-12 has-text-centered">
+                <a class="button is-primary is-medium" @click="openZoom = true">
+                  壁紙サイズに拡大
+                </a>
+                <Modal title="壁紙サイズに拡大" :isModalOpen="openZoom == true" @modal-closed="openZoom = false">
+                  <h2 class="has-text-centered">
+                    何倍にしますか?
+                  </h2>
+                  <div class="field has-addons has-addons-centered">
+                    <div class="control">
+                      <div class="select is-medium">
+                        <select v-model="waifuScale">
+                          <option>1.5倍</option>
+                          <option>2.0倍</option>
+                          <option>2.5倍</option>
+                          <option>3.0倍</option>
+                          <option>3.5倍</option>
+                          <option>4.0倍</option>
+                          <option>4.5倍</option>
+                          <option>5.0倍</option>
+                          <option>6.0倍</option>
+                          <option>7.0倍</option>
+                          <option>8.0倍</option>
+                          <option>9.0倍</option>
+                          <option>10.0倍</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="control">
+                      <button class="button is-primary is-medium">
+                        実行
+                      </button>
+                    </div>
+                  </div>
+                  <p class="has-text-centered">
+                    機械学習(Waifu2x)の力でなるべく綺麗に拡大します。
+                    スマホ壁紙や、PCの壁紙にしたいときにご利用ください。
+                    この処理にはそれなりに時間がかかります。
+                    あんまり無駄に連打すると怒ります。
+                  </p>
+                </Modal>
+              </div>
             </div>
             <div class="column is-12 has-text-centered">
               <a class="button is-large" @click="openSocialShare(LineShareAddress)">
@@ -100,14 +133,14 @@
                 </span>
               </a>
             </div>
-            <div v-if="isEditable" class="column is-12 has-text-centered">
-              <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit'">
-                データ編集
-              </nuxt-link>
-            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div v-if="isEditable" class="column is-12 has-text-centered">
+      <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit'">
+        データ編集
+      </nuxt-link>
     </div>
     <div class="modal" :class="{'is-active': isModalOpen}">
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
@@ -123,9 +156,11 @@
 <script>
 import Fas from '~/components/ui/Fas.vue'
 import Fab from '~/components/ui/Fab.vue'
+import Modal from '~/components/ui/Modal.vue'
 
 export default {
   components: {
+    Modal,
     Fas,
     Fab
   },
@@ -151,6 +186,9 @@ export default {
       result: {},
       isEditable: false,
       starSound: null,
+      openZoom: false,
+      isZoomAllowed: false,
+      waifuScale: '',
       bookmarkSound: null,
       isPC: this.$cookies.get('isPC'),
       acceptR18: this.$cookies.get('acceptR18'),
@@ -193,11 +231,18 @@ export default {
         window.open(addr, '', 'width=500,height=500')
       }
     },
+    async requestWaifu2x () {
+      const scale = this.waifuScale.substr(-1)
+      const params = { cdn: this.ImgOrigAddress, size: scale }
+      const resp = await this.$axios.get('https://***REMOVED***/waifu2x', { params })
+      if (resp.statusCode === 204) {
+        alert('204 No Content(OK)')
+      }
+    },
     async addStar () {
       const endpoint = '/arts/' + this.result.illustID + '/likes'
       this.result.like += 1
       await this.$axios.put(endpoint)
-      // this.starSound.play()
     },
     toggleBookmark () {
       // const endpoint = '/arts/' + this.result.illustID + '/bookmark'
