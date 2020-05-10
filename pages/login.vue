@@ -188,9 +188,11 @@ export default {
   },
   created () {
     if (process.client) {
+      /*
       if (this.$store.state.auth.loggedIn) {
         this.$router.push({ path: '/' })
       }
+      */
       const CSRF = Math.random().toString(36).slice(-8)
       const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
       const REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_callback'

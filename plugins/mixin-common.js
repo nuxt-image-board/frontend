@@ -33,7 +33,7 @@ Vue.mixin({
         })
       }
       this.$router.push({ path: '/' })
-      location.reload()
+      // location.reload()
     }
   }
 })
