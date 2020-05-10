@@ -73,6 +73,7 @@ export default {
     '~plugins/axios',
     '~plugins/vue-scrollto',
     '~plugins/vue2-touch-events',
+    '~plugins/mixin-common',
     { src: '@/plugins/vue-input-tag', ssr: false }
   ],
   /*
@@ -94,9 +95,10 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/device',
     '@nuxtjs/onesignal',
-    'nuxt-fontawesome',
     'cookie-universal-nuxt',
-    'nuxt-webfontloader'
+    'nuxt-fontawesome',
+    'nuxt-webfontloader',
+    'nuxt-device-detect'
   ],
   /*
   ** Post Notify

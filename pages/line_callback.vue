@@ -26,18 +26,7 @@ export default {
         this.form.code = this.$route.query.code
         try {
           await this.$auth.loginWith('local', { data: this.form })
-          const member = {
-            name: '***REMOVED***',
-            value: 'true',
-            opts: {
-              path: '/',
-              domain: '***REMOVED***',
-              maxAge: 60 * 60 * 24 * 7,
-              secure: true
-            }
-          }
-          this.$cookies.set(member)
-          this.$router.push({ path: '/' })
+          this.postLoggedIn()
         } catch (error) {
           this.$router.push({ path: '/login?err=1' })
         }

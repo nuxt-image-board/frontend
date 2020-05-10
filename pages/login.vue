@@ -188,6 +188,9 @@ export default {
   },
   created () {
     if (process.client) {
+      if (this.$store.state.auth.loggedIn) {
+        this.$router.push({ path: '/' })
+      }
       const CSRF = Math.random().toString(36).slice(-8)
       const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
       const REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_callback'
@@ -210,18 +213,7 @@ export default {
       try {
         e.preventDefault()
         await this.$auth.loginWith('local', { data: this.form })
-        const member = {
-          name: '***REMOVED***',
-          value: 'true',
-          opts: {
-            path: '/',
-            domain: '***REMOVED***',
-            maxAge: 60 * 60 * 24 * 7,
-            secure: true
-          }
-        }
-        this.$cookies.set(member)
-        this.$router.push({ path: '/' })
+        this.postLoggedIn()
       } catch (error) {
         this.notificationDeleted = false
         this.notificationClasses = 'is-danger'
