@@ -9,12 +9,6 @@
           <SelectForm :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
         </div>
       </div>
-      <Pagination
-        :current-page-from-prop="SelectedPage"
-        :total-page="totalPage"
-        :send-mounted="false"
-        @onPageChanged="updatePage"
-      />
       <div class="columns is-centered is-multiline is-mobile">
         <div v-for="result in results" :key="result.illustID" class="column is-12-mobile is-6-touch is-3-desktop">
           <SearchResult v-if="isSearchPage" :useWebP="useWebP" :isPC="isPC" :accept-r18="acceptR18" :result="result" />
@@ -154,13 +148,11 @@ export default {
     updateSelect (newSort) {
       this.SelectedSort = newSort
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, sort: newSort } })
-      this.getData()
     },
     updatePage (newPage) {
       this.SelectedPage = newPage
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
       this.$scrollTo('#top')
-      this.getData()
     }
   }
 }

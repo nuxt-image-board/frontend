@@ -3,7 +3,7 @@
     <div class="card-image">
       <a :href="link">
         <figure class="image">
-          <img :src="thumbnail">
+          <img :src="thumbnail" decoding="async">
         </figure>
       </a>
     </div>

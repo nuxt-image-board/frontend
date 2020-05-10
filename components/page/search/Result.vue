@@ -9,7 +9,14 @@
       </div>
       <nuxt-link :to="artAddress">
         <figure class="image">
-          <img :src="previewAddress" :class="{'blur': result.nsfw && !acceptR18}">
+          <img
+            :src="previewAddress"
+            :class="{'blur': result.nsfw && !acceptR18}"
+            decoding="async"
+            loading="lazy"
+            width="320px"
+            height="240px"
+          >
         </figure>
       </nuxt-link>
     </div>
