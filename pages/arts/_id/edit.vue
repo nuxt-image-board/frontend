@@ -164,7 +164,7 @@ export default {
       if (response.data.status === 200) {
         this.LoadingText = '更新しました!'
       } else {
-        this.LoadingText = '投稿に失敗しました'
+        this.LoadingText = '更新に失敗しました'
         this.isFailed = true
       }
     },
