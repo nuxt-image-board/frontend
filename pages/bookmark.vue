@@ -21,7 +21,6 @@
 import Notification from '~/components/ui/Notification.vue'
 
 export default {
-  auth: false,
   components: {
     Notification
   },
