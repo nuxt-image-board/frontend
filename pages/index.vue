@@ -12,7 +12,7 @@
                 ***REMOVED***
               </p>
               <div class="content">
-                α3 20/05/11 Build
+                {{ version }}
               </div>
             </article>
           </div>
@@ -40,9 +40,9 @@
                     <div class="media-content">
                       <div class="content">
                         <p>
-                          <strong>***REMOVED***</strong>
+                          <strong>{{ hitokoto.name }}</strong>
                           <br>
-                          DDoSとかあったらつらい
+                          {{ hitokoto.message }}
                         </p>
                       </div>
                     </div>
@@ -95,6 +95,8 @@
 </template>
 
 <script>
+import { version, hitokoto } from '~/assets/texts/index.json'
+
 export default {
   async asyncData ({ $axios, $auth, params, error }) {
     const news = await $axios.get('/news/list?count=2')
@@ -109,7 +111,9 @@ export default {
     const randomIllustID = random.data.data.imgs[0].illustID
     return {
       randomIllustID,
-      newsHead
+      newsHead,
+      version,
+      hitokoto
     }
   },
   computed: {
