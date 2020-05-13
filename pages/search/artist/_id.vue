@@ -31,7 +31,8 @@ export default {
     const data = response.data.data
     return {
       endpoint,
-      NotificationTitle: '作者さんから検索 ' + data.title + ' ' + data.count + '件',
+      pageTitle: `絵師から検索 ${data.title}`,
+      NotificationTitle: '絵師から検索 ' + data.title + ' ' + data.count + '件',
       results: data.imgs,
       SelectedPage: page,
       totalPage: data.pages,
@@ -41,7 +42,7 @@ export default {
   },
   head () {
     return {
-      title: '作者さんから検索'
+      title: this.pageTitle
     }
   }
 }

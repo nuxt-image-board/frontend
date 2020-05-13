@@ -31,6 +31,7 @@ export default {
     const data = response.data.data
     return {
       endpoint,
+      pageTitle: `タグから検索 ${data.title}`,
       NotificationTitle: 'タグから検索 ' + data.title + ' ' + data.count + '件',
       results: data.imgs,
       SelectedPage: page,
@@ -41,7 +42,7 @@ export default {
   },
   head () {
     return {
-      title: 'タグから検索'
+      title: this.pageTitle
     }
   }
 }

@@ -15,7 +15,7 @@
               />
             </h3>
             <h3 class="subtitle has-text-centered">
-              ***REMOVED***はその特性上、オフラインで動作しない仕様です。(動作するなら全画像がスマホに保存されて大変なことになります。)インターネットに接続してから、再度起動してください。
+              ***REMOVED***はその特性上、オフラインで動作しない仕様です。動作するなら全画像がスマホに保存されてやばいです。インターネットに接続してから、再度起動してください。
             </h3>
           </div>
         </div>
@@ -38,6 +38,11 @@ export default {
   auth: false,
   components: {
     Notification
+  },
+  head () {
+    return {
+      title: 'オフライン'
+    }
   }
 }
 </script>

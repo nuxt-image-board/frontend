@@ -46,7 +46,7 @@ export default {
   },
   head () {
     return {
-      title: 'ニュース'
+      title: this.news.title
     }
   }
 }
