@@ -24,6 +24,8 @@ Vue.mixin({
           path: '/',
           maxAge: 60 * 60 * 24 * 7
         })
+        // どうも初回取得できないことがあるので1回だけ二重に要求する
+        this.$store.dispatch('getNavigations')
       }
       // MacまたはiOS以外かを判定
       if (!this.$device.isMacOS) {
@@ -32,8 +34,6 @@ Vue.mixin({
           maxAge: 60 * 60 * 24 * 7
         })
       }
-      this.$router.push({ path: '/' })
-      // location.reload()
     }
   }
 })

@@ -348,7 +348,7 @@ export default {
   },
   head () {
     return {
-      title: 'イラスト登録フォーム'
+      title: 'イラスト投稿'
     }
   }
 }

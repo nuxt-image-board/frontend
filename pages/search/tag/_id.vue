@@ -31,7 +31,7 @@ export default {
     const data = response.data.data
     return {
       endpoint,
-      pageTitle: `タグから検索 ${data.title}`,
+      pageTitle: `${data.title}`,
       NotificationTitle: 'タグから検索 ' + data.title + ' ' + data.count + '件',
       results: data.imgs,
       SelectedPage: page,
