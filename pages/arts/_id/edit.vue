@@ -174,6 +174,11 @@ export default {
       // const response = await this.$axios.delete('/arts/' + this.illust.illustID)
       alert('200 OK')
     }
+  },
+  head () {
+    return {
+      title: 'イラストデータ編集'
+    }
   }
 }
 </script>

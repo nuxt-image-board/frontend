@@ -39,6 +39,11 @@ export default {
       SelectedSort: sortNum,
       isSearchPage: false
     }
+  },
+  head () {
+    return {
+      title: 'キャラクターから検索'
+    }
   }
 }
 </script>

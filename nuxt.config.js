@@ -7,20 +7,25 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: '***REMOVED***' || process.env.npm_package_name,
+    titleTemplate: '%s | ' + '***REMOVED***',
+    title: '***REMOVED***',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'robots', content: 'noindex,nofollow,noarchive' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' },
+      { hid: 'description', name: 'description', content: '***REMOVED***' },
       { hid: 'og:title', property: 'og:title', content: '***REMOVED***' },
       { hid: 'og:description', property: 'og:description', content: '***REMOVED***' },
       { hid: 'og:site_name', property: 'og:site_name', content: '***REMOVED***' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
       { hid: 'og:url', property: 'og:url', content: 'https://***REMOVED***' },
-      { hid: 'og:image', property: 'og:image', content: '***REMOVED***' }
+      { hid: 'og:image', property: 'og:image', content: '***REMOVED***' },
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:title', content: '***REMOVED***' },
+      { name: 'twitter:description', content: '***REMOVED***' },
+      { name: 'twitter:image', content: '***REMOVED***' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -81,14 +86,12 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/bulma
     '@nuxtjs/bulma',
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
@@ -214,7 +217,9 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-      config.devtool = 'inline-cheap-module-source-map'
+      if (ctx.isDev) {
+        config.devtool = 'inline-cheap-module-source-map'
+      }
     }
   },
   vue: {

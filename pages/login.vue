@@ -182,6 +182,11 @@ export default {
     deletedEvent () {
       this.notificationDeleted = true
     }
+  },
+  head () {
+    return {
+      title: 'ログイン'
+    }
   }
 }
 </script>

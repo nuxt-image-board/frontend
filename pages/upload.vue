@@ -345,6 +345,11 @@ export default {
       this.scrapeUrl = ''
       this.isLoading = false
     }
+  },
+  head () {
+    return {
+      title: 'イラスト登録フォーム'
+    }
   }
 }
 </script>

@@ -33,7 +33,7 @@
                         v-model="form.username"
                         name="display_id"
                         type="text"
-                        placeholder="***REMOVED***"
+                        placeholder="香風智乃"
                         maxlength="20"
                         class="input"
                         autocomplete="nickname"
@@ -228,6 +228,11 @@ export default {
     },
     deletedEvent () {
       this.notificationDeleted = true
+    }
+  },
+  head () {
+    return {
+      title: '新規登録'
     }
   }
 }

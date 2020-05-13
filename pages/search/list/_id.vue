@@ -40,6 +40,11 @@ export default {
       SelectedSort: sortNum,
       isSearchPage: true
     }
+  },
+  head () {
+    return {
+      title: '一覧から検索'
+    }
   }
 }
 </script>

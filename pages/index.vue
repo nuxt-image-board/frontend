@@ -126,6 +126,11 @@ export default {
     RANDOM_ILLUST () {
       return 'arts/' + this.randomIllustID
     }
+  },
+  head () {
+    return {
+      titleTemplate: '***REMOVED***'
+    }
   }
 }
 </script>

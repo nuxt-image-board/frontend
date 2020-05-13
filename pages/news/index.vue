@@ -66,6 +66,11 @@ export default {
     return {
       news: resp.data.data
     }
+  },
+  head () {
+    return {
+      title: 'ニュース'
+    }
   }
 }
 </script>

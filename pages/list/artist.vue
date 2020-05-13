@@ -31,13 +31,18 @@ export default {
     const data = response.data.data
     return {
       endpoint,
-      NotificationTitle: '作者名から検索',
+      NotificationTitle: '作者さんから検索',
       results: data,
       SelectedPage: page,
       totalPage: data.pages,
       pageType: 'artist',
       SelectedSort: sortNum,
       isSearchPage: false
+    }
+  },
+  head () {
+    return {
+      title: '作者さんから検索'
     }
   }
 }

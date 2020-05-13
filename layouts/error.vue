@@ -69,6 +69,11 @@ export default {
     error404Msg () {
       return this.error404[Math.floor(Math.random() * this.error404.length)]
     }
+  },
+  head () {
+    return {
+      title: 'エラー'
+    }
   }
 }
 </script>

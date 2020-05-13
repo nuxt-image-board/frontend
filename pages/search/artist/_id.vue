@@ -38,6 +38,11 @@ export default {
       SelectedSort: sortNum,
       isSearchPage: true
     }
+  },
+  head () {
+    return {
+      title: '作者さんから検索'
+    }
   }
 }
 </script>

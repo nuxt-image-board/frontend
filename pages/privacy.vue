@@ -99,10 +99,14 @@
 
 <script>
 export default {
-  auth: false,
   computed: {
     CONTACT () {
       return process.env.CONTACT
+    }
+  },
+  head () {
+    return {
+      title: 'プライバシーポリシー'
     }
   }
 }

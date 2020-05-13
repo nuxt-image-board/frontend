@@ -150,6 +150,11 @@ export default {
       this.step = 0
       this.fileName = ''
     }
+  },
+  head () {
+    return {
+      title: '画像から検索'
+    }
   }
 }
 </script>

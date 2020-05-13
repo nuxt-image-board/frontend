@@ -30,6 +30,11 @@ import Accordion from '~/components/ui/Accordion.vue'
 export default {
   components: {
     Accordion
+  },
+  head () {
+    return {
+      title: '利用ガイド'
+    }
   }
 }
 </script>

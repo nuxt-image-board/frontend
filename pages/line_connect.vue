@@ -19,6 +19,11 @@ export default {
       )
     }
     this.$router.push({ path: '/profile' })
+  },
+  head () {
+    return {
+      title: 'LINEログイン'
+    }
   }
 }
 </script>

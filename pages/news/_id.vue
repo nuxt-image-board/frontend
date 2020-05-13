@@ -43,6 +43,11 @@ export default {
       return error({ statusCode: 404, message: 'err' })
     }
     return { news: resp.data.data }
+  },
+  head () {
+    return {
+      title: 'ニュース'
+    }
   }
 }
 </script>

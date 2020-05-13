@@ -437,6 +437,11 @@ export default {
     clearCache () {
       alert('未実装です')
     }
+  },
+  head () {
+    return {
+      title: 'マイページ'
+    }
   }
   /*
   async fetch (context) {

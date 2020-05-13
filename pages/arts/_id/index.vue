@@ -250,6 +250,11 @@ export default {
       // this.bookmarkSound.play()
       alert('まだ未実装です > <')
     }
+  },
+  head () {
+    return {
+      title: 'イラストページ'
+    }
   }
 }
 </script>

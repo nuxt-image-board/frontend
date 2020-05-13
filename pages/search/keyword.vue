@@ -36,6 +36,11 @@ export default {
     deletedEvent () {
       this.notificationDeleted = true
     }
+  },
+  head () {
+    return {
+      title: 'キーワードから検索'
+    }
   }
 }
 </script>
