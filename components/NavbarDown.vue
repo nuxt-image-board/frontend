@@ -19,19 +19,13 @@
           <span>ヘルプ</span>
         </nuxt-link>
       </p>
-      <p v-if="$store.state.auth.loggedIn" class="level-item has-text-centered">
+      <p class="level-item has-text-centered">
         <nuxt-link to="/links" class="is-size-6 has-text-white heading">
           <span class="icon"><Fas i="sitemap" /></span>
           <span>リンク集</span>
         </nuxt-link>
       </p>
     </nav>
-    <div v-if="!$store.state.auth.loggedIn" class="has-text-centered has-text-white" style="font-size: 0.6rem">
-      <h5>About this site</h5>
-      <div class="has-text-centered">
-        <small>This site is a links collectively site. User can post arts by own,these may include some external links. Site admin don't upload anything. If anyone have a problem, please contact us from <a :href="DMCA">DMCA form</a>.</small>
-      </div>
-    </div>
   </footer>
 </template>
 
@@ -41,11 +35,6 @@ import Fas from '~/components/ui/Fas.vue'
 export default {
   components: {
     Fas
-  },
-  computed: {
-    DMCA () {
-      return process.env.DMCA
-    }
   }
 }
 </script>

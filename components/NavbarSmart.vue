@@ -42,7 +42,7 @@
                 <span>ホーム</span>
               </nuxt-link>
             </li>
-            <li v-if="$store.state.auth.loggedIn">
+            <li>
               <nuxt-link to="/news" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="bell" /></span>
                 <span>ニュース</span>
@@ -54,19 +54,19 @@
                 <span>ヘルプ</span>
               </nuxt-link>
             </li>
-            <li v-if="$store.state.auth.loggedIn" style="margin-top:20px">
+            <li style="margin-top:20px">
               <nuxt-link to="/profile" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="users" /></span>
                 <span>マイページ</span>
               </nuxt-link>
             </li>
-            <li v-if="$store.state.auth.loggedIn">
+            <li>
               <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="upload" /></span>
                 <span>イラスト投稿</span>
               </nuxt-link>
             </li>
-            <li v-if="$store.state.auth.loggedIn" style="margin-top:20px">
+            <li style="margin-top:20px">
               <a class="has-text-white" @click="openSearch = !openSearch">
                 <span class="icon"><Fas i="search" /></span>
                 <span>検索</span>
@@ -134,7 +134,7 @@
                     <span>プライバシーポリシー</span>
                   </nuxt-link>
                 </li>
-                <li v-if="$store.state.auth.loggedIn">
+                <li>
                   <nuxt-link to="/links" class="is-size-6 has-text-white heading" @click.native="openMenu = !openMenu">
                     <span class="icon"><Fas i="sitemap" /></span>
                     <span>リンク集</span>

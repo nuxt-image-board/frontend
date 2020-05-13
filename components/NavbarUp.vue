@@ -13,7 +13,7 @@
           </span>
         </div>
         <div id="navMenu" class="navbar-menu" :class="{ 'is-active': openMenu }">
-          <div v-if="$store.state.auth.loggedIn" class="navbar-start">
+          <div class="navbar-start">
             <div class="navbar-item">
               <div class="field has-addons">
                 <div class="control">
@@ -28,7 +28,7 @@
               </div>
             </div>
           </div>
-          <div v-if="$store.state.auth.loggedIn" class="navbar-start" style="flex-grow: 1; justify-content: center;">
+          <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
             <nuxt-link to="/search/list" class="navbar-item is-hoverable has-text-white" @click.native="closeAll()">
               <span class="icon"><Fas i="search" /></span>
               <span>一覧検索</span>
@@ -83,7 +83,7 @@
               <span>画像検索</span>
             </nuxt-link>
           </div>
-          <div v-if="$store.state.auth.loggedIn" class="navbar-end">
+          <div class="navbar-end">
             <div class="navbar-item">
               <div class="field is-grouped">
                 <p class="control">
@@ -113,20 +113,6 @@
                     <span class="icon"><Fas i="users" /></span>
                     <span>マイページ</span>
                   </nuxt-link>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div v-if="!$store.state.auth.loggedIn" class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <a href="https://***REMOVED***" class="button is-outlined">
-                    <span class="icon">
-                      <Fas i="home" />
-                    </span>
-                    <span>***REMOVED***公式サイト</span>
-                  </a>
                 </p>
               </div>
             </div>

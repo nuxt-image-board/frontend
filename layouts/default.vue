@@ -61,7 +61,8 @@ export default {
   },
   created () {
     if (process.client) {
-      console.log('%c***REMOVED*** α2', 'color: blue; font-size: 30px')
+      console.clear()
+      console.log('%c***REMOVED***', 'color: blue; font-size: 30px')
       console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
     }
   },
