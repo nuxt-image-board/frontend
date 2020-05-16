@@ -53,7 +53,7 @@
             <div class="tile is-parent">
               <article class="tile is-child notification has-background-chiya">
                 <p class="title">
-                  Recommend
+                  Random
                 </p>
                 <figure class="image is-4by3">
                   <a :href="RANDOM_ILLUST">
