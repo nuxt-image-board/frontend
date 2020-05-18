@@ -32,7 +32,7 @@ export default {
     return {
       endpoint,
       NotificationTitle: 'タグから検索',
-      results: data,
+      results: data.contents,
       SelectedPage: page,
       totalPage: data.pages,
       pageType: 'tag',

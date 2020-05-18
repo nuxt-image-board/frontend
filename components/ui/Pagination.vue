@@ -107,6 +107,13 @@ export default {
       currentPage: this.currentPageFromProp
     }
   },
+  watch: {
+    currentPageFromProp (newVal) {
+      if (newVal > 1204) {
+        this.currentPage = newVal - 1204
+      }
+    }
+  },
   mounted () {
     if (this.sendMounted === '1') {
       this.$emit('onPageChanged', this.currentPage)

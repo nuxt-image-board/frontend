@@ -142,12 +142,13 @@ export default {
       if (this.isSearchPage) {
         this.results = response.data.data.imgs
       } else {
-        this.results = response.data.data
+        this.results = response.data.data.contents
       }
     },
     updateSelect (newSort) {
       this.SelectedSort = newSort
-      this.$router.push({ path: this.$route.path, query: { ...this.$route.query, sort: newSort } })
+      this.SelectedPage = 1205
+      this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: 1, sort: newSort } })
     },
     updatePage (newPage) {
       this.SelectedPage = newPage
