@@ -11,13 +11,18 @@
               ユーザー名: {{ $auth.$state.user.name }}
             </p>
             <p class="panel-block">
-              内部ID: {{ $auth.$state.user.userID }}
-            </p>
-            <p class="panel-block">
-              表示ID: {{ $auth.$state.user.displayID }}
+              ID: {{ $auth.$state.user.displayID }}
             </p>
             <p class="panel-block">
               登録日: {{ $auth.$state.user.registeredDate }}
+            </p>
+            <p class="panel-block">
+              <nuxt-link
+                class="button is-link is-outlined is-fullwidth"
+                to="/upload_history"
+              >
+                投稿履歴確認
+              </nuxt-link>
             </p>
           </nav>
         </div>
@@ -270,29 +275,6 @@
         </div>
       </div>
       <div class="column is-12">
-        <button class="button is-warning" @click="modalType = 5">
-          キャッシュ消去
-        </button>
-        <Modal title="キャッシュ消去" :isModalOpen="modalType === 5" @modal-closed="modalType = 0">
-          <h2 class="has-text-centered">
-            キャッシュを消去しますか?
-          </h2>
-          <p class="subtitle has-text-centered" style="word-break:break-all">
-            <button class="button is-danger is-large" @click="clearCache">
-              はい
-            </button>
-          </p>
-          <p>
-            キャッシュを消去すると、ストレージが一時的に空きますが、
-            <b>
-              キャッシュの再ダウンロードが発生し、表示に時間がかかるようになります。
-              今どうしても容量がない場合、またはなんらかの不具合が発生した場合にのみ
-            </b>
-            ご利用ください。
-          </p>
-        </Modal>
-      </div>
-      <div class="column is-12">
         <button class="button is-danger" @click="modalType = 6">
           退会する
         </button>
@@ -372,33 +354,33 @@ export default {
     acceptR18 (val) {
       this.$cookies.set('acceptR18', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 7
+        maxAge: 60 * 60 * 24 * 31
       })
     },
     useWebP (val) {
       this.$cookies.set('useWebP', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 7
+        maxAge: 60 * 60 * 24 * 31
       })
     },
     isLeftHanded (val) {
       this.$cookies.set('isLeftHanded', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 7
+        maxAge: 60 * 60 * 24 * 31
       })
       location.reload()
     },
     isPC (val) {
       this.$cookies.set('isPC', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 7
+        maxAge: 60 * 60 * 24 * 31
       })
       location.reload()
     },
     isJumpEnabled (val) {
       this.$cookies.set('isJumpEnabled', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 7
+        maxAge: 60 * 60 * 24 * 31
       })
       location.reload()
     }
