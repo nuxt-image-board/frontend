@@ -14,10 +14,10 @@
           <div class="columns is-centered is-multiline">
             <div class="column is-12 has-text-centered">
               <p class="title">
-                <input class="input is-large" type="text" :value="illust.title" :placeholder="illust.title">
+                <input v-model="illust.title" class="input is-large" type="text" :placeholder="illust.title">
               </p>
               <p class="subtitle">
-                <input class="input" type="text" :value="illust.caption" :placeholder="illust.caption">
+                <input v-model="illust.caption" class="input" type="text" :placeholder="illust.caption">
               </p>
             </div>
             <div class="column is-12 is-centered">
@@ -26,7 +26,7 @@
                 :tags="illust.tag"
                 :validation="validation"
                 style="width: 100%;max-width: none;"
-                @tags-changed="newTags => tags = newTags"
+                @tags-changed="newTags => illust.tag = newTags"
               />
             </div>
             <div class="column is-12">
@@ -74,7 +74,9 @@
               <a class="button is-primary" @click="reGet()">再取得</a>
             </div>
             <div class="column is-12 has-text-centered">
-              <a class="button is-primary is-large" @click="update()">更新を適用</a>
+              <button class="button is-primary is-large" @click="update()">
+                更新を適用
+              </button>
             </div>
           </div>
         </div>
@@ -114,6 +116,7 @@ export default {
   data () {
     return {
       tag: '',
+      tags: [],
       loadingText: '',
       isLoading: false,
       isSending: false,
@@ -142,10 +145,11 @@ export default {
   },
   methods: {
     async update () {
+      this.isFailed = false
       this.isSending = true
       this.isLoading = true
       this.loadingText = '更新しています...'
-      this.illust.tags = this.illust.tags.map(tag => (tag.text))
+      const newTagData = this.illust.tag.map(tag => (tag.text))
       const params = {
         title: this.illust.title,
         caption: this.illust.caption,
@@ -155,18 +159,24 @@ export default {
         artist: {
           name: this.illust.artist
         },
-        tag: this.illust.tags,
+        tag: newTagData,
         chara: [],
         nsfw: this.illust.R18
       }
       const response = await this.$axios.put('/arts/' + this.illust.illustID, params)
       this.isSending = false
       if (response.data.status === 200) {
-        this.LoadingText = '更新しました!'
+        this.loadingText = '更新しました!'
       } else {
-        this.LoadingText = '更新に失敗しました'
+        this.loadingText = '更新に失敗しました'
         this.isFailed = true
       }
+      setTimeout(this.closeWindow, 2000)
+    },
+    closeWindow () {
+      this.$router.push({ path: '/arts/' + this.illust.illustID })
+      this.isSending = false
+      this.isLoading = false
     },
     async reGet () {
     },
