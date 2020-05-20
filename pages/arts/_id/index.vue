@@ -253,7 +253,7 @@ export default {
   },
   head () {
     return {
-      title: 'イラストページ'
+      title: this.result.title
     }
   }
 }

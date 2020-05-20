@@ -2,11 +2,11 @@
   <section class="section">
     <div class="container is-widescreen">
       <div class="columns is-centered">
-        <div class="column is-two-third">
+        <div class="column is-8">
           <Notification :title="NotificationTitle" />
         </div>
-        <div class="column is-one-third">
-          <SelectForm :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+        <div class="column is-4">
+          <SelectForm class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
         </div>
       </div>
       <div class="columns is-centered is-multiline is-mobile">
