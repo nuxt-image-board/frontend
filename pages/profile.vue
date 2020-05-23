@@ -278,19 +278,15 @@
                   初期化する
                 </button>
               </p>
-              <p class="has-text-weight-bold">
-                ※この機能は Appleのせいで、iOS(iPhone/iPad等)で使うことができません。***REMOVED***の開発者は悪くないです。
-              </p>
               <p>
                 設定すると、今使っているブラウザまたはアプリに通知ができるようになります。
-                「設定する」を押すと 通知してもいいかの確認画面が出るので、良ければ許可を押してください。
+                「設定する」を押すと 通知してもいいかの確認画面が出るので、許可を押してください。
+                「設定する」ボタンを押してもなんの反応もない場合は、お手数ですがリロードをお願いします。
+                この通知は使うスマホ、パソコン、タブレット毎に設定が要ります。合計5台まで設定可能です。
+                5台を超えて設定する場合は一度初期化してから、改めて各デバイスで設定してください。
                 <b>
-                  この通知は使うスマホ、パソコン、タブレット毎に設定が要ります。合計5台まで設定可能です。
-                  5台を超えて設定する場合は一度初期化してから、改めて各デバイスで設定してください。
+                  この機能は Appleのせいで、iOS(iPhone/iPad等)で使うことができません。
                 </b>
-              </p>
-              <p>
-                ボタンを押してもなんの反応もない場合はお手数ですがリロードをお願いします
               </p>
             </Modal>
             <a class="panel-block" @click="modalType = 8">
@@ -304,8 +300,8 @@
                 通知状態: {{ IS_LINE_NOTIFY_CONNECTED }}
               </h2>
               <p class="subtitle has-text-centered" style="word-break:break-all">
-                <a :href="NOTIFY_CONNECT_URL" class="button">
-                  連携する
+                <a :href="NOTIFY_CONNECT_URL" class="button is-primary is-large">
+                  設定する
                 </a>
               </p>
               <p>
@@ -316,12 +312,27 @@
                 アカウントを変えた場合は上記ボタンから再連携することができます。
               </p>
             </Modal>
-            <nuxt-link to="/bookmark" class="panel-block">
+            <a class="panel-block" @click="modalType = 9">
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
               </span>
               Twitter通知設定(未実装)
-            </nuxt-link>
+            </a>
+            <Modal title="Twitter通知設定" :isModalOpen="modalType === 9" @modal-closed="modalType = 0">
+              <h2 class="has-text-centered">
+                通知状態: {{ IS_TWITTER_CONNECTED }}
+              </h2>
+              <p class="subtitle has-text-centered" style="word-break:break-all">
+                <a :href="TWITTER_CONNECT_URL" class="button is-primary is-large" disabled="true">
+                  設定する
+                </a>
+              </p>
+              <p>
+                設定すると、Twitterに通知が送れるようになります。
+                通知には、***REMOVED***BotによるDMが使用されます。
+                アカウントを変えた場合は上記ボタンから再連携することができます。
+              </p>
+            </Modal>
           </nav>
         </div>
       </div>
@@ -401,6 +412,9 @@ export default {
     IS_LINE_NOTIFY_CONNECTED () {
       return this.$auth.$state.user.lineNotify ? '設定済み' : '未設定'
     },
+    IS_TWITTER_CONNECTED () {
+      return '未設定'
+    },
     IS_INVITE_ENABLED () {
       return this.$auth.$state.user.invite.enabled ? '可' : '否'
     },
@@ -409,7 +423,7 @@ export default {
         return '未設定'
       }
       const count = this.$auth.$state.user.oneSignalNotify.split(',').length
-      return `${count}台 設定済み`
+      return `${count}台設定済み`
     }
   },
   watch: {
