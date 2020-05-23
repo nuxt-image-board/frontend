@@ -35,7 +35,7 @@
             </nuxt-link>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(1)">
-                <span class="icon"><Fas i="user" /></span>
+                <span class="icon"><Fas i="users" /></span>
                 <span>キャラ検索</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 1}">
@@ -110,7 +110,7 @@
               <div class="field is-grouped">
                 <p class="control">
                   <nuxt-link to="/profile" class="button is-outlined" @click.native="closeAll()">
-                    <span class="icon"><Fas i="users" /></span>
+                    <span class="icon"><Fas i="user" /></span>
                     <span>マイページ</span>
                   </nuxt-link>
                 </p>

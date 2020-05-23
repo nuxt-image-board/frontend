@@ -174,7 +174,6 @@ export default {
       setTimeout(this.closeWindow, 2000)
     },
     closeWindow () {
-      this.$router.push({ path: '/arts/' + this.illust.illustID })
       this.isSending = false
       this.isLoading = false
     },

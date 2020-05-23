@@ -1,14 +1,12 @@
 <template>
-  <div class="card" :class="{'has-background-grey': result.nsfw, 'has-background-light': !result.nsfw}">
-    <div class="card-header">
-      <p class="card-header-title">
-        <nuxt-link style="color: inherit;" :to="artAddress">
+  <nuxt-link style="color: inherit;" :to="artAddress">
+    <div class="card" :class="{'has-background-grey': result.nsfw, 'has-background-light': !result.nsfw}">
+      <div class="card-header">
+        <p class="card-header-title">
           {{ result.name }}
-        </nuxt-link>
-      </p>
-    </div>
-    <div class="card-content">
-      <nuxt-link style="color: inherit;" :to="artAddress">
+        </p>
+      </div>
+      <div class="card-content">
         <nav class="level">
           <div class="level-item has-text-centered">
             <div>
@@ -31,9 +29,9 @@
             </div>
           </div>
         </nav>
-      </nuxt-link>
+      </div>
     </div>
-  </div>
+  </nuxt-link>
 </template>
 
 <style>
