@@ -7,6 +7,7 @@
     :total-page="totalPage"
     :is-search-page="isSearchPage"
     :selected-sort-from-props="SelectedSort"
+    :notify-title="pageTitle"
   />
 </template>
 
@@ -31,7 +32,7 @@ export default {
     const data = response.data.data
     return {
       endpoint,
-      pageTitle: `${data.title}`,
+      pageTitle: data.title,
       NotificationTitle: 'タグから検索 ' + data.title + ' ' + data.count + '件',
       results: data.imgs,
       SelectedPage: page,

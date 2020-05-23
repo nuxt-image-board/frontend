@@ -1,12 +1,19 @@
 <template>
   <section class="section">
     <div class="container is-widescreen">
-      <div class="columns is-centered">
+      <div class="columns is-centered is-vcentered is-multiline">
         <div class="column is-8">
           <Notification :title="NotificationTitle" />
         </div>
-        <div class="column is-4">
-          <SelectForm class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+        <div class="column is-10">
+          <div class="columns is-touch is-centered is-vcentered">
+            <div class="column is-6">
+              <SelectForm class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+            </div>
+            <div v-if="isSearchPage" class="column is-2 ">
+              <NotifyRegister :notifyTitle="notifyTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="parseInt($route.params.id)" />
+            </div>
+          </div>
         </div>
       </div>
       <div class="columns is-centered is-multiline is-mobile">
@@ -28,6 +35,7 @@
 <script>
 import Notification from '~/components/ui/Notification.vue'
 import SelectForm from '~/components/ui/SelectForm.vue'
+import NotifyRegister from '~/components/ui/NotifyRegister.vue'
 import Pagination from '~/components/ui/Pagination.vue'
 import ListResult from '~/components/page/list/Result.vue'
 import SearchResult from '~/components/page/search/Result.vue'
@@ -36,6 +44,7 @@ export default {
   components: {
     Notification,
     SelectForm,
+    NotifyRegister,
     Pagination,
     ListResult,
     SearchResult
@@ -47,6 +56,10 @@ export default {
     },
     // eslint-disable-next-line
     NotificationTitle: {
+      type: String,
+      default: ''
+    },
+    notifyTitle: {
       type: String,
       default: ''
     },
@@ -109,6 +122,19 @@ export default {
         { text: '累計いいね数が多い順', value: 4 },
         { text: '累計いいね数が少ない順', value: 5 }
       ]
+    }
+  },
+  computed: {
+    notifyTargetType () {
+      switch (this.endpoint) {
+        case '/search/artist':
+          return 2
+        case '/search/tag':
+        case '/search/character':
+          return 1
+        default:
+          return 0
+      }
     }
   },
   watch: {

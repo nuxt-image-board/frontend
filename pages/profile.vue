@@ -303,7 +303,7 @@
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
               </span>
-              ブラウザ通知設定(未実装)
+              Twitter通知設定(未実装)
             </nuxt-link>
           </nav>
         </div>

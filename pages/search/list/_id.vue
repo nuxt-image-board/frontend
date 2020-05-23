@@ -7,6 +7,7 @@
     :total-page="totalPage"
     :is-search-page="isSearchPage"
     :selected-sort-from-props="SelectedSort"
+    notify-title="全て"
   />
 </template>
 
