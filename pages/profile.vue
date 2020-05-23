@@ -242,35 +242,69 @@
             </a>
           </nav>
         </div>
-        <div class="column is-4 is-vcentered has-text-centered is-hidden">
+        <div class="column is-4 is-vcentered has-text-centered" style="height:100%">
           <nav class="panel">
             <p class="panel-heading has-text-dark has-background-rize">
               通知設定
             </p>
-            <nuxt-link to="/upload" class="panel-block">
+            <a class="panel-block" @click="modalType = 5">
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
               </span>
-              通知する
+              通知機能とは
+            </a>
+            <Modal title="通知機能について" :isModalOpen="modalType === 5" @modal-closed="modalType = 0">
+              <p>新着イラストが投稿された際にお知らせする機能です。</p>
+              <p>リアルタイムで通知されるので、量によっては目障りとなる可能性もあります。</p>
+              <p>現在ブラウザ通知のみ設定可能です。</p>
+            </Modal>
+            <a class="panel-block" @click="modalType = 7">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true" />
+              </span>
+              ブラウザ通知設定
+            </a>
+            <Modal title="ブラウザ通知設定" :isModalOpen="modalType === 7" @modal-closed="modalType = 0">
+              <h2 class="has-text-centered">
+                設定状態: {{ IS_BROWSER_NOTIFY_ENABLED }}
+              </h2>
+              <p class="subtitle has-text-centered" style="word-break:break-all">
+                <button class="button is-primary is-large" @click="popUpOneSignal()">
+                  設定する
+                </button>
+                <br>
+                <br>
+                <button class="button is-warning is-small" @click="resetOneSignal()">
+                  初期化する
+                </button>
+              </p>
+              <p class="has-text-weight-bold">
+                ※この機能は Appleのせいで、iOS(iPhone/iPad等)で使うことができません。***REMOVED***の開発者は悪くないです。
+              </p>
+              <p>
+                今使っているブラウザ、またはアプリに通知したい場合は設定してください。
+                <b>
+                  設定する
+                </b>
+                を押すと 通知してもいいかの確認画面が出るので、良ければ許可を押してください。
+                <b>
+                  この通知は使うスマホ、パソコン、タブレット毎に設定が要ります。合計5台まで設定可能です。
+                  5台を超えて設定する場合は一度初期化してから、改めて各デバイスで設定してください。
+                </b>
+              </p>
+            </Modal>
+            <nuxt-link to="/bookmark" class="panel-block">
+              <span class="panel-icon">
+                <i class="fas fa-book" aria-hidden="true" />
+              </span>
+              LINE通知設定(未実装)
             </nuxt-link>
             <nuxt-link to="/bookmark" class="panel-block">
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
               </span>
-              通知内容
+              ブラウザ通知設定(未実装)
             </nuxt-link>
-            <a :href="CONTACT" class="panel-block">
-              <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true" />
-              </span>
-              ブラウザ通知
-            </a>
-            <a to="/guide" class="panel-block">
-              <span class="panel-icon">
-                <i class="fas fa-book" aria-hidden="true" />
-              </span>
-              LINE通知(未実装)
-            </a>
           </nav>
         </div>
       </div>
@@ -348,6 +382,9 @@ export default {
     },
     IS_INVITE_ENABLED () {
       return this.$auth.$state.user.invite.enabled ? '可' : '否'
+    },
+    IS_BROWSER_NOTIFY_ENABLED () {
+      return '未設定'
     }
   },
   watch: {
@@ -410,13 +447,54 @@ export default {
         this.inviteKey = this.$auth.$state.user.invite.code
       }
     },
+    popUpOneSignal () {
+      console.log('<OneSignalPopup>')
+      const self = this
+      this.$OneSignal.push(() => {
+        this.$OneSignal.isPushNotificationsEnabled().then(function (isEnabled) {
+          if (isEnabled) {
+            console.log('Push notifications are already enabled.')
+            self.$OneSignal.getUserId().then(function (userId) {
+              console.log('OneSignal User ID:', userId)
+              self.registerOneSignal(userId)
+            })
+          } else {
+            console.log('Push notifications are not enabled yet.')
+            this.$OneSignal.on('subscriptionChange', function (isSubscribed) {
+              if (isSubscribed) {
+                self.$OneSignal.getUserId().then(function (userId) {
+                  console.log('OneSignal User ID:', userId)
+                  self.registerOneSignal(userId)
+                })
+              }
+            })
+            this.$OneSignal.showNativePrompt()
+          }
+        })
+      })
+    },
+    async registerOneSignal (userId) {
+      const resp = await this.$axios.post('/notify/setting/onesignal', { id: userId })
+      if (resp.data.status === 200) {
+        alert('ブラウザ通知の設定が完了しました')
+        this.modalType = 0
+      } else if (resp.data.status === 409) {
+        alert('既に登録済みです')
+        this.modalType = 0
+      } else {
+        alert('これ以上追加できません、初期化が必要です')
+      }
+    },
+    async resetOneSignal () {
+      const resp = await this.$axios.delete('/notify/setting/onesignal')
+      if (resp.data.status === 200) {
+        alert('ブラウザ通知の設定を初期化しました')
+      }
+    },
     changePassword () {
       alert('未実装です')
     },
     destroyAccount () {
-      alert('未実装です')
-    },
-    clearCache () {
       alert('未実装です')
     }
   },
