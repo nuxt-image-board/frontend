@@ -283,6 +283,7 @@ export default {
       setTimeout(this.closeWindow, 2000)
     },
     closeWindow () {
+      this.isUploadDisabled = false
       this.isScraped = false
       this.scrapeUrl = ''
       this.isLoading = false
