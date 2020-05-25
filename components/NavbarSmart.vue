@@ -36,10 +36,21 @@
       <div class="quickview-body">
         <aside class="menu" style="margin-top: 10px; margin-left: 20px">
           <ul class="menu-list">
+            <li class="menu-title">
+              <p class="is-size-7 has-text-white">
+                ホーム
+              </p>
+            </li>
             <li>
               <nuxt-link to="/" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="home" /></span>
-                <span>ホーム</span>
+                <span>トップ</span>
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/profile" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="user" /></span>
+                <span>マイページ</span>
               </nuxt-link>
             </li>
             <li>
@@ -48,25 +59,18 @@
                 <span>ニュース</span>
               </nuxt-link>
             </li>
-            <li>
-              <nuxt-link to="/help" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="question-circle" /></span>
-                <span>ヘルプ</span>
-              </nuxt-link>
-            </li>
-            <li style="margin-top:20px">
-              <nuxt-link to="/profile" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="users" /></span>
-                <span>マイページ</span>
-              </nuxt-link>
+            <li class="menu-title">
+              <p class="is-size-7 has-text-white">
+                イラスト
+              </p>
             </li>
             <li>
-              <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="upload" /></span>
-                <span>イラスト投稿</span>
+              <nuxt-link to="/search/list" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="list" /></span>
+                <span>一覧</span>
               </nuxt-link>
             </li>
-            <li style="margin-top:20px">
+            <li>
               <a class="has-text-white" @click="openSearch = !openSearch">
                 <span class="icon"><Fas i="search" /></span>
                 <span>検索</span>
@@ -75,12 +79,6 @@
               </a>
               <ul v-if="openSearch">
                 <li>
-                  <nuxt-link to="/search/list" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="list" /></span>
-                    <span>一覧</span>
-                  </nuxt-link>
-                </li>
-                <li>
                   <nuxt-link to="/search/keyword" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                     <span class="icon"><Fas i="keyboard" /></span>
                     <span>キーワード</span>
@@ -88,7 +86,7 @@
                 </li>
                 <li>
                   <nuxt-link to="/list/character" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="user" /></span>
+                    <span class="icon"><Fas i="users" /></span>
                     <span>キャラ</span>
                   </nuxt-link>
                 </li>
@@ -112,35 +110,40 @@
                 </li>
               </ul>
             </li>
-          </ul>
-          <ul class="menu-list">
             <li>
-              <a class="has-text-white" @click="openOther = !openOther">
+              <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="upload" /></span>
+                <span>投稿</span>
+              </nuxt-link>
+            </li>
+            <li class="menu-title">
+              <p class="is-size-7 has-text-white">
+                その他
+              </p>
+            </li>
+            <li>
+              <nuxt-link to="/help" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="question-circle" /></span>
+                <span>ヘルプ</span>
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/links" class="is-size-6 has-text-white heading" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="sitemap" /></span>
+                <span>リンク集</span>
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/terms" class="is-size-6 link has-text-white heading" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="users" /></span>
+                <span>利用規約</span>
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/privacy" class="is-size-6 has-text-white heading" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="pen-fancy" /></span>
-                <span>その他</span>
-                <Fas v-if="!openOther" i="chevron-down" />
-                <Fas v-else i="chevron-up" />
-              </a>
-              <ul v-if="openOther">
-                <li>
-                  <nuxt-link to="/terms" class="is-size-6 link has-text-white heading" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="users" /></span>
-                    <span>利用規約</span>
-                  </nuxt-link>
-                </li>
-                <li>
-                  <nuxt-link to="/privacy" class="is-size-6 has-text-white heading" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="pen-fancy" /></span>
-                    <span>プライバシーポリシー</span>
-                  </nuxt-link>
-                </li>
-                <li>
-                  <nuxt-link to="/links" class="is-size-6 has-text-white heading" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="sitemap" /></span>
-                    <span>リンク集</span>
-                  </nuxt-link>
-                </li>
-              </ul>
+                <span>プライバシーポリシー</span>
+              </nuxt-link>
             </li>
           </ul>
         </aside>
@@ -171,6 +174,15 @@
 }
 .quickview-footer {
     border-top: 1px solid #6d3c32;
+}
+
+.menu-title {
+  margin-top:20px;
+  margin-bottom: 5px;
+}
+
+.menu-list a:hover {
+  background-color: inherit;
 }
 
 .navbar-burger.left {

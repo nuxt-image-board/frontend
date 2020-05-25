@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <div class="control">
-      <div class="select is-large is-fullwidth is-rounded">
+      <div class="select is-medium is-fullwidth is-rounded">
         <select v-model="selectedType" @change="updateValue">
           <option v-for="option in options" :key="option.text" :value="option.value">
             {{ option.text }}

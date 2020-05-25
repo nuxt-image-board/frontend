@@ -4,7 +4,7 @@
       id="notifyButton"
       v-model="notifyEnabled"
       name="notifyButton"
-      class="is-checkradio is-info is-large"
+      class="is-checkradio is-info is-medium"
       type="checkbox"
       :disabled="!isFetchFinished"
       @click="openNotifyPopup"
