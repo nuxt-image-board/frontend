@@ -11,7 +11,7 @@
               <SelectForm class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
             </div>
             <div v-if="isSearchPage" class="column is-2 ">
-              <NotifyRegister :notifyTitle="notifyTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="parseInt($route.params.id)" />
+              <NotifyRegister :notifyTitle="notifyTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
             </div>
           </div>
         </div>
@@ -135,6 +135,12 @@ export default {
         default:
           return 0
       }
+    },
+    notifyTargetID () {
+      if (this.$route.params.id) {
+        return parseInt(this.$route.params.id)
+      }
+      return 0
     }
   },
   watch: {
