@@ -122,12 +122,24 @@
               </div>
             </div>
             <div class="column is-12 has-text-centered">
-              <a class="button is-large" @click="openSocialShare(LineShareAddress)">
+              <a
+                class="button is-large"
+                :href="isPC ? '#' : LineShareAddress"
+                target="_blank"
+                rel="noopener noreferrer"
+                @click="isPC ? openSocialShare(LineShareAddress) : null"
+              >
                 <span class="icon has-text-primary">
                   <Fab i="line" classes="fa-2x" />
                 </span>
               </a>
-              <a class="button is-large" @click="openSocialShare(TwitterShareAddress)">
+              <a
+                class="button is-large"
+                :href="isPC ? '#' : TwitterShareAddress"
+                target="_blank"
+                rel="noopener noreferrer"
+                @click="isPC ? openSocialShare(TwitterShareAddress) : null"
+              >
                 <span class="icon has-text-info">
                   <Fab i="twitter-square" classes="fa-2x" />
                 </span>
@@ -176,9 +188,14 @@ export default {
     if (data.user.id === $auth.$state.user.userID) {
       isEditable = true
     }
+    const shareAddress = encodeURI(data.title + '\n' + data.originUrl)
+    const LineShareAddress = 'https://social-plugins.line.me/lineit/share?url=' + data.originUrl
+    const TwitterShareAddress = 'https://twitter.com/intent/tweet?text=' + shareAddress + '&related=usagi_anime'
     return {
       result: data,
-      isEditable
+      isEditable,
+      LineShareAddress,
+      TwitterShareAddress
     }
   },
   data () {
@@ -201,18 +218,6 @@ export default {
     },
     ImgOrigAddress () {
       return process.env.CDN_ENDPOINT + 'illusts/orig/' + this.result.illustID + '.' + this.result.extension
-    },
-    TwitterShareAddress () {
-      const base = 'https://twitter.com/intent/tweet'
-      const params = new URLSearchParams()
-      const text = this.result.title + '\n' + this.result.originUrl
-      // TODO: 作者さんのTwitterアカウントを取得(現状では返ってくる値はtwitter_idなので、screen_nameにしないといけない)
-      params.append('text', text)
-      params.append('related', 'usagi_anime')
-      return base + '?' + params.toString()
-    },
-    LineShareAddress () {
-      return 'https://line.me/R/msg/text?' + this.result.title + '\n' + this.result.originUrl
     }
   },
   /*
@@ -225,11 +230,7 @@ export default {
   */
   methods: {
     openSocialShare (addr) {
-      if (!this.isPC) {
-        location.href = addr
-      } else {
-        window.open(addr, '', 'width=500,height=500')
-      }
+      window.open(addr, '', 'width=500,height=500')
     },
     async requestWaifu2x () {
       const scale = this.waifuScale.substr(-1)
