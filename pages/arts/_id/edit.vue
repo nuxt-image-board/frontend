@@ -37,7 +37,7 @@
                       <Fas i="pen-fancy" />
                     </span>
                     <span class="tag is-link is-large">
-                      <input class="input is-small has-text-black" :placeholder="illust.artist.name" :value="illust.artist.name">
+                      <input v-model="illust.artist.name" class="input is-small has-text-black" :placeholder="illust.artist.name">
                     </span>
                   </div>
                 </div>
@@ -47,7 +47,7 @@
                       <Fas i="broadcast-tower" />
                     </span>
                     <span class="tag is-link is-large">
-                      <input class="input is-small has-text-black" :placeholder="illust.originUrl" :value="illust.originUrl">
+                      <input v-model="illust.originUrl" class="input is-small has-text-black" :placeholder="illust.originUrl">
                     </span>
                   </div>
                 </div>
@@ -71,7 +71,9 @@
               </div>
             </div>
             <div class="column is-12 has-text-centered">
-              <a class="button is-primary" @click="reGet()">再取得</a>
+              <a class="button is-primary" @click="reGet()">
+                再取得
+              </a>
             </div>
             <div class="column is-12 has-text-centered">
               <button class="button is-primary is-large" @click="update()">
@@ -83,7 +85,9 @@
       </div>
     </div>
     <div class="column is-12 has-text-centered">
-      <a class="button is-danger is-small" @click="remove()">削除(非表示にする)</a>
+      <a class="button is-danger is-small" @click="remove()">
+        削除(非表示にする)
+      </a>
     </div>
   </section>
 </template>
@@ -156,9 +160,7 @@ export default {
         originService: this.illust.originService,
         originUrl: this.illust.originUrl,
         imageUrl: this.illust.originUrl,
-        artist: {
-          name: this.illust.artist
-        },
+        artist: this.illust.artist,
         tag: newTagData,
         chara: [],
         nsfw: this.illust.R18
