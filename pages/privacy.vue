@@ -77,7 +77,7 @@
       <br>
       <p><b>第９条（お問い合わせ窓口）</b></p>
       <p>本ポリシーに関するお問い合わせは，下記の窓口までお願いいたします。</p>
-      <p><a :href="CONTACT">{{ CONTACT }}</a></p>
+      <p><a :href="CONTACT" target="_blank" rel="noopener noreferrer">{{ CONTACT }}</a></p>
     </div>
   </section>
 </template>

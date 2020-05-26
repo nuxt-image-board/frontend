@@ -33,7 +33,7 @@
                         v-model="form.username"
                         name="display_id"
                         type="text"
-                        placeholder="香風智乃"
+                        placeholder="***REMOVED***"
                         maxlength="20"
                         class="input"
                         autocomplete="nickname"
@@ -156,7 +156,7 @@
               <nuxt-link to="/login">
                 ログインはこちら
               </nuxt-link> &nbsp;·&nbsp;
-              <a :href="CONTACT">
+              <a :href="CONTACT" target="_blank" rel="noopener noreferrer">
                 問い合わせはこちら
               </a>
             </p>

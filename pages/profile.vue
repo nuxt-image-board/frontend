@@ -300,7 +300,7 @@
                 通知状態: {{ IS_LINE_NOTIFY_CONNECTED }}
               </h2>
               <p class="subtitle has-text-centered" style="word-break:break-all">
-                <a :href="NOTIFY_CONNECT_URL" class="button is-primary is-large">
+                <a :href="NOTIFY_CONNECT_URL" target="_blank" rel="noopener noreferrer" class="button is-primary is-large">
                   設定する
                 </a>
               </p>
@@ -323,7 +323,7 @@
                 通知状態: {{ IS_TWITTER_CONNECTED }}
               </h2>
               <p class="subtitle has-text-centered" style="word-break:break-all">
-                <a :href="TWITTER_CONNECT_URL" class="button is-primary is-large" disabled="true">
+                <a :href="TWITTER_CONNECT_URL" target="_blank" rel="noopener noreferrer" class="button is-primary is-large" disabled="true">
                   設定する
                 </a>
               </p>
@@ -383,6 +383,7 @@ export default {
       inviteKey: '',
       LINE_CONNECT_URL: '',
       NOTIFY_CONNECT_URL: '',
+      TWITTER_CONNECT_URL: '',
       passwordForm: {
         old: '',
         new: '',

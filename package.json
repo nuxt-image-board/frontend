@@ -36,6 +36,7 @@
     "nuxt": "^2.0.0",
     "nuxt-device-detect": "^1.1.5",
     "nuxt-fontawesome": "^0.4.0",
+    "nuxt-logrocket": "^1.2.10",
     "nuxt-webfontloader": "^1.1.0",
     "vue-aplayer": "^1.6.1",
     "vue-scrollto": "^2.18.1",

@@ -80,7 +80,7 @@
                     </button>
                   </div>
                   <div class="column is-6">
-                    <a :href="LINE_LOGIN_URL" class="button is-block has-text-white is-medium is-fullwidth" style="background-color: #1a8607;">
+                    <a :href="LINE_LOGIN_URL" target="_blank" rel="noopener noreferrer" class="button is-block has-text-white is-medium is-fullwidth" style="background-color: #1a8607;">
                       LINEでログイン <Fas i="sign-in-alt" />
                     </a>
                   </div>

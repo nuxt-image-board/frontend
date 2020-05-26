@@ -102,7 +102,8 @@ export default {
     'cookie-universal-nuxt',
     'nuxt-fontawesome',
     'nuxt-webfontloader',
-    'nuxt-device-detect'
+    'nuxt-device-detect',
+    'nuxt-logrocket'
   ],
   /*
   ** Post Notify
@@ -199,6 +200,13 @@ export default {
   */
   dotenv: {
     filename: envPath
+  },
+  /*
+  ** Tracking User activity
+  */
+  logRocket: {
+    logRocketId: '***REMOVED***',
+    devModeAllowed: false
   },
   /*
   ** Build configuration
