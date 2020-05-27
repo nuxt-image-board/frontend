@@ -258,6 +258,9 @@ export default {
       this.isLoading = true
       this.LoadingText = '投稿しています...'
       this.illust.tags = this.tags.map(tag => (tag.text))
+      if (this.illust.title === this.illust.caption) {
+        this.illust.caption = ''
+      }
       const params = {
         title: this.illust.title,
         caption: this.illust.caption,
@@ -271,7 +274,6 @@ export default {
         chara: [],
         nsfw: this.illust.R18
       }
-      // console.log(params)
       const response = await this.$axios.post('/arts', params)
       this.isSending = false
       if (response.data.status === 202) {
