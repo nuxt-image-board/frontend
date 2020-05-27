@@ -18,6 +18,44 @@
         通知を有効にすると指定した条件の新着イラストが投稿された際にお知らせします。
         条件の設定次第では、高頻度で通知される可能性があります。詳細はヘルプをご確認ください。
       </p>
+      <h5 class="has-text-centered">
+        通知先
+      </h5>
+      <div class="field is-grouped is-grouped-centered">
+        <div class="control">
+          <input
+            id="webCheck"
+            v-model="notifySelection.web"
+            class="is-checkradio"
+            type="checkbox"
+            name="webCheck"
+            :disabled="!notifyConfigured.web"
+          >
+          <label class="checkbox" for="webCheck">ブラウザ</label>
+        </div>
+        <div class="control">
+          <input
+            id="lineCheck"
+            v-model="notifySelection.line"
+            class="is-checkradio"
+            type="checkbox"
+            name="lineCheck"
+            :disabled="!notifyConfigured.line"
+          >
+          <label for="lineCheck">LINE</label>
+        </div>
+        <div class="control">
+          <input
+            id="twitterCheck"
+            v-model="notifySelection.twitter"
+            class="is-checkradio"
+            type="checkbox"
+            name="twitterCheck"
+            :disabled="!notifyConfigured.twitter"
+          >
+          <label for="twitterCheck">Twitter</label>
+        </div>
+      </div>
       <p class="subtitle has-text-centered">
         <button class="button is-primary is-large" @click="registerNotify">
           有効にする
@@ -52,34 +90,83 @@ export default {
     return {
       notifyEnabled: false,
       notifyPopup: false,
+      notifySelection: {
+        line: false,
+        web: false,
+        twitter: false
+      },
+      notifyConfigured: {
+        line: !!this.$auth.$state.user.lineNotify,
+        web: !!this.$auth.$state.user.oneSignalNotify,
+        twitter: false
+      },
       isFetchFinished: false
     }
   },
   watch: {
     notifyEnabled (val) {
       if (val === false) {
-        this.requestUnregisterNotify()
+        this.unregisterNotify()
       }
     }
   },
   async mounted () {
-    const params = {
-      id: this.notifyTargetID,
-      type: this.notifyTargetType,
-      method: 0
-    }
-    const resp = await this.$axios.get('/notify/find', { params })
-    if (resp.data.status === 200) {
-      this.notifyEnabled = true
+    await this.fetchNotify()
+    // 1つも設定されていなければ無効化
+    if (
+      (
+        this.notifyConfigured.line ===
+        this.notifyConfigured.web ===
+        this.notifyConfigured.twitter
+      ) &&
+      (
+        this.notifyConfigured.web === false
+      )
+    ) {
+      this.isFetchFinished = false
     } else {
-      this.notifyEnabled = false
+      this.isFetchFinished = true
     }
-    this.isFetchFinished = true
   },
   methods: {
     registerNotify () {
-      this.requestRegisterNotify()
+      let notifyMethod = 0
+      for (const key in this.notifySelection) {
+        if (this.notifySelection[key] === true) {
+          this.requestRegisterNotify(notifyMethod)
+        }
+        notifyMethod += 1
+      }
       this.notifyPopup = false
+    },
+    unregisterNotify () {
+      let notifyMethod = 0
+      for (const key in this.notifySelection) {
+        if (this.notifySelection[key] === true) {
+          this.requestUnregisterNotify(notifyMethod)
+          this.notifySelection[key] = false
+        }
+        notifyMethod += 1
+      }
+    },
+    async fetchNotify () {
+      const params = {
+        id: this.notifyTargetID,
+        type: this.notifyTargetType,
+        method: 0
+      }
+      let notifyMethod = 0
+      for (const key in this.notifySelection) {
+        params.method = notifyMethod
+        const resp = await this.$axios.get('/notify/find', { params })
+        if (resp.data.status === 200) {
+          this.notifySelection[key] = true
+          this.notifyEnabled = true
+        } else {
+          this.notifySelection[key] = false
+        }
+        notifyMethod += 1
+      }
     },
     openNotifyPopup () {
       if (!this.notifyEnabled) {
@@ -90,10 +177,10 @@ export default {
       this.notifyEnabled = false
       this.notifyPopup = false
     },
-    async requestRegisterNotify () {
+    async requestRegisterNotify (notifyMethod) {
       const params = {
         type: this.notifyTargetType,
-        method: 0,
+        method: notifyMethod,
         id: 0
       }
       if (!isNaN(this.notifyTargetID)) {
@@ -104,10 +191,10 @@ export default {
         alert('通知登録エラー (リロードしてください)')
       }
     },
-    async requestUnregisterNotify () {
+    async requestUnregisterNotify (notifyMethod) {
       const params = {
         type: this.notifyTargetType,
-        method: 0,
+        method: notifyMethod,
         id: 0
       }
       if (!isNaN(this.notifyTargetID)) {
