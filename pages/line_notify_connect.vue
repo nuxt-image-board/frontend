@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  // 2回呼ばれるのでasyncDataに変えること。
   async created () {
     if (this.$route.query.code) {
       const code = this.$route.query.code

@@ -499,25 +499,26 @@ export default {
     popUpOneSignal () {
       console.log('<OneSignalPopup>')
       const self = this
-      this.$OneSignal.push(() => {
-        this.$OneSignal.isPushNotificationsEnabled().then(function (isEnabled) {
+      window.OneSignal = window.OneSignal || []
+      window.OneSignal.push(() => {
+        window.OneSignal.isPushNotificationsEnabled().then(function (isEnabled) {
           if (isEnabled) {
             console.log('Push notifications are already enabled.')
-            self.$OneSignal.getUserId().then(function (userId) {
+            window.OneSignal.getUserId().then(function (userId) {
               console.log('OneSignal User ID:', userId)
               self.registerOneSignal(userId)
             })
           } else {
             console.log('Push notifications are not enabled yet.')
-            this.$OneSignal.on('subscriptionChange', function (isSubscribed) {
+            window.OneSignal.on('subscriptionChange', function (isSubscribed) {
               if (isSubscribed) {
-                self.$OneSignal.getUserId().then(function (userId) {
+                window.OneSignal.getUserId().then(function (userId) {
                   console.log('OneSignal User ID:', userId)
                   self.registerOneSignal(userId)
                 })
               }
             })
-            this.$OneSignal.showNativePrompt()
+            window.OneSignal.showNativePrompt()
           }
         })
       })

@@ -94,11 +94,11 @@ export default {
   modules: [
     '@nuxtjs/bulma',
     '@nuxtjs/axios',
+    '@nuxtjs/onesignal',
     '@nuxtjs/pwa',
     '@nuxtjs/auth',
     '@nuxtjs/dotenv',
     '@nuxtjs/device',
-    '@nuxtjs/onesignal',
     'cookie-universal-nuxt',
     'nuxt-fontawesome',
     'nuxt-webfontloader',
