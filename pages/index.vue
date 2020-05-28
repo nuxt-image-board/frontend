@@ -56,9 +56,9 @@
                   Random
                 </p>
                 <figure class="image is-4by3">
-                  <a :href="RANDOM_ILLUST">
+                  <nuxt-link :to="RANDOM_ILLUST">
                     <img :src="RANDOM_ILLUST_SRC">
-                  </a>
+                  </nuxt-link>
                 </figure>
               </article>
             </div>
