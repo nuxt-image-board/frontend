@@ -159,15 +159,16 @@ export default {
     },
     async getInfo () {
       let endpoint = '/scrape/'
+      let url = this.scrapeUrl
       switch (true) {
-        case this.scrapeUrl.includes('twitter.com'):
+        case url.includes('twitter.com'):
           endpoint += 'twitter'
           break
-        case this.scrapeUrl.includes('pixiv.net'):
+        case url.includes('pixiv.net'):
           endpoint += 'pixiv'
           break
         default:
-          this.scrapeUrl = ''
+          url = ''
           break
       }
       let tags = []
@@ -191,13 +192,39 @@ export default {
           thumb_src: 'https://profile.***REMOVED***?2'
         }]
       }
-      if (this.scrapeUrl !== '') {
+      if (url !== '') {
         isLoading = true
-        const response = await this.$axios.post(endpoint, { url: this.scrapeUrl })
+        const response = await this.$axios.post(endpoint, { url })
         const data = response.data
         if (response.data.status === '200') {
           illust = data.data.illust
-          const ngWords = [' ', '　']
+          const ngWords = []
+          const ngTags = [
+            '***REMOVED***',
+            '***REMOVED***',
+            '***REMOVED***',
+            '***REMOVED***',
+            'R-18',
+            'R18',
+            'チノ',
+            '***REMOVED***',
+            '***REMOVED***',
+            '***REMOVED***',
+            '***REMOVED***'
+          ]
+          const addTags = {
+            チノ: '***REMOVED***',
+            ***REMOVED***: '***REMOVED***',
+            ***REMOVED***: '***REMOVED***',
+            ***REMOVED***: '***REMOVED***',
+            ***REMOVED***: '***REMOVED***',
+            制服: '制服'
+          }
+          for (const t in addTags) {
+            if (illust.title.includes(t)) {
+              illust.tags.push(addTags[t])
+            }
+          }
           illust.tags.forEach(
             (tag) => {
               ngWords.push('#' + tag)
@@ -205,27 +232,18 @@ export default {
             }
           )
           ngWords.forEach(
-            (tag) => {
-              illust.title = illust.title.replace(tag, '')
-              illust.caption = illust.caption.replace(tag, '')
+            (w) => {
+              illust.title = illust.title.replace(w, '')
+              illust.caption = illust.caption.replace(w, '')
             }
           )
-          const ngTags = [
-            '***REMOVED***',
-            '***REMOVED***',
-            '***REMOVED***',
-            '***REMOVED***',
-            'R-18',
-            'R18'
-          ]
-          illust.tags = illust.tags.filter(
-            (tag) => { return !ngTags.includes(tag) }
-          )
-          thumbnails = illust.imgs.map(img => img.thumb_src)
-          tags = illust.tags.map(tag => ({ text: tag }))
-          illust.tags = illust.tags.map(tag => ({ text: tag }))
-          illust.originUrl = this.scrapeUrl
-          illust.artist = removeEmoji.removeEmoji(illust.artist.split('@')[0])
+          illust.originUrl = url
+          // 余計な文字は消す
+          illust.title = illust.title.trim()
+          illust.caption = illust.title.trim()
+          illust.artist = illust.artist.split('@')[0]
+          illust.artist = illust.artist.split('＠')[0]
+          illust.artist = removeEmoji.removeEmoji(illust.artist)
           switch (true) {
             case illust.originUrl.includes('twitter'):
               illust.originService = 'Twitter'
@@ -237,12 +255,17 @@ export default {
               illust.originService = '独自'
               break
           }
+          thumbnails = illust.imgs.map(img => img.thumb_src)
+          tags = illust.tags.filter(
+            (tag) => { return !ngTags.includes(tag) }
+          )
+          illust.tags = tags.map(tag => ({ text: tag }))
+          tags = tags.map(tag => ({ text: tag }))
           isLoading = false
           this.isScraped = true
         } else {
           LoadingText = '取得失敗!'
           isFailed = true
-          setTimeout(this.closeWindow, 2000)
         }
       }
       this.tags = tags
@@ -257,7 +280,10 @@ export default {
       this.isSending = true
       this.isLoading = true
       this.LoadingText = '投稿しています...'
+      // TODO: この辺りの行による propsのエラー修正
+      // あとリファクタリング
       this.illust.tags = this.tags.map(tag => (tag.text))
+      // 全く同じなら説明文は消す
       if (this.illust.title === this.illust.caption) {
         this.illust.caption = ''
       }
@@ -274,15 +300,35 @@ export default {
         chara: [],
         nsfw: this.illust.R18
       }
-      const response = await this.$axios.post('/arts', params)
-      this.isSending = false
-      if (response.data.status === 202) {
-        this.LoadingText = '投稿しました!'
+      // 連番アップロード
+      if (this.sendAsNumbered) {
+        const tasks = []
+        for (let page = 1; page < this.illust.imgs.length + 1; page++) {
+          params.imageUrl = this.illust.originUrl + '?page=' + page
+          if (page !== 1) {
+            params.title = this.illust.title + ` (${page})`
+          }
+          tasks.push(this.$axios.post('/arts', params))
+        }
+        const taskResults = await Promise.all(tasks)
+        if (taskResults.every(v => v.data.status === 202)) {
+          this.LoadingText = '投稿しました!'
+        } else {
+          this.LoadingText = '投稿に失敗しました'
+          this.isFailed = true
+        }
+      // 通常アップロード
       } else {
-        this.LoadingText = '投稿に失敗しました'
-        this.isFailed = true
+        const response = await this.$axios.post('/arts', params)
+        this.isSending = false
+        if (response.data.status === 202) {
+          this.LoadingText = '投稿しました!'
+        } else {
+          this.LoadingText = '投稿に失敗しました'
+          this.isFailed = true
+        }
       }
-      setTimeout(this.closeWindow, 2000)
+      setTimeout(this.closeWindow, 1500)
     },
     closeWindow () {
       this.isUploadDisabled = false
