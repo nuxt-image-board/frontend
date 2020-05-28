@@ -33,6 +33,19 @@ Vue.mixin({
           path: '/',
           maxAge: 60 * 60 * 24 * 7
         })
+        this.$cookies.set('useSwipe', true, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7
+        })
+      } else {
+        this.$cookies.set('useWebP', false, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7
+        })
+        this.$cookies.set('useSwipe', false, {
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7
+        })
       }
     }
   }
