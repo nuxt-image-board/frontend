@@ -26,6 +26,7 @@ https://helloworld-blog.tech/javascript/vue-js-smooth-scroll%E3%81%A7top%E3%81%A
 
 import NavbarUp from '~/components/NavbarUp.vue'
 import NavbarSmart from '~/components/NavbarSmart.vue'
+// import NavbarSmartDown from '~/components/NavbarSmartDown.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
 import Fas from '~/components/ui/Fas.vue'
 
@@ -34,9 +35,10 @@ export default {
     'auth'
   ],
   components: {
-    NavbarSmart,
     NavbarUp,
     NavbarDown,
+    NavbarSmart,
+    // NavbarSmartDown,
     Fas
   },
   data () {
@@ -45,7 +47,8 @@ export default {
       openSmartNav: false,
       isPC: this.$cookies.get('isPC'),
       isLeftMenu: this.$cookies.get('isLeftHanded'),
-      isJumpEnabled: this.$cookies.get('isJumpEnabled')
+      isJumpEnabled: this.$cookies.get('isJumpEnabled'),
+      useSwipe: this.$cookies.get('useSwipe')
     }
   },
   computed: {
@@ -71,17 +74,21 @@ export default {
       this.scrollY = window.pageYOffset
     },
     showSmartNav () {
-      if (!this.isLeftMenu) {
-        this.openSmartNav = false
-      } else {
-        this.openSmartNav = true
+      if (this.useSwipe) {
+        if (!this.isLeftMenu) {
+          this.openSmartNav = false
+        } else {
+          this.openSmartNav = true
+        }
       }
     },
     hideSmartNav () {
-      if (!this.isLeftMenu) {
-        this.openSmartNav = true
-      } else {
-        this.openSmartNav = false
+      if (this.useSwipe) {
+        if (!this.isLeftMenu) {
+          this.openSmartNav = true
+        } else {
+          this.openSmartNav = false
+        }
       }
     },
     changeMenu (value) {
