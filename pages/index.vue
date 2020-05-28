@@ -116,12 +116,17 @@ export default {
       hitokoto
     }
   },
+  data () {
+    return {
+      useWebP: this.$cookies.get('useWebP')
+    }
+  },
   computed: {
     CONTACT () {
       return process.env.CONTACT
     },
     RANDOM_ILLUST_SRC () {
-      return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllustID + '.webp'
+      return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllustID + (this.useWebP ? '.webp' : '.jpg')
     },
     RANDOM_ILLUST () {
       return 'arts/' + this.randomIllustID

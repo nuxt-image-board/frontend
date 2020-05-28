@@ -209,12 +209,13 @@ export default {
       bookmarkSound: null,
       isPC: this.$cookies.get('isPC'),
       acceptR18: this.$cookies.get('acceptR18'),
+      useWebP: this.$cookies.get('useWebP'),
       isModalOpen: false
     }
   },
   computed: {
     ImgAddress () {
-      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.result.illustID + '.webp'
+      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.result.illustID + (this.useWebP ? '.webp' : '.jpg')
     },
     ImgOrigAddress () {
       return process.env.CDN_ENDPOINT + 'illusts/orig/' + this.result.illustID + '.' + this.result.extension

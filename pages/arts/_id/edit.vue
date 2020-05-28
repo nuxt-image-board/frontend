@@ -126,6 +126,7 @@ export default {
       isSending: false,
       isFailed: false,
       isPC: this.$cookies.get('isPC'),
+      useWebP: this.$cookies.get('useWebP'),
       validation: [{
         classes: 'max-length',
         rule: tag => tag.text.length > 20
@@ -141,7 +142,7 @@ export default {
   },
   computed: {
     ImgAddress () {
-      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.illust.illustID + '.webp'
+      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.illust.illustID + (this.useWebP ? '.webp' : '.jpg')
     },
     ImgOrigAddress () {
       return process.env.CDN_ENDPOINT + 'illusts/orig/' + this.illust.illustID + '.png'
