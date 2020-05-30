@@ -97,10 +97,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.blur{
-  -ms-filter: blur(20px);
-  filter: blur(20px);
-}
-</style>

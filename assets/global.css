@@ -56,3 +56,13 @@ color: #CACACA !important;
   text-align: center;
   vertical-align: middle;
 }
+
+.blur{
+  -ms-filter: blur(20px);
+  filter: blur(20px);
+}
+
+.thumb{
+  max-height: 65vh;
+  width: auto;
+}

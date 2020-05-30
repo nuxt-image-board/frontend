@@ -14,13 +14,13 @@
           <div class="columns is-centered is-multiline">
             <div class="column is-12 has-text-centered">
               <p class="title">
-                <input v-model="illust.title" class="input is-large" type="text" :placeholder="illust.title">
+                {{ illust.title }}
               </p>
               <p class="subtitle">
-                <input v-model="illust.caption" class="input" type="text" :placeholder="illust.caption">
+                {{ illust.caption }}
               </p>
             </div>
-            <div class="column is-12 is-centered">
+            <div class="column is-12 has-text-centered">
               <vue-tags-input
                 v-model="tag"
                 :tags="illust.tag"
@@ -33,47 +33,49 @@
               <div class="field is-grouped is-grouped-centered is-grouped-multiline">
                 <div class="control">
                   <div class="tags has-addons">
-                    <span class="tag is-large">
-                      <Fas i="pen-fancy" />
+                    <span class="tag">
+                      <Fas i="calendar" />
                     </span>
-                    <span class="tag is-link is-large">
-                      <input v-model="illust.artist.name" class="input is-small has-text-black" :placeholder="illust.artist.name">
-                    </span>
+                    <span class="tag is-info">{{ illust.date }}</span>
                   </div>
                 </div>
                 <div class="control">
                   <div class="tags has-addons">
-                    <span class="tag is-large">
-                      <Fas i="broadcast-tower" />
+                    <span class="tag">
+                      <Fas i="bookmark" />
                     </span>
-                    <span class="tag is-link is-large">
-                      <input v-model="illust.originUrl" class="input is-small has-text-black" :placeholder="illust.originUrl">
-                    </span>
-                  </div>
-                </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag is-large">
-                      R18
-                    </span>
-                    <span class="tag is-link is-large">
-                      <input
-                        id="isR18Form"
-                        v-model="illust.R18"
-                        type="checkbox"
-                        name="switchRoundedDanger"
-                        class="switch is-rounded is-danger"
-                      >
-                      <label for="isR18Form" style="margin-top: -20px" />
-                    </span>
+                    <span class="tag is-info">0</span>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="column is-12 has-text-centered">
-              <a class="button is-primary" @click="reGet()">
-                再取得
-              </a>
+              <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+                <div class="control">
+                  <div class="tags has-addons">
+                    <span class="tag">
+                      <Fas i="pen-fancy" />
+                    </span>
+                    <nuxt-link :to="&quot;/search/artist/&quot;+illust.artist.id" class="tag is-link">
+                      {{ illust.artist.name }}
+                    </nuxt-link>
+                  </div>
+                </div>
+                <div class="control">
+                  <div class="tags has-addons">
+                    <span class="tag">
+                      <Fas i="user-edit" />
+                    </span>
+                    <a class="tag is-link" href="#">{{ illust.user.name }}</a>
+                  </div>
+                </div>
+                <div class="control">
+                  <div class="tags has-addons">
+                    <span class="tag">
+                      <Fas i="broadcast-tower" />
+                    </span>
+                    <a class="tag is-link" :href="illust.originUrl">{{ illust.originService }}</a>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="column is-12 has-text-centered">
               <button class="button is-primary is-large" @click="update()">
@@ -83,11 +85,6 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="column is-12 has-text-centered">
-      <a class="button is-danger is-small" @click="remove()">
-        削除(非表示にする)
-      </a>
     </div>
   </section>
 </template>
@@ -107,9 +104,6 @@ export default {
       return error({ statusCode: 404, message: 'err' })
     }
     const illust = response.data.data
-    if (illust.user.id !== $auth.$state.user.userID) {
-      return error({ statusCode: 401, message: 'err' })
-    }
     let vtags = illust.chara.map(tag => ({ text: tag[1] }))
     vtags = vtags.concat(illust.tag.map(tag => ({ text: tag[1] })))
     illust.tag = vtags
@@ -125,7 +119,6 @@ export default {
       isLoading: false,
       isSending: false,
       isFailed: false,
-      useWebP: this.$cookies.get('useWebP'),
       validation: [{
         classes: 'max-length',
         rule: tag => tag.text.length > 20
@@ -141,7 +134,7 @@ export default {
   },
   computed: {
     ImgAddress () {
-      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.illust.illustID + (this.useWebP ? '.webp' : '.jpg')
+      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.illust.illustID + '.webp'
     }
   },
   methods: {
@@ -152,15 +145,7 @@ export default {
       this.loadingText = '更新しています...'
       const newTagData = this.illust.tag.map(tag => (tag.text))
       const params = {
-        title: this.illust.title,
-        caption: this.illust.caption,
-        originService: this.illust.originService,
-        originUrl: this.illust.originUrl,
-        imageUrl: this.illust.originUrl,
-        artist: this.illust.artist,
-        tag: newTagData,
-        chara: [],
-        nsfw: this.illust.R18
+        tag: newTagData
       }
       const response = await this.$axios.put('/arts/' + this.illust.illustID, params)
       this.isSending = false
@@ -175,17 +160,11 @@ export default {
     closeWindow () {
       this.isSending = false
       this.isLoading = false
-    },
-    async reGet () {
-    },
-    remove () {
-      // const response = await this.$axios.delete('/arts/' + this.illust.illustID)
-      alert('200 OK')
     }
   },
   head () {
     return {
-      title: 'イラストデータ編集'
+      title: 'イラストタグ編集'
     }
   }
 }

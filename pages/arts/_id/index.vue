@@ -154,6 +154,11 @@
         データ編集
       </nuxt-link>
     </div>
+    <div v-if="isTagEditable" class="column is-12 has-text-centered">
+      <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit_tag'">
+        タグ編集
+      </nuxt-link>
+    </div>
     <div class="modal" :class="{'is-active': isModalOpen}">
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
       <div class="modal-content">
@@ -181,12 +186,16 @@ export default {
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const response = await $axios.get(endpoint + id)
     let isEditable = false
+    let isTagEditable = false
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }
     const data = response.data.data
     if (data.user.id === $auth.$state.user.userID) {
       isEditable = true
+      isTagEditable = true
+    } else if ($auth.$state.user.permission > 1) {
+      isTagEditable = true
     }
     const shareAddress = encodeURI(data.title + '\n' + data.originUrl)
     const LineShareAddress = 'https://social-plugins.line.me/lineit/share?url=' + data.originUrl
@@ -194,6 +203,7 @@ export default {
     return {
       result: data,
       isEditable,
+      isTagEditable,
       LineShareAddress,
       TwitterShareAddress
     }
@@ -202,7 +212,6 @@ export default {
     return {
       result: {},
       isEditable: false,
-      starSound: null,
       openZoom: false,
       isZoomAllowed: false,
       waifuScale: '',
@@ -260,14 +269,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.blur{
-  -ms-filter: blur(20px);
-  filter: blur(20px);
-}
-.thumb{
-  max-height: 65vh;
-  width: auto;
-}
-</style>

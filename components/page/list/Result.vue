@@ -34,13 +34,6 @@
   </nuxt-link>
 </template>
 
-<style>
-.blur{
-  -ms-filter: blur(20px);
-  filter: blur(20px);
-}
-</style>
-
 <script>
 export default {
   props: {
