@@ -84,6 +84,7 @@
 
 <script>
 export default {
+  auth: false,
   computed: {
     CONTACT () {
       return process.env.CONTACT

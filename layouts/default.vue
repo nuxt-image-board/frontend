@@ -10,7 +10,7 @@
         <Fas i="angle-up" classes="scroll-icon" />
       </a>
     </transition>
-    <NavbarDown v-if="isPC" />
+    <NavbarDown />
   </div>
 </template>
 

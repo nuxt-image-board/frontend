@@ -19,7 +19,7 @@
           <span>ヘルプ</span>
         </nuxt-link>
       </p>
-      <p class="level-item has-text-centered">
+      <p v-if="$auth.loggedIn" class="level-item has-text-centered">
         <nuxt-link to="/links" class="is-size-6 has-text-white heading">
           <span class="icon"><Fas i="sitemap" /></span>
           <span>リンク集</span>
