@@ -10,7 +10,7 @@ Vue.mixin({
         {
           path: '/',
           domain: '***REMOVED***',
-          maxAge: 60 * 60 * 24 * 7,
+          maxAge: 60 * 60 * 24 * 31 * 6,
           secure: true
         }
       )
@@ -18,35 +18,24 @@ Vue.mixin({
       if (this.$device.isDesktop) {
         this.$cookies.set('isPC', true, {
           path: '/',
-          maxAge: 60 * 60 * 24 * 7
+          maxAge: 60 * 60 * 24 * 31 * 6
         })
         this.$cookies.set('isJumpEnabled', true, {
           path: '/',
-          maxAge: 60 * 60 * 24 * 7
+          maxAge: 60 * 60 * 24 * 31 * 6
         })
         // どうも初回取得できないことがあるので1回だけ二重に要求する
         this.$store.dispatch('getNavigations')
       }
       // MacまたはiOS以外かを判定
-      if (!this.$device.isMacOS) {
-        this.$cookies.set('useWebP', true, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7
-        })
-        this.$cookies.set('useSwipe', true, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7
-        })
-      } else {
-        this.$cookies.set('useWebP', false, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7
-        })
-        this.$cookies.set('useSwipe', false, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 7
-        })
-      }
+      this.$cookies.set('useWebP', !this.$device.isMacOS, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
+      this.$cookies.set('useSwipe', !this.$device.isMacOS, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
     }
   }
 })

@@ -352,8 +352,10 @@
           </nav>
         </div>
       </div>
+      <br>
+      <br>
       <div class="column is-12">
-        <button class="button is-danger" @click="modalType = 6">
+        <button class="button is-danger is-small" @click="modalType = 6">
           退会する
         </button>
         <Modal title="退会" :isModalOpen="modalType === 6" @modal-closed="modalType = 0; destroyStep = 0">
@@ -448,40 +450,40 @@ export default {
     acceptR18 (val) {
       this.$cookies.set('acceptR18', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 31
+        maxAge: 60 * 60 * 24 * 31 * 6
       })
     },
     useWebP (val) {
       this.$cookies.set('useWebP', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 31
+        maxAge: 60 * 60 * 24 * 31 * 6
       })
     },
     useSwipe (val) {
       this.$cookies.set('useSwipe', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 31
+        maxAge: 60 * 60 * 24 * 31 * 6
       })
       location.reload()
     },
     isLeftHanded (val) {
       this.$cookies.set('isLeftHanded', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 31
+        maxAge: 60 * 60 * 24 * 31 * 6
       })
       location.reload()
     },
     isPC (val) {
       this.$cookies.set('isPC', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 31
+        maxAge: 60 * 60 * 24 * 31 * 6
       })
       location.reload()
     },
     isJumpEnabled (val) {
       this.$cookies.set('isJumpEnabled', val, {
         path: '/',
-        maxAge: 60 * 60 * 24 * 31
+        maxAge: 60 * 60 * 24 * 31 * 6
       })
       location.reload()
     }
@@ -521,7 +523,6 @@ export default {
       }
     },
     popUpOneSignal () {
-      console.log('<OneSignalPopup>')
       const self = this
       window.OneSignal = window.OneSignal || []
       window.OneSignal.push(() => {
