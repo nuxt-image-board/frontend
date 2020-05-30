@@ -212,7 +212,7 @@ export default {
           this.form.id = this.form.displayID
           await this.$auth.loginWith('local', { data: this.form })
           this.postLoggedIn()
-          this.$route.push('/')
+          this.$router.push('/')
           break
         case 400:
           this.notificationDeleted = false
