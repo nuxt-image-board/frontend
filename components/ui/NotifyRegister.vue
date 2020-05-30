@@ -91,13 +91,13 @@ export default {
       notifyEnabled: false,
       notifyPopup: false,
       notifySelection: {
-        line: false,
         web: false,
+        line: false,
         twitter: false
       },
       notifyConfigured: {
-        line: !!this.$auth.$state.user.lineNotify,
         web: !!this.$auth.$state.user.oneSignalNotify,
+        line: !!this.$auth.$state.user.lineNotify,
         twitter: false
       },
       isFetchFinished: false
@@ -111,20 +111,13 @@ export default {
     }
   },
   async mounted () {
-    await this.fetchNotify()
     // 1つも設定されていなければ無効化
     if (
-      (
-        this.notifyConfigured.line ===
-        this.notifyConfigured.web ===
-        this.notifyConfigured.twitter
-      ) &&
-      (
-        this.notifyConfigured.web === false
-      )
+      this.notifyConfigured.line ||
+      this.notifyConfigured.web ||
+      this.notifyConfigured.twitter
     ) {
-      this.isFetchFinished = false
-    } else {
+      await this.fetchNotify()
       this.isFetchFinished = true
     }
   },
@@ -152,20 +145,14 @@ export default {
     async fetchNotify () {
       const params = {
         id: this.notifyTargetID,
-        type: this.notifyTargetType,
-        method: 0
+        type: this.notifyTargetType
       }
-      let notifyMethod = 0
-      for (const key in this.notifySelection) {
-        params.method = notifyMethod
-        const resp = await this.$axios.get('/notify/find', { params })
-        if (resp.data.status === 200) {
-          this.notifySelection[key] = true
+      const resp = await this.$axios.get('/notify/finds', { params })
+      for (const key in resp.data.data) {
+        this.notifySelection[key] = resp.data.data[key]
+        if (resp.data.data[key] === true) {
           this.notifyEnabled = true
-        } else {
-          this.notifySelection[key] = false
         }
-        notifyMethod += 1
       }
     },
     openNotifyPopup () {
