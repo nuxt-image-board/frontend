@@ -1,6 +1,6 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div id="top" class="container">
       <Notification
         icon="info"
         :deletable="notificationDeletable"
@@ -170,6 +170,7 @@ export default {
         this.notificationDeleted = false
         this.notificationClasses = 'is-danger'
         this.notificationText = '一致するユーザーがいません!'
+        this.$scrollTo('#top', 500, { container: 'body', easing: 'ease' })
       }
     },
     deletedEvent () {
