@@ -35,15 +35,18 @@
     <main>
       <nuxt />
     </main>
+    <NavbarDown />
   </div>
 </template>
 
 <script>
+import NavbarDown from '~/components/NavbarDown.vue'
 import Fas from '~/components/ui/Fas.vue'
 
 export default {
   components: {
-    Fas
+    Fas,
+    NavbarDown
   },
   data () {
     return {
