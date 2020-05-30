@@ -46,8 +46,7 @@ export default {
   ** PWA Config
   */
   workbox: {
-    dev: false,
-    offlinePage: '/offline'
+    dev: false
   },
   manifest: {
     name: '***REMOVED***',
