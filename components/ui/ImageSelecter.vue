@@ -1,7 +1,7 @@
 <template>
   <nav class="level">
     <div v-if="imageSource.length > 1 && !isButtonDisabled" class="level-item is-vcentered has-text-centered is-hidden-touch">
-      <button class="button is-large is-primary" :disabled="isDecreaseDisabledC" @click="decreasePage">
+      <button class="button is-large is-primary" :disabled="isDecreaseDisabled" @click="decreasePage">
         &lt;
       </button>
     </div>
@@ -9,15 +9,15 @@
       <img class="image is-128x128" :src="selectedImage">
     </div>
     <div v-if="imageSource.length > 1 && !isButtonDisabled" class="level-item is-vcentered has-text-centered is-hidden-touch">
-      <button class="button is-large is-primary" :disabled="isIncreaseDisabledC" @click="increasePage">
+      <button class="button is-large is-primary" :disabled="isIncreaseDisabled" @click="increasePage">
         &gt;
       </button>
     </div>
     <div v-if="imageSource.length > 1 && !isButtonDisabled" class="level-item is-vcentered has-text-centered is-hidden-desktop">
-      <button class="button is-large is-primary" :disabled="isDecreaseDisabledC" @click="decreasePage">
+      <button class="button is-large is-primary" :disabled="isDecreaseDisabled" @click="decreasePage">
         &lt;
       </button>
-      <button class="button is-large is-primary" :disabled="isIncreaseDisabledC" @click="increasePage">
+      <button class="button is-large is-primary" :disabled="isIncreaseDisabled" @click="increasePage">
         &gt;
       </button>
     </div>
@@ -33,14 +33,6 @@ export default {
         return []
       }
     },
-    isIncreaseDisabled: {
-      type: Boolean,
-      default: false
-    },
-    isDecreaseDisabled: {
-      type: Boolean,
-      default: true
-    },
     isButtonDisabled: {
       type: Boolean,
       default: false
@@ -48,6 +40,8 @@ export default {
   },
   data () {
     return {
+      isIncreaseDisabled: false,
+      isDecreaseDisabled: true,
       currentPage: 0
     }
   },
@@ -63,26 +57,22 @@ export default {
       }
     }
   },
-  created () {
-    this.isIncreaseDisabledC = this.isIncreaseDisabled
-    this.isDecreaseDisabledC = this.isDecreaseDisabled
-  },
   methods: {
     increasePage () {
       this.currentPage += 1
       this.$emit('onSelectedImageChanged', this.currentPage)
       if (this.currentPage === this.imageSource.length - 1) {
-        this.isIncreaseDisabledC = true
+        this.isIncreaseDisabled = true
       }
-      this.isDecreaseDisabledC = false
+      this.isDecreaseDisabled = false
     },
     decreasePage () {
       this.currentPage -= 1
       this.$emit('onSelectedImageChanged', this.currentPage)
       if (this.currentPage === 0) {
-        this.isDecreaseDisabledC = true
+        this.isDecreaseDisabled = true
       }
-      this.isIncreaseDisabledC = false
+      this.isIncreaseDisabled = false
     }
   }
 }
