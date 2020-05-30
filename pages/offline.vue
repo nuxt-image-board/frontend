@@ -24,13 +24,6 @@
   </section>
 </template>
 
-<style>
-.has-image-centered {
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
-
 <script>
 import Notification from '~/components/ui/Notification.vue'
 
