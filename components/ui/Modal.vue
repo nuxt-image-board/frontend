@@ -9,7 +9,7 @@
         <button class="delete" aria-label="close" @click="modalClosed()" />
       </header>
       <section class="has-text-left modal-card-body">
-        <div class="content">
+        <div class="content modal-card-text">
           <slot />
         </div>
       </section>

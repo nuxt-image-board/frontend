@@ -4,12 +4,12 @@
       id="notifyButton"
       v-model="notifyEnabled"
       name="notifyButton"
-      class="is-checkradio is-info is-medium"
+      class="is-checkradio is-success is-medium"
       type="checkbox"
       :disabled="!isFetchFinished"
       @click="openNotifyPopup"
     >
-    <label for="notifyButton">新着通知</label>
+    <label class="content" for="notifyButton">新着通知</label>
     <Modal :title="'通知登録: ' + notifyTitle" :isModalOpen="notifyPopup" @modal-closed="closeNotifyPopup">
       <h4 class="has-text-centered">
         新着イラスト通知を有効にしますか?

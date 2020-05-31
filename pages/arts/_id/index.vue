@@ -8,117 +8,119 @@
           </figure>
         </div>
         <div class="column is-12-mobile is-4-tablet is-6-desktop">
-          <div class="columns is-centered is-multiline">
-            <div class="column is-12 has-text-centered">
-              <p class="title">
-                {{ result.title }}
-              </p>
-              <p class="subtitle">
-                {{ result.caption }}
-              </p>
-            </div>
-            <div class="column is-12 has-text-centered">
-              <div class="field is-centered is-multiline">
-                <nuxt-link v-for="chara in result.chara" :key="chara[0]" :to="&quot;/search/character/&quot;+chara[0]">
-                  <span class="tag is-primary is-light">{{ chara[1] }}</span>&nbsp;
-                </nuxt-link>
-                <nuxt-link v-for="tag in result.tag" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
-                  <span class="tag is-info is-light" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
-                </nuxt-link>
+          <div class="box">
+            <div class="columns is-centered is-multiline">
+              <div class="column is-12 has-text-centered">
+                <p class="title">
+                  {{ result.title }}
+                </p>
+                <p class="subtitle">
+                  {{ result.caption }}
+                </p>
               </div>
-            </div>
-            <div class="column is-12">
-              <div class="field is-grouped is-grouped-centered is-grouped-multiline">
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="calendar" />
-                    </span>
-                    <span class="tag is-info">{{ result.date }}</span>
-                  </div>
-                </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="bookmark" />
-                    </span>
-                    <span class="tag is-info">0</span>
-                  </div>
+              <div class="column is-12 has-text-centered">
+                <div class="field is-centered is-multiline">
+                  <nuxt-link v-for="chara in result.chara" :key="chara[0]" :to="&quot;/search/character/&quot;+chara[0]">
+                    <span class="tag is-primary is-light">{{ chara[1] }}</span>&nbsp;
+                  </nuxt-link>
+                  <nuxt-link v-for="tag in result.tag" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
+                    <span class="tag is-info is-light" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
+                  </nuxt-link>
                 </div>
               </div>
-              <div class="field is-grouped is-grouped-centered is-grouped-multiline">
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="pen-fancy" />
-                    </span>
-                    <nuxt-link :to="&quot;/search/artist/&quot;+result.artist.id" class="tag is-link">
-                      {{ result.artist.name }}
-                    </nuxt-link>
+              <div class="column is-12">
+                <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="calendar" />
+                      </span>
+                      <span class="tag is-info">{{ result.date }}</span>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="bookmark" />
+                      </span>
+                      <span class="tag is-info">0</span>
+                    </div>
                   </div>
                 </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="user-edit" />
-                    </span>
-                    <a class="tag is-link" href="#">{{ result.user.name }}</a>
+                <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="pen-fancy" />
+                      </span>
+                      <nuxt-link :to="&quot;/search/artist/&quot;+result.artist.id" class="tag is-link">
+                        {{ result.artist.name }}
+                      </nuxt-link>
+                    </div>
                   </div>
-                </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="broadcast-tower" />
-                    </span>
-                    <a class="tag is-link" :href="result.originUrl">{{ result.originService }}</a>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="user-edit" />
+                      </span>
+                      <a class="tag is-link" href="#">{{ result.user.name }}</a>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="broadcast-tower" />
+                      </span>
+                      <a class="tag is-link" :href="result.originUrl">{{ result.originService }}</a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="column is-12 has-text-centered">
-              <a class="button is-primary is-large" @click="addStar()"><Fas i="heart" /> x{{ result.like }}</a>
-              <a class="button is-primary is-large" @click="toggleBookmark()"><Fas i="bookmark" /></a>
-              <div v-if="isZoomAllowed" class="column is-12 has-text-centered">
-                <a class="button is-primary is-medium" @click="openZoom = true">
-                  壁紙サイズに拡大
-                </a>
-                <Modal title="壁紙サイズに拡大" :isModalOpen="openZoom == true" @modal-closed="openZoom = false">
-                  <h2 class="has-text-centered">
-                    何倍にしますか?
-                  </h2>
-                  <div class="field has-addons has-addons-centered">
-                    <div class="control">
-                      <div class="select is-medium">
-                        <select v-model="waifuScale">
-                          <option>1.5倍</option>
-                          <option>2.0倍</option>
-                          <option>2.5倍</option>
-                          <option>3.0倍</option>
-                          <option>3.5倍</option>
-                          <option>4.0倍</option>
-                          <option>4.5倍</option>
-                          <option>5.0倍</option>
-                          <option>6.0倍</option>
-                          <option>7.0倍</option>
-                          <option>8.0倍</option>
-                          <option>9.0倍</option>
-                          <option>10.0倍</option>
-                        </select>
+              <div class="column is-12 has-text-centered">
+                <a class="button is-primary is-large" @click="addStar()"><Fas i="heart" /> x{{ result.like }}</a>
+                <a class="button is-primary is-large" @click="toggleBookmark()"><Fas i="bookmark" /></a>
+                <div v-if="isZoomAllowed" class="column is-12 has-text-centered">
+                  <a class="button is-primary is-medium" @click="openZoom = true">
+                    壁紙サイズに拡大
+                  </a>
+                  <Modal title="壁紙サイズに拡大" :isModalOpen="openZoom == true" @modal-closed="openZoom = false">
+                    <h2 class="has-text-centered">
+                      何倍にしますか?
+                    </h2>
+                    <div class="field has-addons has-addons-centered">
+                      <div class="control">
+                        <div class="select is-medium">
+                          <select v-model="waifuScale">
+                            <option>1.5倍</option>
+                            <option>2.0倍</option>
+                            <option>2.5倍</option>
+                            <option>3.0倍</option>
+                            <option>3.5倍</option>
+                            <option>4.0倍</option>
+                            <option>4.5倍</option>
+                            <option>5.0倍</option>
+                            <option>6.0倍</option>
+                            <option>7.0倍</option>
+                            <option>8.0倍</option>
+                            <option>9.0倍</option>
+                            <option>10.0倍</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="control">
+                        <button class="button is-primary is-medium">
+                          実行
+                        </button>
                       </div>
                     </div>
-                    <div class="control">
-                      <button class="button is-primary is-medium">
-                        実行
-                      </button>
-                    </div>
-                  </div>
-                  <p class="has-text-centered">
-                    機械学習(Waifu2x)の力でなるべく綺麗に拡大します。
-                    スマホ壁紙や、PCの壁紙にしたいときにご利用ください。
-                    この処理にはそれなりに時間がかかります。
-                    あんまり無駄に連打すると怒ります。
-                  </p>
-                </Modal>
+                    <p class="has-text-centered">
+                      機械学習(Waifu2x)の力でなるべく綺麗に拡大します。
+                      スマホ壁紙や、PCの壁紙にしたいときにご利用ください。
+                      この処理にはそれなりに時間がかかります。
+                      あんまり無駄に連打すると怒ります。
+                    </p>
+                  </Modal>
+                </div>
               </div>
             </div>
             <div class="column is-12 has-text-centered">
@@ -149,15 +151,17 @@
         </div>
       </div>
     </div>
-    <div v-if="isEditable" class="column is-12 has-text-centered">
-      <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit'">
-        データ編集
-      </nuxt-link>
-    </div>
-    <div v-if="isTagEditable" class="column is-12 has-text-centered">
-      <nuxt-link class="tag is-link is-large" :to="result.illustID + '/edit_tag'">
-        タグ編集
-      </nuxt-link>
+    <div class="columns is-centered">
+      <div v-if="isEditable" class="column is-2 has-text-centered">
+        <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit'">
+          データ編集
+        </nuxt-link>
+      </div>
+      <div v-if="isTagEditable" class="column is-2 has-text-centered">
+        <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit_tag'">
+          タグ編集
+        </nuxt-link>
+      </div>
     </div>
     <div class="modal" :class="{'is-active': isModalOpen}">
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />

@@ -5,12 +5,12 @@
         <div class="column is-8">
           <Notification :title="NotificationTitle" />
         </div>
-        <div class="column is-10">
+        <div class="column is-8">
           <div class="columns is-touch is-centered is-vcentered">
-            <div class="column is-6">
+            <div class="column is-8">
               <SelectForm class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
             </div>
-            <div v-if="isSearchPage" class="column is-2 ">
+            <div v-if="isSearchPage" class="column is-4">
               <NotifyRegister :notifyTitle="notifyTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
             </div>
           </div>

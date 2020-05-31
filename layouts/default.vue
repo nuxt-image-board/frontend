@@ -31,6 +31,7 @@ import NavbarDown from '~/components/NavbarDown.vue'
 import Fas from '~/components/ui/Fas.vue'
 
 export default {
+  scrollToTop: true,
   middleware: [
     'auth'
   ],
@@ -102,6 +103,13 @@ export default {
 </script>
 
 <style>
+ .page-enter {
+   opacity: 0;
+ }
+ .page-enter-active {
+   transition: opacity 0.6s;
+ }
+
 .scroll-top {
   position: fixed;
   bottom: 30px;

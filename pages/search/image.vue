@@ -14,7 +14,7 @@
           </p>
           <br>
           <div class="field">
-            <div class="file is-centered is-large is-primary has-name is-boxed">
+            <div class="file is-centered is-large has-name is-boxed">
               <label class="file-label">
                 <input class="file-input" type="file" accept="image/png,image/jpeg" :disabled="fileName != ''" @change="uploadImage">
                 <span class="file-cta">
