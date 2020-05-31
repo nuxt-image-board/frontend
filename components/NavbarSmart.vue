@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar">
+    <nav class="navbar" :class="{'is-fixed-top': !useSwipe}">
       <div class="container">
         <div class="navbar-brand">
           <a v-if="!isLeftMenu" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
@@ -210,7 +210,8 @@ export default {
       openSearch: false,
       openOther: false,
       showBottomNav: false,
-      isLeftMenu: this.$cookies.get('isLeftHanded')
+      isLeftMenu: this.$cookies.get('isLeftHanded'),
+      useSwipe: this.$cookies.get('useSwipe')
     }
   },
   watch: {

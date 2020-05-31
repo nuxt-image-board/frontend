@@ -1,16 +1,25 @@
 <template>
   <div id="top">
     <NavbarUp v-if="isPC" />
-    <NavbarSmart v-else v-touch:swipe.left="hideSmartNav" v-touch:swipe.right="showSmartNav" :openMenuFromProp="openSmartNav" @menu-event="changeMenu" />
+    <NavbarSmart
+      v-else
+      v-touch:swipe.left="hideSmartNav"
+      v-touch:swipe.right="showSmartNav"
+      :openMenuFromProp="openSmartNav"
+      @menu-event="changeMenu"
+    />
     <main v-touch:swipe.right="showSmartNav" v-touch:swipe.left="hideSmartNav">
-      <nuxt />
+      <br v-if="!useSwipe">
+      <transition name="page">
+        <nuxt />
+      </transition>
     </main>
     <transition name="fade">
       <a v-if="isJumpEnabled" v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">
         <Fas i="angle-up" classes="scroll-icon" />
       </a>
     </transition>
-    <NavbarDown />
+    <NavbarDown v-if="isPC" />
   </div>
 </template>
 
