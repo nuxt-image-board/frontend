@@ -47,7 +47,7 @@
             />
             <br>
             <br>
-            <button class="button is-primary is-small is-warning" @click="scrapeInfo.scraped = false">
+            <button class="button is-primary is-warning" @click="scrapeInfo.scraped = false">
               戻る
             </button>
           </div>

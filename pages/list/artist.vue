@@ -22,10 +22,11 @@ export default {
     const endpoint = '/catalog/artists'
     const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortNum = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
-    const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
+    const order = [0, 2, 4, 6].includes(sortNum) ? 'd' : 'a'
     const sort = (sortNum <= 1) ? 'd'
       : (sortNum <= 3) ? 'c'
-        : 'l'
+        : (sortNum <= 5) ? 'l'
+          : 'n'
     const params = { sort, order, page }
     const response = await $axios.get(endpoint, { params })
     if (response.data.status !== 200) {

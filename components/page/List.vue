@@ -120,7 +120,9 @@ export default {
         { text: '作品数が多い順', value: 2 },
         { text: '作品数が少ない順', value: 3 },
         { text: '累計いいね数が多い順', value: 4 },
-        { text: '累計いいね数が少ない順', value: 5 }
+        { text: '累計いいね数が少ない順', value: 5 },
+        { text: '名前昇順 (A→Z)', value: 7 },
+        { text: '名前降順 (Z→A)', value: 6 }
       ]
     }
   },
@@ -165,10 +167,11 @@ export default {
       const page = this.SelectedPage
       const sortNum = parseInt(this.SelectedSort)
       const id = isFinite(this.$route.params.id) ? parseInt(this.$route.params.id) : 1
-      const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
+      const order = [0, 2, 4, 6].includes(sortNum) ? 'd' : 'a'
       const sort = (sortNum <= 1) ? 'd'
         : (sortNum <= 3) ? 'c'
-          : 'l'
+          : (sortNum <= 5) ? 'l'
+            : 'n'
       const params = { sort, order, page, id }
       const response = await this.$axios.get(this.endpoint, { params })
       if (this.isSearchPage) {
