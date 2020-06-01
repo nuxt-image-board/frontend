@@ -147,20 +147,22 @@
                 </span>
               </a>
             </div>
+            <div class="column is-12">
+              <div class="columns is-centered">
+                <div v-if="isEditable" class="column is-4 has-text-centered">
+                  <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit'">
+                    データ編集
+                  </nuxt-link>
+                </div>
+                <div v-if="isTagEditable" class="column is-4 has-text-centered">
+                  <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit_tag'">
+                    タグ編集
+                  </nuxt-link>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="columns is-centered">
-      <div v-if="isEditable" class="column is-2 has-text-centered">
-        <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit'">
-          データ編集
-        </nuxt-link>
-      </div>
-      <div v-if="isTagEditable" class="column is-2 has-text-centered">
-        <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit_tag'">
-          タグ編集
-        </nuxt-link>
       </div>
     </div>
     <div class="modal" :class="{'is-active': isModalOpen}">
@@ -197,7 +199,6 @@ export default {
     const data = response.data.data
     if (data.user.id === $auth.$state.user.userID) {
       isEditable = true
-      isTagEditable = true
     } else if ($auth.$state.user.permission > 1) {
       isTagEditable = true
     }
