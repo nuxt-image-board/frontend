@@ -83,3 +83,5 @@ $panel-block-hover-background-color: $brown-white;
 @import "usagi";
 // このサイト内で全体的に使うCSSの挿入
 @import "global";
+// Bulma-Extensionsの挿入
+@import "bulma-extensions.min"

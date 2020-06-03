@@ -67,7 +67,6 @@ export default {
   ** Global CSS
   */
   css: [
-    '@/assets/bulma-extensions.min.css',
     { src: '~assets/main.scss', lang: 'scss' }
   ],
   /*
