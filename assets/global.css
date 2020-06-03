@@ -1,7 +1,5 @@
-* {
-    font-family: 'Noto Sans', sans-serif;
-}
 
+/* 背景グラデーションと飾りを置く */
 body {
   background-size:
     auto auto;
@@ -15,97 +13,22 @@ body {
     repeating-linear-gradient( to right, #ffe9dc, #ffe9dc 18px, #FFECE0 18px, #FFECE0 33px );
 }
 
+/* iOSなどのため、最低高さを決める */
 main {
-    min-height:95vh;
+    min-height:97vh;
 }
 
-table {
-  border-radius: 8px;
-}
-
-.is-dark {
-  background-color: #3a190c !important;
-}
-
-.message-header {
-  color: #6B3939;
-  background-color: #ccaa99 !important;
-}
-
-.message-body {
-  background-color: #f7ede9 !important;
-}
-
-.card-content {
-  background-color: #FEFEFE !important;
-}
-
-.modal-card-title {
-  color: #363636 !important;
-}
-
-.modal-card-text > p {
-  color: #363636 !important;
-}
-
-.title {
-  font-family: 'Arvo', serif;
-  color: #6B3939 !important;
-}
-
-.subtitle {
-  color: #955E4B !important;
-}
-
-.is-primary {
-  color: #FFFFFF !important;
-  background-color: #ddaa77 !important;
-}
-
-.file-cta {
-  color: #FFFFFF !important;
-  background-color: #ddaa77 !important;
-}
-
-.is-success {
-  color: #FFFFFF !important;
-  background-color: #ddaa77 !important;
-}
-
+/* ページネーションの リンクに背景色を */
 .pagination-link {
   background-color: #FEFEFE;
 }
 
+/* マイページの項目の背景 */
 .panel {
   background-color: #FEFEFE;
 }
 
-.content {
-  color: #4a1f0f !important;
-}
-
-ul, p {
-  color: #4a1f0f !important;
-}
-
-a:hover{
-    color: #0000FF !important;
-}
-
-input::placeholder {
-color: #CACACA !important;
-}
-
-.navbar,.navbar-menu,.navbar-link:hover,a.navbar-item:focus-within,.navbar-dropdown,.dropdown-item:hover,.navbar-item:hover{
-    background-color: #7b5544 !important;
-}
-
-@media screen and (min-width: 1024px){
-    .navbar-item.has-dropdown:focus .navbar-link, .navbar-item.has-dropdown:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link {
-        background-color: #6a4433 !important;
-    }
-}
-
+/* メニューバーのドロップダウンアイコン(要らない?) */
 .navbar-link::after {
     border: 1px solid #fff !important;
     border-right: 0 !important;
@@ -125,76 +48,32 @@ color: #CACACA !important;
     top: 50%;
 }
 
+/* 画像を左右中央寄せ */
 .has-image-centered {
   margin-left: auto;
   margin-right: auto;
 }
 
+/* テーブルを丸める */
+table {
+  border-radius: 8px;
+}
+
+/* テーブルを中央寄せ */
 .centered-table tr td {
   text-align: center;
   vertical-align: middle;
 }
 
+/* 軽くモザイクかける */
 .blur{
   -ms-filter: blur(20px);
   filter: blur(20px);
 }
 
+/* 画像サイズの限界を決める/丸める */
 .thumb{
   max-height: 65vh;
   width: auto;
   border-radius: 5px;
 }
-
-/*
-* {
-  font-family: 'Noto Sans', sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  background-size: auto auto;
-  background-color: rgba(250, 193, 168, 1);
-  background-image: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(235, 182, 158, 1) 20px, rgba(235, 182, 158, 1) 40px );
-}
-
-区切り線
-.border{
-  border-bottom: 1px solid #FEE7CF;
-}
-
-タイトルカラー
-.title {
-  color: #6B3939;
-  font-size: 6.5vmin;
-}
-
-サブタイトル
-.subtitle {
-  color: #955E4B;
-  font-size: 4vmin;
-}
-
-通常リンク
-a {
-  color: #945f4b;
-}
-
-訪問済みリンク
-a:visited {
-  color: #63311e;
-}
-
-p {
-  color: #4a1f0f;
-}
-
-.is-primary {
-  background-color: #ddaa77 !important;
-}
-
-.is-secondary {
-  color: #FFFFFF !important;
-  background-color: #ccaa99 !important;
-}
-*/

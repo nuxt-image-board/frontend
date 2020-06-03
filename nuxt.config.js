@@ -67,9 +67,8 @@ export default {
   ** Global CSS
   */
   css: [
-    '@/assets/usagi.css',
-    '@/assets/global.css',
-    '@/assets/bulma-extensions.min.css'
+    '@/assets/bulma-extensions.min.css',
+    { src: '~assets/main.scss', lang: 'scss' }
   ],
   /*
   ** Plugins to load before mounting the App
@@ -91,7 +90,6 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/bulma',
     '@nuxtjs/axios',
     '@nuxtjs/onesignal',
     '@nuxtjs/pwa',
@@ -213,6 +211,7 @@ export default {
   buildDir: '.nuxt',
   build: {
     publicPath: '***REMOVED***',
+    vendor: ['axios'],
     postcss: {
       preset: {
         features: {

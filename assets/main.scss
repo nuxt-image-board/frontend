@@ -1,0 +1,85 @@
+@charset "utf-8";
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+// カスタム色リスト
+$brown: #7b5544;
+$brown-white: #ddaa77;
+$brown-whiter: #955E4B;
+$brown-yellow: #FFDD99;
+$brown-red: #80220b;
+$brown-deep: #6a4433;
+$brown-dark: #3a190c;
+$brown-black: #4a1f0f;
+
+// 通常色設定
+$primary: #ddaa77;
+$background: #ffd8b2;
+$link: #955E4B;
+$info: $brown-deep;
+$blue: #3298dc;
+$green: #00d1b2;
+$success: #ddaa77;
+$danger: $brown-red;
+$dark: $brown-dark;
+$warning: $brown-yellow;
+
+// ナビゲーションバー
+$navbar-background-color: $brown;
+$navbar-item-color: $brown;
+$navbar-item-active-color: $brown;
+$navbar-item-hover-color: $brown;
+$navbar-item-hover-background-color: $brown-deep;
+$navbar-dropdown-background-color: $brown;
+$navbar-dropdown-item-color: $brown;
+$navbar-dropdown-item-hover-color: $brown-deep;
+$navbar-dropdown-item-hover-background-color: $brown;
+$navbar-dropdown-item-active-color: $brown-deep;
+$navbar-dropdown-item-active-background-color: $brown-deep;
+$navbar-divider-background-color: $brown-deep;
+$dropdown-item-hover: $brown-deep;
+$dropdown-item-hover-background-color: $brown;
+
+// タイトル/サブタイトル
+$title-color: $brown-deep;
+$title-family: 'Arvo';
+$subtitle-color: $brown-deep;
+$subtitle-family: 'Arvo';
+
+// 一般テキスト
+$text: $brown-black;
+$text-strong: $brown-dark;
+
+// ニュース枠の色
+$message-header-background-color: $brown;
+$message-background-color: #FEFEFE;
+
+// フォームのプレースホルダ
+$input-placeholder-color: #CACACA;
+
+// 検索結果ページのページネーション
+$pagination-current-background-color: $brown-deep;
+
+// 画像検索ページのアップロードボタン
+$file-cta-color: $white;
+$file-cta-background-color: $brown-white;
+$file-cta-active-color: $brown-deep;
+
+// マイページのボタンにホバーしたときの色
+$panel-block-hover-background-color: $brown-white;
+
+// SNSボタン色定義
+.twitter {
+  color: #55acee;
+}
+
+.line {
+  color: #00d1b2;
+}
+
+// Bulma全体を初期化
+@import "~bulma/bulma";
+// ***REMOVED***カラーの挿入
+@import "usagi";
+// このサイト内で全体的に使うCSSの挿入
+@import "global";

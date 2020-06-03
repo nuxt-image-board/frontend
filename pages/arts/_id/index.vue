@@ -21,7 +21,7 @@
               <div class="column is-12 has-text-centered">
                 <div class="field is-centered is-multiline">
                   <nuxt-link v-for="chara in result.chara" :key="chara[0]" :to="&quot;/search/character/&quot;+chara[0]">
-                    <span class="tag is-primary is-light">{{ chara[1] }}</span>&nbsp;
+                    <span class="tag is-primary">{{ chara[1] }}</span>&nbsp;
                   </nuxt-link>
                   <nuxt-link v-for="tag in result.tag" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
                     <span class="tag is-info is-light" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
@@ -35,7 +35,7 @@
                       <span class="tag">
                         <Fas i="calendar" />
                       </span>
-                      <span class="tag is-info">{{ result.date }}</span>
+                      <span class="tag is-link">{{ result.date }}</span>
                     </div>
                   </div>
                   <div class="control">
@@ -43,7 +43,7 @@
                       <span class="tag">
                         <Fas i="bookmark" />
                       </span>
-                      <span class="tag is-info">0</span>
+                      <span class="tag is-link">0</span>
                     </div>
                   </div>
                 </div>
@@ -132,7 +132,7 @@
                 @click="isPC ? openSocialShare(LineShareAddress) : null"
               >
                 <span class="icon has-text-primary">
-                  <Fab i="line" classes="fa-2x" />
+                  <Fab i="line" classes="line fa-2x" />
                 </span>
               </a>
               <a
@@ -143,7 +143,7 @@
                 @click="isPC ? openSocialShare(TwitterShareAddress) : null"
               >
                 <span class="icon has-text-info">
-                  <Fab i="twitter-square" classes="fa-2x" />
+                  <Fab i="twitter-square" classes="twitter fa-2x" />
                 </span>
               </a>
             </div>
