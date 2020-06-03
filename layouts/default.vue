@@ -66,6 +66,14 @@ export default {
       return Boolean(this.scrollY > 200)
     }
   },
+  watch: {
+    '$route.path' () {
+      this.$cookies.set('lastRead', this.$route.path, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
+    }
+  },
   mounted () {
     window.addEventListener('scroll', this.onScroll)
     window.addEventListener('load', () => {
