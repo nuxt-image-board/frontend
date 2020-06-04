@@ -78,7 +78,7 @@ export default {
     },
     artAddress () {
       if (this.result.illustID) {
-        return '/illusts/arts/' + this.result.uploadID
+        return '/arts/' + this.result.illustID
       } else {
         return '#'
       }
