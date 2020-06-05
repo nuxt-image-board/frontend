@@ -8,9 +8,9 @@
         <div class="column is-8">
           <div class="columns is-touch is-centered is-vcentered">
             <div class="column is-8">
-              <SelectForm class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+              <SelectForm :sortMethod="String(SelectedSort)" class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
             </div>
-            <div v-if="isSearchPage" class="column is-4">
+            <div v-if="isSearchPage && !NotificationTitle.includes('キーワード')" class="column is-4">
               <NotifyRegister :notifyTitle="notifyTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
             </div>
           </div>
@@ -167,17 +167,22 @@ export default {
       const page = this.SelectedPage
       const sortNum = parseInt(this.SelectedSort)
       const id = isFinite(this.$route.params.id) ? parseInt(this.$route.params.id) : 1
+      const keyword = this.$route.query.query ? this.$route.query.query : ''
       const order = [0, 2, 4, 6].includes(sortNum) ? 'd' : 'a'
       const sort = (sortNum <= 1) ? 'd'
         : (sortNum <= 3) ? 'c'
           : (sortNum <= 5) ? 'l'
             : 'n'
-      const params = { sort, order, page, id }
+      const params = { sort, order, page, id, keyword }
       const response = await this.$axios.get(this.endpoint, { params })
-      if (this.isSearchPage) {
-        this.results = response.data.data.imgs
+      if (response.data.status === 200) {
+        if (this.isSearchPage) {
+          this.results = response.data.data.imgs
+        } else {
+          this.results = response.data.data.contents
+        }
       } else {
-        this.results = response.data.data.contents
+        this.results = []
       }
     },
     updateSelect (newSort) {

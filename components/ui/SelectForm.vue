@@ -29,11 +29,15 @@ export default {
     sendMounted: {
       type: Boolean,
       default: true
+    },
+    sortMethod: {
+      type: String,
+      default: '0'
     }
   },
   data () {
     return {
-      selectedType: 0
+      selectedType: this.sortMethod
     }
   },
   mounted () {

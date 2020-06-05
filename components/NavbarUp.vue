@@ -15,17 +15,19 @@
         <div id="navMenu" class="navbar-menu" :class="{ 'is-active': openMenu }">
           <div class="navbar-start">
             <div class="navbar-item">
-              <div class="field has-addons">
-                <div class="control">
-                  <input class="input is-rounded" type="text" placeholder="Find an another god-art">
+              <form method="get" action="/search/keyword">
+                <div class="field has-addons">
+                  <div class="control">
+                    <input v-model="keyword" name="query" class="input is-rounded" type="text" placeholder="Find an another god-art">
+                  </div>
+                  <div class="control">
+                    <nuxt-link :to="'/search/keyword?query=' + keyword" class="button is-success is-rounded" @click.native="closeAll()">
+                      <span><Fas i="search" /></span>
+                      <span>検索</span>
+                    </nuxt-link>
+                  </div>
                 </div>
-                <div class="control">
-                  <nuxt-link to="/search/keyword" class="button is-success is-rounded" @click.native="closeAll()">
-                    <span><Fas i="search" /></span>
-                    <span>検索</span>
-                  </nuxt-link>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
           <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
@@ -133,7 +135,8 @@ export default {
   data () {
     return {
       openMenu: false,
-      openTab: 0
+      openTab: 0,
+      keyword: ''
     }
   },
   computed: {
