@@ -40,7 +40,7 @@
                 <span class="icon"><Fas i="users" /></span>
                 <span>キャラ検索</span>
               </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 1}">
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 1, 'is-hidden': hideAllMenu}">
                 <nuxt-link v-for="chara in characters" :key="chara.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/character/&quot;+chara.id" @click.native="closeAll()">
                   {{ chara.name }} <span class="tag is-light">{{ chara.count }}</span>
                 </nuxt-link>
@@ -55,7 +55,7 @@
                 <span class="icon"><Fas i="tags" /></span>
                 <span>タグ検索</span>
               </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 2}">
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 2, 'is-hidden': hideAllMenu}">
                 <nuxt-link v-for="tag in tags" :key="tag.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/tag/&quot;+tag.id" @click.native="closeAll()">
                   {{ tag.name }} <span class="tag is-light">{{ tag.count }}</span>
                 </nuxt-link>
@@ -70,7 +70,7 @@
                 <span class="icon"><Fas i="paint-brush" /></span>
                 <span>絵師検索</span>
               </a>
-              <div class="navbar-dropdown is-boxed has-text-white" :class="{'is-hidden-touch': openTab !== 3}">
+              <div class="navbar-dropdown is-boxed has-text-white" :class="{'is-hidden-touch': openTab !== 3, 'is-hidden': hideAllMenu}">
                 <nuxt-link v-for="artist in artists" :key="artist.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/artist/&quot;+artist.id" @click.native="closeAll()">
                   {{ artist.name }} <span class="tag is-light">{{ artist.count }}</span>
                 </nuxt-link>
@@ -136,7 +136,8 @@ export default {
     return {
       openMenu: false,
       openTab: 0,
-      keyword: ''
+      keyword: '',
+      hideAllMenu: false
     }
   },
   computed: {
@@ -161,6 +162,10 @@ export default {
     closeAll () {
       this.openTab = 0
       this.openMenu = false
+      this.hideAllMenu = true
+      setTimeout(() => {
+        this.hideAllMenu = false
+      }, 300)
     }
   }
 }
