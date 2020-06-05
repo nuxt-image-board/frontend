@@ -1,16 +1,16 @@
 <template>
   <section class="section">
     <div class="container">
-      <div class="columns is-centered is-vcentered" style="min-height:70vh">
+      <div class="columns is-centered is-vcentered" style="min-height:80vh;">
         <div class="column has-text-centered">
           <h4 class="title">
             画像検索
           </h4>
           <p>
-            画像を選ぶと***REMOVED***のデータベースより検索します
+            画像を選ぶと***REMOVED***のDBから検索します
           </p>
           <p>
-            ***REMOVED***に存在しない場合はSauceNaoから検索します
+            存在しない場合はSauceNaoから検索します
           </p>
           <br>
           <div class="field">
@@ -44,16 +44,14 @@
             </span>
           </div>
         </div>
-        <div v-if="results.length !== 0 || naoResults.length !== 0" class="column is-half">
-          <div class="column">
-            <div class="container">
-              <div class="columns is-centered is-mobile is-multiline">
-                <div v-for="result in results" :key="result.illustID" class="column is-4-touch is-6-desktop">
-                  <Result :isPC="isPC" :accept-r18="acceptR18" :result="result" />
-                </div>
-                <div v-for="result in naoResults" :key="result.id" class="column is-4-touch is-6-desktop">
-                  <SimpleResult :link="result.link" :thumbnail="result.thumbnail" />
-                </div>
+        <div v-if="results.length !== 0 || naoResults.length !== 0" class="column has-text-centered is-half">
+          <div class="container">
+            <div class="columns is-mobile is-multiline is-centered is-vcentered">
+              <div v-for="result in results" :key="result.illustID" class="column is-6-mobile is-4-desktop">
+                <Result :isPC="isPC" :accept-r18="acceptR18" :result="result" />
+              </div>
+              <div v-for="result in naoResults" :key="result.id" class="column is-6-mobile is-4-desktop">
+                <SimpleResult :link="result.link" :thumbnail="result.thumbnail" />
               </div>
             </div>
           </div>
@@ -128,11 +126,14 @@ export default {
               return {
                 id: index,
                 thumbnail: res.header.thumbnail,
-                link: res.data.ext_urls[0]
+                link: res.data.ext_urls[0].replace(
+                  'https://www.pixiv.net/member_illust.php?mode=medium&illust_id=',
+                  'https://www.pixiv.net/artworks/'
+                )
               }
             })
             if (this.naoResults.length === 0) {
-              this.naoResults = [{ id: 0, thumbnail: '/not_found.png', link: '#' }]
+              this.naoResults = [{ id: 0, thumbnail: '/not_found.png', link: 'https://***REMOVED***' }]
             }
           }
         } catch (error) {

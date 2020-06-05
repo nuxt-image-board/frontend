@@ -150,7 +150,8 @@ export default {
           'faUpload',
           'faChevronDown',
           'faChevronUp',
-          'faList'
+          'faList',
+          'faPlusSquare'
         ]
       },
       {
