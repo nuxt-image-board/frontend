@@ -9,11 +9,11 @@
       @menu-event="changeMenu"
     />
     <main v-touch:swipe.right="showSmartNav" v-touch:swipe.left="hideSmartNav">
-      <br v-if="!useSwipe">
+      <br v-if="!useSwipe && !isPC">
       <transition name="page">
         <nuxt />
       </transition>
-      <br v-if="!isPC">
+      <br v-if="useBottom && !isPC">
     </main>
     <transition name="fade">
       <a v-if="isJumpEnabled" v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">

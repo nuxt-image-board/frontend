@@ -13,7 +13,7 @@
       <table class="table is-fullwidth centered-table">
         <tbody>
           <tr>
-            <td>画�?</td>
+            <td>画像</td>
             <td>
               <ImageSelecter
                 :image-source="illust.imgs"
@@ -29,7 +29,7 @@
             </td>
           </tr>
           <tr>
-            <td>説�?</td>
+            <td>説明</td>
             <td>
               <textarea v-model="illust.caption" class="textarea" rows="3" type="text" />
             </td>
@@ -39,14 +39,29 @@
             <td>
               <vue-tags-input
                 v-model="tag"
+                placeholder="タグを追加"
                 :tags="illust.tags"
                 :validation="validation"
                 @tags-changed="newTags => illust.tags = newTags"
               />
+              <br>
+              <div class="field is-grouped is-grouped-multiline">
+                <div v-for="c in charas" :key="c" @click="illust.tags.push({text:c})">
+                  <div v-if="!tagList.includes(c)" class="control" style="margin-right: 5px; margin-bottom:2px;">
+                    <div class="tags has-addons">
+                      <div class="tag is-primary">
+                        {{ c }}
+                      </div>
+                      <a class="tag is-secondary">+</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br>
             </td>
           </tr>
           <tr>
-            <td>作�??</td>
+            <td>作者</td>
             <td>
               <input v-model="illust.artist" class="input" type="text">
             </td>
@@ -143,36 +158,36 @@ export default {
       },
       addTags: {
         チノ: ['***REMOVED***'],
-        シャロ: ['桐間紗路'],
-        ココア: ['***REMOVED***'],
-        リゼ: ['天�?座�?�?'],
-        �?�?: ['�?治松�?�?'],
+        ***REMOVED***: ['***REMOVED***'],
+        ***REMOVED***: ['***REMOVED***'],
+        ***REMOVED***: ['***REMOVED***'],
+        ***REMOVED***: ['***REMOVED***'],
         マヤ: ['条河麻耶'],
         メグ: ['奈津恵'],
-        チ�?�メ: ['チ�?�メ�?', '条河麻耶', '奈津恵', '***REMOVED***'],
+        チマメ: ['チマメ隊', '条河麻耶', '奈津恵', '***REMOVED***'],
         ココチノ: ['***REMOVED***', '***REMOVED***', 'ココチノ'],
         チノココ: ['***REMOVED***', '***REMOVED***', 'チノココ'],
-        クロ�?クワーク: ['クロラ�?'],
-        クロラ�?: ['クロラ�?'],
-        リプラ�?: ['リプラ�?'],
+        クロックワーク: ['クロラビ'],
+        クロラビ: ['クロラビ'],
+        リプラビ: ['リプラビ'],
         きららファンタジア: ['きららファンタジア'],
         きらファン: ['きららファンタジア'],
-        水�?: ['水�?'],
+        水着: ['水着'],
         ネコミミ: ['猫耳'],
         猫耳: ['猫耳'],
         ねこみみ: ['猫耳'],
-        ラ�?: ['ラ�?'],
+        ラフ: ['ラフ'],
         らくがき: ['らくがき'],
         ラクガキ: ['らくがき'],
-        わんど�?: ['ワンドロ'],
+        わんどろ: ['ワンドロ'],
         ワンドロ: ['ワンドロ'],
-        制�?: ['制�?'],
+        制服: ['制服'],
         アリス: ['アリス'],
         魔法少女: ['魔法少女'],
         魔法少女チノ: ['魔法少女チノ', '魔法少女'],
         は誕生日: ['誕生日'],
         生誕祭: ['誕生日'],
-        差�?: ['差�?']
+        差分: ['差分']
       },
       ngTags: [
         '***REMOVED***',
@@ -182,12 +197,24 @@ export default {
         'R-18',
         'R18',
         'チノ',
-        'シャロ',
-        'ココア',
-        'リゼ',
-        '�?�?',
+        'チノちゃん',
+        '***REMOVED***',
+        '***REMOVED***',
+        '***REMOVED***',
+        '***REMOVED***',
         'マヤ',
         'メグ'
+      ],
+      charas: [
+        '***REMOVED***',
+        '***REMOVED***',
+        '***REMOVED***',
+        '***REMOVED***',
+        '***REMOVED***',
+        '条河麻耶',
+        '奈津恵',
+        'ティッピー',
+        'ワイルドギース'
       ],
       loading: {
         text: '',
@@ -204,6 +231,11 @@ export default {
           text.includes('<') ||
           text.includes('>')
       }]
+    }
+  },
+  computed: {
+    tagList () {
+      return this.illust.tags.map(tag => (tag.text))
     }
   },
   watch: {
@@ -224,11 +256,11 @@ export default {
       return text.replace(reg, '')
     },
     async getArtInfo () {
-      // APIにリクエストす�?
+      // APIにリクエストする
       const url = this.scrapeInfo.url
       if (url === '') {
         this.loading = {
-          text: '取得失�?',
+          text: '取得失敗',
           status: 9
         }
         this.$emit('getComplete')
@@ -245,7 +277,7 @@ export default {
           break
         default:
           this.loading = {
-            text: '未対応�?�サイトで�?',
+            text: '未対応のサイトです',
             status: 9
           }
           this.$emit('getComplete')
@@ -255,7 +287,7 @@ export default {
       const response = await this.$axios.post(endpoint, { url })
       if (response.data.status !== '200') {
         this.loading = {
-          text: '取得失�?',
+          text: '取得失敗',
           status: 9
         }
         this.$emit('getComplete')
@@ -263,43 +295,43 @@ export default {
         return false
       }
       this.illust = response.data.data.illust
-      // タイトルから自動でタグ追�?(重�?しても後で消し飛�?��?)
+      // タイトルから自動でタグ追加(重複しても後で消し飛ばす)
       for (const t in this.addTags) {
         if (this.illust.title.includes(t) || this.illust.caption.includes(t)) {
           this.illust.tags = this.illust.tags.concat(this.addTags[t])
         }
       }
-      const ngWords = [' ', '�?']
+      const ngWords = [' ', '　']
       this.illust.tags.forEach(
         (tag) => {
           ngWords.push('#' + tag)
-          ngWords.push('?�?' + tag)
+          ngWords.push('＃' + tag)
         }
       )
       this.illust.tags = this.illust.tags.filter(
         (tag) => { return !this.ngTags.includes(tag) }
       )
-      // 重�?タグ削除
+      // 重複タグ削除
       this.illust.tags = Array.from(new Set(this.illust.tags))
       this.illust.tags = this.illust.tags.map(tag => ({ text: tag }))
-      // 余計な�?字�?�を削除(ハッシュタグなど)
+      // 余計な文字列を削除(ハッシュタグなど)
       ngWords.forEach(
         (w) => {
           this.illust.title = this.illust.title.replace(w, '')
           this.illust.caption = this.illust.caption.replace(w, '')
         }
       )
-      // 空�?字削除
+      // 空文字削除
       this.illust.title = this.illust.title.trim()
       this.illust.caption = this.illust.caption.trim()
       this.illust.title.replace(/\r?\n/g, '')
       this.illust.caption.replace(/\r?\n/g, '')
       // 絵師名から宣伝など削除
       this.illust.artist = this.illust.artist.split('@')[0]
-      this.illust.artist = this.illust.artist.split('?�?')[0]
-      // 絵師名から絵�?字を削除
+      this.illust.artist = this.illust.artist.split('＠')[0]
+      // 絵師名から絵文字を削除
       this.illust.artist = this.removeEmoji(this.illust.artist)
-      // 出典の設�?
+      // 出典の設定
       this.illust.originUrl = url
       switch (true) {
         case this.illust.originUrl.includes('twitter'):
@@ -312,7 +344,7 @@ export default {
           this.illust.originService = '独自'
           break
       }
-      // サ�?ネイル抽出
+      // サムネイル抽出
       this.illust.imgs = this.illust.imgs.map(img => img.thumb_src)
       // Twitterはタイトルが短ければ説明文無しに
       if (this.illust.originService === 'Twitter' && this.illust.title.length < 20) {
@@ -323,16 +355,16 @@ export default {
     },
     async uploadArt () {
       // 読込中にする
-      this.loading.text = '投稿して�?ま�?...'
+      this.loading.text = '投稿しています...'
       this.loading.status = 1
       // 全く同じなら説明文は消す
       if (this.illust.title === this.illust.caption) {
         this.illust.caption = ''
       }
-      // 個人�?な趣味でフォーマッ�?
-      this.illust.title = this.illust.title.replace('。�?��??', '...')
-      this.illust.caption = this.illust.caption.replace('。�?��??', '...')
-      // タグをテキストに戻�?
+      // 個人的な趣味でフォーマット
+      this.illust.title = this.illust.title.replace('。。。', '...')
+      this.illust.caption = this.illust.caption.replace('。。。', '...')
+      // タグをテキストに戻す
       this.illust.tags = this.illust.tags.map(tag => (tag.text))
       const params = {
         title: this.illust.title,
@@ -348,11 +380,11 @@ export default {
         nsfw: this.illust.R18
       }
       const tasks = []
-      // 連番ア�?プロー�?
+      // 連番アップロード
       if (this.sendAsNumbered) {
-        this.illust.tags.push('グルー�?' + shortid.generate())
+        this.illust.tags.push('グループ' + shortid.generate())
         for (let page = 1; page < this.illust.imgs.length + 1; page++) {
-          // �?旦�?ィープコピ�?�してくる(しな�?とパラメータが�?�部おなじにな�?)
+          // 一旦ディープコピーしてくる(しないとパラメータが全部おなじになる)
           const numberedParams = JSON.parse(JSON.stringify(params))
           numberedParams.imageUrl = this.illust.originUrl + '?page=' + page
           numberedParams.originUrl = this.illust.originUrl + '?page=' + page
@@ -361,7 +393,7 @@ export default {
           }
           tasks.push(this.$axios.post('/arts', numberedParams))
         }
-      // 通常ア�?プロー�?
+      // 通常アップロード
       } else {
         tasks.push(this.$axios.post('/arts', params))
       }
@@ -387,7 +419,7 @@ export default {
       open('about:blank', '_self').close()
     },
     closeModal () {
-      // 状態を�?に戻�?
+      // 状態を元に戻す
       this.loading.status = 0
       this.selection = 1
       this.sendAsNumbered = false
