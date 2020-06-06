@@ -10,7 +10,7 @@
             画像を選ぶと***REMOVED***のDBから検索します
           </p>
           <p>
-            存在しない場合はSauceNaoから検索します
+            存在しない場合はSauceNAOから検索します
           </p>
           <br>
           <div class="field">
@@ -32,7 +32,7 @@
                     SauceNaoで検索中...
                   </span>
                 </span>
-                <span v-if="fileName" class="file-name has-text-centered">
+                <span v-if="fileName" class="file-name has-text-centered has-background-white">
                   {{ fileName }}
                 </span>
               </label>

@@ -8,7 +8,7 @@
               URL短縮
             </h4>
             <h3 class="subtitle">
-              URLを入力すると https://***REMOVED***.page.link/ランダム英数字4文字 に短縮します
+              URLを入力すると ***REMOVED***/ランダム英数字4文字 に短縮します
             </h3>
             <div class="field">
               <input v-model="url" class="input" type="text" placeholder="https://***REMOVED***">
@@ -75,7 +75,7 @@ export default {
         const resp = await axios.post(
           `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${key}`,
           {
-            longDynamicLink: 'https://***REMOVED***.page.link?link=' + encodeURI(this.url),
+            longDynamicLink: '***REMOVED***?link=' + encodeURI(this.url),
             suffix: { option: 'SHORT' }
           }
         )
