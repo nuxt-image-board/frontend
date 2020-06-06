@@ -22,6 +22,13 @@
             ***REMOVED***
           </a>
         </div>
+        <div class="navbar-end is-hidden-touch">
+          <div class="navbar-item">
+            <button class="button is-primary" @click="openMenu = !openMenu">
+              メニュー
+            </button>
+          </div>
+        </div>
       </div>
     </nav>
     <div id="quickviewDefault" class="quickview" :class="{ 'is-active': openMenu, 'is-left' : isLeftMenu }">

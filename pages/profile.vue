@@ -60,7 +60,7 @@
           {{ inviteKey }}
         </p>
         <p>
-          この招待コードを他の人に伝えることでごちイラに新規登録してもらうことができます。
+          この招待コードを他の人に伝えることで***REMOVED***に新規登録してもらうことができます。
         </p>
         <p>
           ただし、このコードを使い招待された人がなんらかの理由でBANされた場合、あなたにも罰則が付きます。
@@ -139,6 +139,22 @@
                     </div>
                   </td>
                 </tr>
+                <tr v-if="!isPC">
+                  <td>下メニュー</td>
+                  <td>
+                    <div class="field">
+                      <input
+                        id="switchBottom"
+                        v-model="useBottom"
+                        type="checkbox"
+                        name="switchBottom"
+                        class="switch is-rounded is-info"
+                        :checked="useBottom"
+                      >
+                      <label for="switchBottom" />
+                    </div>
+                  </td>
+                </tr>
                 <tr>
                   <td>上に戻るボタン</td>
                   <td>
@@ -196,7 +212,7 @@
                 </a>
               </p>
               <p>
-                LINEと既存アカウントを連携することでごちイラのユーザー名/パスワードなしにログインできるようになります。
+                LINEと既存アカウントを連携することで***REMOVED***のユーザー名/パスワードなしにログインできるようになります。
                 アカウントを変えた場合は上記ボタンから再連携することができます。
               </p>
             </Modal>
@@ -234,7 +250,7 @@
               </span>
               APIキー確認
             </a>
-            <Modal title="ごちイラAPI" :isModalOpen="modalType === 4" @modal-closed="modalType = 0">
+            <Modal title="***REMOVED***API" :isModalOpen="modalType === 4" @modal-closed="modalType = 0">
               <h2 class="has-text-centered">
                 APIキー
               </h2>
@@ -322,7 +338,7 @@
               </p>
               <p>
                 設定すると、LINEに通知が送れるようになります。
-                通知には、LINE Notifyが使用されます。<b>ごちイラBotではありません。</b>
+                通知には、LINE Notifyが使用されます。<b>***REMOVED***Botではありません。</b>
                 好きなグループで利用できますが、サイトの閲覧にはアカウントが必要なため
                 <b>1:1でLINE Notifyから通知を受け取る</b>を選ぶことをおすすめします。
                 アカウントを変えた場合は上記ボタンから再連携することができます。
@@ -345,7 +361,7 @@
               </p>
               <p>
                 設定すると、Twitterに通知が送れるようになります。
-                通知には、ごちイラBotによるDMが使用されます。
+                通知には、***REMOVED***BotによるDMが使用されます。
                 アカウントを変えた場合は上記ボタンから再連携することができます。
               </p>
             </Modal>
@@ -372,7 +388,7 @@
           </p>
           <p>
             退会しても登録したイラストは残ります。
-            再度ごちイラを利用するには新たに招待コードを受け取る必要があります。
+            再度***REMOVED***を利用するには新たに招待コードを受け取る必要があります。
           </p>
         </Modal>
       </div>
@@ -419,7 +435,8 @@ export default {
       isLeftHanded: this.$cookies.get('isLeftHanded'),
       useWebP: this.$cookies.get('useWebP'),
       isJumpEnabled: this.$cookies.get('isJumpEnabled'),
-      useSwipe: this.$cookies.get('useSwipe')
+      useSwipe: this.$cookies.get('useSwipe'),
+      useBottom: this.$cookies.get('useBottom')
     }
   },
   computed: {
@@ -461,6 +478,13 @@ export default {
     },
     useSwipe (val) {
       this.$cookies.set('useSwipe', val, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
+      location.reload()
+    },
+    useBottom (val) {
+      this.$cookies.set('useBottom', val, {
         path: '/',
         maxAge: 60 * 60 * 24 * 31 * 6
       })

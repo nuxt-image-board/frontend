@@ -13,6 +13,7 @@
       <transition name="page">
         <nuxt />
       </transition>
+      <br v-if="!isPC">
     </main>
     <transition name="fade">
       <a v-if="isJumpEnabled" v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">
@@ -20,6 +21,7 @@
       </a>
     </transition>
     <NavbarDown v-if="isPC" />
+    <NavbarSmartDown v-if="useBottom" />
   </div>
 </template>
 
@@ -35,7 +37,7 @@ https://helloworld-blog.tech/javascript/vue-js-smooth-scroll%E3%81%A7top%E3%81%A
 
 import NavbarUp from '~/components/NavbarUp.vue'
 import NavbarSmart from '~/components/NavbarSmart.vue'
-// import NavbarSmartDown from '~/components/NavbarSmartDown.vue'
+import NavbarSmartDown from '~/components/NavbarSmartDown.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
 import Fas from '~/components/ui/Fas.vue'
 
@@ -48,7 +50,7 @@ export default {
     NavbarUp,
     NavbarDown,
     NavbarSmart,
-    // NavbarSmartDown,
+    NavbarSmartDown,
     Fas
   },
   data () {
@@ -58,7 +60,8 @@ export default {
       isPC: this.$cookies.get('isPC'),
       isLeftMenu: this.$cookies.get('isLeftHanded'),
       isJumpEnabled: this.$cookies.get('isJumpEnabled'),
-      useSwipe: this.$cookies.get('useSwipe')
+      useSwipe: this.$cookies.get('useSwipe'),
+      useBottom: this.$cookies.get('useBottom')
     }
   },
   computed: {

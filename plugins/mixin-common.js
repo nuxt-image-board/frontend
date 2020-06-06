@@ -14,25 +14,29 @@ Vue.mixin({
           secure: true
         }
       )
-      // PCユーザーかどうか判定
+      // PC設定
+      this.$cookies.set('isPC', this.$device.isDesktop, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
+      this.$cookies.set('isJumpEnabled', this.$device.isDesktop, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
+      // どうも初回取得できないことがあるので1回だけ二重に要求する
       if (this.$device.isDesktop) {
-        this.$cookies.set('isPC', true, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 31 * 6
-        })
-        this.$cookies.set('isJumpEnabled', true, {
-          path: '/',
-          maxAge: 60 * 60 * 24 * 31 * 6
-        })
-        // どうも初回取得できないことがあるので1回だけ二重に要求する
         this.$store.dispatch('getNavigations')
       }
-      // MacまたはiOS以外かを判定
+      // スマホ設定
       this.$cookies.set('useWebP', !this.$device.isMacOS, {
         path: '/',
         maxAge: 60 * 60 * 24 * 31 * 6
       })
       this.$cookies.set('useSwipe', !this.$device.isMacOS, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
+      this.$cookies.set('useBottom', !this.$device.isDesktop, {
         path: '/',
         maxAge: 60 * 60 * 24 * 31 * 6
       })
