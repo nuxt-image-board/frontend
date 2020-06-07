@@ -10,7 +10,8 @@
       <nuxt-link :to="artAddress">
         <figure class="image">
           <img
-            :src="previewAddress"
+            v-lazy="previewAddress"
+            src="load.png"
             :class="{'blur': result.nsfw && !acceptR18}"
             decoding="async"
             loading="lazy"

@@ -4,7 +4,14 @@
       <div class="columns is-vcentered is-centered is-multiline">
         <div class="column is-12-mobile is-8-tablet is-6-desktop">
           <figure class="has-text-centered" @click="isModalOpen = !isModalOpen">
-            <img class="thumb" :src="ImgAddress" :class="{'blur': result.nsfw && !acceptR18}" decoding="async" loading="lazy">
+            <img
+              v-lazy="ImgAddress"
+              src="load.png"
+              class="thumb"
+              :class="{'blur': result.nsfw && !acceptR18}"
+              decoding="async"
+              loading="lazy"
+            >
           </figure>
         </div>
         <div class="column is-12-mobile is-4-tablet is-6-desktop">
@@ -169,7 +176,7 @@
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
       <div class="modal-content">
         <p class="image">
-          <img :src="ImgOrigAddress">
+          <img v-lazy="ImgOrigAddress" src="load.png">
         </p>
       </div>
     </div>

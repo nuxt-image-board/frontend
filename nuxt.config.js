@@ -77,6 +77,7 @@ export default {
     '~plugins/vue-scrollto',
     '~plugins/vue2-touch-events',
     '~plugins/mixin-common',
+    { src: '~plugins/vue-lazyload', ssr: false },
     { src: '@/plugins/vue-input-tag', ssr: false }
   ],
   /*
