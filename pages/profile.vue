@@ -213,7 +213,17 @@
               </p>
               <p>
                 LINEと既存アカウントを連携することで***REMOVED***のユーザー名/パスワードなしにログインできるようになります。
-                アカウントを変えた場合は上記ボタンから再連携することができます。
+                アカウントを変えた場合は上記ボタンから再連携することができます。LINE連携では、公式に提供しているLINEログインを使用します。
+                このログインでは、識別ID(事業者別ユーザーID)の取得を行います。メッセージを勝手に送信することはありません。
+                ***REMOVED***の連携に関する技術的詳細は
+                <a
+                  href="https://qiita.com/TakahikoKawasaki/items/498ca08bbfcc341691fe"
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                >
+                  OpenID Connectの説明
+                </a>
+                を一読ください。
               </p>
             </Modal>
             <a class="panel-block" @click="modalType = 3">
@@ -223,22 +233,53 @@
               パスワード変更
             </a>
             <Modal title="パスワード変更" :isModalOpen="modalType === 3" @modal-closed="modalType = 0">
-              <form id="changePW">
+              <form id="changePW" @submit.prevent="changePassword">
                 <input id="userName" class="is-hidden" name="username" autocomplete="username" value="">
                 <p class="has-text-centered">
                   現在のパスワード
-                  <input v-model="passwordForm.old" class="input" type="password" autocomplete="current-password">
+                  <input
+                    v-model="passwordForm.old"
+                    minlength="5"
+                    maxlength="50"
+                    class="input"
+                    type="password"
+                    placeholder="5文字以上50文字以下の英数字"
+                    autocomplete="current-password"
+                    required
+                  >
                 </p>
                 <p class="has-text-centered">
                   新しいパスワード
-                  <input v-model="passwordForm.new" class="input" type="password" autocomplete="new-password">
+                  <input
+                    v-model="passwordForm.new"
+                    minlength="5"
+                    maxlength="50"
+                    class="input"
+                    type="password"
+                    placeholder="5文字以上50文字以下の英数字"
+                    autocomplete="new-password"
+                    required
+                  >
                 </p>
                 <p class="has-text-centered">
                   新しいパスワード(再入力)
-                  <input v-model="passwordForm.re" class="input" type="password" autocomplete="new-password">
+                  <input
+                    v-model="passwordForm.re"
+                    minlength="5"
+                    maxlength="50"
+                    class="input"
+                    type="password"
+                    placeholder="5文字以上50文字以下の英数字"
+                    autocomplete="new-password"
+                    required
+                  >
                 </p>
                 <p class="has-text-centered">
-                  <button class="button is-primary" @click="changePassword">
+                  <button
+                    class="button is-primary"
+                    type="submit"
+                    :disabled="passwordForm.new !== passwordForm.re || passwordForm.new == ''"
+                  >
                     変更
                   </button>
                 </p>
@@ -590,8 +631,19 @@ export default {
         alert('ブラウザ通知の設定を初期化しました')
       }
     },
-    changePassword () {
-      alert('未実装です')
+    async changePassword () {
+      const resp = await this.$axios.put(
+        `/accounts/${this.$auth.$state.user.userID}`,
+        { userPassword: this.passwordForm.new, userOldPassword: this.passwordForm.old }
+      )
+      if (resp.data.status === 200) {
+        alert('パスワードを変更しました')
+        this.modalType = 0
+      } else if (resp.data.status === 400) {
+        alert('現在のパスワードが間違っています')
+      } else {
+        alert('変更できませんでした')
+      }
     },
     destroyAccount () {
       alert('未実装です')
