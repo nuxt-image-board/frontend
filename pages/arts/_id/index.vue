@@ -6,7 +6,7 @@
           <figure class="has-text-centered" @click="isModalOpen = !isModalOpen">
             <img
               v-lazy="ImgAddress"
-              src="load.png"
+              src="~/assets/load.png"
               class="thumb"
               :class="{'blur': result.nsfw && !acceptR18}"
               decoding="async"
@@ -176,7 +176,7 @@
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
       <div class="modal-content">
         <p class="image">
-          <img v-lazy="ImgOrigAddress" src="load.png">
+          <img v-lazy="ImgOrigAddress" src="~/assets/load.png">
         </p>
       </div>
     </div>

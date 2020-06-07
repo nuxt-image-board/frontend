@@ -11,7 +11,7 @@
         <figure class="image">
           <img
             v-lazy="previewAddress"
-            src="load.png"
+            src="~/assets/load.png"
             :class="{'blur': result.nsfw && !acceptR18}"
             decoding="async"
             loading="lazy"
