@@ -85,7 +85,8 @@ export default {
   ** Nuxt.js dev-modules
   */
   buildModules: [
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    'nuxt-purgecss'
   ],
   /*
   ** Nuxt.js modules
@@ -102,6 +103,7 @@ export default {
     'nuxt-webfontloader',
     'nuxt-device-detect',
     'nuxt-logrocket',
+    'nuxt-precompress',
     '~modules/axCache'
   ],
   /*
@@ -219,6 +221,41 @@ export default {
   /*
   ** Build configuration
   */
+  nuxtPrecompress: {
+    enabled: true, // Enable in production
+    report: true, // set false to turn off console messages
+    test: /\.(js|css|html|txt|xml|svg)$/, // files to compress on build
+    // Serving options
+    middleware: {
+      // You can disable middleware if you serve static files using nginx...
+      enabled: true,
+      // Enable if you have .gz or .br files in /static/ folder
+      enabledStatic: true,
+      // Priority of content-encodings, first matched with request Accept-Encoding will me served
+      encodingsPriority: ['br', 'gzip']
+    },
+    // build time compression settings
+    gzip: {
+      // should compress to gzip?
+      enabled: true,
+      // compression config
+      // https://www.npmjs.com/package/compression-webpack-plugin
+      filename: '[path].gz[query]', // middleware will look for this filename
+      threshold: 10240,
+      minRatio: 0.8,
+      compressionOptions: { level: 9 }
+    },
+    brotli: {
+      // should compress to brotli?
+      enabled: true,
+      // compression config
+      // https://www.npmjs.com/package/compression-webpack-plugin
+      filename: '[path].br[query]', // middleware will look for this filename
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8
+    }
+  },
   buildDir: '.nuxt',
   build: {
     publicPath: '***REMOVED***',

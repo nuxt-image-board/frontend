@@ -37,6 +37,7 @@
     "nuxt-device-detect": "^1.1.5",
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-logrocket": "^1.2.10",
+    "nuxt-precompress": "^0.4.1",
     "nuxt-webfontloader": "^1.1.0",
     "shortid": "^2.2.15",
     "vue-aplayer": "^1.6.1",
@@ -46,12 +47,13 @@
     "vue2-touch-events": "^2.2.1"
   },
   "devDependencies": {
-    "sass-loader": "^8.0.2",
-    "node-sass": "^4.14.1",
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.1.0",
-    "eslint-plugin-nuxt": ">=0.4.2"
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "node-sass": "^4.14.1",
+    "nuxt-purgecss": "^1.0.0",
+    "sass-loader": "^8.0.2"
   }
 }
