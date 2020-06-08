@@ -101,7 +101,8 @@ export default {
     'nuxt-fontawesome',
     'nuxt-webfontloader',
     'nuxt-device-detect',
-    'nuxt-logrocket'
+    'nuxt-logrocket',
+    '~modules/axCache'
   ],
   /*
   ** Post Notify
@@ -166,6 +167,14 @@ export default {
   ** Authorization
   */
   auth: {
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        samesite: 'lax',
+        secure: process.env.NODE_ENV === 'production'
+      }
+    },
     redirect: {
       login: '/login', // 未ログイン時のリダイレクト先
       logout: '/login', // ログアウト処理を実行した直後のリダイレクト先

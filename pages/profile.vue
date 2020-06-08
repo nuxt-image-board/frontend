@@ -190,7 +190,7 @@
                 <tr>
                   <td>
                     <a class="has-text-dark" @click="modalType=10">
-                      スクロール読み込みについて
+                      スクロール読み込み
                     </a>
                   </td>
                   <td>
@@ -210,7 +210,7 @@
               </tbody>
             </table>
           </nav>
-          <Modal title="スクロール読み込み" :isModalOpen="modalType === 10" @modal-closed="modalType=0">
+          <Modal title="スクロール読み込みについて" :isModalOpen="modalType === 10" @modal-closed="modalType=0">
             <p>
               設定すると、検索結果がページ単位ではなくなり、スクロールで次々表示されるようになります。
               一見便利なのですが、転送量をそこそこ食うので、そこのところをご理解の上でご利用ください。

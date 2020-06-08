@@ -38,7 +38,7 @@
 export default {
   async asyncData ({ $axios, error, route }) {
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
-    const resp = await $axios.get('/news/' + id)
+    const resp = await $axios.get('/news/' + id, { useCache: true })
     if (resp.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }

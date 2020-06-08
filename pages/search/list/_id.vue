@@ -27,7 +27,7 @@ export default {
       : (sortNum <= 3) ? 'c'
         : 'l'
     const params = { sort, order, page }
-    const response = await $axios.get(endpoint, { params })
+    const response = await $axios.get(endpoint, { params, useCache: process.client })
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }

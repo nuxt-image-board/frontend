@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 // 状態管理したい要素に名前をつけて、stateとしてexportする
 export const state = () => ({
   // 'hogeFromStore' という名前の状態を管理する
@@ -20,22 +18,17 @@ export const mutations = {
 
 // 実際に各コンポーネントから呼び出す処理をactionとしてexportする
 export const actions = {
-  async getNavigations ({ commit, state }) {
-    // この条件があることで初回のみ取得になる
-    if (state.characters.length === 0) {
-      const client = axios.create({
-        baseURL: process.env.API_ENDPOINT,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + process.env.API_KEY
-        },
-        data: {}
-      })
+  // サーバーサイドの初期化時に自動的に実行される
+  async nuxtServerInit ({ dispatch }, req) {
+    await dispatch('getNavigations', req)
+  },
+  async getNavigations ({ commit }) {
+    if (this.$cookies.get('isPC')) {
       // コミットすることで状態変更が反映される
       const [characters, tags, artists] = await Promise.all([
-        client.get('navigations/characters'),
-        client.get('navigations/tags'),
-        client.get('navigations/artists')
+        this.$axios.get('navigations/characters', { useCache: true }),
+        this.$axios.get('navigations/tags', { useCache: true }),
+        this.$axios.get('navigations/artists', { useCache: true })
       ])
       commit('setNavigations', {
         characters: characters.data.data,

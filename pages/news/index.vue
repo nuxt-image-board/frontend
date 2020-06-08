@@ -59,7 +59,7 @@
 <script>
 export default {
   async asyncData ({ $axios, $auth, error }) {
-    const resp = await $axios.get('/news/list')
+    const resp = await $axios.get('/news/list', { useCache: true })
     if (resp.status !== 200) {
       return error({ statusCode: 502, message: 'err' })
     }

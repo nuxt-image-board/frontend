@@ -99,7 +99,7 @@ import { version, hitokoto } from '~/assets/texts/index.json'
 
 export default {
   async asyncData ({ $axios, $auth, params, error }) {
-    const news = await $axios.get('/news/list?count=2')
+    const news = await $axios.get('/news/list?count=2', { useCache: true })
     if (news.status !== 200) {
       return error({ statusCode: 502, message: 'err' })
     }

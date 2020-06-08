@@ -192,7 +192,7 @@ export default {
             : (sortNum <= 5) ? 'l'
               : 'n'
         const params = { sort, order, page, id, keyword }
-        const response = await this.$axios.get(this.endpoint, { params })
+        const response = await this.$axios.get(this.endpoint, { params, useCache: process.client })
         if (response.data.status === 200) {
           if (this.isSearchPage) {
             this.results = this.results.concat(response.data.data.imgs)
@@ -223,7 +223,7 @@ export default {
           : (sortNum <= 5) ? 'l'
             : 'n'
       const params = { sort, order, page, id, keyword }
-      const response = await this.$axios.get(this.endpoint, { params })
+      const response = await this.$axios.get(this.endpoint, { params, useCache: process.client })
       if (response.data.status === 200) {
         if (this.isSearchPage) {
           this.results = response.data.data.imgs

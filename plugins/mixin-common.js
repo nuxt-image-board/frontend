@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 Vue.mixin({
   methods: {
-    postLoggedIn () {
+    async postLoggedIn () {
       // Aprilクッキーを焼く
       this.$cookies.set(
         '***REMOVED***',
@@ -19,14 +19,13 @@ Vue.mixin({
         path: '/',
         maxAge: 60 * 60 * 24 * 31 * 6
       })
+      if (this.$device.isDesktop) {
+        await this.$store.dispatch('getNavigations')
+      }
       this.$cookies.set('isJumpEnabled', this.$device.isDesktop, {
         path: '/',
         maxAge: 60 * 60 * 24 * 31 * 6
       })
-      // どうも初回取得できないことがあるので1回だけ二重に要求する
-      if (this.$device.isDesktop) {
-        this.$store.dispatch('getNavigations')
-      }
       // スマホ設定
       this.$cookies.set('useWebP', !this.$device.isMacOS, {
         path: '/',

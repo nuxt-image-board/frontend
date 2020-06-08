@@ -115,9 +115,6 @@ export default {
     changeMenu (value) {
       this.openSmartNav = value
     }
-  },
-  serverPrefetch () {
-    return this.$store.dispatch('getNavigations')
   }
 }
 </script>
