@@ -13,10 +13,6 @@
             v-lazy="previewAddress"
             src="~/assets/load.png"
             :class="{'blur': result.nsfw && !acceptR18}"
-            decoding="async"
-            loading="lazy"
-            width="320px"
-            height="240px"
           >
         </figure>
       </nuxt-link>

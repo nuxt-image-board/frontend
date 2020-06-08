@@ -57,7 +57,7 @@
                 </p>
                 <figure class="image is-4by3">
                   <nuxt-link :to="RANDOM_ILLUST">
-                    <img :src="RANDOM_ILLUST_SRC">
+                    <img v-lazy="RANDOM_ILLUST_SRC" src="~/assets/load.png">
                   </nuxt-link>
                 </figure>
               </article>

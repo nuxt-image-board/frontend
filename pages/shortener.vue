@@ -13,7 +13,7 @@
             <div class="field">
               <input v-model="url" class="input" type="text" placeholder="https://***REMOVED***">
             </div>
-            <button class="button is-primary is-large" :disabled="IS_URL" @click="postUrl">
+            <button class="button is-primary is-large" :disabled="IS_NOT_URL" @click="postUrl">
               短縮
             </button>
             <br>
@@ -61,7 +61,7 @@ export default {
     }
   },
   computed: {
-    IS_URL () {
+    IS_NOT_URL () {
       if (!this.url.startsWith('https://')) {
         return true
       }

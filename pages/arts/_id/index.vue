@@ -6,11 +6,8 @@
           <figure class="has-text-centered" @click="isModalOpen = !isModalOpen">
             <img
               v-lazy="ImgAddress"
-              src="~/assets/load.png"
               class="thumb"
               :class="{'blur': result.nsfw && !acceptR18}"
-              decoding="async"
-              loading="lazy"
             >
           </figure>
         </div>

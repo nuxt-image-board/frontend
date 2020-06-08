@@ -9,11 +9,8 @@
       <a :href="link" target="_blank" rel="noopener noreferrer nofollow">
         <figure class="image">
           <img
-            :src="thumbnail"
-            decoding="async"
-            loading="lazy"
-            width="320px"
-            height="240px"
+            v-lazy="thumbnail"
+            src="~/assets/load.png"
           >
         </figure>
       </a>
