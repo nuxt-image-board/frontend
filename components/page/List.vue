@@ -22,6 +22,16 @@
           <ListResult v-else :accept-r18="acceptR18" :page-type="pageType" :result="result" />
         </div>
       </div>
+      <client-only>
+        <infinite-loading @infinite="infiniteHandler">
+          <div slot="no-more">
+            最終ページまで読み込みました
+          </div>
+          <div slot="no-results">
+            一致するデータがありませんでした
+          </div>
+        </infinite-loading>
+      </client-only>
       <Pagination
         :current-page-from-prop="SelectedPage"
         :total-page="totalPage"
@@ -108,6 +118,7 @@ export default {
   },
   data () {
     return {
+      loading: false,
       SelectedPage: this.SelectedPageFromProps,
       SelectedSort: this.SelectedSortFromProps,
       results: this.resultsFromProps,
@@ -162,6 +173,42 @@ export default {
     }
   },
   methods: {
+    async infiniteHandler ($state) {
+      if (this.loading) {
+        return
+      }
+      try {
+        this.loading = true
+        this.SelectedPage += 1
+        const page = this.SelectedPage
+        const sortNum = parseInt(this.SelectedSort)
+        const id = isFinite(this.$route.params.id) ? parseInt(this.$route.params.id) : 1
+        const keyword = this.$route.query.query ? this.$route.query.query : ''
+        const order = [0, 2, 4, 6].includes(sortNum) ? 'd' : 'a'
+        const sort = (sortNum <= 1) ? 'd'
+          : (sortNum <= 3) ? 'c'
+            : (sortNum <= 5) ? 'l'
+              : 'n'
+        const params = { sort, order, page, id, keyword }
+        const response = await this.$axios.get(this.endpoint, { params })
+        if (response.data.status === 200) {
+          if (this.isSearchPage) {
+            this.results = this.results.concat(response.data.data.imgs)
+          } else {
+            this.results = this.results.concat(response.data.data.contents)
+          }
+          // 読み込みが終わって、まだ読み込めればloaded()を呼ぶ
+          $state.loaded()
+        } else {
+          $state.complete()
+        }
+      } catch (error) {
+        // もう読み込めなければcomplete()を呼ぶ
+        $state.complete()
+      } finally {
+        this.loading = false
+      }
+    },
     async getData () {
       this.results = []
       const page = this.SelectedPage

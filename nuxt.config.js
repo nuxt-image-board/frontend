@@ -78,6 +78,7 @@ export default {
     '~plugins/vue2-touch-events',
     '~plugins/mixin-common',
     { src: '~plugins/vue-lazyload', ssr: false },
+    { src: '~plugins/vue-infinite-loading', ssr: false },
     { src: '@/plugins/vue-input-tag', ssr: false }
   ],
   /*
@@ -212,7 +213,6 @@ export default {
   buildDir: '.nuxt',
   build: {
     publicPath: '***REMOVED***',
-    vendor: ['axios'],
     postcss: {
       preset: {
         features: {
