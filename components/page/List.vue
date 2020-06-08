@@ -22,17 +22,18 @@
           <ListResult v-else :accept-r18="acceptR18" :page-type="pageType" :result="result" />
         </div>
       </div>
-      <client-only>
+      <client-only v-if="useInfinity">
         <infinite-loading @infinite="infiniteHandler">
           <div slot="no-more">
             最終ページまで読み込みました
           </div>
           <div slot="no-results">
-            一致するデータがありませんでした
+            最終ページまで読み込みました
           </div>
         </infinite-loading>
       </client-only>
       <Pagination
+        v-else
         :current-page-from-prop="SelectedPage"
         :total-page="totalPage"
         :send-mounted="false"
@@ -125,6 +126,7 @@ export default {
       acceptR18: this.$cookies.get('acceptR18'),
       isPC: this.$cookies.get('isPC'),
       useWebP: this.$cookies.get('useWebP'),
+      useInfinity: this.$cookies.get('useInfinity'),
       SortOptions: [
         { text: '投稿が新しい順', value: 0 },
         { text: '投稿が古い順', value: 1 },

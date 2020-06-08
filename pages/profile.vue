@@ -187,9 +187,38 @@
                     </div>
                   </td>
                 </tr>
+                <tr>
+                  <td>
+                    <a class="has-text-dark" @click="modalType=10">
+                      スクロール読み込みについて
+                    </a>
+                  </td>
+                  <td>
+                    <div class="field">
+                      <input
+                        id="switchInfinity"
+                        v-model="useInfinity"
+                        :checked="useInfinity"
+                        type="checkbox"
+                        name="switchInfinity"
+                        class="switch is-rounded is-info"
+                      >
+                      <label for="switchInfinity" />
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </nav>
+          <Modal title="スクロール読み込み" :isModalOpen="modalType === 10" @modal-closed="modalType=0">
+            <p>
+              設定すると、検索結果がページ単位ではなくなり、スクロールで次々表示されるようになります。
+              一見便利なのですが、転送量をそこそこ食うので、そこのところをご理解の上でご利用ください。
+            </p>
+            <p class="has-text-centered has-text-weight-bold">
+              参考: サムネイル1枚辺りおよそ0.02MB消費します。
+            </p>
+          </Modal>
         </div>
         <div class="column is-4 is-centered">
           <nav class="panel">
@@ -477,7 +506,8 @@ export default {
       useWebP: this.$cookies.get('useWebP'),
       isJumpEnabled: this.$cookies.get('isJumpEnabled'),
       useSwipe: this.$cookies.get('useSwipe'),
-      useBottom: this.$cookies.get('useBottom')
+      useBottom: this.$cookies.get('useBottom'),
+      useInfinity: this.$cookies.get('useInfinity')
     }
   },
   computed: {
@@ -530,6 +560,12 @@ export default {
         maxAge: 60 * 60 * 24 * 31 * 6
       })
       location.reload()
+    },
+    useInfinity (val) {
+      this.$cookies.set('useInfinity', val, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
     },
     isLeftHanded (val) {
       this.$cookies.set('isLeftHanded', val, {
