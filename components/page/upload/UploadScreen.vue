@@ -1,5 +1,5 @@
 <template>
-  <div v-show="illust.title || loading.status == 9">
+  <div v-show="illust.title !='not_fetched' || loading.status == 9">
     <div
       class="pageloader"
       :class="{'is-active': ([1,2,9].includes(loading.status)), 'is-warning': (loading.status == 1), 'is-danger': (loading.status == 9)}"
@@ -69,7 +69,7 @@
           <tr>
             <td>ソース</td>
             <td>
-              <input v-model="illust.source" class="input" type="text">
+              <input v-model="illust.source" class="input" type="text" disabled>
             </td>
           </tr>
           <tr>
@@ -108,7 +108,7 @@
         <div class="column has-text-centered is-centered">
           <button
             class="button is-primary is-fullwidth is-large"
-            :disabled="loading.status != 0"
+            :disabled="loading.status != 0 || illust.title == '' || illust.artist == '' || illust.source == ''"
             @click="uploadArt"
           >
             送信
@@ -148,7 +148,7 @@ export default {
       sendAsNumbered: false,
       selection: 1,
       illust: {
-        title: '',
+        title: 'not_fetched',
         caption: '',
         imgs: [],
         tags: [],
