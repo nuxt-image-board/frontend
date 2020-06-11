@@ -1,6 +1,9 @@
 import Vue from 'vue'
 
 Vue.mixin({
+  layout ({ app }) {
+    return app.$cookies.get('isPC') ? 'desktop' : 'mobile'
+  },
   methods: {
     async postLoggedIn () {
       // Aprilクッキーを焼く

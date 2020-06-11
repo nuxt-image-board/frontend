@@ -28,9 +28,9 @@ main {
   background-color: #FEFEFE;
 }
 
-/* メニューバーのドロップダウンアイコン(要らない?) */
+/* メニューバーのドロップダウンアイコン(Bulmaのどうしようもない仕様を無理やり上書き)*/
 .navbar-link::after {
-    border: 1px solid #fff !important;
+    border: 2px solid #fff !important;
     border-right: 0 !important;
     border-top: 0 !important;
     content: " ";

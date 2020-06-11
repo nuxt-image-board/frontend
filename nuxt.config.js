@@ -265,14 +265,6 @@ export default {
           customProperties: false
         }
       }
-    },
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-      if (ctx.isDev) {
-        config.devtool = 'inline-cheap-module-source-map'
-      }
     }
   },
   vue: {

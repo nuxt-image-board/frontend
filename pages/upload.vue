@@ -4,23 +4,22 @@
       <div class="columns is-centered is-vcentered" style="min-height:70vh">
         <div class="column is-7 has-text-centered">
           <h4 class="title">
-            イラスト投稿
+            イラスト投稿フォーム
           </h4>
           <p>
-            指定されたサイトアドレスからイラスト情報を取得し、投稿フォームを出します。
-            アドレスには 共有またはシェアで出てくるアドレス を入れてください。
-          </p>
-          <p class="has-text-weight-bold">
-            投稿前には必ず
-            <nuxt-link to="/rules/illust">
-              イラスト投稿ルール
-            </nuxt-link>
-            をご確認ください!
+            指定されたサイトから情報およびイラストを取得し投稿を行います。
+            <b>
+              投稿前には必ず
+              <nuxt-link to="/rules/illust">
+                イラスト投稿ルール
+              </nuxt-link>
+              をご確認ください!
+            </b>
           </p>
           <br>
           <div v-show="!scrapeInfo.scraped">
             <div class="field">
-              <label class="label">取得元URL</label>
+              <label class="label">情報取得元URL(共有用アドレス)</label>
               <div class="control">
                 <input
                   v-model="scrapeInfo.url"
@@ -35,10 +34,16 @@
             </div>
             <br>
             <div class="field is-centered">
-              <button class="button is-primary is-fullwidth is-large" @click="getArtInfo">
-                データ取得
+              <button class="button is-primary is-fullwidth is-large" :disabled="!scrapeInfo.url" @click="getArtInfo">
+                情報入力画面へ
               </button>
             </div>
+            <br>
+            <p>
+              ※このサイトでは、記載サイトから情報を取得し、半自動で登録するシステムを採用しています。
+              イラストだけを直接投稿することはできません。
+              自分で描いたイラストを投稿したい場合は、一旦PixivかTwitterに投稿してから、そのアドレスを入力して投稿してください。
+            </p>
           </div>
           <div v-show="scrapeInfo.scraped">
             <UploadScreen
