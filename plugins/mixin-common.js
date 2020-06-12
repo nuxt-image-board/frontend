@@ -2,6 +2,9 @@ import Vue from 'vue'
 
 Vue.mixin({
   layout ({ app }) {
+    if (!app.$auth.loggedIn) {
+      return 'gate'
+    }
     return app.$cookies.get('isPC') ? 'desktop' : 'mobile'
   },
   methods: {

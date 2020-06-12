@@ -85,9 +85,6 @@
 <script>
 export default {
   auth: false,
-  layout (context) {
-    return context.$auth.loggedIn ? 'default' : 'gate'
-  },
   computed: {
     CONTACT () {
       return process.env.CONTACT
