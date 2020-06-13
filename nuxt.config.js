@@ -221,6 +221,9 @@ export default {
   /*
   ** Build configuration
   */
+  purgeCSS: {
+    whitelistPatterns: [/(^|\.)fa-/, /-fa($|\.)/]
+  },
   nuxtPrecompress: {
     enabled: true, // Enable in production
     report: true, // set false to turn off console messages
