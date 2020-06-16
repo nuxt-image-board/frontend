@@ -1,5 +1,11 @@
 <template>
   <div id="top">
+    <div v-if="useBlossom">
+      <canvas id="js-background" width="100px" height="100px" />
+      <script src="https://code.createjs.com/1.0.0/createjs.min.js" />
+      <script src="***REMOVED***" />
+      <script src="particlejs_init.js" />
+    </div>
     <NavbarSmart
       v-touch:swipe.left="hideSmartNav"
       v-touch:swipe.right="showSmartNav"
@@ -44,7 +50,8 @@ export default {
       isLeftMenu: this.$cookies.get('isLeftHanded'),
       isJumpEnabled: this.$cookies.get('isJumpEnabled'),
       useSwipe: this.$cookies.get('useSwipe'),
-      useBottom: this.$cookies.get('useBottom')
+      useBottom: this.$cookies.get('useBottom'),
+      useBlossom: this.$cookies.get('useBlossom')
     }
   },
   computed: {

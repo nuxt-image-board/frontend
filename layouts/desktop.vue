@@ -1,5 +1,11 @@
 <template>
   <div id="top">
+    <div v-if="useBlossom">
+      <canvas id="js-background" width="100px" height="100px" />
+      <script src="https://code.createjs.com/1.0.0/createjs.min.js" />
+      <script src="***REMOVED***" />
+      <script src="particlejs_init.js" />
+    </div>
     <NavbarUp />
     <main>
       <transition name="page">
@@ -33,7 +39,8 @@ export default {
   data () {
     return {
       scrollY: 0,
-      isJumpEnabled: this.$cookies.get('isJumpEnabled')
+      isJumpEnabled: this.$cookies.get('isJumpEnabled'),
+      useBlossom: this.$cookies.get('useBlossom')
     }
   },
   computed: {
@@ -71,12 +78,21 @@ export default {
 </script>
 
 <style>
- .page-enter {
-   opacity: 0;
- }
- .page-enter-active {
-   transition: opacity 0.6s;
- }
+#js-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.page-enter {
+  opacity: 0;
+}
+.page-enter-active {
+  transition: opacity 0.6s;
+}
 
 .scroll-top {
   position: fixed;

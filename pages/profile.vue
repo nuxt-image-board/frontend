@@ -188,6 +188,22 @@
                   </td>
                 </tr>
                 <tr>
+                  <td>花びら背景</td>
+                  <td>
+                    <div class="field">
+                      <input
+                        id="switchBlossom"
+                        v-model="useBlossom"
+                        type="checkbox"
+                        name="switchBlossom"
+                        class="switch is-rounded is-info"
+                        :checked="useBlossom"
+                      >
+                      <label for="switchBlossom" />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
                   <td>
                     <a class="has-text-dark" @click="modalType=10">
                       スクロール読み込み
@@ -507,7 +523,8 @@ export default {
       isJumpEnabled: this.$cookies.get('isJumpEnabled'),
       useSwipe: this.$cookies.get('useSwipe'),
       useBottom: this.$cookies.get('useBottom'),
-      useInfinity: this.$cookies.get('useInfinity')
+      useInfinity: this.$cookies.get('useInfinity'),
+      useBlossom: this.$cookies.get('useBlossom')
     }
   },
   computed: {
@@ -583,6 +600,13 @@ export default {
     },
     isJumpEnabled (val) {
       this.$cookies.set('isJumpEnabled', val, {
+        path: '/',
+        maxAge: 60 * 60 * 24 * 31 * 6
+      })
+      location.reload()
+    },
+    useBlossom (val) {
+      this.$cookies.set('useBlossom', val, {
         path: '/',
         maxAge: 60 * 60 * 24 * 31 * 6
       })
