@@ -28,7 +28,15 @@ export default {
       { name: 'twitter:image', content: process.env.SITE_OG_IMAGE }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'preconnect dns-prefetch', href: '//***REMOVED***' },
+      { rel: 'preconnect dns-prefetch', href: '//fonts.gstatic.com' },
+      { rel: 'preconnect dns-prefetch', href: '//fonts.googleapis.com' },
+      { rel: 'preconnect dns-prefetch', href: '//cdn.jsdelivr.net' },
+      { rel: 'preconnect dns-prefetch', href: '//cdn.lr-ingest.io' },
+      { rel: 'preconnect dns-prefetch', href: '//cdn.onesignal.com' },
+      { rel: 'preconnect dns-prefetch', href: '//onesignal.com' },
+      { rel: 'dns-prefetch', href: '//***REMOVED***' }
     ]
   },
   /*
