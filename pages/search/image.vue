@@ -1,6 +1,23 @@
 <template>
   <section class="section">
-    <div class="container">
+    <div
+      class="container"
+      @dragenter="fileOnWindow = true"
+    >
+      <div
+        class="modal"
+        :class="{'is-active': fileOnWindow}"
+        @dragover.prevent
+        @drop.prevent="fileOnWindow = false; dropImage($event)"
+        @dragleave="fileOnWindow = false;"
+      >
+        <div class="modal-background" />
+        <div class="modal-content">
+          <p class="title has-text-centered has-text-white">
+            ドロップで画像検索
+          </p>
+        </div>
+      </div>
       <div class="columns is-centered is-vcentered" style="min-height:80vh;">
         <div class="column has-text-centered">
           <h4 class="title">
@@ -81,7 +98,8 @@ export default {
       isPC: this.$cookies.get('isPC'),
       results: [],
       naoResults: [],
-      step: 0
+      step: 0,
+      fileOnWindow: false
     }
   },
   methods: {
@@ -91,6 +109,10 @@ export default {
       } catch (error) {
         this.$router.push({ path: '/login' })
       }
+    },
+    dropImage (e) {
+      e.target.files = e.dataTransfer.files
+      this.uploadImage(e)
     },
     async uploadImage (e) {
       this.results = []
