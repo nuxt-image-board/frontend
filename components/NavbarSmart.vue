@@ -86,7 +86,7 @@
               </a>
               <ul v-if="openSearch">
                 <li>
-                  <nuxt-link to="/search/keyword" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                  <nuxt-link to="/search/keyword?query=" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                     <span class="icon"><Fas i="keyboard" /></span>
                     <span>キーワード</span>
                   </nuxt-link>
