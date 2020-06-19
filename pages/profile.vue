@@ -352,7 +352,7 @@
               <p>本サイトのAPIとはサイトを表示せずにサイト内のデータのみを直接提供するサービスのことです。Bot開発やデータ収集などが好きな開発者の方はどうぞご自由にご利用ください。</p>
               <p>現在ドキュメントは存在しないので、使用方法は通信を眺めてお察しください。</p>
             </Modal>
-            <a class="panel-block" @click="$auth.logout()">
+            <a class="panel-block" @click="$router.push('/logout')">
               <span class="panel-icon">
                 <i class="fas fa-book" aria-hidden="true" />
               </span>

@@ -14,10 +14,11 @@
 
 <script>
 export default {
+  auth: false,
   layout: 'default',
   created () {
-    if (process.client) {
-    }
+    this.$auth.logout()
+    this.$router.push('/login')
   },
   head () {
     return {

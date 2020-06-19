@@ -108,6 +108,7 @@ import Notification from '~/components/ui/Notification.vue'
 import { entries, placeholder } from '~/assets/texts/gate_flavor.json'
 
 export default {
+  auth: false,
   layout: 'gate',
   components: {
     Fas,
@@ -143,7 +144,8 @@ export default {
       if (this.$store.state.auth.loggedIn) {
         const page = this.$cookies.get('lastRead')
         if (page) {
-          this.$router.push({ path: page })
+          this.$router.push({ path: '/' })
+          // this.$router.push({ path: page })
         } else {
           this.$router.push({ path: '/' })
         }

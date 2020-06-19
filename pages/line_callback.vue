@@ -27,6 +27,7 @@ export default {
         try {
           await this.$auth.loginWith('local', { data: this.form })
           this.postLoggedIn()
+          this.$router.push({ path: '/' })
         } catch (error) {
           this.$router.push({ path: '/login?err=1' })
         }
