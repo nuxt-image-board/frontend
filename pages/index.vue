@@ -126,7 +126,7 @@ export default {
       return process.env.CONTACT
     },
     RANDOM_ILLUST_SRC () {
-      return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllustID + (this.useWebP ? '.webp' : '.jpg')
+      return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllustID + (this.$store.state.user.useWebP ? '.webp' : this.result.extension)
     },
     RANDOM_ILLUST () {
       return 'arts/' + this.randomIllustID
