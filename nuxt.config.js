@@ -87,7 +87,9 @@ export default {
     '~plugins/mixin-common',
     { src: '~plugins/vue-lazyload', ssr: false },
     { src: '~plugins/vue-infinite-loading', ssr: false },
-    { src: '@/plugins/vue-input-tag', ssr: false }
+    { src: '~plugins/vue-input-tag', ssr: false },
+    { src: '~plugins/vuex-persistedstate-localstorage', ssr: false },
+    { src: '~plugins/vuex-persistedstate-cookie' }
   ],
   /*
   ** Nuxt.js dev-modules
