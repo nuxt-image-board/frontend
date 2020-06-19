@@ -164,7 +164,8 @@ export default {
           'faChevronDown',
           'faChevronUp',
           'faList',
-          'faPlusSquare'
+          'faPlusSquare',
+          'faArrowLeft'
         ]
       },
       {

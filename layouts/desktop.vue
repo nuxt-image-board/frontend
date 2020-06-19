@@ -1,20 +1,16 @@
 <template>
   <div id="top">
-    <NavbarUp />
-    <div v-if="useBlossom">
+    <client-only v-if="useBlossom">
       <canvas id="js-background" width="0px" height="0px" />
       <script src="/blossom_loader.js" async />
-    </div>
+    </client-only>
+    <NavbarUp />
     <main>
       <transition name="page">
         <nuxt />
       </transition>
     </main>
-    <transition name="fade">
-      <a v-if="isJumpEnabled" v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">
-        <Fas i="angle-up" classes="scroll-icon" />
-      </a>
-    </transition>
+    <BackToTop v-if="isJumpEnabled" />
     <NavbarDown />
   </div>
 </template>
@@ -22,28 +18,19 @@
 <script>
 import NavbarUp from '~/components/NavbarUp.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
-import Fas from '~/components/ui/Fas.vue'
+import BackToTop from '~/components/ui/BackToTop.vue'
 
 export default {
   scrollToTop: true,
-  middleware: [
-    'auth'
-  ],
   components: {
     NavbarUp,
     NavbarDown,
-    Fas
+    BackToTop
   },
   data () {
     return {
-      scrollY: 0,
-      isJumpEnabled: this.$cookies.get('isJumpEnabled'),
-      useBlossom: this.$cookies.get('useBlossom')
-    }
-  },
-  computed: {
-    showJump () {
-      return Boolean(this.scrollY > 200)
+      useBlossom: this.$cookies.get('useBlossom'),
+      isJumpEnabled: this.$cookies.get('isJumpEnabled')
     }
   },
   watch: {
@@ -55,21 +42,18 @@ export default {
     }
   },
   mounted () {
-    window.addEventListener('scroll', this.onScroll)
-    window.addEventListener('load', () => {
-      this.onScroll()
-    })
+    // 圧倒的ゴリ押し なんか泣ける。
+    setTimeout(() => {
+      if (!window.particleSystem && this.useBlossom) {
+        location.reload()
+      }
+    }, 1000)
   },
   created () {
     if (process.client) {
       console.clear()
       console.log('%c***REMOVED***', 'color: blue; font-size: 30px')
       console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
-    }
-  },
-  methods: {
-    onScroll () {
-      this.scrollY = window.pageYOffset
     }
   }
 }
@@ -90,28 +74,5 @@ export default {
 }
 .page-enter-active {
   transition: opacity 0.6s;
-}
-
-.scroll-top {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background-color: #000;
-  padding: 10px 16px;
-  border-radius: 32px;
-}
-.scroll-icon {
-  font-weight: bold;
-  font-size: 20px;
-  color: #fff;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

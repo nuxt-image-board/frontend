@@ -144,8 +144,7 @@ export default {
       if (this.$store.state.auth.loggedIn) {
         const page = this.$cookies.get('lastRead')
         if (page) {
-          this.$router.push({ path: '/' })
-          // this.$router.push({ path: page })
+          this.$router.push({ path: page })
         } else {
           this.$router.push({ path: '/' })
         }
@@ -173,6 +172,7 @@ export default {
         e.preventDefault()
         await this.$auth.loginWith('local', { data: this.form })
         this.postLoggedIn()
+        this.$router.push({ path: '/' })
       } catch (error) {
         this.notificationDeleted = false
         this.notificationClasses = 'is-danger'
