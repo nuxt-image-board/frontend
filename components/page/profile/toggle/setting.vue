@@ -14,6 +14,7 @@
           type="checkbox"
           class="switch is-rounded"
           :class="`${classes}`"
+          :disabled="isDisabled"
         >
         <label :for="'switch' + storeKey" />
       </div>
@@ -35,6 +36,10 @@ export default {
     classes: {
       type: String,
       default: 'is-info'
+    },
+    isDisabled: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -49,6 +54,9 @@ export default {
       },
       set (value) {
         this.$store.commit('user/updateSetting', { path: this.storeKey, param: value })
+        if (['isPC', 'useSakura'].includes(this.storeKey)) {
+          location.reload()
+        }
       }
     }
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="card-image">
-      <div v-if="isPC" class="column is-hidden-touch is-8-fullhd is-8-desktop is-6-widescreen is-v-centered">
+      <div v-if="$store.state.user.isPC" class="column is-hidden-touch is-8-fullhd is-8-desktop is-6-widescreen is-v-centered">
         <span class="tag is-link">{{ result.date }}</span><br>
         <nuxt-link :to="artistAddress">
           <span class="tag is-info">{{ result.artist.name }}</span>
@@ -12,7 +12,7 @@
           <img
             v-lazy="previewAddress"
             src="~/assets/load.png"
-            :class="{'blur': result.nsfw && !acceptR18}"
+            :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
           >
         </figure>
       </nuxt-link>
@@ -61,23 +61,14 @@ export default {
           }
         }
       }
-    },
-    acceptR18: {
-      type: Boolean,
-      default: false
-    },
-    isPC: {
-      type: Boolean,
-      default: false
-    },
-    useWebP: {
-      type: Boolean,
-      default: true
     }
   },
   data () {
     return {
-      previewAddress: process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + (this.useWebP ? '.webp' : '.jpg'),
+      previewAddress: process.env.CDN_ENDPOINT +
+        'illusts/thumb/' +
+        this.result.illustID +
+        (this.$store.state.user.useWebP ? '.webp' : '.jpg'),
       artAddress: '/arts/' + this.result.illustID,
       artistAddress: '/search/artist/' + this.result.artistID
     }

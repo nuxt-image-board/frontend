@@ -52,10 +52,6 @@ export default {
     pageType: {
       type: String,
       default: 'NoData'
-    },
-    acceptR18: {
-      type: Boolean,
-      default: false
     }
   },
   data () {

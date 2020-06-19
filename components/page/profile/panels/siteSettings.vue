@@ -11,6 +11,7 @@
           :key="setting.key"
           :storeKey="setting.key"
           :title="setting.title"
+          :isDisabled="setting.disabled ? true : false"
           :classes="setting.class ? setting.class : ''"
           @openModal="showModal"
           @closeModal="hideModal"

@@ -1,6 +1,6 @@
 <template>
   <div id="top">
-    <client-only v-if="useBlossom">
+    <client-only v-if="$store.state.user.useSakura">
       <canvas id="js-background" width="0px" height="0px" />
       <script src="/blossom_loader.js" async />
     </client-only>
@@ -10,7 +10,7 @@
         <nuxt />
       </transition>
     </main>
-    <BackToTop v-if="isJumpEnabled" />
+    <BackToTop v-if="$store.state.user.useJump" />
     <NavbarDown />
   </div>
 </template>
@@ -27,12 +27,6 @@ export default {
     NavbarDown,
     BackToTop
   },
-  data () {
-    return {
-      useBlossom: this.$cookies.get('useBlossom'),
-      isJumpEnabled: this.$cookies.get('isJumpEnabled')
-    }
-  },
   watch: {
     '$route.path' () {
       this.$cookies.set('lastRead', this.$route.path, {
@@ -44,7 +38,7 @@ export default {
   mounted () {
     // 圧倒的ゴリ押し なんか泣ける。
     setTimeout(() => {
-      if (!window.particleSystem && this.useBlossom) {
+      if (!window.particleSystem && this.$store.state.user.useSakura) {
         location.reload()
       }
     }, 1000)

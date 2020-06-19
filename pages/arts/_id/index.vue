@@ -7,7 +7,7 @@
             <img
               v-lazy="ImgAddress"
               class="thumb"
-              :class="{'blur': result.nsfw && !acceptR18}"
+              :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
             >
           </figure>
         </div>
@@ -130,10 +130,10 @@
             <div class="column is-12 has-text-centered">
               <a
                 class="button is-large"
-                :href="isPC ? '#' : LineShareAddress"
+                :href="$store.state.user.isPC ? '#' : LineShareAddress"
                 target="_blank"
                 rel="noopener noreferrer"
-                @click="isPC ? openSocialShare(LineShareAddress) : null"
+                @click="$store.state.user.isPC ? openSocialShare(LineShareAddress) : null"
               >
                 <span class="icon has-text-primary">
                   <Fab i="line" classes="line fa-2x" />
@@ -141,10 +141,10 @@
               </a>
               <a
                 class="button is-large"
-                :href="isPC ? '#' : TwitterShareAddress"
+                :href="$store.state.user.isPC ? '#' : TwitterShareAddress"
                 target="_blank"
                 rel="noopener noreferrer"
-                @click="isPC ? openSocialShare(TwitterShareAddress) : null"
+                @click="$store.state.user.isPC ? openSocialShare(TwitterShareAddress) : null"
               >
                 <span class="icon has-text-info">
                   <Fab i="twitter-square" classes="twitter fa-2x" />
@@ -225,28 +225,24 @@ export default {
       isZoomAllowed: false,
       waifuScale: '',
       bookmarkSound: null,
-      isPC: this.$cookies.get('isPC'),
-      acceptR18: this.$cookies.get('acceptR18'),
-      useWebP: this.$cookies.get('useWebP'),
       isModalOpen: false
     }
   },
   computed: {
     ImgAddress () {
-      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.result.illustID + (this.useWebP ? '.webp' : '.jpg')
+      return process.env.CDN_ENDPOINT +
+        'illusts/large/' +
+        this.result.illustID +
+        (this.$store.state.user.useWebP ? '.webp' : '.' + this.result.extension)
     },
     ImgOrigAddress () {
-      return process.env.CDN_ENDPOINT + 'illusts/orig/' + this.result.illustID + '.' + this.result.extension
+      return process.env.CDN_ENDPOINT +
+        'illusts/orig/' +
+        this.result.illustID +
+        '.' +
+        this.result.extension
     }
   },
-  /*
-  mounted () {
-    this.starSound = new Audio('star.wav')
-    this.starSound.load()
-    this.bookmarkSound = new Audio('bookmark.wav')
-    this.bookmarkSound.load()
-  }
-  */
   methods: {
     openSocialShare (addr) {
       window.open(addr, '', 'width=500,height=500')

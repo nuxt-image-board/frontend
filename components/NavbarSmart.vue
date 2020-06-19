@@ -1,14 +1,14 @@
 <template>
   <header>
-    <nav class="navbar" :class="{'is-fixed-top': !useSwipe}">
+    <nav class="navbar" :class="{'is-fixed-top': !$store.state.user.useSwipe}">
       <div class="container">
         <div class="navbar-brand">
-          <a v-if="!isLeftMenu" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
+          <a v-if="!$store.state.user.isLeftHanded" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
             ***REMOVED***
           </a>
           <a
             role="button"
-            :class="{'left': isLeftMenu}"
+            :class="{'left': $store.state.user.isLeftHanded}"
             class="navbar-burger has-text-white"
             aria-label="menu"
             aria-expanded="false"
@@ -18,7 +18,7 @@
             <span aria-hidden="true" />
             <span aria-hidden="true" />
           </a>
-          <a v-if="isLeftMenu" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
+          <a v-if="$store.state.user.isLeftHanded" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
             ***REMOVED***
           </a>
         </div>
@@ -31,7 +31,7 @@
         </div>
       </div>
     </nav>
-    <div id="quickviewDefault" class="quickview" :class="{ 'is-active': openMenu, 'is-left' : isLeftMenu }">
+    <div id="quickviewDefault" class="quickview" :class="{ 'is-active': openMenu, 'is-left' : $store.state.user.isLeftHanded }">
       <header class="quickview-header">
         <p class="has-text-white">
           <nuxt-link to="/" class="has-text-white" @click.native="openMenu = !openMenu">
@@ -156,7 +156,7 @@
         </aside>
       </div>
     </div>
-    <nav v-if="showBottomNav" class="navbar is-link is-fixed-bottom" role="navigation">
+    <nav v-if="$store.state.user.useBottom" class="navbar is-link is-fixed-bottom" role="navigation">
       <div class="navbar-brand">
         <nuxt-link to="/" class="navbar-item is-expanded is-block has-text-centered">
           <Fas i="home" classes="fa-lg" />
@@ -216,9 +216,7 @@ export default {
       openMenu: false,
       openSearch: false,
       openOther: false,
-      showBottomNav: false,
-      isLeftMenu: this.$cookies.get('isLeftHanded'),
-      useSwipe: this.$cookies.get('useSwipe')
+      showBottomNav: false
     }
   },
   watch: {

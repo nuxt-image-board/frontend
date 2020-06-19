@@ -1,7 +1,13 @@
 <template>
   <div>
     <transition name="fade">
-      <a v-show="showJump" v-scroll-to="'#top'" href="#" class="scroll-top">
+      <a
+        v-show="showJump"
+        v-scroll-to="'#top'"
+        href="#"
+        class="scroll-top"
+        :class="{'scroll-has-bottom': $store.state.user.useBottom, 'scroll-no-bottom': !$store.state.user.useBottom}"
+      >
         <Fas i="angle-up" classes="scroll-icon" />
       </a>
     </transition>
@@ -17,7 +23,8 @@ export default {
   },
   data () {
     return {
-      scrollY: 0
+      scrollY: 0,
+      bottomMargin: 65
     }
   },
   computed: {
@@ -40,10 +47,16 @@ export default {
 </script>
 
 <style>
+.scroll-has-bottom {
+  bottom: 65px;
+}
+.scroll-no-bottom {
+  bottom: 20px;
+}
+
 .scroll-top {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  right: 20px;
   background-color: #000;
   padding: 10px 16px;
   border-radius: 32px;

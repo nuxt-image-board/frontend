@@ -1,6 +1,6 @@
 <template>
   <div id="top">
-    <client-only v-if="useBlossom">
+    <client-only v-if="$store.state.user.useSakura">
       <canvas id="js-background" width="0px" height="0px" />
       <script src="/blossom_loader.js" async />
     </client-only>
@@ -11,15 +11,15 @@
       @menu-event="changeMenu"
     />
     <main v-touch:swipe.right="showSmartNav" v-touch:swipe.left="hideSmartNav">
-      <br v-if="!useSwipe">
+      <br v-if="!$store.state.user.useSwipe">
       <transition name="page">
         <nuxt />
       </transition>
-      <br v-if="useBottom">
+      <br v-if="$store.state.user.useBottom">
     </main>
-    <BackToTop v-if="isJumpEnabled" />
-    <BackToRecent v-if="!useSwipe" />
-    <NavbarSmartDown v-if="useBottom" />
+    <BackToTop v-if="$store.state.user.useJump" />
+    <BackToRecent v-if="$store.state.user.useBack" />
+    <NavbarSmartDown v-if="$store.state.user.useBottom" />
   </div>
 </template>
 
@@ -40,12 +40,7 @@ export default {
   data () {
     return {
       scrollY: 0,
-      openSmartNav: false,
-      isLeftMenu: this.$cookies.get('isLeftHanded'),
-      isJumpEnabled: this.$cookies.get('isJumpEnabled'),
-      useSwipe: this.$cookies.get('useSwipe'),
-      useBottom: this.$cookies.get('useBottom'),
-      useBlossom: this.$cookies.get('useBlossom')
+      openSmartNav: false
     }
   },
   watch: {
@@ -66,15 +61,15 @@ export default {
   mounted () {
     // 圧倒的ゴリ押し なんか泣ける。
     setTimeout(() => {
-      if (!window.particleSystem && this.useBlossom) {
+      if (!window.particleSystem && this.$store.state.user.useSakura) {
         location.reload()
       }
     }, 1000)
   },
   methods: {
     showSmartNav () {
-      if (this.useSwipe) {
-        if (!this.isLeftMenu) {
+      if (this.$store.state.user.useSwipe) {
+        if (!this.$store.state.user.isLeftHanded) {
           this.openSmartNav = false
         } else {
           this.openSmartNav = true
@@ -82,8 +77,8 @@ export default {
       }
     },
     hideSmartNav () {
-      if (this.useSwipe) {
-        if (!this.isLeftMenu) {
+      if (this.$store.state.user.useSwipe) {
+        if (!this.$store.state.user.isLeftHanded) {
           this.openSmartNav = true
         } else {
           this.openSmartNav = false
