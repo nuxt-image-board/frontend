@@ -1,12 +1,10 @@
 <template>
   <div id="top">
-    <div v-if="useBlossom">
-      <canvas id="js-background" width="100px" height="100px" />
-      <script src="https://code.createjs.com/1.0.0/createjs.min.js" />
-      <script src="***REMOVED***" />
-      <script src="particlejs_init.js" />
-    </div>
     <NavbarUp />
+    <div v-if="useBlossom">
+      <canvas id="js-background" width="0px" height="0px" />
+      <script src="/blossom_loader.js" async />
+    </div>
     <main>
       <transition name="page">
         <nuxt />
