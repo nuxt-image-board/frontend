@@ -1,0 +1,75 @@
+{
+    "settings": [
+        {
+            "key": "acceptR18",
+            "flag": false,
+            "mobile_only": false,
+            "class": "is-danger",
+            "title": "R18表示",
+            "description": "有効にすると、18禁イラストがモザイク無しに表示されるようになります。あなたが18歳以上、かつ性的コンテンツを不快に思わない場合のみ有効にしてください。"
+        },
+        {
+            "key": "isPC",
+            "flag": false,
+            "mobile_only": false,
+            "title": "PC版メニュー",
+            "description": "有効にすると、PC用のメニューが表示されるようになります。スマホで有効にしても使用できないことはないですが、PCを使っている場合にのみ有効にすることをおすすめします。"
+        },
+        {
+            "key": "isLeftHanded",
+            "flag": false,
+            "mobile_only": true,
+            "title": "左利きメニュー",
+            "description": "有効にすると、メニューの位置が左になり、スワイプメニューが左から出るようになります。メニューが左にないと違和感があるという方はご利用ください。"
+        },
+        {
+            "key": "useSwipe",
+            "flag": false,
+            "mobile_only": true,
+            "title": "スワイプメニュー",
+            "description": "有効にすると、スワイプした際に横からメニューが出てくるようになります。スワイプで出てくるメニューが邪魔だと思う方は無効にしてください。"
+        },
+        {
+            "key": "useBottom",
+            "flag": false,
+            "mobile_only": true,
+            "title": "下部メニュー",
+            "description": "有効にすると、下部に 一覧 投稿 検索 ユーザー ボタンが常時表示されるようになります。画面サイズが狭いと邪魔になりますので、ある程度画面が大きいスマホをご利用の場合のみご利用ください。"
+        },
+        {
+            "key": "useBack",
+            "flag": false,
+            "mobile_only": true,
+            "title": "戻るボタン",
+            "description": "有効にすると、戻るボタンが左下に表示されるようになります。iOSをご利用の方は有効にしてください。"
+        },
+        {
+            "key": "useJump",
+            "flag": false,
+            "mobile_only": false,
+            "title": "ジャンプボタン",
+            "description": "有効にすると、ページ上部に戻るためのジャンプボタンが右下に出るようになります。下部メニューと位置が重なるので、どちらかのみを有効にしてください。"
+        },
+        {
+            "key": "useWebP",
+            "flag": false,
+            "mobile_only": false,
+            "title": "WebP使用",
+            "description": "有効にすると、次世代画像形式で画像が表示されるようになります。Appleは次世代画像形式のことがキライみたいで、いつも未対応で、開発者の頭イタイイタイなのだった。ワイ「トホホ……Appleくんかっこいいのにブラウザはイタイイタイなんだから……」(iOSやMacで有効にすると画像が真っ白になります Android/Windowsでのみ有効にしてください。)"
+        },
+        {
+            "key": "useSakura",
+            "flag": false,
+            "mobile_only": false,
+            "title": "花びら背景",
+            "description": "有効にすると、背景に某公式サイトのような花びらが出るようになります。若干重いので、スペックに不安がある場合は有効にしないでください。(アプリもどきから起動している場合はリロードするまで出てきません)"
+        },
+        {
+            "key": "useInfinity",
+            "flag": false,
+            "mobile_only": false,
+            "title": "無限スクロール",
+            "description": "有効にすると、検索結果がページ単位で無くなり、ツイッターのようにスクロールで次々出るようになります。次々出てくる分、データ転送量を少し速く消費します。(つまりギガを食います)参考までに、検索結果のサムネイルは1枚辺りおよそ0.02MB(約100枚弱で1MB)です。"
+        }
+    ]
+}
