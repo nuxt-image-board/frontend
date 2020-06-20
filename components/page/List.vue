@@ -13,6 +13,9 @@
             <div v-if="isSearchPage && !NotificationTitle.includes('キーワード')" class="column is-4">
               <NotifyRegister :notifyTitle="notifyTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
             </div>
+            <div v-if="!isSearchPage" class="column is-4">
+              <input v-model="filterKeyword" class="input is-medium" type="text" placeholder="絞り込みキーワード">
+            </div>
           </div>
         </div>
       </div>
@@ -33,7 +36,7 @@
         </infinite-loading>
       </client-only>
       <Pagination
-        v-else
+        v-if="!$store.state.user.useInfinity && filterKeyword === ''"
         :current-page-from-prop="SelectedPage"
         :total-page="totalPage"
         :send-mounted="false"
@@ -120,6 +123,7 @@ export default {
   data () {
     return {
       loading: false,
+      filterKeyword: '',
       SelectedPage: this.SelectedPageFromProps,
       SelectedSort: this.SelectedSortFromProps,
       results: this.resultsFromProps,
@@ -158,6 +162,15 @@ export default {
     '$route' (to, from) {
       this.SelectedPage = isFinite(to.query.page) ? parseInt(to.query.page) : 1
       this.getData()
+    },
+    filterKeyword (newVal) {
+      if (newVal) {
+        if (newVal.length > 1 || newVal.length === 0) {
+          this.$route.query.query = newVal
+          this.SelectedPage = 1
+          this.getData()
+        }
+      }
     }
   },
   mounted () {
@@ -168,6 +181,8 @@ export default {
         { text: 'いいね数が多い順', value: 4 },
         { text: 'いいね数が少ない順', value: 5 }
       ]
+    } else {
+      this.filterKeyword = this.$route.query.query
     }
   },
   methods: {
