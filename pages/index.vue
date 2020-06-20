@@ -116,11 +116,6 @@ export default {
       hitokoto
     }
   },
-  data () {
-    return {
-      useWebP: this.$cookies.get('useWebP')
-    }
-  },
   computed: {
     CONTACT () {
       return process.env.CONTACT

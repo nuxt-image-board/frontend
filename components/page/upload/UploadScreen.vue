@@ -1,5 +1,5 @@
 <template>
-  <div v-show="illust.title !='not_fetched' || loading.status == 9">
+  <div v-show="illust.title !='not_fetched' || loading.status == 9 || scrapeInfo == {}">
     <div
       class="pageloader"
       :class="{'is-active': ([1,2,9].includes(loading.status)), 'is-warning': (loading.status == 1), 'is-danger': (loading.status == 9)}"
@@ -69,7 +69,7 @@
           <tr>
             <td>ソース</td>
             <td>
-              <input v-model="illust.source" class="input" type="text" disabled>
+              <input v-model="illust.source" class="input" type="text" :disabled="scraped">
             </td>
           </tr>
           <tr>
@@ -108,7 +108,7 @@
         <div class="column has-text-centered is-centered">
           <button
             class="button is-primary is-fullwidth is-large"
-            :disabled="loading.status != 0 || illust.title == '' || illust.artist == '' || illust.source == ''"
+            :disabled="loading.status != 0 || illust.title == '' || illust.artist == ''"
             @click="uploadArt"
           >
             送信
@@ -147,6 +147,7 @@ export default {
       tag: '',
       sendAsNumbered: false,
       selection: 1,
+      scraped: false,
       illust: {
         title: 'not_fetched',
         caption: '',
@@ -257,6 +258,11 @@ export default {
       const reg = new RegExp(ranges.join('|'), 'g')
       return text.replace(reg, '')
     },
+    writeArtInfo (url) {
+      this.illust.title = ''
+      this.illust.imgs = [url]
+      this.illust.originService = '独自'
+    },
     async getArtInfo () {
       // APIにリクエストする
       const url = this.scrapeInfo.url
@@ -331,10 +337,11 @@ export default {
       // 絵師名から宣伝など削除
       this.illust.artist = this.illust.artist.split('@')[0]
       this.illust.artist = this.illust.artist.split('＠')[0]
+      this.illust.artist = this.illust.artist.replace('お仕事募集中', '')
       // 絵師名から絵文字を削除
       this.illust.artist = this.removeEmoji(this.illust.artist)
       // 出典の設定
-      this.illust.originUrl = url
+      this.illust.originUrl = url.replace('mobile.', '')
       switch (true) {
         case this.illust.originUrl.includes('twitter'):
           this.illust.originService = 'Twitter'
@@ -352,6 +359,7 @@ export default {
       if (this.illust.originService === 'Twitter' && this.illust.title.length < 20) {
         this.illust.caption = ''
       }
+      this.scraped = true
       this.$emit('getComplete')
       return true
     },

@@ -4,7 +4,7 @@
       <div class="columns is-centered is-vcentered" style="min-height:70vh">
         <div class="column is-7 has-text-centered">
           <h4 class="title">
-            イラスト投稿フォーム
+            イラスト投稿
           </h4>
           <p>
             指定されたサイトから情報およびイラストを取得し投稿を行います。
@@ -39,11 +39,12 @@
               </button>
             </div>
             <br>
-            <p>
-              ※このサイトでは、記載サイトから情報を取得し、半自動で登録するシステムを採用しています。
-              イラストだけを直接投稿することはできません。
-              自分で描いたイラストを投稿したい場合は、一旦PixivかTwitterに投稿してから、そのアドレスを入力して投稿してください。
-            </p>
+            <br>
+            <div class="field is-centered">
+              <nuxt-link to="/upload_image" class="button is-primary is-medium">
+                画像から投稿する場合はこちら
+              </nuxt-link>
+            </div>
           </div>
           <div v-show="scrapeInfo.scraped">
             <UploadScreen

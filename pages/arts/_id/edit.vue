@@ -125,7 +125,6 @@ export default {
       isLoading: false,
       isSending: false,
       isFailed: false,
-      useWebP: this.$cookies.get('useWebP'),
       validation: [{
         classes: 'max-length',
         rule: tag => tag.text.length > 20

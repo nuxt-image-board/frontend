@@ -5,6 +5,7 @@
       @dragenter="fileOnWindow = true"
     >
       <div
+        v-if="step == 0"
         class="modal"
         :class="{'is-active': fileOnWindow}"
         @dragover.prevent
@@ -19,21 +20,28 @@
         </div>
       </div>
       <div class="columns is-centered is-vcentered" style="min-height:80vh;">
-        <div class="column has-text-centered">
+        <div v-if="step == 0" class="column is-6 has-text-centered">
           <h4 class="title">
-            画像検索
+            画像からイラスト投稿
           </h4>
           <p>
-            画像を選ぶと***REMOVED***のDBから検索します
+            <b>
+              投稿前には必ず
+              <nuxt-link to="/rules/illust">
+                イラスト投稿ルール
+              </nuxt-link>
+              をご確認ください!
+            </b>
           </p>
           <p>
-            存在しない場合はSauceNAOから検索します
+            こちらは主に公式のイラストを投稿するのを想定しています。ファンアート等はURLから登録してください。
+            ***REMOVED***
           </p>
           <p>
             ※JPGかJPEGかPNGのみ対応です
           </p>
           <br>
-          <div class="field">
+          <div v-if="step < 2" class="field">
             <div class="file is-centered is-large has-name is-boxed">
               <label class="file-label">
                 <input class="file-input" type="file" accept="image/png,image/jpeg" :disabled="fileName != ''" @change="uploadImage">
@@ -44,37 +52,41 @@
                   <span v-if="!fileName" class="file-label">
                     画像を選択…
                   </span>
-                  <span v-if="fileName" class="button is-primary is-loading" />
+                  <span v-if="step == 1" class="button is-primary is-loading" />
                   <span v-if="step == 1" class="file-label">
                     ***REMOVED***で検索中...
                   </span>
-                  <span v-if="step == 2" class="file-label">
-                    SauceNaoで検索中...
-                  </span>
-                </span>
-                <span v-if="fileName" class="file-name has-text-centered has-background-white">
-                  {{ fileName }}
                 </span>
               </label>
             </div>
           </div>
-          <div v-if="hash && !fileName" class="column has-text-centered">
-            <span>
-              ハッシュ値: {{ hash }}
-            </span>
+          <br>
+          <br>
+          <div v-if="step < 2" class="field is-centered">
+            <nuxt-link to="/upload" class="button is-primary is-medium">
+              URLから投稿する場合はこちら
+            </nuxt-link>
           </div>
         </div>
-        <div v-if="results.length !== 0 || naoResults.length !== 0" class="column has-text-centered is-half">
+        <div v-if="results.length !== 0 && step < 2" class="column has-text-centered is-half">
           <div class="container">
             <div class="columns is-mobile is-multiline is-centered is-vcentered">
               <div v-for="result in results" :key="result.illustID" class="column is-6-mobile is-4-desktop">
                 <Result :result="result" />
               </div>
-              <div v-for="result in naoResults" :key="result.id" class="column is-6-mobile is-4-desktop">
-                <SimpleResult :link="result.link" :thumbnail="result.thumbnail" />
-              </div>
             </div>
           </div>
+        </div>
+        <div v-show="step > 1" class="column has-text-centered is-8">
+          <UploadScreen
+            ref="uploadScreen"
+            @uploadComplete="resetUpload"
+          />
+          <br>
+          <br>
+          <button class="has-text-centered button is-primary is-warning" @click="step = 0">
+            戻る
+          </button>
         </div>
       </div>
     </div>
@@ -84,43 +96,39 @@
 <script>
 import Fas from '~/components/ui/Fas.vue'
 import Result from '~/components/page/search/Result.vue'
-import SimpleResult from '~/components/page/search/SimpleResult.vue'
+import UploadScreen from '~/components/page/upload/UploadScreen.vue'
 
 export default {
   components: {
     Fas,
     Result,
-    SimpleResult
+    UploadScreen
   },
   data () {
     return {
+      fileOnWindow: false,
       selectedFile: null,
+      imageUrl: '',
       fileName: '',
-      hash: '',
       results: [],
-      naoResults: [],
-      step: 0,
-      fileOnWindow: false
+      step: 0
     }
   },
   methods: {
-    async logout () {
-      try {
-        await this.$auth.logout()
-      } catch (error) {
-        this.$router.push({ path: '/login' })
-      }
-    },
     dropImage (e) {
       e.target.files = e.dataTransfer.files
       this.uploadImage(e)
     },
     async uploadImage (e) {
-      this.results = []
-      this.naoResults = []
       e.preventDefault()
+      // バリデーション
+      this.step = 1
+      this.results = []
       if (e.target.files.length === 0) {
-        return null
+        alert('指定されたファイルが正しくありません')
+        this.step = 0
+        this.fileName = ''
+        return
       }
       const imageFile = e.target.files[0]
       this.fileName = imageFile.name
@@ -128,56 +136,54 @@ export default {
         alert('指定されたファイルが正しくありません')
         this.step = 0
         this.fileName = ''
-        this.hash = ''
         return
       }
+      // 検索APIに投げる
       const headers = { 'content-type': 'multipart/form-data' }
       const data = new FormData()
       data.append('file', imageFile)
-      this.step += 1
       try {
         const resp = await this.$axios.post('/search/image', data, { headers })
         if (resp.data.status === 200) {
           this.results = resp.data.data.illusts
-          this.hash = resp.data.data.hash
+          if (resp.data.data.illusts.length > 0) {
+            alert('そのイラストは既に存在します')
+            this.step = 0
+            this.fileName = ''
+            return
+          }
         }
       } catch (error) {
         alert('通信エラーが発生しました')
-        this.hash = ''
+        this.step = 0
+        this.fileName = ''
+        return
       }
-      if (this.results.length === 0) {
-        this.step += 1
-        try {
-          const resp = await this.$axios.post('/search/image/saucenao', data, { headers })
-          if (resp.data.status === 200) {
-            let result = resp.data.data.result.slice(0, 3)
-            result = result.filter((res) => { return parseFloat(res.header.similarity) > 50 })
-            this.naoResults = result.map(function (res, index) {
-              return {
-                id: index,
-                thumbnail: res.header.thumbnail,
-                link: res.data.ext_urls[0].replace(
-                  'https://www.pixiv.net/member_illust.php?mode=medium&illust_id=',
-                  'https://www.pixiv.net/artworks/'
-                )
-              }
-            })
-            if (this.naoResults.length === 0) {
-              this.naoResults = [{ id: 0, thumbnail: '/not_found.png', link: 'https://***REMOVED***' }]
-            }
-          }
-        } catch (error) {
-          alert('通信エラーが発生しました')
-          this.naoResults = []
+      // 投稿APIに投げる
+      try {
+        const resp = await this.$axios.post('/scrape/self', data, { headers })
+        if (resp.data.status === 200) {
+          this.imageUrl = resp.data.url
         }
+      } catch (error) {
+        alert('通信エラーが発生しました')
+        this.step = 0
+        this.fileName = ''
+        return
       }
+      this.step = 2
+      this.fileName = ''
+      // 投稿画面を開く
+      this.$refs.uploadScreen.writeArtInfo(this.imageUrl)
+    },
+    resetUpload () {
       this.step = 0
       this.fileName = ''
     }
   },
   head () {
     return {
-      title: '画像から検索'
+      title: '画像からイラスト投稿'
     }
   }
 }
