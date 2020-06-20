@@ -1,2 +1,7 @@
+User-agent: Twitterbot
+User-agent: facebookexternalhit
+User-agent: Linespider
+Disallow:
+
 User-agent: *
 Disallow: /
