@@ -31,6 +31,12 @@
         "description": "ランダムな***REMOVED***イラストを表示する"
       },
       {
+        "title": "Danbooru",
+        "link": "danbooru.donmai.us",
+        "img": "danbooru.png",
+        "description": "イラスト保管サイト。***REMOVED***が目指す先。"
+      },
+      {
         "title": "SauceNAO",
         "link": "saucenao.com",
         "img": "SauceNao.png",
