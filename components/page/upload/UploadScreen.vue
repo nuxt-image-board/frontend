@@ -387,12 +387,21 @@ export default {
         },
         tag: this.illust.tags,
         chara: [],
+        group: [],
+        system: [],
         nsfw: this.illust.R18
       }
       const tasks = []
+      // システムタグ作成
+      if (this.illust.R18) {
+        this.illust.system.push('R18')
+      }
+      const today = new Date()
+      const dateTag = today.getFullYear() + '年' + ('00' + (today.getMonth() + 1)).slice(-2) + '月'
+      this.illust.system.push(dateTag)
       // 連番アップロード
       if (this.sendAsNumbered) {
-        this.illust.tags.push('グループ' + shortid.generate())
+        this.illust.group.push(shortid.generate())
         for (let page = 1; page < this.illust.imgs.length + 1; page++) {
           // 一旦ディープコピーしてくる(しないとパラメータが全部おなじになる)
           const numberedParams = JSON.parse(JSON.stringify(params))
