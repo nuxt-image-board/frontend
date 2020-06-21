@@ -111,9 +111,17 @@
             <div class="navbar-item">
               <div class="field is-grouped">
                 <p class="control">
-                  <nuxt-link to="/profile" class="button is-outlined" @click.native="closeAll($event)">
-                    <span class="icon"><Fas i="user" /></span>
-                    <span>マイページ</span>
+                  <nuxt-link to="/shop" @click.native="closeAll($event)">
+                    <Fas i="shopping-cart" classes="has-text-white" />
+                  </nuxt-link>
+                </p>
+              </div>
+            </div>
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <nuxt-link to="/profile" @click.native="closeAll($event)">
+                    <Fas i="user" classes="has-text-white" />
                   </nuxt-link>
                 </p>
               </div>

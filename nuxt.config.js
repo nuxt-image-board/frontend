@@ -167,7 +167,8 @@ export default {
           'faChevronUp',
           'faList',
           'faPlusSquare',
-          'faArrowLeft'
+          'faArrowLeft',
+          'faShoppingCart'
         ]
       },
       {
