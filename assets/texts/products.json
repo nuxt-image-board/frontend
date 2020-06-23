@@ -1,13 +1,6 @@
 {
     "products": [
         {
-            "title": "AdsGone",
-            "description": "This will allow you to browse ***REMOVED*** sans ads, and still retain your conscience.",
-            "price": 1,
-            "margin": 0,
-            "key": "acceptR18"
-        },
-        {
             "title": "Collector",
             "description": "画像からイラスト登録できるようにします",
             "price": 10,
@@ -37,7 +30,7 @@
         },
         {
             "title": "UsagiRaws",
-            "description": "常に元画像をサーバーに要求できるようにします",
+            "description": "検索結果含めて全ページで常に元画像を要求できるようにします",
             "price": 50,
             "margin": 0,
             "key": "acceptR18"
@@ -53,6 +46,13 @@
             "title": "Dark",
             "description": "ダークモードのサイトデザインを使用できるようにします",
             "price": 50,
+            "margin": 0,
+            "key": "acceptR18"
+        },
+        {
+            "title": "AdsGone",
+            "description": "サイト内の広告を非表示にできるようにします",
+            "price": 100,
             "margin": 0,
             "key": "acceptR18"
         },
@@ -142,13 +142,6 @@
             "description": "好きなイラストを5倍まで拡大できるようにします",
             "price": 700,
             "margin": 10,
-            "key": "bookmark1"
-        },
-        {
-            "title": "ACCESS KEY",
-            "description": "アクセスキーを得ます",
-            "price": 9999,
-            "margin": 0,
             "key": "bookmark1"
         }
     ]
