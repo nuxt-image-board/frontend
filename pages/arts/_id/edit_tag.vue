@@ -106,6 +106,8 @@ export default {
     const illust = response.data.data
     let vtags = illust.chara.map(tag => ({ text: tag[1] }))
     vtags = vtags.concat(illust.tag.map(tag => ({ text: tag[1] })))
+    vtags = vtags.concat(illust.group.map(tag => ({ text: tag[1] })))
+    vtags = vtags.concat(illust.system.map(tag => ({ text: tag[1] })))
     illust.tag = vtags
     return {
       illust
