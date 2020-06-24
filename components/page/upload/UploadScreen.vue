@@ -69,7 +69,7 @@
           <tr>
             <td>ソース</td>
             <td>
-              <input v-model="illust.source" class="input" type="text" :disabled="scraped">
+              <input v-model="illust.originUrl" class="input" type="text" :disabled="scraped">
             </td>
           </tr>
           <tr>
@@ -154,7 +154,9 @@ export default {
         imgs: [],
         tags: [],
         artist: '',
-        source: '',
+        imageUrl: '',
+        originUrl: '',
+        originService: '',
         R18: false
       },
       addTags: {
@@ -267,6 +269,8 @@ export default {
         artist: '',
         source: '',
         R18: false,
+        imageUrl: url,
+        originUrl: '',
         originService: '独自'
       }
     },
@@ -349,6 +353,7 @@ export default {
       this.illust.artist = this.removeEmoji(this.illust.artist)
       // 出典の設定
       this.illust.originUrl = url.replace('mobile.', '')
+      this.illust.imageUrl = url.replace('mobile.', '')
       switch (true) {
         case this.illust.originUrl.includes('twitter'):
           this.illust.originService = 'Twitter'
@@ -381,8 +386,6 @@ export default {
       // 個人的な趣味でフォーマット
       this.illust.title = this.illust.title.replace('。。。', '...')
       this.illust.caption = this.illust.caption.replace('。。。', '...')
-      // ソースを反映させる
-      this.illust.originUrl = this.illust.source
       // タグをテキストに戻す
       this.illust.tags = this.illust.tags.map(tag => (tag.text))
       const params = {
@@ -390,7 +393,7 @@ export default {
         caption: this.illust.caption,
         originService: this.illust.originService,
         originUrl: this.illust.originUrl + '?page=' + this.selection,
-        imageUrl: this.illust.originUrl + '?page=' + this.selection,
+        imageUrl: this.illust.imageUrl + '?page=' + this.selection,
         artist: {
           name: this.illust.artist
         },
