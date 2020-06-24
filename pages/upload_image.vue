@@ -163,7 +163,7 @@ export default {
       try {
         const resp = await this.$axios.post('/scrape/self', data, { headers })
         if (resp.data.status === 200) {
-          this.imageUrl = resp.data.url
+          this.imageUrl = resp.data.data.url
         }
       } catch (error) {
         alert('通信エラーが発生しました')

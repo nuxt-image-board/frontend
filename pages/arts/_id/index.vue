@@ -24,11 +24,17 @@
               </div>
               <div class="column is-12 has-text-centered">
                 <div class="field is-centered is-multiline">
+                  <nuxt-link v-for="tag in result.system" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
+                    <span class="tag is-danger">{{ tag[1] }}</span>&nbsp;
+                  </nuxt-link>
                   <nuxt-link v-for="chara in result.chara" :key="chara[0]" :to="&quot;/search/character/&quot;+chara[0]">
                     <span class="tag is-primary">{{ chara[1] }}</span>&nbsp;
                   </nuxt-link>
                   <nuxt-link v-for="tag in result.tag" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
-                    <span class="tag is-info is-light" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
+                    <span class="tag is-light" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
+                  </nuxt-link>
+                  <nuxt-link v-for="tag in result.group" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
+                    <span class="tag is-warning">{{ tag[1] }}</span>&nbsp;
                   </nuxt-link>
                 </div>
               </div>
