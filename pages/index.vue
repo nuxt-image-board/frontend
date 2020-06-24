@@ -108,9 +108,9 @@ export default {
     if (random.status !== 200) {
       return error({ statusCode: 502, message: 'err' })
     }
-    const randomIllustID = random.data.data.imgs[0].illustID
+    const randomIllust = random.data.data.imgs[0]
     return {
-      randomIllustID,
+      randomIllust,
       newsHead,
       version,
       hitokoto
@@ -121,10 +121,10 @@ export default {
       return process.env.CONTACT
     },
     RANDOM_ILLUST_SRC () {
-      return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllustID + (this.$store.state.user.useWebP ? '.webp' : this.result.extension)
+      return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllust.illustID + (this.$store.state.user.useWebP ? '.webp' : this.randomIllust.extension)
     },
     RANDOM_ILLUST () {
-      return 'arts/' + this.randomIllustID
+      return 'arts/' + this.randomIllust.illustID
     }
   },
   head () {
