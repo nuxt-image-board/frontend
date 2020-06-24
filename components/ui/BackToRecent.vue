@@ -1,6 +1,5 @@
 <template>
   <a
-    href="#"
     class="back-button"
     :class="{'back-has-bottom': $store.state.user.useBottom, 'back-no-bottom': !$store.state.user.useBottom}"
     @click="$router.go(-1)"
