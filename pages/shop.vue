@@ -36,7 +36,9 @@
               <thead>
                 <tr>
                   <th>商品</th>
-                  <th>説明</th>
+                  <th style="min-width:200px;">
+                    説明
+                  </th>
                   <th>価格</th>
                   <th>取引</th>
                 </tr>
