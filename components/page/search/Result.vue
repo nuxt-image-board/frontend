@@ -68,7 +68,8 @@ export default {
       previewAddress: process.env.CDN_ENDPOINT +
         'illusts/thumb/' +
         this.result.illustID +
-        (this.$store.state.user.useWebP ? '.webp' : this.result.extension),
+        '.' +
+        (this.$store.state.user.useWebP ? 'webp' : this.result.extension),
       artAddress: '/arts/' + this.result.illustID,
       artistAddress: '/search/artist/' + this.result.artistID
     }

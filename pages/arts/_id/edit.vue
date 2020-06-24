@@ -140,7 +140,11 @@ export default {
   },
   computed: {
     ImgAddress () {
-      return process.env.CDN_ENDPOINT + 'illusts/large/' + this.illust.illustID + (this.$store.state.user.useWebP ? '.webp' : this.illust.extension)
+      return process.env.CDN_ENDPOINT +
+        'illusts/large/' +
+        this.illust.illustID +
+        '.' +
+        (this.$store.state.user.useWebP ? 'webp' : this.illust.extension)
     }
   },
   methods: {
