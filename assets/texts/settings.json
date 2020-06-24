@@ -69,7 +69,7 @@
             "flag": false,
             "mobile_only": false,
             "class": "is-info",
-            "disabled": false,
+            "disabled": true,
             "title": "花びら背景",
             "description": "有効にすると、背景に某公式サイトのような花びらが出るようになります。若干重いので、スペックに不安がある場合は有効にしないでください。(アプリもどきから起動している場合はリロードするまで出てきません)"
         },
