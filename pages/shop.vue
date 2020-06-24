@@ -19,12 +19,12 @@
       </h4>
       <div class="columns is-centered is-mobile">
         <div class="column is-4 is-centered has-text-centered">
-          <button class="button is-primary">
+          <button class="button is-primary" disabled>
             取引履歴へ
           </button>
         </div>
         <div class="column is-4 is-centered has-text-centered">
-          <button class="button is-primary">
+          <button class="button is-primary" disabled>
             PYON贈与へ
           </button>
         </div>

@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { settings } from '~/assets/texts/site_settings.json'
+import { settings } from '~/assets/texts/settings.json'
 import Modal from '~/components/ui/Modal.vue'
 import Setting from '~/components/page/profile/toggle/setting.vue'
 

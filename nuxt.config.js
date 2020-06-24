@@ -168,7 +168,8 @@ export default {
           'faList',
           'faPlusSquare',
           'faArrowLeft',
-          'faShoppingCart'
+          'faShoppingCart',
+          'faSignOutAlt'
         ]
       },
       {

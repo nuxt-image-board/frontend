@@ -105,7 +105,7 @@
 <script>
 import Fas from '~/components/ui/Fas.vue'
 import Notification from '~/components/ui/Notification.vue'
-import { entries, placeholder } from '~/assets/texts/gate_flavor.json'
+import { entries, placeholder } from '~/assets/texts/gate.json'
 
 export default {
   auth: false,

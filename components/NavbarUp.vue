@@ -15,6 +15,17 @@
         <div id="navMenu" class="navbar-menu" :class="{ 'is-active': openMenu }">
           <div class="navbar-start">
             <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                  <nuxt-link to="/news" @click.native="closeAll($event)">
+                    <span class="icon">
+                      <Fas i="bell" classes="has-text-white" />
+                    </span>
+                  </nuxt-link>
+                </p>
+              </div>
+            </div>
+            <div class="navbar-item">
               <form method="get" action="/search/keyword">
                 <div class="field has-addons">
                   <div class="control">
@@ -32,7 +43,7 @@
           </div>
           <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
             <nuxt-link to="/search/list" class="navbar-item has-text-white" @click.native="closeAll($event)">
-              <span class="icon"><Fas i="search" /></span>
+              <span class="icon"><Fas i="list" /></span>
               <span>一覧検索</span>
             </nuxt-link>
             <div class="navbar-item has-dropdown is-hoverable">
@@ -45,7 +56,7 @@
                   {{ chara.name }} <span class="tag is-light">{{ chara.count }}</span>
                 </nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/list/character" class="navbar-item has-text-white" @click.native="closeAll($event)">
+                <nuxt-link to="/list/character" class="dropdown-item has-text-white" @click.native="closeAll($event)">
                   もっと見る
                 </nuxt-link>
               </div>
@@ -60,7 +71,7 @@
                   {{ tag.name }} <span class="tag is-light">{{ tag.count }}</span>
                 </nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/list/tag" class="navbar-item has-text-white" @click.native="closeAll($event)">
+                <nuxt-link to="/list/tag" class="dropdown-item has-text-white" @click.native="closeAll($event)">
                   もっと見る
                 </nuxt-link>
               </div>
@@ -70,12 +81,12 @@
                 <span class="icon"><Fas i="paint-brush" /></span>
                 <span>絵師検索</span>
               </a>
-              <div class="navbar-dropdown is-boxed has-text-white" :class="{'is-hidden-touch': openTab !== 3}">
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 3}">
                 <nuxt-link v-for="artist in artists" :key="artist.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/artist/&quot;+artist.id" @click.native="closeAll($event)">
                   {{ artist.name }} <span class="tag is-light">{{ artist.count }}</span>
                 </nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/list/artist" class="navbar-item has-text-white" @click.native="closeAll($event)">
+                <nuxt-link to="/list/artist" class="dropdown-item has-text-white" @click.native="closeAll($event)">
                   もっと見る
                 </nuxt-link>
               </div>
@@ -86,44 +97,23 @@
             </nuxt-link>
           </div>
           <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <nuxt-link to="/upload" @click.native="closeAll($event)">
-                    <span class="icon">
-                      <Fas i="upload" classes="has-text-white" />
-                    </span>
-                  </nuxt-link>
-                </p>
-              </div>
-            </div>
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <nuxt-link to="/news" @click.native="closeAll($event)">
-                    <span class="icon">
-                      <Fas i="bell" classes="has-text-white" />
-                    </span>
-                  </nuxt-link>
-                </p>
-              </div>
-            </div>
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <nuxt-link to="/shop" @click.native="closeAll($event)">
-                    <Fas i="shopping-cart" classes="has-text-white" />
-                  </nuxt-link>
-                </p>
-              </div>
-            </div>
-            <div class="navbar-item">
-              <div class="field is-grouped">
-                <p class="control">
-                  <nuxt-link to="/profile" @click.native="closeAll($event)">
-                    <Fas i="user" classes="has-text-white" />
-                  </nuxt-link>
-                </p>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link has-text-white" @click="changeTab(4)">
+                <span class="icon"><Fas i="user" /></span>
+                <span>{{ $auth.$state.user.name }}</span>
+              </a>
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 4}">
+                <nuxt-link v-for="user in userNav" :key="user.name" class="dropdown-item has-text-white pl-3" :to="user.to" @click.native="closeAll($event)">
+                  <span class="icon">
+                    <Fas :i="user.icon" classes="has-text-white" />
+                  </span>
+                  {{ user.title }}
+                </nuxt-link>
+                <hr class="navbar-divider">
+                <nuxt-link class="dropdown-item has-text-white pl-3" to="/logout" @click.native="closeAll($event)">
+                  <Fas i="sign-out-alt" classes="has-text-white" />
+                  ログアウト
+                </nuxt-link>
               </div>
             </div>
           </div>
@@ -145,7 +135,24 @@ export default {
       openMenu: false,
       openTab: 0,
       keyword: '',
-      hideAllMenu: false
+      hideAllMenu: false,
+      userNav: [
+        {
+          to: '/profile',
+          title: 'マイページ',
+          icon: 'user'
+        },
+        {
+          to: '/shop',
+          title: 'ショップ',
+          icon: 'shopping-cart'
+        },
+        {
+          to: '/upload',
+          title: '投稿',
+          icon: 'upload'
+        }
+      ]
     }
   },
   computed: {

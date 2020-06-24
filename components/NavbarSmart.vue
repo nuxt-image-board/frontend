@@ -31,7 +31,7 @@
         </div>
       </div>
     </nav>
-    <div id="quickviewDefault" class="quickview" :class="{ 'is-active': openMenu, 'is-left' : $store.state.user.isLeftHanded }">
+    <div class="quickview" :class="{ 'is-active': openMenu, 'is-left' : $store.state.user.isLeftHanded }">
       <header class="quickview-header">
         <p class="has-text-white">
           <nuxt-link to="/" class="has-text-white" @click.native="openMenu = !openMenu">
@@ -52,12 +52,6 @@
               <nuxt-link to="/" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="home" /></span>
                 <span>トップ</span>
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/profile" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="user" /></span>
-                <span>マイページ</span>
               </nuxt-link>
             </li>
             <li>
@@ -121,6 +115,23 @@
               <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="upload" /></span>
                 <span>投稿</span>
+              </nuxt-link>
+            </li>
+            <li class="menu-title">
+              <p class="is-size-7 has-text-white">
+                ユーザー
+              </p>
+            </li>
+            <li>
+              <nuxt-link to="/profile" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="user" /></span>
+                <span>マイページ</span>
+              </nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/shop" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="shopping-cart" /></span>
+                <span>ショップ</span>
               </nuxt-link>
             </li>
             <li class="menu-title">
@@ -214,9 +225,7 @@ export default {
   data () {
     return {
       openMenu: false,
-      openSearch: false,
-      openOther: false,
-      showBottomNav: false
+      openSearch: false
     }
   },
   watch: {

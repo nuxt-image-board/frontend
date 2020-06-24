@@ -22,8 +22,9 @@ export const actions = {
   async nuxtServerInit ({ dispatch }, req) {
     await dispatch('getNavigations', req)
   },
-  async getNavigations ({ commit }) {
-    if (this.$cookies.get('isPC')) {
+  async getNavigations ({ commit, rootState }) {
+    // 他のファイルに依存する...
+    if (rootState.user.isPC) {
       // コミットすることで状態変更が反映される
       const [characters, tags, artists] = await Promise.all([
         this.$axios.get('navigations/characters', { useCache: true }),
