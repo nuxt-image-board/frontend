@@ -239,7 +239,7 @@ export default {
       return process.env.CDN_ENDPOINT +
         'illusts/large/' +
         this.result.illustID +
-        (this.$store.state.user.useWebP ? '.webp' : '.' + this.result.extension)
+        (this.$store.state.user.useWebP ? '.webp' : '.jpg')
     },
     ImgOrigAddress () {
       return process.env.CDN_ENDPOINT +

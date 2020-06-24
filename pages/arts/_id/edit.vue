@@ -144,7 +144,7 @@ export default {
         'illusts/large/' +
         this.illust.illustID +
         '.' +
-        (this.$store.state.user.useWebP ? 'webp' : this.illust.extension)
+        (this.$store.state.user.useWebP ? 'webp' : 'jpg')
     }
   },
   methods: {
