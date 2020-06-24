@@ -259,9 +259,16 @@ export default {
       return text.replace(reg, '')
     },
     writeArtInfo (url) {
-      this.illust.title = ''
-      this.illust.imgs = [url]
-      this.illust.originService = '独自'
+      this.illust = {
+        title: '',
+        caption: '',
+        imgs: [url],
+        tags: [],
+        artist: '',
+        source: '',
+        R18: false,
+        originService: '独自'
+      }
     },
     async getArtInfo () {
       // APIにリクエストする
@@ -374,6 +381,8 @@ export default {
       // 個人的な趣味でフォーマット
       this.illust.title = this.illust.title.replace('。。。', '...')
       this.illust.caption = this.illust.caption.replace('。。。', '...')
+      // ソースを反映させる
+      this.illust.originUrl = this.illust.source
       // タグをテキストに戻す
       this.illust.tags = this.illust.tags.map(tag => (tag.text))
       const params = {

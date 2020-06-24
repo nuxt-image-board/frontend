@@ -11,18 +11,19 @@ $brown-red: #80220b;
 $brown-deep: #6a4433;
 $brown-dark: #3a190c;
 $brown-black: #4a1f0f;
+$brown-bg: #ffd8b2;
 
 // 通常色設定
-$primary: #ddaa77;
-$background: #ffd8b2;
-$link: #955E4B;
+$primary: $brown-white;
+$background: $brown-bg;
+$link: $brown-whiter;
 $info: $brown-deep;
-$blue: #3298dc;
-$green: #00d1b2;
-$success: #ddaa77;
 $danger: $brown-red;
 $dark: $brown-dark;
 $warning: $brown-yellow;
+$blue: #3298dc;
+$green: #00d1b2;
+$success: #ddaa77;
 
 /*
 公式サイトカラー
