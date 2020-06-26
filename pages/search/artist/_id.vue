@@ -3,6 +3,7 @@
     :endpoint="endpoint"
     :notification-title="NotificationTitle"
     :results-from-props="results"
+    :mylist-registered="mylistRegistered"
     :selected-page-from-props="SelectedPage"
     :total-page="totalPage"
     :is-search-page="isSearchPage"
@@ -18,7 +19,7 @@ export default {
   components: {
     List
   },
-  async asyncData ({ $axios, route, error }) {
+  async asyncData ({ $axios, $auth, route, error }) {
     const endpoint = '/search/artist'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
@@ -33,11 +34,17 @@ export default {
       return error({ statusCode: 404, message: 'err' })
     }
     const data = response.data.data
+    const illustIds = data.imgs.map(img => img.illustID)
+    const mylistRegistered = await $axios.post(
+      `/mylist/${$auth.$state.user.mylist.id}/finds`,
+      { ids: illustIds }
+    )
     return {
       endpoint,
       pageTitle: `${data.title}`,
       NotificationTitle: '絵師から検索 ' + data.title + ' ' + data.count + '件',
       results: data.imgs,
+      mylistRegistered: mylistRegistered.data.data,
       SelectedPage: page,
       totalPage: data.pages,
       SelectedSort: sortNum,

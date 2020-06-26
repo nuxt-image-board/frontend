@@ -175,6 +175,10 @@ export default {
       {
         set: '@fortawesome/free-brands-svg-icons', // Brand icons
         icons: ['faTwitterSquare', 'faLine']
+      },
+      {
+        set: '@fortawesome/free-regular-svg-icons', // Brand icons
+        icons: ['faBookmark']
       }
     ]
   },

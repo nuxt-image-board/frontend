@@ -27,7 +27,8 @@
         </span>
       </a>
       <a class="card-footer-item" @click="toggleBookmark()">
-        <span v-if="result.bookmarked" class="icon is-medium">
+        {{ bookmarked }}
+        <span v-if="!bookmarked" class="icon is-medium">
           <Far i="bookmark" classes="fa-2x" />
         </span>
         <span v-else class="icon is-medium">
@@ -61,6 +62,10 @@ export default {
           }
         }
       }
+    },
+    bookmarkedFromProps: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -71,6 +76,7 @@ export default {
         '.' +
         (this.$store.state.user.useWebP ? 'webp' : 'jpg'),
       artAddress: '/arts/' + this.result.illustID,
+      bookmarked: this.bookmarkedFromProps,
       artistAddress: '/search/artist/' + this.result.artistID
     }
   },
@@ -80,8 +86,12 @@ export default {
       this.result.like += 1
       await this.$axios.put(endpoint)
     },
-    toggleBookmark () {
-      // pass
+    async toggleBookmark () {
+      this.bookmarked = !this.bookmarked
+      await this.$axios.put(
+        `/mylist/${this.$auth.$state.user.mylist.id}`,
+        { illustID: this.result.illustID, action: this.bookmarked ? 'remove' : 'add' }
+      )
     }
   }
 }
