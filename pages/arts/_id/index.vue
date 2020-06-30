@@ -48,7 +48,7 @@
                       <span class="tag is-link">{{ result.date }}</span>
                     </div>
                   </div>
-                    </div>
+                </div>
                 <div class="field is-grouped is-grouped-centered is-grouped-multiline">
                   <div class="control">
                     <div class="tags has-addons">
