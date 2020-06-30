@@ -66,7 +66,14 @@ export default {
     const params = { sort, order, page }
     const response = await $axios.get(endpoint, { params })
     if (response.data.status !== 200) {
-      return error({ statusCode: 404, message: 'err' })
+      return {
+        endpoint,
+        results: [],
+        count: 0,
+        SelectedPage: page,
+        totalPage: 0,
+        SelectedSort: sortNum
+      }
     }
     const data = response.data.data
     return {
