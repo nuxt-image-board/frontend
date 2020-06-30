@@ -48,15 +48,7 @@
                       <span class="tag is-link">{{ result.date }}</span>
                     </div>
                   </div>
-                  <div class="control">
-                    <div class="tags has-addons">
-                      <span class="tag">
-                        <Fas i="bookmark" />
-                      </span>
-                      <span class="tag is-link">0</span>
                     </div>
-                  </div>
-                </div>
                 <div class="field is-grouped is-grouped-centered is-grouped-multiline">
                   <div class="control">
                     <div class="tags has-addons">
@@ -87,8 +79,15 @@
                 </div>
               </div>
               <div class="column is-12 has-text-centered">
-                <a class="button is-primary is-large" @click="addStar()"><Fas i="heart" /> x{{ result.like }}</a>
-                <a class="button is-primary is-large" @click="toggleBookmark()"><Fas i="bookmark" /></a>
+                <a class="button is-primary is-large" @click="addStar()">
+                  <Fas i="heart" style="margin-right:3px;" />
+                  x{{ result.like }}
+                </a>
+                <a class="button is-primary is-large" @click="toggleBookmark()">
+                  <Fas v-if="result.mylisted" i="bookmark" style="margin-right:3px;" />
+                  <Far v-else i="bookmark" style="margin-right:3px;" />
+                  x{{ result.mylist }}
+                </a>
                 <div v-if="isZoomAllowed" class="column is-12 has-text-centered">
                   <a class="button is-primary is-medium" @click="openZoom = true">
                     壁紙サイズに拡大
@@ -188,6 +187,7 @@
 
 <script>
 import Fas from '~/components/ui/Fas.vue'
+import Far from '~/components/ui/Far.vue'
 import Fab from '~/components/ui/Fab.vue'
 import Modal from '~/components/ui/Modal.vue'
 
@@ -195,6 +195,7 @@ export default {
   components: {
     Modal,
     Fas,
+    Far,
     Fab
   },
   async asyncData ({ $axios, $auth, route, error }) {
@@ -266,11 +267,17 @@ export default {
       this.result.like += 1
       await this.$axios.put(endpoint)
     },
-    toggleBookmark () {
-      // const endpoint = '/arts/' + this.result.illustID + '/bookmark'
-      // await this.$axios.post(endpoint)
-      // this.bookmarkSound.play()
-      alert('まだ未実装です > <')
+    async toggleBookmark () {
+      if (!this.result.mylisted) {
+        this.result.mylist += 1
+      } else {
+        this.result.mylist -= 1
+      }
+      await this.$axios.put(
+        `/mylist/${this.$auth.$state.user.mylist.id}`,
+        { illustID: this.result.illustID, action: this.result.mylisted ? 'remove' : 'add' }
+      )
+      this.result.mylisted = !this.result.mylisted
     }
   },
   head () {

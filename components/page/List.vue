@@ -21,7 +21,7 @@
       </div>
       <div class="columns is-centered is-multiline is-mobile">
         <div v-for="result in results" :key="result.illustID" class="column is-12-mobile is-6-touch is-3-desktop">
-          <SearchResult v-if="isSearchPage" :result="result" :bookmarked-from-props="mylistRegistered[result.illustID]" />
+          <SearchResult v-if="isSearchPage" :result="result" />
           <ListResult v-else :page-type="pageType" :result="result" />
         </div>
       </div>
@@ -109,14 +109,6 @@ export default {
             }
           }
         ]
-      }
-    },
-    mylistRegistered: {
-      type: Object,
-      default: () => {
-        return {
-          0: false
-        }
       }
     },
     pageType: {

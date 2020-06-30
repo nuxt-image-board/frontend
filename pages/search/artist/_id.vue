@@ -3,7 +3,6 @@
     :endpoint="endpoint"
     :notification-title="NotificationTitle"
     :results-from-props="results"
-    :mylist-registered="mylistRegistered"
     :selected-page-from-props="SelectedPage"
     :total-page="totalPage"
     :is-search-page="isSearchPage"
@@ -29,22 +28,16 @@ export default {
       : (sortNum <= 3) ? 'c'
         : 'l'
     const params = { sort, order, page, id }
-    const response = await $axios.get(endpoint, { params, useCache: process.client })
+    const response = await $axios.get(endpoint, { params })
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }
     const data = response.data.data
-    const illustIds = data.imgs.map(img => img.illustID)
-    const mylistRegistered = await $axios.post(
-      `/mylist/${$auth.$state.user.mylist.id}/finds`,
-      { ids: illustIds }
-    )
     return {
       endpoint,
       pageTitle: `${data.title}`,
       NotificationTitle: '絵師から検索 ' + data.title + ' ' + data.count + '件',
       results: data.imgs,
-      mylistRegistered: mylistRegistered.data.data,
       SelectedPage: page,
       totalPage: data.pages,
       SelectedSort: sortNum,

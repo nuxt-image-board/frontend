@@ -77,7 +77,7 @@ export default {
       }
     }
     const params = { sort, order, page, keyword }
-    const response = await $axios.get(endpoint, { params, useCache: process.client })
+    const response = await $axios.get(endpoint, { params })
     const data = response.data.data
     if (response.data.status !== 200) {
       return {
@@ -122,7 +122,7 @@ export default {
         : (sortNum <= 3) ? 'c'
           : 'l'
       const params = { sort, order, page, keyword }
-      const response = await this.$axios.get(this.endpoint, { params, useCache: process.client })
+      const response = await this.$axios.get(this.endpoint, { params })
       const data = response.data.data
       if (response.data.status === 200) {
         this.pageTitle = `${data.title}`

@@ -143,6 +143,11 @@ export default {
           icon: 'user'
         },
         {
+          to: '/mylist',
+          title: 'マイリスト',
+          icon: 'bookmark'
+        },
+        {
           to: '/shop',
           title: 'ショップ',
           icon: 'shopping-cart'

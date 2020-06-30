@@ -22,17 +22,19 @@
         <span class="icon is-small">
           <Fas i="heart" />
         </span>
-        <span class="animated">
+        <span>
           x{{ result.like }}
         </span>
       </a>
       <a class="card-footer-item" @click="toggleBookmark()">
-        {{ bookmarked }}
-        <span v-if="!bookmarked" class="icon is-medium">
-          <Far i="bookmark" classes="fa-2x" />
+        <span v-if="result.mylisted" class="icon is-small">
+          <Fas i="bookmark" />
         </span>
-        <span v-else class="icon is-medium">
-          <Fas i="bookmark" classes="fa-2x" />
+        <span v-else class="icon is-small">
+          <Far i="bookmark" />
+        </span>
+        <span>
+          x{{ result.mylist }}
         </span>
       </a>
     </div>
@@ -76,7 +78,6 @@ export default {
         '.' +
         (this.$store.state.user.useWebP ? 'webp' : 'jpg'),
       artAddress: '/arts/' + this.result.illustID,
-      bookmarked: this.bookmarkedFromProps,
       artistAddress: '/search/artist/' + this.result.artistID
     }
   },
@@ -87,11 +88,16 @@ export default {
       await this.$axios.put(endpoint)
     },
     async toggleBookmark () {
-      this.bookmarked = !this.bookmarked
       await this.$axios.put(
         `/mylist/${this.$auth.$state.user.mylist.id}`,
-        { illustID: this.result.illustID, action: this.bookmarked ? 'remove' : 'add' }
+        { illustID: this.result.illustID, action: this.result.mylisted ? 'remove' : 'add' }
       )
+      if (this.result.mylisted) {
+        this.result.mylist -= 1
+      } else {
+        this.result.mylist += 1
+      }
+      this.result.mylisted = !this.result.mylisted
     }
   }
 }

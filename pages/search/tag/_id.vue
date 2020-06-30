@@ -18,7 +18,7 @@ export default {
   components: {
     List
   },
-  async asyncData ({ $axios, route, error }) {
+  async asyncData ({ $axios, $auth, route, error }) {
     const endpoint = '/search/tag'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
@@ -28,7 +28,7 @@ export default {
       : (sortNum <= 3) ? 'c'
         : 'l'
     const params = { sort, order, page, id }
-    const response = await $axios.get(endpoint, { params, useCache: process.client })
+    const response = await $axios.get(endpoint, { params })
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }
