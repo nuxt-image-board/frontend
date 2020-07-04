@@ -129,6 +129,12 @@
               </nuxt-link>
             </li>
             <li>
+              <nuxt-link to="/mylist" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="bookmark" /></span>
+                <span>マイリスト</span>
+              </nuxt-link>
+            </li>
+            <li>
               <nuxt-link to="/shop" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="shopping-cart" /></span>
                 <span>ショップ</span>
