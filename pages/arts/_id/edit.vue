@@ -107,7 +107,7 @@ export default {
       return error({ statusCode: 404, message: 'err' })
     }
     const illust = response.data.data
-    if (illust.user.id !== $auth.$state.user.userID) {
+    if (illust.user.id !== $auth.$state.user.userID && $auth.$state.user.permission !== 9) {
       return error({ statusCode: 401, message: 'err' })
     }
     let vtags = illust.chara.map(tag => ({ text: tag[1] }))
@@ -124,6 +124,7 @@ export default {
       tag: '',
       tags: [],
       loadingText: '',
+      destroyed: false,
       isLoading: false,
       isSending: false,
       isFailed: false,
@@ -180,12 +181,29 @@ export default {
     closeWindow () {
       this.isSending = false
       this.isLoading = false
+      if (this.destroyed) {
+        this.$router.go(-2)
+      } else {
+        this.$router.go(-1)
+      }
     },
     async reGet () {
     },
-    remove () {
-      // const response = await this.$axios.delete('/arts/' + this.illust.illustID)
-      alert('200 OK')
+    async remove () {
+      this.isFailed = false
+      this.isSending = true
+      this.isLoading = true
+      this.loadingText = '削除しています...'
+      const response = await this.$axios.delete('/arts/' + this.illust.illustID)
+      this.isSending = false
+      if (response.data.status === 200) {
+        this.loadingText = '削除しました!'
+        this.destroyed = true
+      } else {
+        this.loadingText = '削除に失敗しました'
+        this.isFailed = true
+      }
+      setTimeout(this.closeWindow, 2000)
     }
   },
   head () {

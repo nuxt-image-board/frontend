@@ -208,9 +208,10 @@ export default {
       return error({ statusCode: 404, message: 'err' })
     }
     const data = response.data.data
-    if (data.user.id === $auth.$state.user.userID) {
+    if (data.user.id === $auth.$state.user.userID || $auth.$state.user.permission === 9) {
       isEditable = true
-    } else if ($auth.$state.user.permission > 1) {
+    }
+    if ($auth.$state.user.permission > 1) {
       isTagEditable = true
     }
     const shareAddress = encodeURI(data.title + '\n' + data.originUrl)
