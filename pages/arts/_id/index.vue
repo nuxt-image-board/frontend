@@ -33,8 +33,10 @@
                   <nuxt-link v-for="tag in result.tag" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
                     <span class="tag is-light" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
                   </nuxt-link>
+                </div>
+                <div v-if="result.group.length > 0">
                   <nuxt-link v-for="tag in result.group" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
-                    <span class="tag is-warning">{{ tag[1] }}</span>&nbsp;
+                    <span class="tag is-warning">{{ 'グループID '+tag[1] }}</span>&nbsp;
                   </nuxt-link>
                 </div>
               </div>
@@ -46,6 +48,22 @@
                         <Fas i="calendar" />
                       </span>
                       <span class="tag is-link">{{ result.date }}</span>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="file-image" />
+                      </span>
+                      <span class="tag is-link">{{ result.filesize }}</span>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="arrows-alt" />
+                      </span>
+                      <span class="tag is-link">{{ result.width }}x{{ result.height }}</span>
                     </div>
                   </div>
                 </div>
@@ -159,12 +177,17 @@
             <div class="column is-12">
               <div class="columns is-centered">
                 <div v-if="isEditable" class="column is-4 has-text-centered">
-                  <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit'">
+                  <nuxt-link class="button is-success" :to="result.illustID + '/edit'">
                     データ編集
                   </nuxt-link>
                 </div>
+                <div class="column is-4 has-text-centered">
+                  <button class="button is-success" @click="copyIllustID">
+                    イラストIDをコピー
+                  </button>
+                </div>
                 <div v-if="isTagEditable" class="column is-4 has-text-centered">
-                  <nuxt-link class="tag is-success is-large" :to="result.illustID + '/edit_tag'">
+                  <nuxt-link class="button is-success" :to="result.illustID + '/edit_tag'">
                     タグ編集
                   </nuxt-link>
                 </div>
@@ -252,6 +275,12 @@ export default {
     }
   },
   methods: {
+    copyIllustID () {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(this.result.illustID)
+        alert('コピーしました')
+      }
+    },
     openSocialShare (addr) {
       window.open(addr, '', 'width=500,height=500')
     },

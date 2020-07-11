@@ -15,7 +15,7 @@
         <div class="modal-background" />
         <div class="modal-content">
           <p class="title has-text-centered has-text-white">
-            ドロップで画像検索
+            ドロップで画像投稿
           </p>
         </div>
       </div>

@@ -11,76 +11,86 @@
           </figure>
         </div>
         <div class="column is-12-mobile is-4-tablet is-6-desktop">
-          <div class="columns is-centered is-multiline">
-            <div class="column is-12 has-text-centered">
-              <p class="title">
-                {{ illust.title }}
-              </p>
-              <p class="subtitle">
-                {{ illust.caption }}
-              </p>
-            </div>
-            <div class="column is-12 has-text-centered">
-              <vue-tags-input
-                v-model="tag"
-                :tags="illust.tag"
-                :validation="validation"
-                style="width: 100%;max-width: none;"
-                @tags-changed="newTags => illust.tag = newTags"
-              />
-            </div>
-            <div class="column is-12">
-              <div class="field is-grouped is-grouped-centered is-grouped-multiline">
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="calendar" />
-                    </span>
-                    <span class="tag is-info">{{ illust.date }}</span>
+          <div class="box">
+            <div class="columns is-centered is-multiline">
+              <div class="column is-12 has-text-centered">
+                <p class="title">
+                  {{ illust.title }}
+                </p>
+                <p class="subtitle">
+                  {{ illust.caption }}
+                </p>
+              </div>
+              <div class="column is-12 has-text-centered">
+                <vue-tags-input
+                  v-model="tag"
+                  :tags="illust.tag"
+                  :validation="validation"
+                  style="width: 100%;max-width: none;"
+                  @tags-changed="newTags => illust.tag = newTags"
+                />
+              </div>
+              <div class="column is-12">
+                <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="calendar" />
+                      </span>
+                      <span class="tag is-link">{{ illust.date }}</span>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="file-image" />
+                      </span>
+                      <span class="tag is-link">{{ illust.filesize }}</span>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="arrows-alt" />
+                      </span>
+                      <span class="tag is-link">{{ illust.width }}x{{ illust.height }}</span>
+                    </div>
                   </div>
                 </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="bookmark" />
-                    </span>
-                    <span class="tag is-info">0</span>
+                <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="pen-fancy" />
+                      </span>
+                      <nuxt-link :to="&quot;/search/artist/&quot;+illust.artist.id" class="tag is-link">
+                        {{ illust.artist.name }}
+                      </nuxt-link>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="user-edit" />
+                      </span>
+                      <a class="tag is-link" href="#">{{ illust.user.name }}</a>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="broadcast-tower" />
+                      </span>
+                      <a class="tag is-link" :href="illust.originUrl">{{ illust.originService }}</a>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="field is-grouped is-grouped-centered is-grouped-multiline">
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="pen-fancy" />
-                    </span>
-                    <nuxt-link :to="&quot;/search/artist/&quot;+illust.artist.id" class="tag is-link">
-                      {{ illust.artist.name }}
-                    </nuxt-link>
-                  </div>
-                </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="user-edit" />
-                    </span>
-                    <a class="tag is-link" href="#">{{ illust.user.name }}</a>
-                  </div>
-                </div>
-                <div class="control">
-                  <div class="tags has-addons">
-                    <span class="tag">
-                      <Fas i="broadcast-tower" />
-                    </span>
-                    <a class="tag is-link" :href="illust.originUrl">{{ illust.originService }}</a>
-                  </div>
-                </div>
+              <div class="column is-12 has-text-centered">
+                <button class="button is-primary is-large" @click="update()">
+                  更新を適用
+                </button>
               </div>
-            </div>
-            <div class="column is-12 has-text-centered">
-              <button class="button is-primary is-large" @click="update()">
-                更新を適用
-              </button>
             </div>
           </div>
         </div>
