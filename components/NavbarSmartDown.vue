@@ -1,28 +1,15 @@
 <template>
   <nav class="navbar is-link is-fixed-bottom" role="navigation">
     <div class="navbar-brand">
-      <nuxt-link to="/search/list" class="navbar-item is-expanded is-block has-text-centered has-background-link">
-        <Fas i="list" />
+      <nuxt-link
+        v-for="b in bottom_buttons"
+        :key="b.title"
+        :to="b.to"
+        class="bottom-button navbar-item is-block has-text-centered has-background-link"
+      >
+        <Fas :i="b.icon" />
         <p class="is-size-7">
-          一覧
-        </p>
-      </nuxt-link>
-      <nuxt-link to="/upload" class="navbar-item is-expanded is-block has-text-centered has-background-link">
-        <Fas i="upload" />
-        <p class="is-size-7">
-          投稿
-        </p>
-      </nuxt-link>
-      <nuxt-link to="/search/image" class="navbar-item is-expanded is-block has-text-centered has-background-link">
-        <Fas i="search" />
-        <p class="is-size-7">
-          検索
-        </p>
-      </nuxt-link>
-      <nuxt-link to="/profile" class="navbar-item is-expanded is-block has-text-centered has-background-link">
-        <Fas i="user" />
-        <p class="is-size-7">
-          設定
+          {{ b.title }}
         </p>
       </nuxt-link>
     </div>
@@ -35,6 +22,43 @@ import Fas from '~/components/ui/Fas.vue'
 export default {
   components: {
     Fas
+  },
+  data () {
+    return {
+      bottom_buttons: [
+        {
+          to: '/search/list',
+          icon: 'home',
+          title: 'ﾎｰﾑ'
+        },
+        {
+          to: '/search/methods',
+          icon: 'search',
+          title: '検索'
+        },
+        {
+          to: '/upload',
+          icon: 'upload',
+          title: '投稿'
+        },
+        {
+          to: '/mylist',
+          icon: 'bookmark',
+          title: 'ﾏｲﾘｽﾄ'
+        },
+        {
+          to: '/profile',
+          icon: 'user',
+          title: '設定'
+        }
+      ]
+    }
   }
 }
 </script>
+
+<style>
+.bottom-button{
+  width: 20%;
+}
+</style>

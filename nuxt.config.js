@@ -65,7 +65,37 @@ export default {
     background_color: process.env.SITE_BG_COLOR,
     display: 'standalone',
     scope: process.env.SITE_URL,
-    start_url: process.env.SITE_URL
+    start_url: process.env.SITE_URL,
+    shortcuts: [
+      {
+        name: '一覧画面を開く',
+        short_name: '一覧',
+        description: 'View the list of podcasts you saved for later',
+        url: '/search/list',
+        icons: [{ src: '/icons/play-later.png', sizes: '192x192' }]
+      },
+      {
+        name: '投稿画面を開く',
+        short_name: '投稿',
+        description: 'View the list of podcasts you listen to',
+        url: '/upload',
+        icons: [{ src: '/icons/subscriptions.png', sizes: '192x192' }]
+      },
+      {
+        name: '推し画面を開く',
+        short_name: '推し',
+        description: 'View the list of podcasts you saved for later',
+        url: '/user/mylist',
+        icons: [{ src: '/icons/play-later.png', sizes: '192x192' }]
+      },
+      {
+        name: 'マイリストを開く',
+        short_name: 'マイリスト',
+        description: 'View the list of podcasts you saved for later',
+        url: '/user/mylist',
+        icons: [{ src: '/icons/play-later.png', sizes: '192x192' }]
+      }
+    ]
   },
   /*
   ** Customize the progress-bar color
