@@ -250,15 +250,7 @@ export default {
   },
   methods: {
     removeEmoji (text) {
-      const ranges = [
-        '\uD83C[\uDF00-\uDFFF]',
-        '\uD83D[\uDC00-\uDE4F]',
-        '\uD83D[\uDE80-\uDEFF]',
-        '\uD7C9[\uDE00-\uDEFF]',
-        '[\u2600-\u27BF]'
-      ]
-      const reg = new RegExp(ranges.join('|'), 'g')
-      return text.replace(reg, '')
+      return text.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '')
     },
     writeArtInfo (url) {
       this.illust = {
