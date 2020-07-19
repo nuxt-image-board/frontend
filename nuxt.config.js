@@ -201,7 +201,8 @@ export default {
           'faShoppingCart',
           'faSignOutAlt',
           'faArrowsAlt',
-          'faFileImage'
+          'faFileImage',
+          'faWallet'
         ]
       },
       {

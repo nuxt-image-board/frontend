@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container is-widescreen">
       <h1 class="title has-text-centered">
-        ショップ (未実装 / 近日実装予定)
+        ショップ
       </h1>
       <div class="columns is-centered">
         <div class="column is-6 is-centered has-text-centered">
@@ -15,20 +15,8 @@
         </div>
       </div>
       <h4 class="subtitle has-text-centered">
-        You currently have 0 PYON.
+        あなたは現在 {{ money }} PYON を所持しています。
       </h4>
-      <div class="columns is-centered is-mobile">
-        <div class="column is-4 is-centered has-text-centered">
-          <button class="button is-primary" disabled>
-            取引履歴へ
-          </button>
-        </div>
-        <div class="column is-4 is-centered has-text-centered">
-          <button class="button is-primary" disabled>
-            PYON贈与へ
-          </button>
-        </div>
-      </div>
       <div class="columns is-centered">
         <div class="column is-8">
           <div class="table-container">
@@ -71,6 +59,14 @@
 import { products } from '~/assets/texts/products.json'
 
 export default {
+  async asyncData ({ $axios, error, route }) {
+    try {
+      const user = await $axios.get('/toymoney/users/assets')
+      return { money: user.data.money, assets: user.data.assets }
+    } catch (err) {
+      return error({ statusCode: 502, message: 'err' })
+    }
+  },
   data () {
     return {
       products

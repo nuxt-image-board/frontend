@@ -148,9 +148,9 @@ export default {
           icon: 'bookmark'
         },
         {
-          to: '/shop',
-          title: 'ショップ',
-          icon: 'shopping-cart'
+          to: '/wallet',
+          title: 'ウォレット',
+          icon: 'wallet'
         },
         {
           to: '/upload',
