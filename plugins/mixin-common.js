@@ -20,18 +20,25 @@ Vue.mixin({
           secure: true
         }
       )
-      // 共通設定
-      this.$store.commit('user/updateSetting', { path: 'useWebP', param: !this.$device.isMacOS })
-      // PC設定
-      this.$store.commit('user/updateSetting', { path: 'isPC', param: this.$device.isDesktop })
-      this.$store.commit('user/updateSetting', { path: 'useJump', param: this.$device.isDesktop })
+      // デフォルト設定代入
+      const defaultSettings = {
+        useWebP: !this.$device.isMacOS,
+        isPC: this.$device.isDesktop,
+        useJump: this.$device.isDesktop,
+        useBack: this.$device.isMacOS && !this.$device.isDesktop,
+        useSwipe: !this.$device.isMacOS,
+        useBottom: !this.$device.isDesktop
+      }
+      for (const setting in defaultSettings) {
+        this.$store.commit(
+          'user/updateSetting',
+          { path: setting, param: defaultSettings[setting] }
+        )
+      }
+      // PCなら一応ナビゲーションを取り直す
       if (this.$device.isDesktop) {
         await this.$store.dispatch('getNavigations')
       }
-      // スマホ用設定
-      this.$store.commit('user/updateSetting', { path: 'useBack', param: this.$device.isMacOS && !this.$device.isDesktop })
-      this.$store.commit('user/updateSetting', { path: 'useSwipe', param: !this.$device.isMacOS })
-      this.$store.commit('user/updateSetting', { path: 'useBottom', param: !this.$device.isDesktop })
     }
   }
 })

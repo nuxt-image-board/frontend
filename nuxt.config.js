@@ -70,30 +70,30 @@ export default {
       {
         name: '一覧画面を開く',
         short_name: '一覧',
-        description: 'View the list of podcasts you saved for later',
+        description: '新着順で投稿一覧画面を開きます',
         url: '/search/list',
-        icons: [{ src: '/icons/play-later.png', sizes: '192x192' }]
+        icons: [{ src: '/icons/list.png', sizes: '192x192' }]
       },
       {
         name: '投稿画面を開く',
         short_name: '投稿',
-        description: 'View the list of podcasts you listen to',
+        description: 'イラストの投稿画面を開きます',
         url: '/upload',
-        icons: [{ src: '/icons/subscriptions.png', sizes: '192x192' }]
+        icons: [{ src: '/icons/upload.png', sizes: '192x192' }]
       },
       {
-        name: '推し画面を開く',
-        short_name: '推し',
-        description: 'View the list of podcasts you saved for later',
-        url: '/user/mylist',
-        icons: [{ src: '/icons/play-later.png', sizes: '192x192' }]
+        name: '検索画面を開く',
+        short_name: '検索',
+        description: 'イラストの検索画面を開きます',
+        url: '/search/methods',
+        icons: [{ src: '/icons/search.png', sizes: '192x192' }]
       },
       {
         name: 'マイリストを開く',
         short_name: 'マイリスト',
-        description: 'View the list of podcasts you saved for later',
+        description: '自分のマイリスト画面を開きます',
         url: '/user/mylist',
-        icons: [{ src: '/icons/play-later.png', sizes: '192x192' }]
+        icons: [{ src: '/icons/mylist.png', sizes: '192x192' }]
       }
     ]
   },
@@ -115,6 +115,7 @@ export default {
     '~plugins/vue-scrollto',
     '~plugins/vue2-touch-events',
     '~plugins/mixin-common',
+    '~plugins/insert-search-history',
     { src: '~plugins/vue-lazyload', ssr: false },
     { src: '~plugins/vue-infinite-loading', ssr: false },
     { src: '~plugins/vue-input-tag', ssr: false },

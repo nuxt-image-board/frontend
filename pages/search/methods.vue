@@ -10,7 +10,7 @@
           :key="p.title"
           class="column is-6"
         >
-          <nuxt-link class="button is-fullwidth is-medium is-primary" :to="p.to">
+          <nuxt-link class="button is-fullwidth is-medium is-primary" :to="p.title != '投稿者' ? p.to : '#'">
             <Fas :i="p.icon" />&nbsp;{{ p.title }}
           </nuxt-link>
         </div>
@@ -20,12 +20,15 @@
       </h4>
       <div class="columns is-mobile is-multiline">
         <div
-          v-for="p in page_buttons"
-          :key="p.title"
+          v-for="(p,index) in $store.state.user.searchHistory"
+          :key="index"
           class="column is-6"
         >
-          <nuxt-link class="button is-fullwidth" to="/search/list">
-            <Fas i="tags" />&nbsp;***REMOVED***
+          <nuxt-link class="button is-fullwidth" :to="`/search/${p.type}/${p.id}`">
+            <Fas v-if="p.type == 'artist'" i="paint-brush" />
+            <Fas v-else-if="p.type == 'character'" i="users" />
+            <Fas v-else i="tags" />
+            <span>&nbsp; {{ p.title }}</span>
           </nuxt-link>
         </div>
       </div>
