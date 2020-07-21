@@ -62,7 +62,8 @@ export default {
   async asyncData ({ $axios, error, route }) {
     try {
       const user = await $axios.get('/toymoney/users/assets')
-      return { money: user.data.money, assets: user.data.assets }
+      const prod = await $axios.get('/toymoney/machines/1')
+      return { money: user.data.money, assets: user.data.assets, prod: prod.data }
     } catch (err) {
       return error({ statusCode: 502, message: 'err' })
     }
@@ -70,6 +71,15 @@ export default {
   data () {
     return {
       products
+    }
+  },
+  methods: {
+    async buyProduct (productId) {
+      const resp = await this.$axios.post(`toymoney/machines/1/${productId}/buy`)
+      if (resp.status === 200) {
+        this.products[productId].buyable = false
+        this.money -= this.products[productId].price
+      }
     }
   },
   head () {

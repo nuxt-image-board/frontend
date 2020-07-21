@@ -38,7 +38,7 @@ export default {
   async asyncData ({ $axios, error, route }) {
     try {
       // IDを得て、base32デコードする
-      const id = parseInt(base32.decode(route.params.id.split('_')[0] + '===')) || 0
+      const id = parseInt(base32.decode(route.params.id.split('_')[0].toUpperCase() + '===')) || 0
       const resp = await $axios.get('/toymoney/airdrops/' + id + '/status')
       return resp.data
     } catch (err) {
@@ -46,7 +46,9 @@ export default {
     }
   },
   methods: {
-    claimAirdrop () {
+    async claimAirdrop (airdropID) {
+      await this.$axios.post(`/toymoney/airdrops/${airdropID}/claim`)
+      this.$router.push('/wallet')
     }
   },
   head () {

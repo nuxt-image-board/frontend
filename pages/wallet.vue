@@ -77,8 +77,8 @@
                         t.amount,
                         t.provider_type,
                         t.provider,
-                        t.reciever_type,
-                        t.reciever
+                        t.receiver_type,
+                        t.receiver
                       ) }}
                     </td>
                   </tr>
@@ -110,7 +110,7 @@ export default {
   async asyncData ({ $axios, error, route }) {
     try {
       const airdrops = await $axios.get('/toymoney/airdrops/list_with_status?count=3&sort=2')
-      const transactions = await $axios.get('/toymoney/users/transactions?count=3')
+      const transactions = await $axios.get('/toymoney/users/transactions?count=5')
       const money = await $axios.get('/toymoney/users/money')
       return { bonus: airdrops.data.airdrops, transaction: transactions.data.transactions, money: money.data.money }
     } catch (err) {
@@ -120,16 +120,10 @@ export default {
   data () {
     return {
       bonus: [
-        { id: 1, name: '日1ログボ', caption: '1日1回 1PYONが貰えます', recieved: false },
-        { id: 2, name: '週1ガチャ', caption: '1週1回 1~10PYONが貰えます', recieved: true },
-        { id: 3, name: '月1ガチャ', caption: '1月1回 5~30PYONが貰えます', recieved: true }
+        { id: 1, name: '日1ログボ', caption: '1日1回 1PYONが貰えます', receivable: false }
       ],
       transaction: [
-        { id: 1, reception: '2020-07-19 19:38:37', amount: 1, provider_type: 1, provider: 1, reciever_type: 0, reciever: 0 },
-        { id: 2, reception: '2020-07-19 19:38:37', amount: 2, provider_type: 1, provider: 2, reciever_type: 0, reciever: 0 },
-        { id: 3, reception: '2020-07-19 19:38:37', amount: 10, provider_type: 1, provider: 3, reciever_type: 0, reciever: 0 },
-        { id: 4, reception: '2020-07-19 19:38:37', amount: 10, provider_type: 1, provider: 4, reciever_type: 0, reciever: 0 },
-        { id: 5, reception: '2020-07-19 19:38:37', amount: 5, provider_type: 0, provider: 0, reciever_type: 0, reciever: 0 }
+        { id: 1, reception: '2020-07-19 19:38:37', amount: 1, provider_type: 1, provider: 1, receiver_type: 0, receiver: 0 }
       ]
     }
   },
@@ -139,7 +133,7 @@ export default {
       if (resp.status === 200) {
         this.bonus[airdropID - 1].receivable = false
         this.money = resp.data.after
-        const transactions = await this.$axios.get('/toymoney/users/transactions?count=3')
+        const transactions = await this.$axios.get('/toymoney/users/transactions?count=5')
         this.transaction = transactions.data.transactions
       }
     },
