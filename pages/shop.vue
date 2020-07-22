@@ -32,17 +32,19 @@
                 </tr>
               </thead>
               <tbody>
-                <tr v-for="p in products" :key="p.title">
+                <tr v-for="p in products" :key="p.id">
                   <td>
-                    <p :style="{'margin-left': p.margin +'px'}">
-                      {{ p.title }}
-                    </p>
+                    {{ p.name }}
                   </td>
                   <td>{{ p.description }}</td>
                   <td>{{ p.price }} PYON</td>
                   <td>
-                    <button class="button is-primary" disabled>
-                      購入
+                    <button
+                      class="button is-primary"
+                      :disabled="obtainedProducts.includes(p.id) || money < p.price"
+                      @click="buyProduct(p.id, p.price)"
+                    >
+                      {{ !obtainedProducts.includes(p.id) ? '購入する' : '獲得済み' }}
                     </button>
                   </td>
                 </tr>
@@ -56,29 +58,31 @@
 </template>
 
 <script>
-import { products } from '~/assets/texts/products.json'
 
 export default {
   async asyncData ({ $axios, error, route }) {
     try {
       const user = await $axios.get('/toymoney/users/assets')
-      const prod = await $axios.get('/toymoney/machines/1')
-      return { money: user.data.money, assets: user.data.assets, prod: prod.data }
+      const productIds = user.data.assets.map(a => a.id)
+      const prod = await $axios.get('/toymoney/machines/1', { useCache: true })
+      return {
+        money: user.data.money,
+        products: prod.data.products,
+        obtainedProducts: productIds
+      }
     } catch (err) {
       return error({ statusCode: 502, message: 'err' })
     }
   },
-  data () {
-    return {
-      products
-    }
-  },
   methods: {
-    async buyProduct (productId) {
+    async buyProduct (productId, productPrice) {
       const resp = await this.$axios.post(`toymoney/machines/1/${productId}/buy`)
       if (resp.status === 200) {
-        this.products[productId].buyable = false
-        this.money -= this.products[productId].price
+        this.obtainedProducts.push(productId)
+        this.$store.commit(
+          'user/setObtainedProducts', this.obtainedProducts
+        )
+        this.money -= productPrice
       }
     }
   },

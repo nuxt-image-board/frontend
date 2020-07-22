@@ -10,7 +10,8 @@ export const state = () => ({
   useWebP: false,
   useInfinity: false,
   useSakura: false,
-  searchHistory: []
+  searchHistory: [],
+  obtainedProducts: []
 })
 
 // 状態を変更する処理は mutationとしてexportする
@@ -28,9 +29,17 @@ export const mutations = {
     state[path] = param
   },
   addSearchHistory (state, history) {
+    state.searchHistory.forEach((h, index) => {
+      if (h.id === history.id && h.type === history.type) {
+        state.searchHistory.splice(index, 1)
+      }
+    })
     state.searchHistory.unshift(history)
     if (state.searchHistory.length > 6) {
       state.searchHistory.pop()
     }
+  },
+  setObtainedProducts (state, obtainedProducts) {
+    state.obtainedProducts = obtainedProducts
   }
 }

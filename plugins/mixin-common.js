@@ -39,6 +39,11 @@ Vue.mixin({
       if (this.$device.isDesktop) {
         await this.$store.dispatch('getNavigations')
       }
+      // 所有している物のID一覧を保管する
+      const assets = await this.$axios.get('/toymoney/users/assets')
+      this.$store.commit(
+        'user/setObtainedProducts', assets.data.assets.map(a => a.id)
+      )
     }
   }
 })

@@ -69,7 +69,7 @@
             "flag": false,
             "mobile_only": false,
             "class": "is-info",
-            "disabled": true,
+            "require_product": 5,
             "title": "花びら背景",
             "description": "有効にすると、背景に某公式サイトのような花びらが出るようになります。若干重いので、スペックに不安がある場合は有効にしないでください。(アプリもどきから起動している場合はリロードするまで出てきません)"
         },
@@ -79,6 +79,7 @@
             "mobile_only": false,
             "class": "is-info",
             "disabled": true,
+            "require_product": 4,
             "title": "RAW画質",
             "description": "有効にすると、常に、最高画質のイラストが表示されます。データ転送量がものすごく増えます。"
         },

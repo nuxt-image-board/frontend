@@ -11,7 +11,8 @@
           :key="setting.key"
           :storeKey="setting.key"
           :title="setting.title"
-          :isDisabled="setting.disabled ? true : false"
+          :isDisabled="setting.require_product ? (
+            !$store.state.user.obtainedProducts.includes(setting.require_product) ? true : false) : false"
           :classes="setting.class ? setting.class : ''"
           @openModal="showModal"
           @closeModal="hideModal"
