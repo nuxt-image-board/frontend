@@ -2,7 +2,6 @@
     "settings": [
         {
             "key": "acceptR18",
-            "flag": false,
             "mobile_only": false,
             "class": "is-danger",
             "title": "R18表示",
@@ -10,15 +9,12 @@
         },
         {
             "key": "isPC",
-            "flag": false,
-            "mobile_only": false,
             "class": "is-info",
             "title": "PC版メニュー",
             "description": "有効にすると、PC用のメニューが表示されるようになります。スマホで有効にしても使用できないことはないですが、PCを使っている場合にのみ有効にすることをおすすめします。"
         },
         {
             "key": "isLeftHanded",
-            "flag": false,
             "mobile_only": true,
             "class": "is-info",
             "title": "左利きメニュー",
@@ -26,7 +22,6 @@
         },
         {
             "key": "useSwipe",
-            "flag": false,
             "mobile_only": true,
             "class": "is-info",
             "title": "スワイプメニュー",
@@ -34,7 +29,6 @@
         },
         {
             "key": "useBottom",
-            "flag": false,
             "mobile_only": true,
             "class": "is-info",
             "title": "下部メニュー",
@@ -42,7 +36,6 @@
         },
         {
             "key": "useBack",
-            "flag": false,
             "mobile_only": true,
             "class": "is-info",
             "title": "戻るボタン",
@@ -50,7 +43,6 @@
         },
         {
             "key": "useJump",
-            "flag": false,
             "mobile_only": false,
             "class": "is-info",
             "title": "ジャンプボタン",
@@ -58,7 +50,6 @@
         },
         {
             "key": "useWebP",
-            "flag": false,
             "mobile_only": false,
             "class": "is-info",
             "title": "WebP使用",
@@ -66,26 +57,22 @@
         },
         {
             "key": "useSakura",
-            "flag": false,
             "mobile_only": false,
-            "class": "is-info",
             "require_product": 5,
+            "class": "is-info",
             "title": "花びら背景",
             "description": "有効にすると、背景に某公式サイトのような花びらが出るようになります。若干重いので、スペックに不安がある場合は有効にしないでください。(アプリもどきから起動している場合はリロードするまで出てきません)"
         },
         {
             "key": "useRaw",
-            "flag": false,
             "mobile_only": false,
-            "class": "is-info",
-            "disabled": true,
             "require_product": 4,
+            "class": "is-info",
             "title": "RAW画質",
             "description": "有効にすると、常に、最高画質のイラストが表示されます。データ転送量がものすごく増えます。"
         },
         {
             "key": "useInfinity",
-            "flag": false,
             "mobile_only": false,
             "class": "is-info",
             "title": "無限スクロール",

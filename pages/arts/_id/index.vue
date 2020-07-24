@@ -202,6 +202,10 @@
           <img v-lazy="ImgOrigAddress" src="~/assets/load.png">
         </p>
       </div>
+      <br>
+      <button class="button" @click="downloadImage()">
+        ダウンロード
+      </button>
     </div>
   </section>
 </template>
@@ -277,6 +281,31 @@ export default {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(this.result.illustID)
         alert('コピーしました')
+      }
+    },
+    async downloadImage () {
+      const imageOrig = await this.$axios.get(
+        'http://localhost:5000/static/illusts/orig/1.png',
+        { responseType: 'blob', cache: true }
+      )
+      const mimeType = this.result.extension === 'png' ? 'image/png' : 'image/jpeg'
+      const blob = new Blob(
+        [imageOrig.data],
+        { type: mimeType }
+      )
+      // Safari以外
+      if (!this.$device.isIos) {
+        const imageUrl = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        document.body.appendChild(a)
+        a.href = imageUrl
+        a.download = `***REMOVED***_${this.result.illustID}.${this.result.extension}`
+        a.click()
+        a.remove()
+        URL.revokeObjectURL(imageUrl)
+      // Safari
+      } else {
+        window.open('data:' + mimeType + ';base64,' + window.Base64.encode(imageOrig.data), '_blank')
       }
     },
     openSocialShare (addr) {
