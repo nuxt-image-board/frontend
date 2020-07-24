@@ -1,0 +1,30 @@
+{
+    "userNav": [
+        {
+          "to": "/profile",
+          "title": "マイページ",
+          "icon": "user"
+        },
+        {
+          "to": "/history",
+          "require_product": 3,
+          "title": "閲覧履歴",
+          "icon": "history"
+        },
+        {
+          "to": "/mylist",
+          "title": "マイリスト",
+          "icon": "bookmark"
+        },
+        {
+          "to": "/wallet",
+          "title": "ウォレット",
+          "icon": "wallet"
+        },
+        {
+          "to": "/upload",
+          "title": "投稿",
+          "icon": "upload"
+        }
+    ]
+}

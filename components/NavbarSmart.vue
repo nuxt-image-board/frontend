@@ -122,22 +122,14 @@
                 ユーザー
               </p>
             </li>
-            <li>
-              <nuxt-link to="/profile" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="user" /></span>
-                <span>マイページ</span>
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/mylist" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="bookmark" /></span>
-                <span>マイリスト</span>
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/wallet" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="wallet" /></span>
-                <span>ウォレット</span>
+            <li v-for="user in userNavigation" :key="user.name">
+              <nuxt-link :to="user.to" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon">
+                  <Fas :i="user.icon" classes="has-text-white" />
+                </span>
+                <span>
+                  {{ user.title }}
+                </span>
               </nuxt-link>
             </li>
             <li class="menu-title">
@@ -173,19 +165,6 @@
         </aside>
       </div>
     </div>
-    <nav v-if="$store.state.user.useBottom" class="navbar is-link is-fixed-bottom" role="navigation">
-      <div class="navbar-brand">
-        <nuxt-link to="/" class="navbar-item is-expanded is-block has-text-centered">
-          <Fas i="home" classes="fa-lg" />
-        </nuxt-link>
-        <nuxt-link to="/search" class="navbar-item is-expanded is-block has-text-centered">
-          <Fas i="search" classes="fa-lg" />
-        </nuxt-link>
-        <nuxt-link to="/profile" class="navbar-item is-expanded is-block has-text-centered">
-          <Fas i="user" classes="fa-lg" />
-        </nuxt-link>
-      </div>
-    </nav>
   </header>
 </template>
 
@@ -217,6 +196,7 @@
 
 <script>
 import Fas from '~/components/ui/Fas.vue'
+import { userNav } from '~/assets/texts/navigations.json'
 
 export default {
   components: {
@@ -232,6 +212,13 @@ export default {
     return {
       openMenu: false,
       openSearch: false
+    }
+  },
+  computed: {
+    userNavigation () {
+      return userNav.filter((nav) => {
+        return !nav.require_product || this.$store.state.user.obtainedProducts.includes(nav.require_product)
+      })
     }
   },
   watch: {

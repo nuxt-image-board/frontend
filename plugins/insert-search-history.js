@@ -5,7 +5,8 @@ export default async ({ app, $axios, store }) => {
       path.startsWith('/search/') &&
       !path.includes('methods') &&
       !path.includes('list') &&
-      !path.includes('keyword')
+      !path.includes('keyword') &&
+      !path.includes('image')
     ) {
       const searchID = path.split('/')[3]
       const searchType = path.split('/')[2]

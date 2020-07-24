@@ -289,12 +289,12 @@ export default {
         { responseType: 'blob', cache: true }
       )
       const mimeType = this.result.extension === 'png' ? 'image/png' : 'image/jpeg'
-      const blob = new Blob(
-        [imageOrig.data],
-        { type: mimeType }
-      )
       // Safari以外
       if (!this.$device.isIos) {
+        const blob = new Blob(
+          [imageOrig.data],
+          { type: mimeType }
+        )
         const imageUrl = URL.createObjectURL(blob)
         const a = document.createElement('a')
         document.body.appendChild(a)

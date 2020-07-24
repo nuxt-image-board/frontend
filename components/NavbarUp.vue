@@ -125,6 +125,7 @@
 
 <script>
 import Fas from '~/components/ui/Fas.vue'
+import { userNav } from '~/assets/texts/navigations.json'
 
 export default {
   components: {
@@ -135,40 +136,12 @@ export default {
       openMenu: false,
       openTab: 0,
       keyword: '',
-      hideAllMenu: false,
-      userNav: [
-        {
-          to: '/profile',
-          title: 'マイページ',
-          icon: 'user'
-        },
-        {
-          to: '/history',
-          require_product: 3,
-          title: '閲覧履歴',
-          icon: 'history'
-        },
-        {
-          to: '/mylist',
-          title: 'マイリスト',
-          icon: 'bookmark'
-        },
-        {
-          to: '/wallet',
-          title: 'ウォレット',
-          icon: 'wallet'
-        },
-        {
-          to: '/upload',
-          title: '投稿',
-          icon: 'upload'
-        }
-      ]
+      hideAllMenu: false
     }
   },
   computed: {
     userNavigation () {
-      return this.userNav.filter((nav) => {
+      return userNav.filter((nav) => {
         return !nav.require_product || this.$store.state.user.obtainedProducts.includes(nav.require_product)
       })
     },
