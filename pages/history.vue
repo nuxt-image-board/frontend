@@ -33,7 +33,7 @@ export default {
     }
     const illustData = await Promise.all(
       store.state.user.illustHistory.map(
-        illustID => $axios.get(`arts/${illustID}`)
+        illustID => $axios.get(`arts/${illustID}`, { cache: true })
       )
     )
     return {

@@ -285,7 +285,7 @@ export default {
     },
     async downloadImage () {
       const imageOrig = await this.$axios.get(
-        'http://localhost:5000/static/illusts/orig/1.png',
+        this.ImgOrigAddress,
         { responseType: 'blob', cache: true }
       )
       const mimeType = this.result.extension === 'png' ? 'image/png' : 'image/jpeg'
