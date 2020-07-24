@@ -2,43 +2,61 @@
   <section class="section">
     <div class="container is-widescreen">
       <h1 class="title has-text-centered">
-        ソフトウェア ライセンス
+        OSSライセンス
       </h1>
       <h2 class="subtitle has-text-centered">
         ***REMOVED*** made with many OSS projects.
         Thanks to all OSS project contributors.
       </h2>
-      <Accordion title="Frontend / フロントエンド">
-        <p>
-          Now loading.
-        </p>
-      </Accordion>
-      <Accordion title="Backend / バックエンド">
-        <p>
-          Now loading.
-        </p>
-      </Accordion>
-      <Accordion title="Tool / ツール">
-        <p>
-          Now loading.
-        </p>
-      </Accordion>
-      <Accordion title="Other / その他">
-        <p>
-          Test
-        </p>
-      </Accordion>
+      <div class="table-container">
+        <table class="table is-fullwidth centered-table">
+          <thead>
+            <tr>
+              <th align="center">
+                ライブラリ名
+              </th>
+              <th align="center">
+                ライセンス
+              </th>
+              <th align="center">
+                公開者
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(l,index) in licenses" :key="index">
+              <td>
+                <a :href="l.repository" rel="noopener noreferrer nofollow" target="_blank">
+                  {{ l.name }}
+                </a>
+              </td>
+              <td>
+                {{ l.licenses }}
+              </td>
+              <td>
+                {{ l.publisher }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import Accordion from '~/components/ui/Accordion.vue'
+import licensesJson from '~/assets/texts/licenses.json'
 
 export default {
-  auth: false,
-  components: {
-    Accordion
+  data () {
+    return {
+      licenses: licensesJson
+    }
+  },
+  head () {
+    return {
+      title: 'OSSライセンス'
+    }
   }
 }
 </script>
