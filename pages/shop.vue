@@ -44,7 +44,7 @@
                       :disabled="obtainedProducts.includes(p.id) || money < p.price"
                       @click="buyProduct(p.id, p.price)"
                     >
-                      {{ !obtainedProducts.includes(p.id) ? '購入する' : '獲得済み' }}
+                      {{ !obtainedProducts.includes(p.id) ? '購入する' : '購入済み' }}
                     </button>
                   </td>
                 </tr>

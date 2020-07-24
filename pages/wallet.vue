@@ -114,7 +114,7 @@ export default {
       const money = await $axios.get('/toymoney/users/money')
       return { bonus: airdrops.data.airdrops, transaction: transactions.data.transactions, money: money.data.money }
     } catch (err) {
-      return error({ statusCode: 500, message: 'err' })
+      return error({ statusCode: 502, message: 'err' })
     }
   },
   data () {

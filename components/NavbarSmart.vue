@@ -135,9 +135,9 @@
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/shop" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="shopping-cart" /></span>
-                <span>ショップ</span>
+              <nuxt-link to="/wallet" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="wallet" /></span>
+                <span>ウォレット</span>
               </nuxt-link>
             </li>
             <li class="menu-title">
