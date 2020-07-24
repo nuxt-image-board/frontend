@@ -73,10 +73,14 @@ export default {
   data () {
     return {
       previewAddress: process.env.CDN_ENDPOINT +
-        'illusts/thumb/' +
+        'illusts/' +
+        (this.$store.state.user.useRaw ? 'orig' : 'thumb') +
+        '/' +
         this.result.illustID +
         '.' +
-        (this.$store.state.user.useWebP ? 'webp' : 'jpg'),
+        (this.$store.state.user.useRaw ? this.result.extension
+          : (this.$store.state.user.useWebP ? 'webp' : 'jpg')
+        ),
       artAddress: '/arts/' + this.result.illustID,
       artistAddress: '/search/artist/' + this.result.artistID
     }

@@ -3,6 +3,8 @@ import VueLazyload from 'vue-lazyload'
 
 Vue.use(VueLazyload, {
   preLoad: 1.1,
+  loading: require('~/assets/loading.png'),
+  error: require('~/assets/error.png'),
   attempt: 1,
   observer: true,
 

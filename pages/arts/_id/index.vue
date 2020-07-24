@@ -5,7 +5,7 @@
         <div class="column is-12-mobile is-8-tablet is-6-desktop">
           <figure class="has-text-centered" @click="isModalOpen = !isModalOpen">
             <img
-              v-lazy="ImgAddress"
+              v-lazy="$store.state.user.useRaw ? ImgOrigAddress : ImgAddress"
               class="thumb"
               :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
             >
