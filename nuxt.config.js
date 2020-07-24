@@ -116,6 +116,7 @@ export default {
     '~plugins/vue2-touch-events',
     '~plugins/mixin-common',
     '~plugins/insert-search-history',
+    '~plugins/insert-illust-history',
     { src: '~plugins/vue-lazyload', ssr: false },
     { src: '~plugins/vue-infinite-loading', ssr: false },
     { src: '~plugins/vue-input-tag', ssr: false },
@@ -203,7 +204,8 @@ export default {
           'faSignOutAlt',
           'faArrowsAlt',
           'faFileImage',
-          'faWallet'
+          'faWallet',
+          'faHistory'
         ]
       },
       {

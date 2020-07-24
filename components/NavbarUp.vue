@@ -103,7 +103,7 @@
                 <span>{{ $auth.$state.user.name }}</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 4}">
-                <nuxt-link v-for="user in userNav" :key="user.name" class="dropdown-item has-text-white pl-3" :to="user.to" @click.native="closeAll($event)">
+                <nuxt-link v-for="user in userNavigation" :key="user.name" class="dropdown-item has-text-white pl-3" :to="user.to" @click.native="closeAll($event)">
                   <span class="icon">
                     <Fas :i="user.icon" classes="has-text-white" />
                   </span>
@@ -143,6 +143,12 @@ export default {
           icon: 'user'
         },
         {
+          to: '/history',
+          require_product: 3,
+          title: '閲覧履歴',
+          icon: 'history'
+        },
+        {
           to: '/mylist',
           title: 'マイリスト',
           icon: 'bookmark'
@@ -161,6 +167,11 @@ export default {
     }
   },
   computed: {
+    userNavigation () {
+      return this.userNav.filter((nav) => {
+        return !nav.require_product || this.$store.state.user.obtainedProducts.includes(nav.require_product)
+      })
+    },
     characters () {
       return this.$store.state.characters
     },

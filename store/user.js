@@ -11,6 +11,7 @@ export const state = () => ({
   useInfinity: false,
   useSakura: false,
   searchHistory: [],
+  illustHistory: [],
   obtainedProducts: []
 })
 
@@ -27,6 +28,19 @@ export const mutations = {
   },
   updateSetting (state, { path, param }) {
     state[path] = param
+  },
+  logout (state) {
+    state.isLogined = false
+  },
+  addIllustHistory (state, illustID) {
+    illustID = illustID.illustID
+    state.illustHistory = state.illustHistory.filter(
+      illust => illust !== illustID
+    )
+    state.illustHistory.unshift(illustID)
+    if (state.illustHistory.length > 20) {
+      state.illustHistory.pop()
+    }
   },
   addSearchHistory (state, history) {
     state.searchHistory.forEach((h, index) => {
