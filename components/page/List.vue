@@ -6,7 +6,7 @@
           <Notification :title="NotificationTitle" />
         </div>
         <div class="column is-8">
-          <div class="columns is-touch is-centered is-vcentered">
+          <div class="columns is-centered is-vcentered">
             <div class="column is-8">
               <SelectForm :sortMethod="String(SelectedSort)" class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
             </div>
@@ -17,6 +17,14 @@
               <input v-model="filterKeyword" class="input is-medium" type="text" placeholder="絞り込みキーワード">
             </div>
           </div>
+        </div>
+        <div v-if="hasWikiElement && !endpoint.includes('all')" class="column is-12 has-text-centered">
+          <Wiki
+            :articleTitle="notifyTitle"
+            :articleTargetType="notifyTargetType"
+            :articleTargetID="notifyTargetID"
+            @noWikiContent="hasWikiElement = false"
+          />
         </div>
       </div>
       <div
@@ -52,6 +60,7 @@
 <script>
 import Notification from '~/components/ui/Notification.vue'
 import SelectForm from '~/components/ui/SelectForm.vue'
+import Wiki from '~/components/ui/Wiki.vue'
 import NotifyRegister from '~/components/ui/NotifyRegister.vue'
 import Pagination from '~/components/ui/Pagination.vue'
 import ListResult from '~/components/page/list/Result.vue'
@@ -62,6 +71,7 @@ export default {
     Notification,
     SelectForm,
     NotifyRegister,
+    Wiki,
     Pagination,
     ListResult,
     SearchResult
@@ -130,6 +140,7 @@ export default {
       SelectedPage: this.SelectedPageFromProps,
       SelectedSort: this.SelectedSortFromProps,
       results: this.resultsFromProps,
+      hasWikiElement: true,
       SortOptions: [
         { text: '投稿が新しい順', value: 0 },
         { text: '投稿が古い順', value: 1 },

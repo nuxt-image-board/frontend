@@ -23,7 +23,7 @@
           :sortMethod="String(computedStore)"
           :options="items"
           :send-mounted="false"
-          :disabled="false"
+          :disabled="isDisabled"
           :isMedium="false"
           @onSelectChanged="setStore"
         />
