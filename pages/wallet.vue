@@ -141,7 +141,7 @@ export default {
       // type一覧: 0ユーザー 1エアドロップ 2商品 3強制
       // 商品が受け取ったなら購入取引
       if (rtype === 2) {
-        return `商品ID:${r}を購入し ${a}PYON消費`
+        return `商品を購入し ${a}PYON消費`
       }
       // エアドロから受け取ったならエアドロ取引
       if (ptype === 1) {

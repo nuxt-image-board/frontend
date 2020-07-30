@@ -11,8 +11,9 @@ export default {
     title: process.env.SITE_NAME,
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, minimal-ui' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
+      { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
       { name: 'robots', content: 'noindex,nofollow,noarchive' },
       { hid: 'description', name: 'description', content: process.env.SITE_DESCRIPTION },
       { hid: 'og:title', property: 'og:title', content: process.env.SITE_NAME },

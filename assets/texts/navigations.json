@@ -6,12 +6,6 @@
           "icon": "user"
         },
         {
-          "to": "/history",
-          "require_product": 3,
-          "title": "閲覧履歴",
-          "icon": "history"
-        },
-        {
           "to": "/mylist",
           "title": "マイリスト",
           "icon": "bookmark"
@@ -25,6 +19,18 @@
           "to": "/upload",
           "title": "投稿",
           "icon": "upload"
+        },
+        {
+          "to": "/history_search",
+          "require_product": 3,
+          "title": "検索履歴",
+          "icon": "history"
+        },
+        {
+          "to": "/history_illust",
+          "require_product": 3,
+          "title": "閲覧履歴",
+          "icon": "history"
         }
     ]
 }
