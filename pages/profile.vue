@@ -8,6 +8,9 @@
         <div class="column is-4 is-centered">
           <inviteInfo />
         </div>
+        <div class="column is-4 is-centered">
+          <storageInfo />
+        </div>
       </div>
       <div class="columns is-vcentered is-centered">
         <div class="column is-4 is-centered">
@@ -51,6 +54,7 @@
 <script>
 import Modal from '~/components/ui/Modal.vue'
 import userInfo from '~/components/page/profile/panels/userInfo.vue'
+import storageInfo from '~/components/page/profile/panels/storageInfo.vue'
 import inviteInfo from '~/components/page/profile/panels/inviteInfo.vue'
 import siteSettings from '~/components/page/profile/panels/siteSettings.vue'
 import accountSettings from '~/components/page/profile/panels/accountSettings.vue'
@@ -60,6 +64,7 @@ export default {
   components: {
     Modal,
     userInfo,
+    storageInfo,
     inviteInfo,
     siteSettings,
     accountSettings,
