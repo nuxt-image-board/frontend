@@ -17,8 +17,8 @@
         </figure>
       </nuxt-link>
     </div>
-    <div class="card-footer">
-      <a onselectstart="return false;" unselectable="on" class="star card-footer-item" @click="addStar()">
+    <div v-if="!$store.state.user.colSize || $store.state.user.colSize >= 6 || $store.state.user.isPC" class="card-footer">
+      <a class="card-footer-item" @click="addStar()">
         <span class="icon is-small">
           <Fas i="heart" />
         </span>

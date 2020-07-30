@@ -1,8 +1,8 @@
 <template>
   <div class="field">
     <div class="control">
-      <div class="select is-medium is-fullwidth is-rounded">
-        <select v-model="selectedType" @change="updateValue">
+      <div class="select is-fullwidth is-rounded" :class="{'is-medium': isMedium}">
+        <select v-model="selectedType" :disabled="disabled" @change="updateValue">
           <option v-for="option in options" :key="option.text" :value="option.value">
             {{ option.text }}
           </option>
@@ -33,6 +33,14 @@ export default {
     sortMethod: {
       type: String,
       default: '0'
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    isMedium: {
+      type: Boolean,
+      default: true
     }
   },
   data () {

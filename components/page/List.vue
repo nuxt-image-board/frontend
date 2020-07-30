@@ -19,8 +19,11 @@
           </div>
         </div>
       </div>
-      <div class="columns is-centered is-multiline is-mobile">
-        <div v-for="result in results" :key="result.illustID" class="column is-12-mobile is-6-touch is-3-desktop">
+      <div
+        class="columns is-centered is-vcentered is-multiline is-mobile"
+        :class="{'is-gapless': $store.state.user.colSize < 6 && !$store.state.user.isPC}"
+      >
+        <div v-for="result in results" :key="result.illustID" :class="colSize">
           <SearchResult v-if="isSearchPage" :result="result" />
           <ListResult v-else :page-type="pageType" :result="result" />
         </div>
@@ -140,6 +143,13 @@ export default {
     }
   },
   computed: {
+    colSize () {
+      const colSize = this.$store.state.user.colSize
+      if (colSize) {
+        return `column is-${colSize}-mobile is-${colSize}-touch is-${colSize}-desktop`
+      }
+      return 'column is-12-mobile is-6-touch is-3-desktop'
+    },
     notifyTargetType () {
       switch (this.endpoint) {
         case '/search/artist':

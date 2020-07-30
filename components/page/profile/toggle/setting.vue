@@ -6,24 +6,39 @@
       </a>
     </td>
     <td>
-      <div class="field">
+      <div v-if="items.length < 1" class="field">
         <input
           :id="'switch' + storeKey"
           v-model="computedStore"
-          :name="'switch' + storeKey"
           type="checkbox"
+          :name="'switch' + storeKey"
           class="switch is-rounded"
           :class="`${classes}`"
           :disabled="isDisabled"
         >
         <label :for="'switch' + storeKey" />
       </div>
+      <div v-else>
+        <SelectForm
+          :sortMethod="String(computedStore)"
+          :options="items"
+          :send-mounted="false"
+          :disabled="false"
+          :isMedium="false"
+          @onSelectChanged="setStore"
+        />
+      </div>
     </td>
   </tr>
 </template>
 
 <script>
+import SelectForm from '~/components/ui/SelectForm.vue'
+
 export default {
+  components: {
+    SelectForm
+  },
   props: {
     title: {
       type: String,
@@ -40,6 +55,12 @@ export default {
     isDisabled: {
       type: Boolean,
       default: false
+    },
+    items: {
+      type: Array,
+      default: () => {
+        return []
+      }
     }
   },
   data () {
@@ -58,6 +79,11 @@ export default {
           location.reload()
         }
       }
+    }
+  },
+  methods: {
+    setStore (value) {
+      this.computedStore = value
     }
   }
 }
