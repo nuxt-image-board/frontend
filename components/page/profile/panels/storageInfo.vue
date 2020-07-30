@@ -58,7 +58,6 @@ export default {
         return
       }
       const names = await window.caches.keys()
-      console.log(names)
       for (const name of names) {
         window.caches.delete(name)
       }

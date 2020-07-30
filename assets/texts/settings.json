@@ -94,7 +94,7 @@
             "key": "useViewer",
             "mobile_only": false,
             "flag": false,
-            "require_product": 11,
+            "require_product": 15,
             "class": "is-info",
             "title": "画像ビューア",
             "description": "有効にすると、イラストページで原寸表示時、回転・反転・拡大ができるようになります。利用にはショップでの購入が必要です。"
@@ -103,7 +103,7 @@
             "key": "colSize",
             "mobile_only": false,
             "flag": false,
-            "require_product": 12,
+            "require_product": 16,
             "class": "is-info",
             "title": "表示列数",
             "description": "検索結果に表示する列数を変更します。利用にはショップでの購入が必要です。",

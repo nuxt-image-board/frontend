@@ -25,7 +25,6 @@
     "@nuxtjs/axios": "^5.9.5",
     "@nuxtjs/device": "^1.2.7",
     "@nuxtjs/dotenv": "^1.4.1",
-    "@nuxtjs/markdownit": "^1.2.10",
     "@nuxtjs/onesignal": "^3.0.0-beta.16",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@toast-ui/vue-editor": "^2.3.1",

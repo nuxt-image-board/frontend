@@ -8,7 +8,7 @@
         <div class="column is-4 is-centered">
           <inviteInfo />
         </div>
-        <div class="column is-4 is-centered">
+        <div v-if="!$device.isIos" class="column is-4 is-centered">
           <storageInfo />
         </div>
       </div>
