@@ -12,6 +12,7 @@
     </main>
     <BackToTop v-if="$store.state.user.useJump" />
     <NavbarDown />
+    <Offline />
   </div>
 </template>
 
@@ -19,13 +20,15 @@
 import NavbarUp from '~/components/NavbarUp.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
 import BackToTop from '~/components/ui/BackToTop.vue'
+import Offline from '~/components/Offline.vue'
 
 export default {
   scrollToTop: true,
   components: {
     NavbarUp,
     NavbarDown,
-    BackToTop
+    BackToTop,
+    Offline
   },
   watch: {
     '$route.path' () {
@@ -45,7 +48,6 @@ export default {
   },
   created () {
     if (process.client) {
-      console.clear()
       console.log('%c***REMOVED***', 'color: blue; font-size: 30px')
       console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
     }

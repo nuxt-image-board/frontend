@@ -20,6 +20,7 @@
     <BackToTop v-if="$store.state.user.useJump" />
     <BackToRecent v-if="$store.state.user.useBack" />
     <NavbarSmartDown v-if="$store.state.user.useBottom" />
+    <Offline />
   </div>
 </template>
 
@@ -28,6 +29,7 @@ import NavbarSmart from '~/components/NavbarSmart.vue'
 import NavbarSmartDown from '~/components/NavbarSmartDown.vue'
 import BackToTop from '~/components/ui/BackToTop.vue'
 import BackToRecent from '~/components/ui/BackToRecent.vue'
+import Offline from '~/components/Offline.vue'
 
 export default {
   scrollToTop: true,
@@ -35,7 +37,8 @@ export default {
     NavbarSmart,
     NavbarSmartDown,
     BackToTop,
-    BackToRecent
+    BackToRecent,
+    Offline
   },
   data () {
     return {
@@ -49,13 +52,6 @@ export default {
         path: '/',
         maxAge: 60 * 60 * 24 * 31 * 6
       })
-    }
-  },
-  created () {
-    if (process.client) {
-      console.clear()
-      console.log('%c***REMOVED***', 'color: blue; font-size: 30px')
-      console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
     }
   },
   mounted () {
