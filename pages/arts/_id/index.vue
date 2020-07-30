@@ -3,9 +3,16 @@
     <div class="container">
       <div class="columns is-vcentered is-centered is-multiline">
         <div class="column is-12-mobile is-8-tablet is-6-desktop">
-          <figure class="has-text-centered" @click="isModalOpen = !isModalOpen">
+          <figure v-if="!$store.state.user.useViewer" class="has-text-centered" @click="isModalOpen = !isModalOpen">
             <img
               v-lazy="$store.state.user.useRaw ? ImgOrigAddress : ImgAddress"
+              class="thumb"
+              :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
+            >
+          </figure>
+          <figure v-else v-viewer class="has-text-centered">
+            <img
+              v-lazy="ImgOrigAddress"
               class="thumb"
               :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
             >
@@ -81,7 +88,9 @@
                       <span class="tag">
                         <Fas i="user-edit" />
                       </span>
-                      <a class="tag is-link" href="#">{{ result.user.name }}</a>
+                      <nuxt-link :to="&quot;/search/uploader/&quot;+result.user.id" class="tag is-link">
+                        {{ result.user.name }}
+                      </nuxt-link>
                     </div>
                   </div>
                   <div class="control">
@@ -195,7 +204,7 @@
         </div>
       </div>
     </div>
-    <div class="modal" :class="{'is-active': isModalOpen}">
+    <div v-if="!$store.state.user.useViewer" class="modal" :class="{'is-active': isModalOpen}">
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
       <div class="modal-content">
         <p class="image">

@@ -113,6 +113,7 @@ export default {
   plugins: [
     '~plugins/axios',
     '~plugins/vue-scrollto',
+    '~plugins/v-viewer',
     '~plugins/vue2-touch-events',
     '~plugins/mixin-common',
     '~plugins/insert-search-history',
