@@ -120,7 +120,7 @@ export default {
       )
       if (resp.data.status === 200) {
         alert('記事を投稿しました!')
-        this.$router.go(-1)
+        this.$router.go(-2)
       }
     }
   }
