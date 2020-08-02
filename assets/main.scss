@@ -2,6 +2,11 @@
 @import "~bulma/sass/utilities/initial-variables";
 @import "~bulma/sass/utilities/functions";
 
+
+// Vueビューア
+// 本来ここに入れるものではないが...
+@import "~viewerjs/dist/viewer";
+
 // カスタム色リスト
 $brown: #7b5544;
 $brown-white: #ddaa77;

@@ -6,16 +6,18 @@
     <div class="container is-widescreen has-text-centered">
       <div class="columns is-centered">
         <div class="column is-10">
-          <editor
-            ref="toastuiEditor"
-            class="has-background-white"
-            :options="editorOptions"
-            :visible="editorVisible"
-            :previewStyle="previewType"
-            :initialValue="initialValue"
-            height="500px"
-            initialEditType="wysiwyg"
-          />
+          <client-only>
+            <editor
+              ref="toastuiEditor"
+              class="has-background-white"
+              :options="editorOptions"
+              :visible="editorVisible"
+              :previewStyle="previewType"
+              :initialValue="initialValue"
+              height="500px"
+              initialEditType="wysiwyg"
+            />
+          </client-only>
         </div>
       </div>
       <br>
@@ -25,6 +27,12 @@
     </div>
   </section>
 </template>
+
+<style>
+@import 'tui-editor/dist/tui-editor.css';
+@import 'tui-editor/dist/tui-editor-contents.css';
+@import 'codemirror/lib/codemirror.css';
+</style>
 
 <script>
 export default {

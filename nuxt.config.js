@@ -72,29 +72,37 @@ export default {
         name: '一覧画面を開く',
         short_name: '一覧',
         description: '新着順で投稿一覧画面を開きます',
-        url: '/search/list',
-        icons: [{ src: '/icons/list.png', sizes: '192x192' }]
+        url: process.env.SITE_URL + '/search/list',
+        icons: [{
+          src: process.env.CDN_ENDPOINT + 'icon/list.png', sizes: '192x192'
+        }]
       },
       {
         name: '投稿画面を開く',
         short_name: '投稿',
         description: 'イラストの投稿画面を開きます',
-        url: '/upload',
-        icons: [{ src: '/icons/upload.png', sizes: '192x192' }]
+        url: process.env.SITE_URL + '/upload',
+        icons: [{
+          src: process.env.CDN_ENDPOINT + 'icon/upload.png', sizes: '192x192'
+        }]
       },
       {
         name: '検索画面を開く',
         short_name: '検索',
         description: 'イラストの検索画面を開きます',
-        url: '/search/methods',
-        icons: [{ src: '/icons/search.png', sizes: '192x192' }]
+        url: process.env.SITE_URL + '/search/methods',
+        icons: [{
+          src: process.env.CDN_ENDPOINT + 'icon/search.png', sizes: '192x192'
+        }]
       },
       {
         name: 'マイリストを開く',
         short_name: 'マイリスト',
         description: '自分のマイリスト画面を開きます',
-        url: '/user/mylist',
-        icons: [{ src: '/icons/mylist.png', sizes: '192x192' }]
+        url: process.env.SITE_URL + '/mylist',
+        icons: [{
+          src: process.env.CDN_ENDPOINT + 'icon/mylist.png', sizes: '192x192'
+        }]
       }
     ]
   },
@@ -119,7 +127,7 @@ export default {
     '~plugins/mixin-common',
     '~plugins/insert-search-history',
     '~plugins/insert-illust-history',
-    { src: '~plugins/tui-editor', ssr: false },
+    { src: '~plugins/tui-editor', mode: 'client' },
     { src: '~plugins/vue-lazyload', ssr: false },
     { src: '~plugins/vue-infinite-loading', ssr: false },
     { src: '~plugins/vue-input-tag', ssr: false },
@@ -278,7 +286,13 @@ export default {
   ** Build configuration
   */
   purgeCSS: {
-    whitelistPatterns: [/(^|\.)fa-/, /-fa($|\.)/]
+    whitelistPatterns: [
+      /(^|\.)fa-/, /-fa($|\.)/,
+      /tui-.*/,
+      /viewer-.*/,
+      /CodeMirror-.*/,
+      /te-.*/
+    ]
   },
   nuxtPrecompress: {
     enabled: true, // Enable in production

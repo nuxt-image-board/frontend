@@ -4,7 +4,9 @@
       <div class="columns is-vcentered is-centered">
         <div class="column is-8">
           <div class="boxed has-background-white round-15" style="min-height: 70vh;">
-            <viewer :initialValue="article.body" />
+            <client-only>
+              <viewer :initialValue="article.body" />
+            </client-only>
           </div>
         </div>
         <div class="column is-vcentered is-2">
@@ -63,6 +65,10 @@
 </template>
 
 <style>
+@import 'tui-editor/dist/tui-editor.css';
+@import 'tui-editor/dist/tui-editor-contents.css';
+@import 'codemirror/lib/codemirror.css';
+
 .round-15 {
   border-radius: 15px;
 }
