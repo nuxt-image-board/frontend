@@ -1,9 +1,6 @@
 <template>
   <div id="top">
-    <client-only v-if="$store.state.user.useSakura">
-      <canvas id="js-background" width="0px" height="0px" />
-      <script src="/blossom_loader.js" async />
-    </client-only>
+    <canvas id="js-background" width="0px" height="0px" />
     <NavbarSmart
       v-touch:swipe.left="hideSmartNav"
       v-touch:swipe.right="showSmartNav"
@@ -55,12 +52,11 @@ export default {
     }
   },
   mounted () {
-    // 圧倒的ゴリ押し なんか泣ける。
-    setTimeout(() => {
-      if (!window.particleSystem && this.$store.state.user.useSakura) {
-        location.reload()
-      }
-    }, 1000)
+    if (this.$store.state.user.useSakura) {
+      const loader = document.createElement('script')
+      loader.setAttribute('src', 'https://***REMOVED***/blossom/blossom_loader.js')
+      document.body.appendChild(loader)
+    }
   },
   methods: {
     showSmartNav () {
