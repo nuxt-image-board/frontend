@@ -18,7 +18,7 @@
             </div>
           </div>
         </div>
-        <div v-if="hasWikiElement && !endpoint.includes('all')" class="column is-12 has-text-centered">
+        <div v-if="hasWikiElement && !endpoint.includes('all') && !endpoint.includes('catalog')" class="column is-12 has-text-centered">
           <Wiki
             :articleTitle="notifyTitle"
             :articleTargetType="notifyTargetType"
@@ -157,7 +157,7 @@ export default {
     colSize () {
       const colSize = this.$store.state.user.colSize
       if (colSize) {
-        return `column is-${colSize}-mobile is-${colSize}-touch is-${colSize}-desktop`
+        return `column is-${colSize}`
       }
       return 'column is-12-mobile is-6-touch is-3-desktop'
     },
