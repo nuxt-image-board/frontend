@@ -6,7 +6,7 @@
       </a>
     </td>
     <td>
-      <div v-if="items.length < 1" class="field">
+      <div v-if="items.length < 1 && !placeholder" class="field">
         <input
           :id="'switch' + storeKey"
           v-model="computedStore"
@@ -18,7 +18,7 @@
         >
         <label :for="'switch' + storeKey" />
       </div>
-      <div v-else>
+      <div v-else-if="items.length > 0">
         <SelectForm
           :sortMethod="String(computedStore)"
           :options="items"
@@ -27,6 +27,14 @@
           :isMedium="false"
           @onSelectChanged="setStore"
         />
+      </div>
+      <div v-else>
+        <input
+          v-model="computedStore"
+          type="text"
+          :placeholder="placeholder"
+          class="input"
+        >
       </div>
     </td>
   </tr>
@@ -61,6 +69,10 @@ export default {
       default: () => {
         return []
       }
+    },
+    placeholder: {
+      type: String,
+      default: ''
     }
   },
   data () {

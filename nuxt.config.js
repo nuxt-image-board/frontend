@@ -127,6 +127,8 @@ export default {
     '~plugins/mixin-common',
     '~plugins/insert-search-history',
     '~plugins/insert-illust-history',
+    { src: '~plugins/vue-notification', mode: 'client' },
+    { src: '~plugins/dynamic-marquee', mode: 'client' },
     { src: '~plugins/tui-editor', mode: 'client' },
     { src: '~plugins/vue-lazyload', ssr: false },
     { src: '~plugins/vue-infinite-loading', ssr: false },
@@ -216,7 +218,14 @@ export default {
           'faArrowsAlt',
           'faFileImage',
           'faWallet',
-          'faHistory'
+          'faHistory',
+          'faPlay',
+          'faPause',
+          'faStepBackward',
+          'faStepForward',
+          'faTools',
+          'faMusic',
+          'faTimesCircle'
         ]
       },
       {

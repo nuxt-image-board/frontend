@@ -1,6 +1,9 @@
 <template>
   <div id="top">
-    <canvas id="js-background" width="0px" height="0px" />
+    <client-only>
+      <canvas id="js-background" width="0px" height="0px" />
+      <notifications classes="my-notify" width="30%" position="top right" group="default" />
+    </client-only>
     <NavbarUp />
     <main>
       <transition name="page">
@@ -8,14 +11,48 @@
       </transition>
     </main>
     <BackToTop v-if="$store.state.user.useJump" />
+    <client-only>
+      <NavbarDownFixed />
+    </client-only>
     <NavbarDown />
     <Offline />
   </div>
 </template>
 
+<style lang="scss">
+.my-notify {
+  margin-top: 10px;
+  margin-right: 10px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #ddaa77;
+  color: #000;
+  background: #FFF !important;
+  border-left: 5px solid #ddaa77;
+  padding: 10px;
+
+  &.warning {
+    border-left-color: #f48a06;
+  }
+
+  &.danger {
+    border-left-color: #B82E24;
+  }
+
+  &.info {
+    border-left-color: #3298dc;
+  }
+
+  &.success {
+    border-left-color: #00d1b2;
+  }
+}
+</style>
+
 <script>
 import NavbarUp from '~/components/NavbarUp.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
+import NavbarDownFixed from '~/components/NavbarDownFixed.vue'
 import BackToTop from '~/components/ui/BackToTop.vue'
 import Offline from '~/components/Offline.vue'
 
@@ -24,6 +61,7 @@ export default {
   components: {
     NavbarUp,
     NavbarDown,
+    NavbarDownFixed,
     BackToTop,
     Offline
   },
@@ -41,11 +79,33 @@ export default {
       console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
     }
   },
-  mounted () {
+  async mounted () {
     if (this.$store.state.user.useSakura) {
       const loader = document.createElement('script')
       loader.setAttribute('src', 'https://***REMOVED***/blossom/blossom_loader.js')
       document.body.appendChild(loader)
+    }
+    try {
+      await this.$axios.post('/toymoney/airdrops/1/claim', {}, { progress: false })
+      this.$notify(
+        {
+          group: 'default',
+          duration: 5000,
+          type: '',
+          title: 'デイリーボーナス',
+          text: '1PYONを獲得しました!'
+        }
+      )
+    } catch {
+      this.$notify(
+        {
+          group: 'default',
+          duration: 5000,
+          type: '',
+          title: 'デイリーボーナス',
+          text: '1PYONを獲得しました!'
+        }
+      )
     }
   }
 }
