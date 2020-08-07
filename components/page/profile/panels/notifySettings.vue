@@ -165,19 +165,51 @@ export default {
     async registerOneSignal (userId) {
       const resp = await this.$axios.post('/notify/setting/onesignal', { id: userId })
       if (resp.data.status === 200) {
-        alert('ブラウザ通知の設定が完了しました')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 5000,
+            title: 'ブラウザ通知設定',
+            text: '追加に成功しました。'
+          }
+        )
         this.modalType = 0
       } else if (resp.data.status === 409) {
-        alert('既に登録済みです')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: 'ブラウザ通知設定',
+            text: '既に登録済みです。'
+          }
+        )
         this.modalType = 0
       } else {
-        alert('これ以上追加できません、初期化が必要です')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: 'ブラウザ通知設定',
+            text: 'これ以上追加できません。初期化が必要です。'
+          }
+        )
       }
     },
     async resetOneSignal () {
       const resp = await this.$axios.delete('/notify/setting/onesignal')
       if (resp.data.status === 200) {
-        alert('ブラウザ通知の設定を初期化しました')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 5000,
+            title: 'ブラウザ通知設定',
+            text: '初期化が完了しました'
+          }
+        )
       }
     }
   }

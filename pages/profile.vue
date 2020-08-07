@@ -84,7 +84,15 @@ export default {
   },
   methods: {
     destroyAccount () {
-      alert('未実装です')
+      this.$notify(
+        {
+          group: 'default',
+          type: 'danger',
+          duration: 5000,
+          title: '未実装',
+          text: '問い合わせフォームから直接お問い合わせください'
+        }
+      )
     }
   },
   head () {

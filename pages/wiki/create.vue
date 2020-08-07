@@ -114,7 +114,15 @@ export default {
     async postArticle () {
       const markdownContent = this.$refs.toastuiEditor.invoke('getMarkdown')
       if (markdownContent.length < 10) {
-        alert('文字数が短すぎます')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: 'Wiki投稿',
+            text: '文字数が少なすぎます。'
+          }
+        )
         return
       }
       const resp = await this.$axios.post(
@@ -127,7 +135,15 @@ export default {
         }
       )
       if (resp.data.status === 200) {
-        alert('記事を投稿しました!')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: 'Wiki投稿',
+            text: '投稿に成功しました。'
+          }
+        )
         this.$router.go(-2)
       }
     }

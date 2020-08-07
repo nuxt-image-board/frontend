@@ -289,7 +289,14 @@ export default {
     copyIllustID () {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(this.result.illustID)
-        alert('コピーしました')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 5000,
+            title: 'イラストIDをコピーしました'
+          }
+        )
       }
     },
     async downloadImage () {
@@ -325,7 +332,15 @@ export default {
       const params = { cdn: this.ImgOrigAddress, size: scale }
       const resp = await this.$axios.get('https://***REMOVED***/waifu2x', { params })
       if (resp.statusCode === 204) {
-        alert('204 No Content(OK)')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 3000,
+            title: 'Waifu2x',
+            text: 'リクエストに成功しました'
+          }
+        )
       }
     },
     async addStar () {

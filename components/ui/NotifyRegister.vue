@@ -175,7 +175,15 @@ export default {
       }
       const resp = await this.$axios.post('/notify/register', params)
       if (resp.data.status !== 200) {
-        alert('通知登録エラー (リロードしてください)')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: '通知登録エラー',
+            text: 'ページを再読み込みしてください'
+          }
+        )
       }
     },
     async requestUnregisterNotify (notifyMethod) {

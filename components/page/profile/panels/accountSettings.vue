@@ -167,12 +167,33 @@ export default {
         { userPassword: this.passwordForm.new, userOldPassword: this.passwordForm.old }
       )
       if (resp.data.status === 200) {
-        alert('パスワードを変更しました')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 5000,
+            title: 'パスワードを変更しました'
+          }
+        )
         this.modalType = 0
       } else if (resp.data.status === 400) {
-        alert('現在のパスワードが間違っています')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: '現在のパスワードが間違っています'
+          }
+        )
       } else {
-        alert('変更できませんでした')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: '変更できませんでした'
+          }
+        )
       }
     }
   }

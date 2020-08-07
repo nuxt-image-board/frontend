@@ -125,7 +125,14 @@ export default {
       const imageFile = e.target.files[0]
       this.fileName = imageFile.name
       if (!this.fileName.includes('jpeg') && !this.fileName.includes('jpg') && !this.fileName.includes('png')) {
-        alert('指定されたファイルが正しくありません')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: '未対応のファイルです'
+          }
+        )
         this.step = 0
         this.fileName = ''
         this.hash = ''
@@ -142,7 +149,14 @@ export default {
           this.hash = resp.data.data.hash
         }
       } catch (error) {
-        alert('通信エラーが発生しました')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: '通信エラーが発生しました'
+          }
+        )
         this.hash = ''
       }
       if (this.results.length === 0) {
@@ -167,7 +181,14 @@ export default {
             }
           }
         } catch (error) {
-          alert('通信エラーが発生しました')
+          this.$notify(
+            {
+              group: 'default',
+              type: 'danger',
+              duration: 5000,
+              title: '通信エラーが発生しました'
+            }
+          )
           this.naoResults = []
         }
       }

@@ -83,14 +83,28 @@ export default {
           this.resp = resp.data.shortLink
         }
       } catch (error) {
-        alert('通信エラーが発生しました')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 5000,
+            title: '通信エラーが発生しました'
+          }
+        )
         this.resp = ''
       }
     },
     copyUrl () {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(this.resp)
-        alert('コピーしました')
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 5000,
+            title: 'URLをコピーしました'
+          }
+        )
       }
     }
   },
