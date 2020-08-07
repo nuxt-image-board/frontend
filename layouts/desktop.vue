@@ -12,7 +12,7 @@
     </main>
     <BackToTop v-if="$store.state.user.useJump" />
     <client-only>
-      <NavbarDownFixed />
+      <NavbarDownMusic v-if="$store.state.user.useMusicPlayer" />
     </client-only>
     <NavbarDown />
     <Offline />
@@ -52,7 +52,7 @@
 <script>
 import NavbarUp from '~/components/NavbarUp.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
-import NavbarDownFixed from '~/components/NavbarDownFixed.vue'
+import NavbarDownMusic from '~/components/NavbarDownMusic.vue'
 import BackToTop from '~/components/ui/BackToTop.vue'
 import Offline from '~/components/Offline.vue'
 
@@ -61,7 +61,7 @@ export default {
   components: {
     NavbarUp,
     NavbarDown,
-    NavbarDownFixed,
+    NavbarDownMusic,
     BackToTop,
     Offline
   },
@@ -103,7 +103,7 @@ export default {
           duration: 5000,
           type: '',
           title: 'デイリーボーナス',
-          text: '1PYONを獲得しました!'
+          text: '既に受け取り済みです!'
         }
       )
     }

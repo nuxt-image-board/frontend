@@ -1,55 +1,13 @@
 <template>
-  <nav class="navbar is-mobile is-fixed-bottom no-bg" role="navigation">
-    <div v-show="!minimized" class="navbar-end">
-      <a class="navbar-item has-text-centered has-bg">
-        <nav class="level">
-          <div class="level-item">
-            <youtube
-              ref="youtube"
-              width="0px"
-              height="0px"
-              :player-vars="playerVars"
-              @playing="playing"
-            />
-            <a :href="nowPlaying" target="_blank" rel="noopener noreferrer" class="has-text-white" @click="pause">
-              <img v-if="thumbnail && $store.state.user.playerShowThumbnail" class="image" :src="thumbnail">
-            </a>
-          </div>
-          <div class="level-item">
-            <a :href="nowPlaying" target="_blank" rel="noopener noreferrer" class="has-text-white" @click="pause">
-              &nbsp;{{ title }} {{ currentTime }} / {{ totalTime }}&nbsp;
-            </a>
-          </div>
-          <div class="level-item">
-            <nav class="level is-mobile">
-              <div class="level-item has-text-centered" @click="backward">
-                <Fas i="step-backward" classes="has-text-white" />
-              </div>
-              <div v-if="isPaused" class="level-item has-text-centered" @click="play">
-                <Fas i="play" classes="has-text-white" />
-              </div>
-              <div v-else class="level-item has-text-centered" @click="pause">
-                <Fas i="pause" classes="has-text-white" />
-              </div>
-              <div class="level-item has-text-centered" @click="forward">
-                <Fas i="step-forward" classes="has-text-white" />
-              </div>
-              <div class="level-item has-text-centered" @click="openMenu = true">
-                <Fas i="tools" classes="has-text-white" />
-              </div>
-              <div class="level-item has-text-centered" @click="minimized = true">
-                <Fas i="times-circle" classes="has-text-white" />
-              </div>
-            </nav>
-          </div>
-        </nav>
-      </a>
-    </div>
-    <div v-if="minimized" class="navbar-end">
-      <a class="navbar-item has-text-centered has-bg" @click="minimized = false">
-        <Fas i="music" classes="has-text-white" />
-      </a>
-    </div>
+  <div>
+    <youtube
+      ref="youtube"
+      style="display:none;"
+      width="0px"
+      height="0px"
+      :player-vars="playerVars"
+      @playing="playing"
+    />
     <Modal
       title="Usagi Player Config"
       :isModalOpen="openMenu"
@@ -87,36 +45,12 @@
         システムを十分ご理解の上、ご利用ください。
       </p>
     </Modal>
-  </nav>
+  </div>
 </template>
-
-<style scoped>
-@media (max-width: 1024px) {
-  .no-bg {
-    pointer-events:none;
-    background-color: #955E4B;
-  }
-}
-
-@media (min-width: 1024px) {
-  .no-bg {
-    pointer-events:none;
-    background-color: transparent;
-  }
-}
-
-.has-bg {
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  pointer-events: auto;
-  background-color: #955E4B;
-}
-</style>
 
 <script>
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
-import Fas from '~/components/ui/Fas.vue'
 import Modal from '~/components/ui/Modal.vue'
 import Setting from '~/components/page/profile/toggle/setting.vue'
 
@@ -124,7 +58,6 @@ Vue.use(VueYoutube)
 
 export default {
   components: {
-    Fas,
     Modal,
     Setting
   },
@@ -134,7 +67,6 @@ export default {
       processId: null,
       isPaused: true,
       openMenu: false,
-      minimized: false,
       currentTimeInSeconds: 0,
       totalTimeInSeconds: 0,
       thumbnail: '',
@@ -173,14 +105,21 @@ export default {
           flag: false,
           class: 'is-info',
           title: 'ランダム再生',
-          description: '有効にすると、プレイリストの中からランダムに再生するようになります。有効な場合、戻っても進んでもランダムになります。この処理は前回地点からの再開よりも優先されます。'
+          description: '有効にすると、プレイリストの中からランダムに再生するようになります。有効な場合、戻っても進んでもランダムになります。この処理は最優先で処理されます。'
         },
         {
           key: 'playerAutoPlay',
           flag: false,
           class: 'is-info',
           title: '自動再生',
-          description: '有効にすると、ページを開くと自動で再生されるようになります。PCでのみ利用可能です。'
+          description: '有効にすると、ページを開くと自動で再生されるようになります。スマホでは使えない可能性が高いです。iOSでは動作しません。'
+        },
+        {
+          key: 'playerLoopPlay',
+          flag: false,
+          class: 'is-info',
+          title: 'ループ再生',
+          description: '有効にすると、現在再生中の動画を繰り返し再生します。ランダム再生が有効な場合そちらが優先されます。'
         },
         {
           key: 'playerResumePlay',
@@ -194,7 +133,7 @@ export default {
           flag: false,
           class: 'is-info',
           title: 'サムネイル表示',
-          description: '無効にするとサムネイルが消えます。'
+          description: '無効にするとサムネイルが消えます。転送量を少しでも減らしたい場合はどうぞ。'
         }
       ],
       playlistData: [],
@@ -240,6 +179,7 @@ export default {
     this.player.setPlaybackQuality('small')
     this.player.loadPlaylist({ listType: 'playlist', list: this.$store.state.user.playerPlaylist })
     this.player.addEventListener('onStateChange', this.playerStateChanged)
+    this.player.setVolume(this.$store.state.user.playerVolume * 10)
     this.player.setLoop(true)
     this.getYoutubeData()
   },
@@ -261,6 +201,7 @@ export default {
     async play () {
       await this.player.playVideo()
       this.isPaused = false
+      this.$emit('paused', false)
     },
     async getYoutubeData (nextPageToken = null) {
       const params = {
@@ -286,17 +227,28 @@ export default {
       this.processId = setInterval(() => {
         this.player.getCurrentTime().then((time) => {
           this.currentTimeInSeconds = Math.round(time)
+          this.$emit('currentTime', this.currentTime)
+          this.$emit('totalTime', this.totalTime)
           this.$store.commit('user/updateSetting', { path: 'playerVideoCurrent', param: Math.round(time) })
         })
       }, 100)
     },
     pause () {
+      this.$emit('paused', true)
       this.player.pauseVideo()
       this.isPaused = true
       clearInterval(this.processId)
     },
     async playerStateChanged (event) {
+      if (event.data === 0) {
+        if (this.$store.state.user.playerLoopPlay) {
+          this.player.playVideoAt(this.$store.state.user.playerVideoIndex)
+          this.player.setVolume(this.$store.state.user.playerVolume * 10)
+        }
+      }
       if (event.data === 1) {
+        this.player.setVolume(this.$store.state.user.playerVolume * 10)
+        this.$emit('paused', false)
         this.isPaused = false
         if (this.firstRun && this.$store.state.user.playerRandomPlay) {
           this.forward()
@@ -311,14 +263,20 @@ export default {
           this.player.playVideoAt(this.$store.state.user.playerVideoIndex)
           this.player.seekTo(this.$store.state.user.playerVideoCurrent, true)
         }
-        if (this.firstRun && !this.$store.state.user.playerAutoPlay) {
-          this.pause()
-        }
         this.nowPlaying = await this.player.getVideoUrl()
         const videoID = this.$youtube.getIdFromUrl(await this.player.getVideoUrl())
         const videoInfo = this.playlistData.find(p => p.snippet.resourceId.videoId === videoID)
         this.title = videoInfo.snippet.title
         this.thumbnail = videoInfo.snippet.thumbnails.default.url
+        if (!this.firstRun) {
+          this.$emit('title', this.title)
+          this.$emit('thumbnail', this.thumbnail)
+        }
+        if (this.firstRun && !this.$store.state.user.playerAutoPlay) {
+          this.title = '再生開始待ち'
+          this.$emit('title', this.title)
+          this.pause()
+        }
         this.firstRun = false
       }
     },
@@ -344,6 +302,10 @@ export default {
       this.title = videoInfo.snippet.title
       this.thumbnail = videoInfo.snippet.thumbnails.default.url
       this.nowPlaying = `https://www.youtube.com/watch?list=${this.$store.state.user.playerPlaylist}&v=${videoInfo.snippet.resourceId.videoId}`
+      this.$emit('title', this.title)
+      this.$emit('thumbnail', this.thumbnail)
+      this.$emit('nowPlaying', this.nowPlaying)
+      this.$emit('paused', false)
     },
     async backward () {
       this.reset()
@@ -367,6 +329,10 @@ export default {
       this.title = videoInfo.snippet.title
       this.thumbnail = videoInfo.snippet.thumbnails.default.url
       this.nowPlaying = `https://www.youtube.com/watch?list=${this.$store.state.user.playerPlaylist}&v=${videoInfo.snippet.resourceId.videoId}`
+      this.$emit('title', this.title)
+      this.$emit('thumbnail', this.thumbnail)
+      this.$emit('nowPlaying', this.nowPlaying)
+      this.$emit('paused', false)
     },
     reset () {
       clearInterval(this.processId)
@@ -374,6 +340,9 @@ export default {
       this.currentTimeInSeconds = 0
       this.totalTimeInSeconds = 0
       this.isPaused = false
+      this.$emit('title', this.title)
+      this.$emit('currentTime', this.currentTime)
+      this.$emit('totalTime', this.totalTime)
     }
   }
 }

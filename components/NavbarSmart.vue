@@ -7,6 +7,16 @@
             ***REMOVED***
           </a>
           <a
+            v-if="!$store.state.user.isLeftHanded && $store.state.user.useMusicPlayer"
+            role="button"
+            class="navbar-item has-text-white"
+            aria-label="menu"
+            aria-expanded="false"
+            @click="$emit('open-music', true)"
+          >
+            <Fas i="music" classes="has-text-white" />
+          </a>
+          <a
             role="button"
             :class="{'left': $store.state.user.isLeftHanded}"
             class="navbar-burger has-text-white"
@@ -17,6 +27,16 @@
             <span aria-hidden="true" />
             <span aria-hidden="true" />
             <span aria-hidden="true" />
+          </a>
+          <a
+            v-if="$store.state.user.isLeftHanded && $store.state.user.useMusicPlayer"
+            role="button"
+            class="navbar-item has-text-white"
+            aria-label="menu"
+            aria-expanded="false"
+            @click="$emit('open-music', true)"
+          >
+            <Fas i="music" classes="has-text-white" />
           </a>
           <a v-if="$store.state.user.isLeftHanded" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
             ***REMOVED***
