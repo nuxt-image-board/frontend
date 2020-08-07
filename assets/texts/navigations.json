@@ -31,6 +31,12 @@
           "require_product": 3,
           "title": "閲覧履歴",
           "icon": "history"
+        },
+        {
+          "to": "/library",
+          "require_product": 30,
+          "title": "図書室",
+          "icon": "history"
         }
     ]
 }
