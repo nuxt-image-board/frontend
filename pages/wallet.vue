@@ -54,9 +54,6 @@
                 <thead>
                   <tr>
                     <th align="center">
-                      ID
-                    </th>
-                    <th align="center">
                       日付時刻
                     </th>
                     <th align="center">
@@ -66,9 +63,6 @@
                 </thead>
                 <tbody>
                   <tr v-for="t in transaction" :key="t.id">
-                    <td>
-                      {{ t.id }}
-                    </td>
                     <td>
                       {{ t.reception }}
                     </td>
