@@ -1,8 +1,5 @@
 <template>
   <section class="section">
-    <div class="pageloader" :class="{'is-active': isLoading, 'is-danger': isFailed, 'is-warning':isSending}">
-      <span class="title">{{ loadingText }}</span>
-    </div>
     <div class="container">
       <div class="columns is-vcentered is-centered is-multiline">
         <div class="column is-12-mobile is-8-tablet is-6-desktop">
@@ -208,7 +205,6 @@ export default {
     return {
       tag: '',
       tags: [],
-      loadingText: '',
       replaceNumber: 0,
       openReplace: false,
       openReplaceConfirm: false,
@@ -237,10 +233,6 @@ export default {
           filesize: ''
         }
       },
-      destroyed: false,
-      isLoading: false,
-      isSending: false,
-      isFailed: false,
       validation: [{
         classes: 'max-length',
         rule: tag => tag.text.length > 20
@@ -265,10 +257,16 @@ export default {
   },
   methods: {
     async update () {
-      this.isFailed = false
-      this.isSending = true
-      this.isLoading = true
-      this.loadingText = '更新しています...'
+      this.$router.go(-1)
+      this.$notify(
+        {
+          group: 'default',
+          type: 'warning',
+          duration: 2000,
+          title: 'イラスト編集',
+          text: '更新しています...'
+        }
+      )
       const newTagData = this.illust.tag.map(tag => (tag.text))
       const params = {
         title: this.illust.title,
@@ -284,20 +282,25 @@ export default {
       const response = await this.$axios.put('/arts/' + this.illust.illustID, params)
       this.isSending = false
       if (response.data.status === 200) {
-        this.loadingText = '更新しました!'
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 8000,
+            title: 'イラスト編集',
+            text: '更新しました!'
+          }
+        )
       } else {
-        this.loadingText = '更新に失敗しました'
-        this.isFailed = true
-      }
-      setTimeout(this.closeWindow, 2000)
-    },
-    closeWindow () {
-      this.isSending = false
-      this.isLoading = false
-      if (this.destroyed) {
-        this.$router.go(-2)
-      } else {
-        this.$router.go(-1)
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 8000,
+            title: 'イラスト編集',
+            text: '更新に失敗しました'
+          }
+        )
       }
     },
     async requestReplace () {
@@ -306,48 +309,90 @@ export default {
         { illustID: this.illust.illustID, status: 0 }
       )
       if (response.data.status !== 200) {
-        this.loadingText = 'イラスト情報を取得できませんでした'
-        this.isFailed = true
-        this.isLoading = true
-        setTimeout(this.closeWindow, 2000)
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 8000,
+            title: 'イラスト編集',
+            text: '置き換え情報を取得できませんでした'
+          }
+        )
       } else {
         this.openReplaceConfirm = true
         this.replaceInfo = response.data.data
       }
     },
     async replace () {
-      this.isFailed = false
-      this.isSending = true
-      this.isLoading = true
-      this.loadingText = '置き換えしています...'
+      this.$router.go(-1)
+      this.$notify(
+        {
+          group: 'default',
+          type: 'warning',
+          duration: 3000,
+          title: 'イラスト編集',
+          text: '置き換えしています..'
+        }
+      )
       const response = await this.$axios.put(
         '/arts/' + this.replaceNumber + '/replace',
         { illustID: this.illust.illustID, status: 1 }
       )
-      this.isSending = false
       if (response.data.status === 200) {
-        this.loadingText = '置き換えしました!'
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 8000,
+            title: 'イラスト編集',
+            text: '置き換えしました!'
+          }
+        )
       } else {
-        this.loadingText = '置き換えに失敗しました'
-        this.isFailed = true
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 8000,
+            title: 'イラスト編集',
+            text: '置き換えに失敗しました'
+          }
+        )
       }
-      setTimeout(this.closeWindow, 2000)
     },
     async remove () {
-      this.isFailed = false
-      this.isSending = true
-      this.isLoading = true
-      this.loadingText = '削除しています...'
+      this.$router.go(-2)
+      this.$notify(
+        {
+          group: 'default',
+          type: 'warning',
+          duration: 8000,
+          title: 'イラスト削除',
+          text: '削除しています'
+        }
+      )
       const response = await this.$axios.delete('/arts/' + this.illust.illustID)
-      this.isSending = false
       if (response.data.status === 200) {
-        this.loadingText = '削除しました!'
-        this.destroyed = true
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 8000,
+            title: 'イラスト削除',
+            text: '削除しました!'
+          }
+        )
       } else {
-        this.loadingText = '削除に失敗しました'
-        this.isFailed = true
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 8000,
+            title: 'イラスト削除',
+            text: '削除に失敗しました'
+          }
+        )
       }
-      setTimeout(this.closeWindow, 2000)
     }
   },
   head () {
