@@ -35,7 +35,7 @@
 import * as base32 from 'hi-base32'
 
 export default {
-  async asyncData ({ $axios, error, route }) {
+  async asyncData ({ $axios, $notify, error, route }) {
     try {
       // IDを得て、base32デコードする
       const id = parseInt(base32.decode(route.params.id.split('_')[0].toUpperCase() + '===')) || 0
@@ -48,6 +48,15 @@ export default {
   methods: {
     async claimAirdrop (airdropID) {
       await this.$axios.post(`/toymoney/airdrops/${airdropID}/claim`)
+      this.$notify(
+        {
+          group: 'default',
+          type: 'success',
+          duration: 7000,
+          title: 'エアドロップ',
+          text: `${this.name}を受け取りました!`
+        }
+      )
       this.$router.push('/wallet')
     }
   },

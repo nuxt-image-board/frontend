@@ -336,7 +336,7 @@ export default {
           {
             group: 'default',
             type: 'success',
-            duration: 3000,
+            duration: 5000,
             title: 'Waifu2x',
             text: 'リクエストに成功しました'
           }
