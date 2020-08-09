@@ -60,10 +60,10 @@ export const mutations = {
   },
   addBookmark (state) {
     if (
-      (state.mylistCount <= 20) ||
-      (state.obtainedProducts.includes(4) && state.mylistCount <= 30) ||
-      (state.obtainedProducts.includes(5) && state.mylistCount <= 50) ||
-      (state.obtainedProducts.includes(6) && state.mylistCount <= 100)
+      (state.mylistCount <= 50) ||
+      (state.obtainedProducts.includes(4) && state.mylistCount <= 100) ||
+      (state.obtainedProducts.includes(5) && state.mylistCount <= 300) ||
+      (state.obtainedProducts.includes(6) && state.mylistCount <= 1000)
     ) {
       state.mylistCount += 1
       state.isBookmarkAddable = true
@@ -80,10 +80,10 @@ export const mutations = {
   setBookmarkCount (state, count) {
     state.mylistCount = count
     if (
-      (state.mylistCount <= 20) ||
-      (state.obtainedProducts.includes(4) && state.mylistCount <= 30) ||
-      (state.obtainedProducts.includes(5) && state.mylistCount <= 50) ||
-      (state.obtainedProducts.includes(6) && state.mylistCount <= 100)
+      (state.mylistCount <= 50) ||
+      (state.obtainedProducts.includes(4) && state.mylistCount <= 100) ||
+      (state.obtainedProducts.includes(5) && state.mylistCount <= 300) ||
+      (state.obtainedProducts.includes(6) && state.mylistCount <= 1000)
     ) {
       state.isBookmarkAddable = true
     } else {
