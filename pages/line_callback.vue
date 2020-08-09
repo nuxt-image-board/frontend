@@ -38,7 +38,7 @@ export default {
   },
   head () {
     return {
-      title: 'LINE連携'
+      title: 'LINEログイン'
     }
   }
 }

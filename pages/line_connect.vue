@@ -22,7 +22,7 @@ export default {
   },
   head () {
     return {
-      title: 'LINEログイン'
+      title: 'LINE連携'
     }
   }
 }
