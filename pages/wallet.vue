@@ -5,11 +5,11 @@
         <div class="tile is-6">
           <div class="tile is-parent is-vertical">
             <article class="tile is-child notification has-background-cocoa">
-              <p class="title">
+              <p class="title has-text-centered">
                 <Fas i="wallet" />
                 <span>PYON Wallet</span>
               </p>
-              <p class="title">
+              <p class="title has-text-centered">
                 所持: {{ money }} PYON
               </p>
             </article>
@@ -20,74 +20,52 @@
               <p class="subtitle">
                 もっと稼ぎたい? ならボーナスガチャを回しましょう!
               </p>
-              <table class="table is-fullwidth centered-table">
-                <tbody>
-                  <tr v-for="b in bonus" :key="b.id">
-                    <td>
-                      <div>
-                        <p class="is-size-5">
-                          {{ b.name }}
-                        </p>
-                        <p class="is-size-7">
-                          {{ b.description }}
-                        </p>
-                      </div>
-                    </td>
-                    <td>
-                      <button class="button is-info" :disabled="!b.receivable" @click="claimAirdrop(b.id)">
-                        {{ b.receivable ? '受け取る' : '受け取り済み' }}
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div v-for="b in bonus" :key="b.id" class="columns is-centered is-vcentered">
+                <div class="column is-9">
+                  <p class="is-size-4">
+                    {{ b.name }}
+                  </p>
+                  <p class="is-size-6">
+                    {{ b.description }}
+                  </p>
+                </div>
+                <div class="column is-3">
+                  <button class="button is-info is-fullwidth" :disabled="!b.receivable" @click="claimAirdrop(b.id)">
+                    {{ b.receivable ? '受け取る' : '受け取り済み' }}
+                  </button>
+                </div>
+              </div>
             </article>
           </div>
         </div>
         <div class="tile is-parent is-vertical">
           <article class="tile is-child notification has-background-cocoa">
-            <div class="content">
-              <p class="title">
-                取引履歴
-              </p>
-              <table class="table is-fullwidth centered-table">
-                <thead>
-                  <tr>
-                    <th align="center">
-                      日付時刻
-                    </th>
-                    <th align="center">
-                      内容
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="t in transaction" :key="t.id">
-                    <td>
-                      {{ t.reception }}
-                    </td>
-                    <td>
-                      {{ getTransactionText(
-                        t.amount,
-                        t.provider_type,
-                        t.provider,
-                        t.receiver_type,
-                        t.receiver
-                      ) }}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <p class="title">
+              取引履歴
+            </p>
+            <div v-for="t in transaction" :key="t.id" class="columns is-vcentered is-centered">
+              <div class="column is-half has-text-centered">
+                <p class="is-size-4">
+                  {{ t.reception.replace('T', ' ') }}
+                </p>
+                <p class="is-size-6">
+                  {{ getTransactionText(
+                    t.amount,
+                    t.provider_type,
+                    t.provider,
+                    t.receiver_type,
+                    t.receiver
+                  ) }}
+                </p>
+              </div>
             </div>
           </article>
-          <article class="tile is-child notification has-text-centered has-background-cocoa">
+          <nuxt-link to="/shop" class="tile is-child notification has-text-centered is-primary is-size-4">
             <div>
-              <nuxt-link to="/shop" class="button is-large is-primary is-fullwidth">
-                <Fas i="shopping-cart" classes="has-text-white" />
-                <span> ショップへ</span>
-              </nuxt-link>
+              <Fas i="shopping-cart" classes="has-text-white" />
+              <span> ショップへ</span>
             </div>
-          </article>
+          </nuxt-link>
         </div>
       </div>
     </div>

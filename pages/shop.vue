@@ -19,7 +19,7 @@
       </h4>
       <div class="columns is-centered">
         <div class="column is-8">
-          <div class="table-container">
+          <div v-if="$store.state.user.isPC" class="table-container">
             <table class="table is-fullwidth is-striped">
               <thead>
                 <tr>
@@ -44,12 +44,38 @@
                       :disabled="obtainedProducts.includes(p.id) || money < p.price"
                       @click="buyProduct(p.id, p.price)"
                     >
-                      {{ !obtainedProducts.includes(p.id) ? '購入する' : '購入済み' }}
+                      {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? '残高不足' : '購入する' ) : '購入済み' }}
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div v-else class="container">
+            <div v-for="p in products" :key="p.id" class="has-text-centered">
+              <p class="is-size-3">
+                {{ p.name }}
+              </p>
+              <p class="is-size-6">
+                {{ p.description }}
+              </p>
+              <div class="field has-addons-centered has-addons">
+                <p class="control">
+                  <a class="button is-static">{{ p.price }} PYON</a>
+                </p>
+                <p class="control">
+                  <button
+                    class="button is-primary"
+                    :disabled="obtainedProducts.includes(p.id) || money < p.price"
+                    @click="buyProduct(p.id, p.price)"
+                  >
+                    {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? '残高不足' : '購入する' ) : '購入済み' }}
+                  </button>
+                </p>
+                <br>
+                <br>
+              </div>
+            </div>
           </div>
         </div>
       </div>
