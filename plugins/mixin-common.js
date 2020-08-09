@@ -44,6 +44,11 @@ Vue.mixin({
       this.$store.commit(
         'user/setObtainedProducts', assets.data.assets.map(a => a.id)
       )
+      // マイリストに入っているデータ数を取得する
+      const mylistCount = await this.$axios.get(`/mylist/${this.$auth.user.mylist.id}`)
+      this.$store.commit(
+        'user/updateSetting', { path: 'mylistCount', param: mylistCount.data.data.count }
+      )
     }
   }
 })

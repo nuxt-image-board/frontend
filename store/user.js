@@ -12,7 +12,9 @@ export const state = () => ({
   useSakura: false,
   searchHistory: [],
   illustHistory: [],
-  obtainedProducts: []
+  obtainedProducts: [],
+  mylistCount: 0,
+  isBookmarkAddable: true
 })
 
 // 状態を変更する処理は mutationとしてexportする
@@ -55,5 +57,37 @@ export const mutations = {
   },
   setObtainedProducts (state, obtainedProducts) {
     state.obtainedProducts = obtainedProducts
+  },
+  addBookmark (state) {
+    if (
+      (state.mylistCount <= 20) ||
+      (state.obtainedProducts.includes(4) && state.mylistCount <= 30) ||
+      (state.obtainedProducts.includes(5) && state.mylistCount <= 50) ||
+      (state.obtainedProducts.includes(6) && state.mylistCount <= 100)
+    ) {
+      state.mylistCount += 1
+      state.isBookmarkAddable = true
+    } else {
+      state.isBookmarkAddable = false
+    }
+  },
+  removeBookmark (state) {
+    if (state.mylistCount > 0) {
+      state.mylistCount -= 1
+      state.isBookmarkAddable = true
+    }
+  },
+  setBookmarkCount (state, count) {
+    state.mylistCount = count
+    if (
+      (state.mylistCount <= 20) ||
+      (state.obtainedProducts.includes(4) && state.mylistCount <= 30) ||
+      (state.obtainedProducts.includes(5) && state.mylistCount <= 50) ||
+      (state.obtainedProducts.includes(6) && state.mylistCount <= 100)
+    ) {
+      state.isBookmarkAddable = true
+    } else {
+      state.isBookmarkAddable = false
+    }
   }
 }
