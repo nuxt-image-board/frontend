@@ -10,9 +10,17 @@
       <nuxt-link :to="artAddress">
         <figure class="image">
           <img
+            v-if="(!result.nsfw || $store.state.user.acceptR18) && !$store.state.user.mutedArtists.includes(result.artistID)"
             v-lazy="previewAddress"
             src="~/assets/load.png"
-            :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
+          >
+          <img
+            v-else-if="result.nsfw && !$store.state.user.mutedArtists.includes(result.artistID)"
+            src="~/assets/blocked_r18.png"
+          >
+          <img
+            v-else
+            src="~/assets/blocked_muted.png"
           >
         </figure>
       </nuxt-link>
@@ -102,10 +110,10 @@ export default {
         this.result.mylist -= 1
       }
       if (this.$store.state.user.isBookmarkAddable || this.result.mylisted) {
-      await this.$axios.put(
-        `/mylist/${this.$auth.$state.user.mylist.id}`,
-        { illustID: this.result.illustID, action: this.result.mylisted ? 'remove' : 'add' }
-      )
+        await this.$axios.put(
+          `/mylist/${this.$auth.$state.user.mylist.id}`,
+          { illustID: this.result.illustID, action: this.result.mylisted ? 'remove' : 'add' }
+        )
         if (!this.result.mylisted) {
           this.$notify(
             {
@@ -116,7 +124,7 @@ export default {
               text: 'マイリストに追加しました'
             }
           )
-      } else {
+        } else {
           this.$notify(
             {
               group: 'default',
@@ -126,8 +134,8 @@ export default {
               text: 'マイリストから削除しました'
             }
           )
-      }
-      this.result.mylisted = !this.result.mylisted
+        }
+        this.result.mylisted = !this.result.mylisted
       } else {
         this.$notify(
           {

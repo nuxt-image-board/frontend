@@ -13,6 +13,7 @@ export const state = () => ({
   searchHistory: [],
   illustHistory: [],
   obtainedProducts: [],
+  mutedArtists: [],
   mylistCount: 0,
   isBookmarkAddable: true
 })
@@ -57,6 +58,18 @@ export const mutations = {
   },
   setObtainedProducts (state, obtainedProducts) {
     state.obtainedProducts = obtainedProducts
+  },
+  addArtistMute (state, artistID) {
+    const isExist = state.mutedArtists.filter(artist => artist === artistID)
+    if (isExist.length < 1) {
+      state.mutedArtists.push(artistID)
+    }
+  },
+  removeArtistMute (state, artistID) {
+    state.mutedArtists = state.mutedArtists.filter(artist => artist !== artistID)
+  },
+  setArtistMuteIds (state, artistIDs) {
+    state.mutedArtists = artistIDs
   },
   addBookmark (state) {
     if (

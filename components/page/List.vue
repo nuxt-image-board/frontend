@@ -18,6 +18,22 @@
             </div>
           </div>
         </div>
+        <div v-if="endpoint.includes('/search/artist')" class="column is-12 has-text-centered">
+          <button
+            v-if="!$store.state.user.mutedArtists.includes(notifyTargetID)"
+            class="button is-primary is-small"
+            @click="$store.commit('user/addArtistMute', notifyTargetID)"
+          >
+            この絵師をミュートする
+          </button>
+          <button
+            v-else
+            class="button is-primary is-small"
+            @click="$store.commit('user/removeArtistMute', notifyTargetID)"
+          >
+            この絵師のミュートを解除する
+          </button>
+        </div>
         <div v-if="hasWikiElement && !endpoint.includes('all') && !endpoint.includes('catalog')" class="column is-12 has-text-centered">
           <Wiki
             :articleTitle="notifyTitle"
