@@ -91,7 +91,7 @@ export default {
         {
           group: 'default',
           duration: 5000,
-          type: '',
+          type: 'success',
           title: 'デイリーボーナス',
           text: '1PYONを獲得しました!'
         }

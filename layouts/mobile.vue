@@ -105,22 +105,12 @@ export default {
         {
           group: 'default',
           duration: 5000,
-          type: '',
+          type: 'success',
           title: 'デイリーボーナス',
           text: '1PYONを獲得しました!'
         }
       )
-    } catch {
-      this.$notify(
-        {
-          group: 'default',
-          duration: 5000,
-          type: '',
-          title: 'デイリーボーナス',
-          text: '既に受け取り済みです!'
-        }
-      )
-    }
+    } catch {}
   },
   methods: {
     showAndHide () {
