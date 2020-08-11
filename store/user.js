@@ -61,10 +61,8 @@ export const mutations = {
     state.obtainedProducts = obtainedProducts
   },
   addArtistMute (state, artistID) {
-    const isExist = state.mutedArtists.filter(artist => artist === artistID)
-    if (isExist.length < 1) {
-      state.mutedArtists.push(artistID)
-    }
+    state.mutedArtists = state.mutedArtists.filter(artist => artist !== artistID)
+    state.mutedArtists.push(artistID)
     if (
       (state.obtainedProducts.includes(4) && state.mutedArtists.length <= 10) ||
       (state.obtainedProducts.includes(5) && state.mutedArtists.length <= 30) ||
@@ -82,7 +80,6 @@ export const mutations = {
   setArtistMuteIds (state, artistIDs) {
     state.mutedArtists = artistIDs
     if (
-      (state.mutedArtists.length <= 50) ||
       (state.obtainedProducts.includes(4) && state.mutedArtists.length <= 10) ||
       (state.obtainedProducts.includes(5) && state.mutedArtists.length <= 30) ||
       (state.obtainedProducts.includes(6) && state.mutedArtists.length <= 100)

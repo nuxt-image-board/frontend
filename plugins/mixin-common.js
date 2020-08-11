@@ -49,6 +49,12 @@ Vue.mixin({
       this.$store.commit(
         'user/updateSetting', { path: 'mylistCount', param: mylistCount.data.data.count }
       )
+      // ミュートしている情報を取得し、対応するリストにつっこむ
+      const muteData = await this.$axios.get('mute/list')
+      // とりあえずアーティストのミュートだけ
+      this.$store.commit(
+        'user/setArtistMuteIds', muteData.data.data.artist
+      )
     }
   }
 })

@@ -292,9 +292,10 @@ export default {
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
       this.$scrollTo('#top')
     },
-    toggleArtistMute (isAdd) {
+    async toggleArtistMute (isAdd) {
       if (this.$store.state.user.isArtistMuteAddable && isAdd) {
         this.$store.commit('user/addArtistMute', this.notifyTargetID)
+        await this.$axios.post('mute/add', { type: 2, id: this.notifyTargetID })
         this.$notify(
           {
             group: 'default',
@@ -306,6 +307,7 @@ export default {
         )
       } else if (!isAdd) {
         this.$store.commit('user/removeArtistMute', this.notifyTargetID)
+        await this.$axios.post('mute/remove', { type: 2, id: this.notifyTargetID })
         this.$notify(
           {
             group: 'default',
