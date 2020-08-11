@@ -15,7 +15,8 @@ export const state = () => ({
   obtainedProducts: [],
   mutedArtists: [],
   mylistCount: 0,
-  isBookmarkAddable: true
+  isBookmarkAddable: true,
+  isArtistMuteAddable: true
 })
 
 // 状態を変更する処理は mutationとしてexportする
@@ -64,12 +65,32 @@ export const mutations = {
     if (isExist.length < 1) {
       state.mutedArtists.push(artistID)
     }
+    if (
+      (state.obtainedProducts.includes(4) && state.mutedArtists.length <= 10) ||
+      (state.obtainedProducts.includes(5) && state.mutedArtists.length <= 30) ||
+      (state.obtainedProducts.includes(6) && state.mutedArtists.length <= 100)
+    ) {
+      state.isArtistMuteAddable = true
+    } else {
+      state.isArtistMuteAddable = false
+    }
   },
   removeArtistMute (state, artistID) {
     state.mutedArtists = state.mutedArtists.filter(artist => artist !== artistID)
+    state.isArtistMuteAddable = true
   },
   setArtistMuteIds (state, artistIDs) {
     state.mutedArtists = artistIDs
+    if (
+      (state.mutedArtists.length <= 50) ||
+      (state.obtainedProducts.includes(4) && state.mutedArtists.length <= 10) ||
+      (state.obtainedProducts.includes(5) && state.mutedArtists.length <= 30) ||
+      (state.obtainedProducts.includes(6) && state.mutedArtists.length <= 100)
+    ) {
+      state.isArtistMuteAddable = true
+    } else {
+      state.isArtistMuteAddable = false
+    }
   },
   addBookmark (state) {
     if (

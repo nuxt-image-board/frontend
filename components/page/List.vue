@@ -22,14 +22,14 @@
           <button
             v-if="!$store.state.user.mutedArtists.includes(notifyTargetID)"
             class="button is-primary is-small"
-            @click="$store.commit('user/addArtistMute', notifyTargetID)"
+            @click="toggleArtistMute(true)"
           >
             この絵師をミュートする
           </button>
           <button
             v-else
             class="button is-primary is-small"
-            @click="$store.commit('user/removeArtistMute', notifyTargetID)"
+            @click="toggleArtistMute(false)"
           >
             この絵師のミュートを解除する
           </button>
@@ -291,6 +291,41 @@ export default {
       this.SelectedPage = newPage
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
       this.$scrollTo('#top')
+    },
+    toggleArtistMute (isAdd) {
+      if (this.$store.state.user.isArtistMuteAddable && isAdd) {
+        this.$store.commit('user/addArtistMute', this.notifyTargetID)
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 2000,
+            title: 'ミュート',
+            text: '絵師をミュートしました'
+          }
+        )
+      } else if (!isAdd) {
+        this.$store.commit('user/removeArtistMute', this.notifyTargetID)
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 2000,
+            title: 'ミュート',
+            text: '絵師のミュートを解除しました'
+          }
+        )
+      } else {
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 2000,
+            title: 'ミュート',
+            text: 'ミュート数の上限に達しています'
+          }
+        )
+      }
     }
   }
 }

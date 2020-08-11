@@ -143,7 +143,7 @@ export default {
             type: 'danger',
             duration: 5000,
             title: 'マイリスト',
-            text: 'マイリスト数の上限に達しました'
+            text: 'マイリスト数の上限に達しています'
           }
         )
       }

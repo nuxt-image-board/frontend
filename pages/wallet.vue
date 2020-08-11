@@ -28,6 +28,9 @@
                   <p class="is-size-6">
                     {{ b.description }}
                   </p>
+                  <p v-if="!b.receivable" class="is-size-6 has-text-weight-bold">
+                    {{ '次回受取可能日:' + b.next_receivable.slice(0, 10) }}
+                  </p>
                 </div>
                 <div class="column is-3">
                   <button class="button is-info is-fullwidth" :disabled="!b.receivable" @click="claimAirdrop(b.id)">
@@ -61,9 +64,11 @@
             </div>
           </article>
           <nuxt-link to="/shop" class="tile is-child notification has-text-centered is-primary is-size-4">
-            <div>
-              <Fas i="shopping-cart" classes="has-text-white" />
-              <span> ショップへ</span>
+            <div class="columns is-vcentered is-centered" style="height:100%">
+              <div class="column is-6">
+                <Fas i="shopping-cart" classes="has-text-white" />
+                <span> ショップへ</span>
+              </div>
             </div>
           </nuxt-link>
         </div>
