@@ -1,20 +1,22 @@
 <template>
   <div id="top">
-    <canvas id="js-background" width="0px" height="0px" />
-    <notifications group="foo" />
+    <client-only>
+      <canvas id="js-background" width="0px" height="0px" />
+      <notifications classes="my-notify-mobile" width="90%" position="top center" group="default" />
+      <NavbarSmartMusic
+        v-if="$store.state.user.useMusicPlayer"
+        v-touch:swipe.left="showSmartNav2"
+        v-touch:swipe.right="hideSmartNav2"
+        :openMenuFromProp="openSmartNav2"
+        @menu-event="changeMenu2"
+      />
+    </client-only>
     <NavbarSmart
       v-touch:swipe.left="hideSmartNav"
       v-touch:swipe.right="showSmartNav"
       :openMenuFromProp="openSmartNav"
       @menu-event="changeMenu"
       @open-music="openSmartNav2 = true"
-    />
-    <NavbarSmartMusic
-      v-if="$store.state.user.useMusicPlayer"
-      v-touch:swipe.left="showSmartNav2"
-      v-touch:swipe.right="hideSmartNav2"
-      :openMenuFromProp="openSmartNav2"
-      @menu-event="changeMenu2"
     />
     <main v-touch:swipe.right="showAndHide" v-touch:swipe.left="showAndHide2">
       <br v-if="!$store.state.user.useSwipe">
@@ -32,31 +34,49 @@
 
 <style lang="scss">
 .my-notify-mobile {
-  margin-bottom: 10px;
+  margin-top: 5px;
   font-size: 1em;
   border-radius: 5px;
   border: 1px solid #ddaa77;
   color: #000;
   background: #FFF !important;
-  border-left: 5px solid #ddaa77;
+  border-top: 5px solid #ddaa77;
   padding: 10px;
   text-align: center !important;
 
   &.warning {
-    border-left-color: #f48a06;
+    border-top-color: #f48a06;
   }
 
   &.danger {
-    border-left-color: #B82E24;
+    border-top-color: #B82E24;
   }
 
   &.info {
-    border-left-color: #3298dc;
+    border-top-color: #3298dc;
   }
 
   &.success {
-    border-left-color: #00d1b2;
+    border-top-color: #00d1b2;
   }
+}
+</style>
+
+<style>
+#js-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.page-enter {
+  opacity: 0;
+}
+.page-enter-active {
+  transition: opacity 0.6s;
 }
 </style>
 
@@ -166,21 +186,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#js-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-}
-
- .page-enter {
-   opacity: 0;
- }
- .page-enter-active {
-   transition: opacity 0.6s;
- }
-</style>

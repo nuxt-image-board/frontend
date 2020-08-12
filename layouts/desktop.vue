@@ -49,6 +49,24 @@
 }
 </style>
 
+<style>
+#js-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.page-enter {
+  opacity: 0;
+}
+.page-enter-active {
+  transition: opacity 0.6s;
+}
+</style>
+
 <script>
 import NavbarUp from '~/components/NavbarUp.vue'
 import NavbarDown from '~/components/NavbarDown.vue'
@@ -100,21 +118,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#js-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-.page-enter {
-  opacity: 0;
-}
-.page-enter-active {
-  transition: opacity 0.6s;
-}
-</style>
