@@ -89,6 +89,16 @@ export default {
         this.$store.commit('user/updateSetting', { path: this.storeKey, param: value })
         if (['isPC', 'useSakura'].includes(this.storeKey)) {
           location.reload()
+        } else if (this.storeKey === 'useMusicPlayer' && value === true) {
+          this.$store.commit('user/updateSetting', { path: 'playerVideoIndex', param: 0 })
+          this.$store.commit('user/updateSetting', { path: 'playerVideoCurrent', param: 0 })
+          this.$store.commit('user/updateSetting', { path: 'playerVolume', param: 10 })
+          this.$store.commit('user/updateSetting', { path: 'playerAutoPlay', param: false })
+          this.$store.commit('user/updateSetting', { path: 'playerResumePlay', param: false })
+          this.$store.commit('user/updateSetting', { path: 'playerRandomPlay', param: false })
+          this.$store.commit('user/updateSetting', { path: 'playerLoopPlay', param: false })
+          this.$store.commit('user/updateSetting', { path: 'playerShowThumbnail', param: true })
+          this.$store.commit('user/updateSetting', { path: 'playerPlaylist', param: 'PL3w4YrAfCCwS2vEqSUXrCKnK-F4-SrYX-' })
         }
       }
     }
