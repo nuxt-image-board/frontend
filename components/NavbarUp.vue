@@ -34,7 +34,6 @@
                   <div class="control">
                     <nuxt-link :to="'/search/keyword?query=' + keyword" class="button is-success is-rounded" @click.native="closeAll($event)">
                       <span><Fas i="search" /></span>
-                      <span>検索</span>
                     </nuxt-link>
                   </div>
                 </div>
@@ -44,12 +43,12 @@
           <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
             <nuxt-link to="/search/list" class="navbar-item has-text-white" @click.native="closeAll($event)">
               <span class="icon"><Fas i="list" /></span>
-              <span>一覧検索</span>
+              <span>一覧</span>
             </nuxt-link>
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(1)">
                 <span class="icon"><Fas i="users" /></span>
-                <span>キャラ検索</span>
+                <span>キャラ</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 1}">
                 <nuxt-link v-for="chara in characters" :key="chara.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/character/&quot;+chara.id" @click.native="closeAll($event)">
@@ -64,7 +63,7 @@
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(2)">
                 <span class="icon"><Fas i="tags" /></span>
-                <span>タグ検索</span>
+                <span>タグ</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 2}">
                 <nuxt-link v-for="tag in tags" :key="tag.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/tag/&quot;+tag.id" @click.native="closeAll($event)">
@@ -79,7 +78,7 @@
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(3)">
                 <span class="icon"><Fas i="paint-brush" /></span>
-                <span>絵師検索</span>
+                <span>絵師</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 3}">
                 <nuxt-link v-for="artist in artists" :key="artist.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/artist/&quot;+artist.id" @click.native="closeAll($event)">
@@ -91,18 +90,33 @@
                 </nuxt-link>
               </div>
             </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link has-text-white" @click="changeTab(4)">
+                <span class="icon"><Fas i="upload" /></span>
+                <span>投稿者</span>
+              </a>
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 4}">
+                <nuxt-link v-for="uploader in uploaders" :key="uploader.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/uploader/&quot;+uploader.id" @click.native="closeAll($event)">
+                  {{ uploader.name }} <span class="tag is-light">{{ uploader.count }}</span>
+                </nuxt-link>
+                <hr class="navbar-divider">
+                <nuxt-link to="/list/uploader" class="dropdown-item has-text-white" @click.native="closeAll($event)">
+                  もっと見る
+                </nuxt-link>
+              </div>
+            </div>
             <nuxt-link to="/search/image" class="navbar-item has-text-white" @click.native="closeAll($event)">
               <span class="icon"><Fas i="image" /></span>
-              <span>画像検索</span>
+              <span>画像</span>
             </nuxt-link>
           </div>
           <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link has-text-white" @click="changeTab(4)">
+              <a class="navbar-link has-text-white" @click="changeTab(5)">
                 <span class="icon"><Fas i="user" /></span>
                 <span>{{ $auth.$state.user.name }}</span>
               </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 4}">
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 5}">
                 <nuxt-link v-for="user in userNavigation" :key="user.name" class="dropdown-item has-text-white pl-3" :to="user.to" @click.native="closeAll($event)">
                   <span class="icon">
                     <Fas :i="user.icon" classes="has-text-white" />
@@ -153,6 +167,9 @@ export default {
     },
     artists () {
       return this.$store.state.artists
+    },
+    uploaders () {
+      return this.$store.state.uploaders
     }
   },
   methods: {

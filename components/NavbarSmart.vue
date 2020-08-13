@@ -124,6 +124,12 @@
                   </nuxt-link>
                 </li>
                 <li>
+                  <nuxt-link to="/list/uploader" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                    <span class="icon"><Fas i="upload" /></span>
+                    <span>投稿者</span>
+                  </nuxt-link>
+                </li>
+                <li>
                   <nuxt-link to="/search/image" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                     <span class="icon"><Fas i="image" /></span>
                     <span>画像</span>

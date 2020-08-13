@@ -18,6 +18,7 @@
           <nuxt-link class="button is-fullwidth" :to="`/search/${p.type}/${p.id}`">
             <Fas v-if="p.type == 'artist'" i="paint-brush" />
             <Fas v-else-if="p.type == 'character'" i="users" />
+            <Fas v-else-if="p.type == 'uploader'" i="upload" />
             <Fas v-else i="tags" />
             <span>&nbsp; {{ p.title }}</span>
           </nuxt-link>
@@ -43,7 +44,7 @@ export default {
   },
   head () {
     return {
-      title: 'イラスト閲覧履歴'
+      title: 'イラスト検索履歴'
     }
   }
 }
