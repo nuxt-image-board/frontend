@@ -64,9 +64,9 @@ export const mutations = {
     state.mutedArtists = state.mutedArtists.filter(artist => artist !== artistID)
     state.mutedArtists.push(artistID)
     if (
-      (state.obtainedProducts.includes(4) && state.mutedArtists.length <= 10) ||
-      (state.obtainedProducts.includes(5) && state.mutedArtists.length <= 30) ||
-      (state.obtainedProducts.includes(6) && state.mutedArtists.length <= 100)
+      (state.obtainedProducts.includes(9) && state.mutedArtists.length <= 10) ||
+      (state.obtainedProducts.includes(10) && state.mutedArtists.length <= 30) ||
+      (state.obtainedProducts.includes(11) && state.mutedArtists.length <= 100)
     ) {
       state.isArtistMuteAddable = true
     } else {
@@ -80,9 +80,9 @@ export const mutations = {
   setArtistMuteIds (state, artistIDs) {
     state.mutedArtists = artistIDs
     if (
-      (state.obtainedProducts.includes(4) && state.mutedArtists.length <= 10) ||
-      (state.obtainedProducts.includes(5) && state.mutedArtists.length <= 30) ||
-      (state.obtainedProducts.includes(6) && state.mutedArtists.length <= 100)
+      (state.obtainedProducts.includes(9) && state.mutedArtists.length <= 10) ||
+      (state.obtainedProducts.includes(10) && state.mutedArtists.length <= 30) ||
+      (state.obtainedProducts.includes(11) && state.mutedArtists.length <= 100)
     ) {
       state.isArtistMuteAddable = true
     } else {
@@ -92,9 +92,9 @@ export const mutations = {
   addBookmark (state) {
     if (
       (state.mylistCount <= 50) ||
-      (state.obtainedProducts.includes(4) && state.mylistCount <= 100) ||
-      (state.obtainedProducts.includes(5) && state.mylistCount <= 300) ||
-      (state.obtainedProducts.includes(6) && state.mylistCount <= 1000)
+      (state.obtainedProducts.includes(6) && state.mylistCount <= 100) ||
+      (state.obtainedProducts.includes(7) && state.mylistCount <= 300) ||
+      (state.obtainedProducts.includes(8) && state.mylistCount <= 1000)
     ) {
       state.mylistCount += 1
       state.isBookmarkAddable = true
@@ -112,9 +112,9 @@ export const mutations = {
     state.mylistCount = count
     if (
       (state.mylistCount <= 50) ||
-      (state.obtainedProducts.includes(4) && state.mylistCount <= 100) ||
-      (state.obtainedProducts.includes(5) && state.mylistCount <= 300) ||
-      (state.obtainedProducts.includes(6) && state.mylistCount <= 1000)
+      (state.obtainedProducts.includes(6) && state.mylistCount <= 100) ||
+      (state.obtainedProducts.includes(7) && state.mylistCount <= 300) ||
+      (state.obtainedProducts.includes(8) && state.mylistCount <= 1000)
     ) {
       state.isBookmarkAddable = true
     } else {

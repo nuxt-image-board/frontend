@@ -130,7 +130,7 @@
             "key": "useMusicPlayer",
             "mobile_only": false,
             "flag": false,
-            "require_product": 16,
+            "require_product": 17,
             "class": "is-info",
             "title": "UsagiPlayer",
             "description": "有効にすると、サイト内で音楽プレイヤーが使用できるようになります。利用にはショップでの購入が必要です。"
