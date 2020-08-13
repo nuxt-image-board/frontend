@@ -19,7 +19,7 @@ export default {
     List
   },
   async asyncData ({ $axios, $auth, route, error }) {
-    const endpoint = '/search/uploader'
+    const endpoint = '/search/uploaders'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortNum = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0

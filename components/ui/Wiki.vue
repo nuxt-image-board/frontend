@@ -12,7 +12,7 @@
       :to="writeArticleLink"
       class="button is-primary is-medium"
     >
-      Wikiで記事を {{ articleID ? '編集する' : '書く' }}
+      Wikiで記事を{{ articleID ? '編集' : '書く' }}
     </nuxt-link>
   </div>
 </template>

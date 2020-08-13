@@ -20,10 +20,10 @@
             <div class="tile is-parent is-vertical">
               <article class="tile is-child notification has-background-cocoa">
                 <p class="title">
-                  Danger
+                  Alpha
                 </p>
                 <div class="content">
-                  <p>表示崩れやバグが発生するかもです。何か気になることがあれば<a :href="CONTACT">問い合わせ等</a>より、ご連絡ください。</p>
+                  <p>表示崩れやバグが発生するかもです。何か気になることがあれば<a :href="CONTACT">問い合わせ等</a>から、ご連絡ください。</p>
                 </div>
               </article>
               <article class="tile is-child notification has-background-cocoa">
