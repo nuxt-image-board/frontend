@@ -197,6 +197,8 @@ export default {
         '***REMOVED***',
         '***REMOVED***',
         '***REMOVED***',
+        '***REMOVED***？',
+        'アニメ',
         'R-18',
         'R18',
         'チノ',
@@ -288,6 +290,9 @@ export default {
         case url.includes('pixiv.net'):
           endpoint += 'pixiv'
           break
+        case url.includes('seiga.nicovideo.jp'):
+          endpoint += 'seiga'
+          break
         default:
           this.loading = {
             text: '未対応のサイトです',
@@ -354,6 +359,9 @@ export default {
           break
         case this.illust.originUrl.includes('pixiv'):
           this.illust.originService = 'Pixiv'
+          break
+        case this.illust.originUrl.includes('nicovideo'):
+          this.illust.originService = 'ニコニコ静画'
           break
         default:
           this.illust.originService = '独自'

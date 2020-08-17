@@ -29,7 +29,7 @@
                 >
               </div>
               <p class="help">
-                対応サイト: twitter.com pixiv.net
+                対応サイト: twitter.com pixiv.net seiga.nicovideo.jp
               </p>
             </div>
             <br>
@@ -88,7 +88,7 @@ export default {
       if (possibleLinks) {
         this.scrapeInfo.url = possibleLinks.filter(
           link => (
-            link.includes('twitter.com') || link.includes('pixiv.net')
+            link.includes('twitter.com') || link.includes('pixiv.net') || link.includes('seiga.nicovideo.jp')
           )
         )[0]
       }
