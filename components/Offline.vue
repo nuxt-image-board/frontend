@@ -17,29 +17,16 @@
 export default {
   data () {
     return {
-      isOffline: false,
-      connection: null
-    }
-  },
-  created () {
-    if (process.client) {
-      this.connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection
+      isOffline: false
     }
   },
   mounted () {
-    if (this.connection) {
-      navigator.connection.addEventListener('change', this.networkChanged)
-    }
+    window.addEventListener('offline', this.toggleNetworkStatus)
+    window.addEventListener('online', this.toggleNetworkStatus)
   },
   methods: {
-    networkChanged () {
-      if (this.connection.downlink === 0) {
-        if (!this.isOffline) {
-          this.isOffline = true
-        }
-      } else if (this.isOffline) {
-        this.isOffline = false
-      }
+    toggleNetworkStatus () {
+      this.isOffline = !this.isOffline
     }
   }
 }

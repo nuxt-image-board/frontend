@@ -115,6 +115,22 @@ export default {
         }
       )
     } catch {}
+    /*
+    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection
+    if (connection) {
+      if (connection.downlink < 5) {
+        this.$notify(
+          {
+            group: 'default',
+            duration: 5000,
+            type: 'warning',
+            title: 'お使いのコンピュータの回線速度は低下しています！',
+            text: '画像読み込みに時間がかかる可能性があります'
+          }
+        )
+      }
+    }
+    */
   }
 }
 </script>
