@@ -129,6 +129,7 @@ export default {
     '~plugins/mixin-layout',
     '~plugins/insert-search-history',
     '~plugins/insert-illust-history',
+    { src: '~plugins/tui-editor', mode: 'client' },
     { src: '~plugins/vue-notification', mode: 'client' },
     { src: '~plugins/dynamic-marquee', mode: 'client' },
     { src: '~plugins/vue-lazyload', ssr: false },

@@ -65,25 +65,16 @@
 </template>
 
 <style>
-@import 'tui-editor/dist/tui-editor.css';
-@import 'tui-editor/dist/tui-editor-contents.css';
-@import 'codemirror/lib/codemirror.css';
-
 .round-15 {
   border-radius: 15px;
 }
 </style>
 
 <script>
-import { Viewer } from '@toast-ui/vue-editor'
 import SocialShare from '~/components/ui/SocialShare.vue'
 
 export default {
-  validate ({ params }) {
-    return /^\d+$/.test(params.id)
-  },
   components: {
-    Viewer,
     SocialShare
   },
   async asyncData ({ $axios, $auth, route, error }) {
