@@ -170,10 +170,28 @@ export default {
     async login (e) {
       try {
         e.preventDefault()
+        this.$notify(
+          {
+            group: 'default',
+            type: 'warning',
+            duration: 2000,
+            title: 'ログイン',
+            text: '認証中'
+          }
+        )
         await this.$auth.loginWith('local', { data: this.form })
-        this.postLoggedIn()
+        await this.postLoggedIn()
         this.$router.push({ path: '/' })
       } catch (error) {
+        this.$notify(
+          {
+            group: 'default',
+            type: 'danger',
+            duration: 2000,
+            title: 'ログイン',
+            text: '認証失敗'
+          }
+        )
         this.notificationDeleted = false
         this.notificationClasses = 'is-danger'
         this.notificationText = '一致するユーザーがいません!'

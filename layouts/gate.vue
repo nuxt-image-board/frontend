@@ -1,5 +1,9 @@
 <template>
   <div id="top">
+    <client-only>
+      <notifications v-if="$device.isDesktop" classes="my-notify" width="30%" position="top right" group="default" />
+      <notifications v-else classes="my-notify-mobile" width="90%" position="top center" group="default" />
+    </client-only>
     <header>
       <nav class="navbar">
         <div class="container">

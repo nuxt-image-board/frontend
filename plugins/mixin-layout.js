@@ -10,6 +10,7 @@ Vue.mixin({
   methods: {
     showConsoleMessage () {
       if (process.client) {
+        console.clear()
         console.log('%c***REMOVED***', 'color: blue; font-size: 30px')
         console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
       }
