@@ -92,6 +92,12 @@
               </nuxt-link>
             </li>
             <li>
+              <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="upload" /></span>
+                <span>投稿</span>
+              </nuxt-link>
+            </li>
+            <li>
               <a class="has-text-white" @click="openSearch = !openSearch">
                 <span class="icon"><Fas i="search" /></span>
                 <span>検索</span>
@@ -99,49 +105,13 @@
                 <Fas v-else i="chevron-up" />
               </a>
               <ul v-if="openSearch">
-                <li>
-                  <nuxt-link to="/search/keyword?query=" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="keyboard" /></span>
-                    <span>キーワード</span>
-                  </nuxt-link>
-                </li>
-                <li>
-                  <nuxt-link to="/list/character" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="users" /></span>
-                    <span>キャラ</span>
-                  </nuxt-link>
-                </li>
-                <li>
-                  <nuxt-link to="/list/tag" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="tags" /></span>
-                    <span>タグ</span>
-                  </nuxt-link>
-                </li>
-                <li>
-                  <nuxt-link to="/list/artist" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="paint-brush" /></span>
-                    <span>絵師</span>
-                  </nuxt-link>
-                </li>
-                <li>
-                  <nuxt-link to="/list/uploader" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="upload" /></span>
-                    <span>投稿者</span>
-                  </nuxt-link>
-                </li>
-                <li>
-                  <nuxt-link to="/search/image" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                    <span class="icon"><Fas i="image" /></span>
-                    <span>画像</span>
+                <li v-for="item in searchItems" :key="item.icon">
+                  <nuxt-link :to="item.to" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                    <span class="icon"><Fas :i="item.icon" /></span>
+                    <span>{{ item.name }}</span>
                   </nuxt-link>
                 </li>
               </ul>
-            </li>
-            <li>
-              <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="upload" /></span>
-                <span>投稿</span>
-              </nuxt-link>
             </li>
             <li class="menu-title">
               <p class="is-size-7 has-text-white">
@@ -163,28 +133,10 @@
                 その他
               </p>
             </li>
-            <li>
-              <nuxt-link to="/help" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="question-circle" /></span>
-                <span>ヘルプ</span>
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/links" class="is-size-6 has-text-white heading" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="sitemap" /></span>
-                <span>リンク集</span>
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/terms" class="is-size-6 link has-text-white heading" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="users" /></span>
-                <span>利用規約</span>
-              </nuxt-link>
-            </li>
-            <li>
-              <nuxt-link to="/privacy" class="is-size-6 has-text-white heading" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="pen-fancy" /></span>
-                <span>プライバシーポリシー</span>
+            <li v-for="item in otherItems" :key="item.icon">
+              <nuxt-link :to="item.to" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas :i="item.icon" /></span>
+                <span>{{ item.name }}</span>
               </nuxt-link>
             </li>
           </ul>
@@ -237,7 +189,21 @@ export default {
   data () {
     return {
       openMenu: false,
-      openSearch: false
+      openSearch: false,
+      searchItems: [
+        { icon: 'keyboard', name: 'キーワード', to: '/search/keyword?query=' },
+        { icon: 'users', name: 'キャラ', to: '/list/character' },
+        { icon: 'tags', name: 'タグ', to: '/list/tag' },
+        { icon: 'paint-brush', name: '絵師', to: '/list/artist' },
+        { icon: 'upload', name: '投稿者', to: '/list/uploader' },
+        { icon: 'image', name: '画像', to: '/search/image' }
+      ],
+      otherItems: [
+        { icon: 'question-circle', name: 'ヘルプ', to: '/help' },
+        { icon: 'sitemap', name: 'リンク集', to: '/links' },
+        { icon: 'users', name: '利用規約', to: '/terms' },
+        { icon: 'pen-fancy', name: 'プライバシーポリシー', to: '/privacy' }
+      ]
     }
   },
   computed: {

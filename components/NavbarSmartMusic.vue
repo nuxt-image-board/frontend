@@ -84,7 +84,6 @@
 <script>
 import Fas from '~/components/ui/Fas.vue'
 import MusicPlayer from '~/components/ui/MusicPlayer.vue'
-import { userNav } from '~/assets/texts/navigations.json'
 
 export default {
   components: {
@@ -105,15 +104,7 @@ export default {
       totalTime: '00:00',
       nowPlaying: '#',
       isPaused: false,
-      openMenu: false,
-      openSearch: false
-    }
-  },
-  computed: {
-    userNavigation () {
-      return userNav.filter((nav) => {
-        return !nav.require_product || this.$store.state.user.obtainedProducts.includes(nav.require_product)
-      })
+      openMenu: false
     }
   },
   watch: {
