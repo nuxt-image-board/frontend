@@ -6,7 +6,12 @@
           <nuxt-link to="/" class="navbar-item has-text-white" style="font-weight:bold;" @click.native="closeAll($event)">
             ***REMOVED***
           </nuxt-link>
-          <span class="navbar-burger burger has-text-white" :class="{ 'is-active': openMenu }" data-target="navMenu" @click="openMenu = !openMenu">
+          <span
+            class="navbar-burger burger has-text-white"
+            :class="{ 'is-active': openMenu }"
+            data-target="navMenu"
+            @click="openMenu = !openMenu"
+          >
             <span />
             <span />
             <span />
@@ -45,62 +50,23 @@
               <span class="icon"><Fas i="list" /></span>
               <span>一覧</span>
             </nuxt-link>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link has-text-white" @click="changeTab(1)">
-                <span class="icon"><Fas i="users" /></span>
-                <span>キャラ</span>
+            <div v-for="(category,index) in searchCategories" :key="category.name" class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link has-text-white" @click="changeTab(index)">
+                <span class="icon"><Fas :i="category.icon" /></span>
+                <span>{{ category.name }}</span>
               </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 1}">
-                <nuxt-link v-for="chara in characters" :key="chara.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/character/&quot;+chara.id" @click.native="closeAll($event)">
-                  {{ chara.name }} <span class="tag is-light">{{ chara.count }}</span>
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== index}">
+                <nuxt-link
+                  v-for="item in category.items"
+                  :key="item.name"
+                  :to="'/search/'+category.endpoint+'/'+item.id"
+                  class="dropdown-item has-text-white pl-3"
+                  @click.native="closeAll($event)"
+                >
+                  {{ item.name }} <span class="tag is-light">{{ item.count }}</span>
                 </nuxt-link>
                 <hr class="navbar-divider">
-                <nuxt-link to="/list/character" class="dropdown-item has-text-white" @click.native="closeAll($event)">
-                  もっと見る
-                </nuxt-link>
-              </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link has-text-white" @click="changeTab(2)">
-                <span class="icon"><Fas i="tags" /></span>
-                <span>タグ</span>
-              </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 2}">
-                <nuxt-link v-for="tag in tags" :key="tag.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/tag/&quot;+tag.id" @click.native="closeAll($event)">
-                  {{ tag.name }} <span class="tag is-light">{{ tag.count }}</span>
-                </nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/list/tag" class="dropdown-item has-text-white" @click.native="closeAll($event)">
-                  もっと見る
-                </nuxt-link>
-              </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link has-text-white" @click="changeTab(3)">
-                <span class="icon"><Fas i="paint-brush" /></span>
-                <span>絵師</span>
-              </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 3}">
-                <nuxt-link v-for="artist in artists" :key="artist.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/artist/&quot;+artist.id" @click.native="closeAll($event)">
-                  {{ artist.name }} <span class="tag is-light">{{ artist.count }}</span>
-                </nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/list/artist" class="dropdown-item has-text-white" @click.native="closeAll($event)">
-                  もっと見る
-                </nuxt-link>
-              </div>
-            </div>
-            <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link has-text-white" @click="changeTab(4)">
-                <span class="icon"><Fas i="upload" /></span>
-                <span>投稿者</span>
-              </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 4}">
-                <nuxt-link v-for="uploader in uploaders" :key="uploader.name" class="dropdown-item has-text-white pl-3" :to="&quot;/search/uploader/&quot;+uploader.id" @click.native="closeAll($event)">
-                  {{ uploader.name }} <span class="tag is-light">{{ uploader.count }}</span>
-                </nuxt-link>
-                <hr class="navbar-divider">
-                <nuxt-link to="/list/uploader" class="dropdown-item has-text-white" @click.native="closeAll($event)">
+                <nuxt-link :to="'/list/'+category.endpoint" class="dropdown-item has-text-white" @click.native="closeAll($event)">
                   もっと見る
                 </nuxt-link>
               </div>
@@ -150,7 +116,32 @@ export default {
       openMenu: false,
       openTab: 0,
       keyword: '',
-      hideAllMenu: false
+      searchCategories: [
+        {
+          icon: 'users',
+          name: 'キャラ',
+          endpoint: 'character',
+          items: this.$store.state.characters
+        },
+        {
+          icon: 'tags',
+          name: 'タグ',
+          endpoint: 'tag',
+          items: this.$store.state.tags
+        },
+        {
+          icon: 'paint-brush',
+          name: '絵師',
+          endpoint: 'artist',
+          items: this.$store.state.artists
+        },
+        {
+          icon: 'upload',
+          name: '投稿者',
+          endpoint: 'uploader',
+          items: this.$store.state.uploaders
+        }
+      ]
     }
   },
   computed: {
@@ -158,18 +149,6 @@ export default {
       return userNav.filter((nav) => {
         return !nav.require_product || this.$store.state.user.obtainedProducts.includes(nav.require_product)
       })
-    },
-    characters () {
-      return this.$store.state.characters
-    },
-    tags () {
-      return this.$store.state.tags
-    },
-    artists () {
-      return this.$store.state.artists
-    },
-    uploaders () {
-      return this.$store.state.uploaders
     }
   },
   methods: {
