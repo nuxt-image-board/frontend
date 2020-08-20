@@ -113,73 +113,10 @@
                   <Far v-else i="bookmark" style="margin-right:3px;" />
                   x{{ result.mylist }}
                 </a>
-                <div v-if="isZoomAllowed" class="column is-12 has-text-centered">
-                  <a class="button is-primary is-medium" @click="openZoom = true">
-                    壁紙サイズに拡大
-                  </a>
-                  <Modal title="壁紙サイズに拡大" :isModalOpen="openZoom == true" @modal-closed="openZoom = false">
-                    <h2 class="has-text-centered">
-                      何倍にしますか?
-                    </h2>
-                    <div class="field has-addons has-addons-centered">
-                      <div class="control">
-                        <div class="select is-medium">
-                          <select v-model="waifuScale">
-                            <option>1.5倍</option>
-                            <option>2.0倍</option>
-                            <option>2.5倍</option>
-                            <option>3.0倍</option>
-                            <option>3.5倍</option>
-                            <option>4.0倍</option>
-                            <option>4.5倍</option>
-                            <option>5.0倍</option>
-                            <option>6.0倍</option>
-                            <option>7.0倍</option>
-                            <option>8.0倍</option>
-                            <option>9.0倍</option>
-                            <option>10.0倍</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="control">
-                        <button class="button is-primary is-medium">
-                          実行
-                        </button>
-                      </div>
-                    </div>
-                    <p class="has-text-centered">
-                      機械学習(Waifu2x)の力でなるべく綺麗に拡大します。
-                      スマホ壁紙や、PCの壁紙にしたいときにご利用ください。
-                      この処理にはそれなりに時間がかかります。
-                      あんまり無駄に連打すると怒ります。
-                    </p>
-                  </Modal>
-                </div>
               </div>
             </div>
             <div class="column is-12 has-text-centered">
-              <a
-                class="button is-large"
-                :href="$store.state.user.isPC ? '#' : LineShareAddress"
-                target="_blank"
-                rel="noopener noreferrer"
-                @click="$store.state.user.isPC ? openSocialShare(LineShareAddress) : null"
-              >
-                <span class="icon has-text-primary">
-                  <Fab i="line" classes="line fa-2x" />
-                </span>
-              </a>
-              <a
-                class="button is-large"
-                :href="$store.state.user.isPC ? '#' : TwitterShareAddress"
-                target="_blank"
-                rel="noopener noreferrer"
-                @click="$store.state.user.isPC ? openSocialShare(TwitterShareAddress) : null"
-              >
-                <span class="icon has-text-info">
-                  <Fab i="twitter-square" classes="twitter fa-2x" />
-                </span>
-              </a>
+              <SocialShare :title="result.title" :url="result.originUrl" />
             </div>
             <div class="column is-12">
               <div class="columns is-centered">
@@ -199,6 +136,42 @@
                   </nuxt-link>
                 </div>
               </div>
+            </div>
+            <div v-if="isZoomAllowed" class="column is-12 has-text-centered">
+              <a class="button is-primary is-medium" @click="openZoom = true">
+                壁紙サイズに拡大
+              </a>
+              <Modal title="壁紙サイズに拡大" :isModalOpen="openZoom == true" @modal-closed="openZoom = false">
+                <h2 class="has-text-centered">
+                  何倍にしますか?
+                </h2>
+                <div class="field has-addons has-addons-centered">
+                  <div class="control">
+                    <div class="select is-medium">
+                      <select v-model="waifuScale">
+                        <option>1.5倍</option>
+                        <option>2.0倍</option>
+                        <option>2.5倍</option>
+                        <option>3.0倍</option>
+                        <option>3.5倍</option>
+                        <option>4.0倍</option>
+                        <option>4.5倍</option>
+                        <option>5.0倍</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <button class="button is-primary is-medium">
+                      実行
+                    </button>
+                  </div>
+                </div>
+                <p class="has-text-centered">
+                  機械学習(Waifu2x)の力でなるべく綺麗に拡大します。
+                  スマホ壁紙や、PCの壁紙にしたいときにご利用ください。
+                  この処理にはそれなりに時間がかかります。
+                </p>
+              </Modal>
             </div>
           </div>
         </div>
@@ -224,17 +197,17 @@
 </style>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
-import Far from '~/components/ui/Far.vue'
-import Fab from '~/components/ui/Fab.vue'
+import SocialShare from '~/components/ui/SocialShare.vue'
 import Modal from '~/components/ui/Modal.vue'
+import Far from '~/components/ui/Far.vue'
+import Fas from '~/components/ui/Fas.vue'
 
 export default {
   components: {
+    SocialShare,
     Modal,
-    Fas,
     Far,
-    Fab
+    Fas
   },
   async asyncData ({ $axios, $auth, route, error }) {
     const endpoint = '/arts/'
@@ -252,15 +225,10 @@ export default {
     if ($auth.$state.user.permission > 1) {
       isTagEditable = true
     }
-    const shareAddress = encodeURI(data.title + '\n' + data.originUrl)
-    const LineShareAddress = 'https://social-plugins.line.me/lineit/share?url=' + data.originUrl
-    const TwitterShareAddress = 'https://twitter.com/intent/tweet?text=' + shareAddress + '&related=usagi_anime'
     return {
       result: data,
       isEditable,
-      isTagEditable,
-      LineShareAddress,
-      TwitterShareAddress
+      isTagEditable
     }
   },
   data () {
@@ -268,9 +236,8 @@ export default {
       result: {},
       isEditable: false,
       openZoom: false,
-      isZoomAllowed: false,
+      isZoomAllowed: true,
       waifuScale: '',
-      bookmarkSound: null,
       isModalOpen: false
     }
   },
@@ -326,16 +293,6 @@ export default {
       // Safari
       } else {
         window.open('data:' + mimeType + ';base64,' + window.Base64.encode(imageOrig.data), '_blank')
-      }
-    },
-    openSocialShare (addr) {
-      window.open(addr, '', 'width=500,height=500')
-    },
-    getOGPThumb () {
-      if (this.result.nsfw) {
-        return require('~/assets/loading.png')
-      } else {
-        return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
       }
     },
     async requestWaifu2x () {
@@ -406,6 +363,13 @@ export default {
             text: 'マイリスト数の上限に達しました'
           }
         )
+      }
+    },
+    getOGPThumb () {
+      if (this.result.nsfw) {
+        return require('~/assets/blocked_r18.png')
+      } else {
+        return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
       }
     }
   },
