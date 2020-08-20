@@ -12,15 +12,15 @@
           <img
             v-if="(!result.nsfw || $store.state.user.acceptR18) && !$store.state.user.mutedArtists.includes(result.artistID)"
             v-lazy="previewAddress"
-            src="~/assets/loading.png"
+            src="~/assets/images/loading.png"
           >
           <img
             v-else-if="result.nsfw && !$store.state.user.mutedArtists.includes(result.artistID)"
-            src="~/assets/blocked_r18.png"
+            src="~/assets/images/blocked_r18.png"
           >
           <img
             v-else
-            src="~/assets/blocked_muted.png"
+            src="~/assets/images/blocked_muted.png"
           >
         </figure>
       </nuxt-link>

@@ -3,7 +3,7 @@
     <div class="modal-background" />
     <div class="modal-content has-text-cecntered">
       <p class="image">
-        <img src="~/assets/offline.jpg" alt="">
+        <img src="~/assets/images/offline.jpg" alt="">
       </p>
       <br>
       <p class="title has-text-centered has-text-white">

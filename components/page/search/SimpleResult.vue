@@ -10,7 +10,7 @@
         <figure class="image">
           <img
             v-lazy="thumbnail"
-            src="~/assets/loading.png"
+            src="~/assets/images/loading.png"
           >
         </figure>
       </a>

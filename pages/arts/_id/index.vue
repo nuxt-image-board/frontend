@@ -181,7 +181,7 @@
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
       <div class="modal-content">
         <p class="image">
-          <img v-lazy="ImgOrigAddress" src="~/assets/loading.png">
+          <img v-lazy="ImgOrigAddress" src="~/assets/images/loading.png">
         </p>
       </div>
       <br>
@@ -367,7 +367,7 @@ export default {
     },
     getOGPThumb () {
       if (this.result.nsfw) {
-        return require('~/assets/blocked_r18.png')
+        return require('~/assets/images/blocked_r18.png')
       } else {
         return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
       }
