@@ -208,7 +208,7 @@
       <div class="modal-background" @click="isModalOpen = !isModalOpen" />
       <div class="modal-content">
         <p class="image">
-          <img v-lazy="ImgOrigAddress" src="~/assets/load.png">
+          <img v-lazy="ImgOrigAddress" src="~/assets/loading.png">
         </p>
       </div>
       <br>

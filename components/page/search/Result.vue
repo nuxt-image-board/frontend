@@ -12,7 +12,7 @@
           <img
             v-if="(!result.nsfw || $store.state.user.acceptR18) && !$store.state.user.mutedArtists.includes(result.artistID)"
             v-lazy="previewAddress"
-            src="~/assets/load.png"
+            src="~/assets/loading.png"
           >
           <img
             v-else-if="result.nsfw && !$store.state.user.mutedArtists.includes(result.artistID)"
