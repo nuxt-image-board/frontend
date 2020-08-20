@@ -37,7 +37,11 @@
                     <input v-model="keyword" name="query" class="input is-rounded" type="text" placeholder="Find an another god-art">
                   </div>
                   <div class="control">
-                    <nuxt-link :to="'/search/keyword?query=' + keyword" class="button is-success is-rounded" @click.native="closeAll($event)">
+                    <nuxt-link
+                      :to="'/search/keyword?query='+keyword"
+                      class="button is-success is-rounded"
+                      @click.native="closeAll($event)"
+                    >
                       <span><Fas i="search" /></span>
                     </nuxt-link>
                   </div>
@@ -83,7 +87,13 @@
                 <span>{{ $auth.$state.user.name }}</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 5}">
-                <nuxt-link v-for="user in userNavigation" :key="user.name" class="dropdown-item has-text-white pl-3" :to="user.to" @click.native="closeAll($event)">
+                <nuxt-link
+                  v-for="user in userNavigation"
+                  :key="user.name"
+                  class="dropdown-item has-text-white pl-3"
+                  :to="user.to"
+                  @click.native="closeAll($event)"
+                >
                   <span class="icon">
                     <Fas :i="user.icon" classes="has-text-white" />
                   </span>
@@ -117,30 +127,10 @@ export default {
       openTab: 0,
       keyword: '',
       searchCategories: [
-        {
-          icon: 'users',
-          name: 'キャラ',
-          endpoint: 'character',
-          items: this.$store.state.characters
-        },
-        {
-          icon: 'tags',
-          name: 'タグ',
-          endpoint: 'tag',
-          items: this.$store.state.tags
-        },
-        {
-          icon: 'paint-brush',
-          name: '絵師',
-          endpoint: 'artist',
-          items: this.$store.state.artists
-        },
-        {
-          icon: 'upload',
-          name: '投稿者',
-          endpoint: 'uploader',
-          items: this.$store.state.uploaders
-        }
+        { icon: 'users', name: 'キャラ', endpoint: 'character', items: this.$store.state.characters },
+        { icon: 'tags', name: 'タグ', endpoint: 'tag', items: this.$store.state.tags },
+        { icon: 'paint-brush', name: '絵師', endpoint: 'artist', items: this.$store.state.artists },
+        { icon: 'upload', name: '投稿者', endpoint: 'uploader', items: this.$store.state.uploaders }
       ]
     }
   },
