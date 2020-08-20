@@ -327,6 +327,13 @@ export default {
     openSocialShare (addr) {
       window.open(addr, '', 'width=500,height=500')
     },
+    getOGPThumb () {
+      if (this.result.nsfw) {
+        return require('~/assets/loading.png')
+      } else {
+        return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
+      }
+    },
     async requestWaifu2x () {
       const scale = this.waifuScale.substr(-1)
       const params = { cdn: this.ImgOrigAddress, size: scale }
@@ -400,7 +407,13 @@ export default {
   },
   head () {
     return {
-      title: this.result.title
+      title: this.result.title,
+      meta: [
+        { hid: 'og:title', property: 'og:title', content: this.result.title + (this.result.nsfw ? '(R18)' : '') },
+        { hid: 'og:description', property: 'og:description', content: this.result.caption.slice(0, 20) + '...' },
+        { hid: 'og:url', property: 'og:url', content: `https://***REMOVED***/arts/${this.result.illustID}` },
+        { hid: 'og:image', property: 'og:image', content: this.getOGPThumb() }
+      ]
     }
   }
 }
