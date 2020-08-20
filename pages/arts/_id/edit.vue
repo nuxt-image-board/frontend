@@ -177,6 +177,9 @@ import Fas from '~/components/ui/Fas.vue'
 import Modal from '~/components/ui/Modal.vue'
 
 export default {
+  validate ({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   components: {
     Fas,
     Modal

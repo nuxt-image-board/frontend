@@ -203,6 +203,9 @@ import Far from '~/components/ui/Far.vue'
 import Fas from '~/components/ui/Fas.vue'
 
 export default {
+  validate ({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   components: {
     SocialShare,
     Modal,

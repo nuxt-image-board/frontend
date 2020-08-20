@@ -79,6 +79,9 @@ import { Viewer } from '@toast-ui/vue-editor'
 import SocialShare from '~/components/ui/SocialShare.vue'
 
 export default {
+  validate ({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   components: {
     Viewer,
     SocialShare

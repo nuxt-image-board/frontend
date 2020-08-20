@@ -103,6 +103,9 @@
 import Fas from '~/components/ui/Fas.vue'
 
 export default {
+  validate ({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   components: {
     Fas
   },

@@ -15,6 +15,9 @@
 import List from '~/components/page/List.vue'
 
 export default {
+  validate ({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   components: {
     List
   },

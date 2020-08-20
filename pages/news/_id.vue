@@ -36,6 +36,9 @@
 
 <script>
 export default {
+  validate ({ params }) {
+    return /^\d+$/.test(params.id)
+  },
   async asyncData ({ $axios, error, route }) {
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const resp = await $axios.get('/news/' + id, { useCache: true })
