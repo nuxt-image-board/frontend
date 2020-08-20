@@ -26,6 +26,27 @@ main {
   transition: opacity 0.6s;
 }
 
+/* BackToTop AND BackToRecent: 下部メニューがあったらズラす*/
+.has-bottom {
+  bottom: 65px;
+}
+.no-bottom {
+  bottom: 20px;
+}
+
+/* BackToTop: 上に戻るボタン  */
+.scroll-top {
+  position: fixed;
+  right: 20px;
+  background-color: #000;
+  padding: 10px 16px;
+  border-radius: 32px;
+}
+.scroll-icon {
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
+}
 .fade-enter-active,
 .fade-leave-active {
  transition: opacity 0.5s;
@@ -33,6 +54,20 @@ main {
 .fade-enter,
 .fade-leave-to {
  opacity: 0;
+}
+
+/* BackToRecent: 前のページに戻るボタン */
+.back-button {
+  position: fixed;
+  left: 20px;
+  background-color: #000;
+  padding: 10px 13px;
+  border-radius: 32px;
+}
+.back-icon {
+  font-weight: bold;
+  font-size: 20px;
+  color: #fff;
 }
 
 /* Layout: Blossom-Loader */

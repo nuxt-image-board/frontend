@@ -4,9 +4,8 @@
       <a
         v-show="showJump"
         v-scroll-to="'#top'"
-        href="#"
         class="scroll-top"
-        :class="{'scroll-has-bottom': $store.state.user.useBottom, 'scroll-no-bottom': !$store.state.user.useBottom}"
+        :class="{'has-bottom': $store.state.user.useBottom, 'no-bottom': !$store.state.user.useBottom}"
       >
         <Fas i="angle-up" classes="scroll-icon" />
       </a>
@@ -23,8 +22,7 @@ export default {
   },
   data () {
     return {
-      scrollY: 0,
-      bottomMargin: 65
+      scrollY: 0
     }
   },
   computed: {
@@ -34,9 +32,7 @@ export default {
   },
   mounted () {
     window.addEventListener('scroll', this.onScroll)
-    window.addEventListener('load', () => {
-      this.onScroll()
-    })
+    window.addEventListener('load', () => { this.onScroll() })
   },
   methods: {
     onScroll () {
@@ -45,34 +41,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.scroll-has-bottom {
-  bottom: 65px;
-}
-.scroll-no-bottom {
-  bottom: 20px;
-}
-
-.scroll-top {
-  position: fixed;
-  right: 20px;
-  background-color: #000;
-  padding: 10px 16px;
-  border-radius: 32px;
-}
-.scroll-icon {
-  font-weight: bold;
-  font-size: 20px;
-  color: #fff;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
