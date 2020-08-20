@@ -128,6 +128,64 @@ img[lazy='loaded'] {
   }
 }
 
+// Vue-Notification(デスクトップ用)
+.my-notify {
+  padding: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddaa77;
+  border-left: 5px solid #ddaa77;
+  border-radius: 5px;
+  color: #000;
+  background: #FFF !important;
+  font-size: 1em;
+
+  &.warning {
+    border-left-color: #f48a06;
+  }
+
+  &.danger {
+    border-left-color: #B82E24;
+  }
+
+  &.info {
+    border-left-color: #3298dc;
+  }
+
+  &.success {
+    border-left-color: #00d1b2;
+  }
+}
+
+// Vue-Notification(スマホ用)
+.my-notify-mobile {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddaa77;
+  border-top: 5px solid #ddaa77;
+  border-radius: 5px;
+  color: #000;
+  background: #FFF !important;
+  font-size: 1em;
+  text-align: center !important;
+
+  &.warning {
+    border-top-color: #f48a06;
+  }
+
+  &.danger {
+    border-top-color: #B82E24;
+  }
+
+  &.info {
+    border-top-color: #3298dc;
+  }
+
+  &.success {
+    border-top-color: #00d1b2;
+  }
+}
+
 // Bulma全体を初期化
 @import "~bulma/bulma";
 // ***REMOVED***カラーの挿入

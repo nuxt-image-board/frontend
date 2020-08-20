@@ -32,71 +32,20 @@
   </div>
 </template>
 
-<style lang="scss">
-.my-notify-mobile {
-  margin-top: 5px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: 1px solid #ddaa77;
-  color: #000;
-  background: #FFF !important;
-  border-top: 5px solid #ddaa77;
-  padding: 10px;
-  text-align: center !important;
-
-  &.warning {
-    border-top-color: #f48a06;
-  }
-
-  &.danger {
-    border-top-color: #B82E24;
-  }
-
-  &.info {
-    border-top-color: #3298dc;
-  }
-
-  &.success {
-    border-top-color: #00d1b2;
-  }
-}
-</style>
-
-<style>
-#js-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
-}
-
-.page-enter {
-  opacity: 0;
-}
-.page-enter-active {
-  transition: opacity 0.6s;
-}
-</style>
-
 <script>
 import NavbarSmart from '~/components/NavbarSmart.vue'
-import NavbarSmartMusic from '~/components/NavbarSmartMusic.vue'
 import NavbarSmartDown from '~/components/NavbarSmartDown.vue'
-import BackToTop from '~/components/ui/BackToTop.vue'
-import BackToRecent from '~/components/ui/BackToRecent.vue'
 import Offline from '~/components/Offline.vue'
 
 export default {
   scrollToTop: true,
   components: {
     NavbarSmart,
-    NavbarSmartMusic,
     NavbarSmartDown,
-    BackToTop,
-    BackToRecent,
-    Offline
+    Offline,
+    NavbarSmartMusic: () => import('~/components/NavbarSmartMusic.vue'),
+    BackToTop: () => import('~/components/ui/BackToTop.vue'),
+    BackToRecent: () => import('~/components/ui/BackToRecent.vue')
   },
   data () {
     return {
@@ -105,32 +54,13 @@ export default {
       openSmartNav2: false
     }
   },
-  watch: {
-    '$route.path' () {
-      this.$cookies.set('lastRead', this.$route.path, {
-        path: '/',
-        maxAge: 60 * 60 * 24 * 31 * 6
-      })
-    }
+  created () {
+    this.showConsoleMessage()
   },
   async mounted () {
-    if (this.$store.state.user.useSakura) {
-      const loader = document.createElement('script')
-      loader.setAttribute('src', 'https://***REMOVED***/blossom/blossom_loader.js')
-      document.body.appendChild(loader)
-    }
-    try {
-      await this.$axios.post('/toymoney/airdrops/1/claim', {}, { progress: false })
-      this.$notify(
-        {
-          group: 'default',
-          duration: 5000,
-          type: 'success',
-          title: 'デイリーボーナス',
-          text: '1PYONを獲得しました!'
-        }
-      )
-    } catch {}
+    this.insertBlossomLoader()
+    await this.requestAndAlertDailyBonus()
+    this.alertConnectionSpeed()
   },
   methods: {
     showAndHide () {

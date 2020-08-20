@@ -1,12 +1,6 @@
 import Vue from 'vue'
 
 Vue.mixin({
-  layout ({ app, store }) {
-    if (!app.$auth.loggedIn) {
-      return 'gate'
-    }
-    return store.state.user.isPC ? 'desktop' : 'mobile'
-  },
   methods: {
     async postLoggedIn () {
       // Aprilクッキーを焼く

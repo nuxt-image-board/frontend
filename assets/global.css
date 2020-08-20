@@ -1,5 +1,5 @@
 
-/* 背景グラデーションと飾りを置く */
+/* Layout: 背景グラデーションと飾りを置く */
 body {
   background-size:
     auto auto;
@@ -13,22 +13,45 @@ body {
     repeating-linear-gradient( to right, #ffe9dc, #ffe9dc 18px, #FFECE0 18px, #FFECE0 33px );
 }
 
-/* iOSなどのため、最低高さを決める */
+/* Layout: iOSなどのため、最低高さを決める */
 main {
     min-height:97vh;
 }
 
-/* ページネーションの リンクに背景色を */
+/* Layout: ページ遷移時のアニメーション */
+.page-enter {
+  opacity: 0;
+}
+.page-enter-active {
+  transition: opacity 0.6s;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+ transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+ opacity: 0;
+}
+
+/* Layout: Blossom-Loader */
+#js-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+
+/* Navbar: ページネーションの リンクに背景色を */
 .pagination-link {
   background-color: #FEFEFE;
 }
 
-/* マイページの項目の背景 */
-.panel {
-  background-color: #FEFEFE;
-}
-
-/* メニューバーのドロップダウンアイコン(Bulmaのどうしようもない仕様を無理やり上書き)*/
+/* Navbar: メニューバーのドロップダウンアイコン(Bulmaのどうしようもない仕様を無理やり上書き)*/
 .navbar-link::after {
     border: 2px solid #fff !important;
     border-right: 0 !important;
@@ -48,30 +71,35 @@ main {
     top: 50%;
 }
 
-/* 画像を左右中央寄せ */
+/* Profile: マイページの項目の背景 */
+.panel {
+  background-color: #FEFEFE;
+}
+
+/* Helper: 画像を左右中央寄せ */
 .has-image-centered {
   margin-left: auto;
   margin-right: auto;
 }
 
-/* テーブルを丸める */
+/* Helper: テーブルを丸める */
 table {
   border-radius: 8px;
 }
 
-/* テーブルを中央寄せ */
+/* Helper: テーブルを中央寄せ */
 .centered-table tr td {
   text-align: center;
   vertical-align: middle;
 }
 
-/* 軽くモザイクかける */
+/* Helper: 軽くモザイクかける */
 .blur{
   -ms-filter: blur(20px);
   filter: blur(20px);
 }
 
-/* 画像サイズの限界を決める/丸める */
+/* Helper: 画像サイズの限界を決める/丸める */
 .thumb{
   max-height: 65vh;
   width: auto;
