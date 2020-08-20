@@ -198,6 +198,9 @@ export default {
   watch: {
     '$route' (to, from) {
       this.SelectedPage = isFinite(to.query.page) ? parseInt(to.query.page) : 1
+      if (this.endpoint.includes('multiple')) {
+        this.id = this.$route.query.id
+      }
       this.getData()
     },
     filterKeyword (newVal) {
@@ -232,7 +235,12 @@ export default {
         this.SelectedPage += 1
         const page = this.SelectedPage
         const sortNum = parseInt(this.SelectedSort)
-        const id = isFinite(this.$route.params.id) ? parseInt(this.$route.params.id) : 1
+        let id = 0
+        if (this.endpoint.includes('multiple')) {
+          id = this.$route.query.query ? this.$route.query.query : ''
+        } else {
+          id = isFinite(this.$route.params.id) ? parseInt(this.$route.params.id) : 1
+        }
         const keyword = this.$route.query.query ? this.$route.query.query : ''
         const order = [0, 2, 4, 6].includes(sortNum) ? 'd' : 'a'
         const sort = (sortNum <= 1) ? 'd'

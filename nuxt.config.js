@@ -121,6 +121,7 @@ export default {
   */
   plugins: [
     '~plugins/axios',
+    '~plugins/search-page-helper',
     '~plugins/vue-scrollto',
     '~plugins/v-viewer',
     '~plugins/vue2-touch-events',
