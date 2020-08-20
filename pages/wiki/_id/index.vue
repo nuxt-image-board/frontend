@@ -75,10 +75,12 @@
 </style>
 
 <script>
+import { Viewer } from '@toast-ui/vue-editor'
 import SocialShare from '~/components/ui/SocialShare.vue'
 
 export default {
   components: {
+    Viewer,
     SocialShare
   },
   async asyncData ({ $axios, $auth, route, error }) {

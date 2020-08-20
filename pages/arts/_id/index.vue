@@ -219,6 +219,10 @@
   </section>
 </template>
 
+<style lang="scss">
+@import "~viewerjs/dist/viewer";
+</style>
+
 <script>
 import Fas from '~/components/ui/Fas.vue'
 import Far from '~/components/ui/Far.vue'

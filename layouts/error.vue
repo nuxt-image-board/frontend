@@ -55,11 +55,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.error-img {
-  max-width: 100%;
-  height: auto;
-  max-height: 50vh;
-}
-</style>

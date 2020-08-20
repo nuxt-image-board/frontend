@@ -35,7 +35,12 @@
 </style>
 
 <script>
+import { Editor } from '@toast-ui/vue-editor'
+
 export default {
+  components: {
+    Editor
+  },
   async asyncData ({ $axios, route, store, error, redirect }) {
     if (!store.state.user.obtainedProducts.includes(2)) {
       redirect('/shop')

@@ -76,6 +76,13 @@ main {
   background-color: #FEFEFE;
 }
 
+/* Error: エラーページの画像 */
+.error-img {
+  max-width: 100%;
+  height: auto;
+  max-height: 50vh;
+}
+
 /* Helper: 画像を左右中央寄せ */
 .has-image-centered {
   margin-left: auto;

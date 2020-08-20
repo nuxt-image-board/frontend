@@ -131,7 +131,6 @@ export default {
     '~plugins/insert-illust-history',
     { src: '~plugins/vue-notification', mode: 'client' },
     { src: '~plugins/dynamic-marquee', mode: 'client' },
-    { src: '~plugins/tui-editor', mode: 'client' },
     { src: '~plugins/vue-lazyload', ssr: false },
     { src: '~plugins/vue-infinite-loading', ssr: false },
     { src: '~plugins/vue-input-tag', ssr: false },
