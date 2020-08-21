@@ -6,6 +6,7 @@
     :page-id-from-props="pageID"
     :sort-id-from-props="sortID"
     :results-from-props="results"
+    :keyword-from-props="keyword"
     :total-page-from-props="totalPage"
   />
 </template>
@@ -25,12 +26,16 @@ export default {
     const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
     const keyword = route.query.keyword
     const resp = await $searchApi.getListResults(apiEndpoint, pageID, sortID, keyword)
+    if (!resp) {
+      error({ statusCode: 404 })
+    }
     return {
       apiEndpoint,
       pageEndpoint,
       pageTitle,
       pageID,
       sortID,
+      keyword,
       results: resp.contents,
       totalPage: resp.pages
     }

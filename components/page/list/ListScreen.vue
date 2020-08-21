@@ -30,9 +30,7 @@
         </div>
       </div>
       <client-only v-if="$store.state.user.useInfinity">
-        <infinite-loading
-          @infinite="addNextpage"
-        >
+        <infinite-loading @infinite="addNextpage">
           <div slot="no-more">
             最終ページまで読み込みました
           </div>
