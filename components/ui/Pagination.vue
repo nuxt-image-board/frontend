@@ -17,7 +17,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage-1}}"
-          :aria-label="&quot;Goto page &quot;+(currentPage-1)"
           @click.native="decreasePage(1)"
         >
           &lsaquo;
@@ -28,7 +27,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage-2}}"
-          :aria-label="&quot;Goto page &quot;+(currentPage-2)"
           @click.native="decreasePage(2)"
         >
           {{ currentPage-2 }}
@@ -39,7 +37,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage-1}}"
-          :aria-label="&quot;Goto page &quot;+(currentPage-1)"
           @click.native="decreasePage(1)"
         >
           {{ currentPage-1 }}
@@ -50,7 +47,6 @@
         <nuxt-link
           class="pagination-link is-current"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage}}"
-          :aria-label="&quot;Page &quot;+currentPage"
           aria-current="page"
         >
           {{ currentPage }}
@@ -61,7 +57,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage+1}}"
-          :aria-label="&quot;Goto page &quot;+(currentPage+1)"
           @click.native="increasePage(1)"
         >
           {{ currentPage+1 }}
@@ -72,7 +67,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage+2}}"
-          :aria-label="&quot;Goto page &quot;+(currentPage+2)"
           @click.native="increasePage(2)"
         >
           {{ currentPage+2 }}
@@ -83,7 +77,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage+1}}"
-          :aria-label="&quot;Goto page &quot;+(currentPage+1)"
           @click.native="increasePage(1)"
         >
           &rsaquo;
@@ -94,7 +87,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: totalPage}}"
-          :aria-label="&quot;Goto page &quot;+totalPage"
           @click.native="setPage(totalPage)"
         >
           &raquo;
@@ -119,7 +111,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage-1}}"
-          :aria-label="&quot;Goto page &quot;(currentPage-1)"
           @click.native="decreasePage(1)"
         >
           &lsaquo;
@@ -130,7 +121,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: currentPage+1}}"
-          :aria-label="&quot;Goto page &quot;+(currentPage+1)"
           @click.native="increasePage(1)"
         >
           &rsaquo;
@@ -141,7 +131,6 @@
         <nuxt-link
           class="pagination-link"
           :to="{path: this.$route.path, query: {...this.$route.query, page: totalPage}}"
-          :aria-label="&quot;Goto page &quot;+totalPage"
           @click.native="setPage(totalPage)"
         >
           &raquo;
@@ -161,10 +150,6 @@ export default {
     totalPage: {
       type: Number,
       default: 1
-    },
-    sendMounted: {
-      type: Boolean,
-      default: true
     }
   },
   data () {
@@ -177,11 +162,6 @@ export default {
       if (newVal > 1204) {
         this.currentPage = newVal - 1204
       }
-    }
-  },
-  mounted () {
-    if (this.sendMounted === '1') {
-      this.$emit('onPageChanged', this.currentPage)
     }
   },
   methods: {

@@ -1,52 +1,43 @@
 <template>
   <List
-    :endpoint="endpoint"
-    :notification-title="NotificationTitle"
+    :api-endpoint="apiEndpoint"
+    :page-endpoint="pageEndpoint"
+    :page-title="pageTitle"
+    :page-id-from-props="pageID"
+    :sort-id-from-props="sortID"
     :results-from-props="results"
-    :selected-page-from-props="SelectedPage"
-    :total-page="totalPage"
-    :is-search-page="isSearchPage"
-    :page-type="pageType"
-    :selected-sort-from-props="SelectedSort"
+    :total-page-from-props="totalPage"
   />
 </template>
 
 <script>
-import List from '@/components/page/List.vue'
+import List from '@/components/page/list/ListScreen.vue'
 
 export default {
   components: {
     List
   },
-  async asyncData ({ $axios, route, error }) {
-    const endpoint = '/catalog/characters'
-    const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
-    const sortNum = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
-    const order = [0, 2, 4, 6].includes(sortNum) ? 'd' : 'a'
-    const sort = (sortNum <= 1) ? 'd'
-      : (sortNum <= 3) ? 'c'
-        : (sortNum <= 5) ? 'l'
-          : 'n'
-    const params = { sort, order, page }
-    const response = await $axios.get(endpoint, { params, useCache: process.client })
-    if (response.data.status !== 200) {
-      return error({ statusCode: 404, message: 'err' })
-    }
-    const data = response.data.data
+  async asyncData ({ $searchApi, $axios, route, error }) {
+    const pageTitle = 'キャラから検索'
+    const pageEndpoint = 'character'
+    const apiEndpoint = '/catalog/characters'
+    const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
+    const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
+    const keyword = route.query.keyword
+    const resp = await $searchApi.getListResults(apiEndpoint, pageID, sortID, keyword)
     return {
-      endpoint,
-      NotificationTitle: 'キャラクターから検索',
-      results: data.contents,
-      SelectedPage: page,
-      totalPage: data.pages,
-      pageType: 'character',
-      SelectedSort: sortNum,
-      isSearchPage: false
+      apiEndpoint,
+      pageEndpoint,
+      pageTitle,
+      pageID,
+      sortID,
+      results: resp.contents,
+      totalPage: resp.pages
     }
   },
   head () {
     return {
-      title: 'キャラクターから検索'
+      title: this.pageTitle
     }
   }
 }

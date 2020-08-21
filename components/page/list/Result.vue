@@ -41,17 +41,17 @@ export default {
       type: Object,
       default: () => {
         return {
-          id: 0,
-          name: 'NoData',
-          count: 0,
-          lcount: 0,
+          id: 1,
+          name: '***REMOVED***',
+          count: 1204,
+          lcount: 1204,
           nsfw: false
         }
       }
     },
     pageType: {
       type: String,
-      default: 'NoData'
+      default: 'characters'
     }
   },
   data () {
