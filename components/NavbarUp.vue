@@ -55,11 +55,11 @@
               <span>一覧</span>
             </nuxt-link>
             <div v-for="(category,index) in searchCategories" :key="category.name" class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link has-text-white" @click="changeTab(index)">
+              <a class="navbar-link has-text-white" @click="changeTab(index+1)">
                 <span class="icon"><Fas :i="category.icon" /></span>
                 <span>{{ category.name }}</span>
               </a>
-              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== index}">
+              <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== index+1}">
                 <nuxt-link
                   v-for="item in category.items"
                   :key="item.name"
