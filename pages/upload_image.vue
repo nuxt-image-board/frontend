@@ -94,9 +94,9 @@
 </template>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
-import Result from '~/components/page/search/Result.vue'
-import UploadScreen from '~/components/page/upload/UploadScreen.vue'
+import Fas from '@/components/ui/Fas.vue'
+import Result from '@/components/page/search/Result.vue'
+import UploadScreen from '@/components/page/upload/UploadScreen.vue'
 
 export default {
   components: {

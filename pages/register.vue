@@ -144,8 +144,8 @@
 </template>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
-import Notification from '~/components/ui/Notification.vue'
+import Fas from '@/components/ui/Fas.vue'
+import Notification from '@/components/ui/Notification.vue'
 import { entries } from '~/assets/texts/gate.json'
 
 export default {

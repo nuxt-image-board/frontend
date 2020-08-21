@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
+import Fas from '@/components/ui/Fas.vue'
 import { userNav } from '~/assets/texts/navigations.json'
 
 export default {

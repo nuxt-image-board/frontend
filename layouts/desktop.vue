@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import NavbarUp from '~/components/NavbarUp.vue'
-import NavbarDown from '~/components/NavbarDown.vue'
-import Offline from '~/components/Offline.vue'
+import NavbarUp from '@/components/NavbarUp.vue'
+import NavbarDown from '@/components/NavbarDown.vue'
+import Offline from '@/components/Offline.vue'
 
 export default {
   scrollToTop: true,
@@ -30,8 +30,8 @@ export default {
     NavbarUp,
     NavbarDown,
     Offline,
-    NavbarDownMusic: () => import('~/components/NavbarDownMusic.vue'),
-    BackToTop: () => import('~/components/ui/BackToTop.vue')
+    NavbarDownMusic: () => import('@/components/NavbarDownMusic.vue'),
+    BackToTop: () => import('@/components/ui/BackToTop.vue')
   },
   created () {
     this.showConsoleMessage()

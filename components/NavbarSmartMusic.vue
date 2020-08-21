@@ -82,8 +82,8 @@
 </template>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
-import MusicPlayer from '~/components/ui/MusicPlayer.vue'
+import Fas from '@/components/ui/Fas.vue'
+import MusicPlayer from '@/components/ui/MusicPlayer.vue'
 
 export default {
   components: {

@@ -82,9 +82,9 @@
 </template>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
-import Result from '~/components/page/search/Result.vue'
-import SimpleResult from '~/components/page/search/SimpleResult.vue'
+import Fas from '@/components/ui/Fas.vue'
+import Result from '@/components/page/search/Result.vue'
+import SimpleResult from '@/components/page/search/SimpleResult.vue'
 
 export default {
   components: {

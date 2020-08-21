@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
-import Far from '~/components/ui/Far.vue'
+import Fas from '@/components/ui/Fas.vue'
+import Far from '@/components/ui/Far.vue'
 
 export default {
   components: {

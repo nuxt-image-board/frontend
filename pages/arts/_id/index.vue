@@ -197,10 +197,10 @@
 </style>
 
 <script>
-import SocialShare from '~/components/ui/SocialShare.vue'
-import Modal from '~/components/ui/Modal.vue'
-import Far from '~/components/ui/Far.vue'
-import Fas from '~/components/ui/Fas.vue'
+import SocialShare from '@/components/ui/SocialShare.vue'
+import Modal from '@/components/ui/Modal.vue'
+import Far from '@/components/ui/Far.vue'
+import Fas from '@/components/ui/Fas.vue'
 
 export default {
   validate ({ params }) {

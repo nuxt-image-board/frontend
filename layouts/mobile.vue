@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import NavbarSmart from '~/components/NavbarSmart.vue'
-import NavbarSmartDown from '~/components/NavbarSmartDown.vue'
-import Offline from '~/components/Offline.vue'
+import NavbarSmart from '@/components/NavbarSmart.vue'
+import NavbarSmartDown from '@/components/NavbarSmartDown.vue'
+import Offline from '@/components/Offline.vue'
 
 export default {
   scrollToTop: true,
@@ -43,9 +43,9 @@ export default {
     NavbarSmart,
     NavbarSmartDown,
     Offline,
-    NavbarSmartMusic: () => import('~/components/NavbarSmartMusic.vue'),
-    BackToTop: () => import('~/components/ui/BackToTop.vue'),
-    BackToRecent: () => import('~/components/ui/BackToRecent.vue')
+    NavbarSmartMusic: () => import('@/components/NavbarSmartMusic.vue'),
+    BackToTop: () => import('@/components/ui/BackToTop.vue'),
+    BackToRecent: () => import('@/components/ui/BackToRecent.vue')
   },
   data () {
     return {

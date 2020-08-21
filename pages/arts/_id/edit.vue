@@ -173,8 +173,8 @@
 </template>
 
 <script>
-import Fas from '~/components/ui/Fas.vue'
-import Modal from '~/components/ui/Modal.vue'
+import Fas from '@/components/ui/Fas.vue'
+import Modal from '@/components/ui/Modal.vue'
 
 export default {
   validate ({ params }) {

@@ -52,13 +52,13 @@
 </template>
 
 <script>
-import Modal from '~/components/ui/Modal.vue'
-import userInfo from '~/components/page/profile/panels/userInfo.vue'
-import storageInfo from '~/components/page/profile/panels/storageInfo.vue'
-import inviteInfo from '~/components/page/profile/panels/inviteInfo.vue'
-import siteSettings from '~/components/page/profile/panels/siteSettings.vue'
-import accountSettings from '~/components/page/profile/panels/accountSettings.vue'
-import notifySettings from '~/components/page/profile/panels/notifySettings.vue'
+import Modal from '@/components/ui/Modal.vue'
+import userInfo from '@/components/page/profile/panels/userInfo.vue'
+import storageInfo from '@/components/page/profile/panels/storageInfo.vue'
+import inviteInfo from '@/components/page/profile/panels/inviteInfo.vue'
+import siteSettings from '@/components/page/profile/panels/siteSettings.vue'
+import accountSettings from '@/components/page/profile/panels/accountSettings.vue'
+import notifySettings from '@/components/page/profile/panels/notifySettings.vue'
 
 export default {
   components: {

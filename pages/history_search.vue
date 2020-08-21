@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import Notification from '~/components/ui/Notification.vue'
-import Fas from '~/components/ui/Fas.vue'
+import Notification from '@/components/ui/Notification.vue'
+import Fas from '@/components/ui/Fas.vue'
 
 export default {
   components: {

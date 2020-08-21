@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import SelectForm from '~/components/ui/SelectForm.vue'
+import SelectForm from '@/components/ui/SelectForm.vue'
 
 export default {
   components: {

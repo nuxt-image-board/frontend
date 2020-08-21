@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import Fab from '~/components/ui/Fab.vue'
+import Fab from '@/components/ui/Fab.vue'
 
 export default {
   components: {

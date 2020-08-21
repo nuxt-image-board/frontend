@@ -71,7 +71,7 @@
 </style>
 
 <script>
-import SocialShare from '~/components/ui/SocialShare.vue'
+import SocialShare from '@/components/ui/SocialShare.vue'
 
 export default {
   components: {

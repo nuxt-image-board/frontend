@@ -121,7 +121,7 @@
 
 <script>
 import shortid from 'shortid'
-import ImageSelecter from '~/components/ui/ImageSelecter.vue'
+import ImageSelecter from '@/components/ui/ImageSelecter.vue'
 
 export default {
   components: {

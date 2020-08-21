@@ -51,8 +51,8 @@
 <script>
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
-import Modal from '~/components/ui/Modal.vue'
-import Setting from '~/components/page/profile/toggle/setting.vue'
+import Modal from '@/components/ui/Modal.vue'
+import Setting from '@/components/page/profile/toggle/setting.vue'
 
 Vue.use(VueYoutube)
 

@@ -42,10 +42,10 @@
 </template>
 
 <script>
-import Notification from '~/components/ui/Notification.vue'
-import SelectForm from '~/components/ui/SelectForm.vue'
-import SearchResult from '~/components/page/search/Result.vue'
-import Pagination from '~/components/ui/Pagination.vue'
+import Notification from '@/components/ui/Notification.vue'
+import SelectForm from '@/components/ui/SelectForm.vue'
+import SearchResult from '@/components/page/search/Result.vue'
+import Pagination from '@/components/ui/Pagination.vue'
 
 export default {
   components: {

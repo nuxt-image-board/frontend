@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import Notification from '~/components/ui/Notification.vue'
-import SelectForm from '~/components/ui/SelectForm.vue'
-import Pagination from '~/components/ui/Pagination.vue'
-import Result from '~/components/page/upload_history/Result.vue'
+import Notification from '@/components/ui/Notification.vue'
+import SelectForm from '@/components/ui/SelectForm.vue'
+import Pagination from '@/components/ui/Pagination.vue'
+import Result from '@/components/page/upload_history/Result.vue'
 
 export default {
   components: {

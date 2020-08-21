@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import NavbarDown from '~/components/NavbarDown.vue'
-import Fas from '~/components/ui/Fas.vue'
+import NavbarDown from '@/components/NavbarDown.vue'
+import Fas from '@/components/ui/Fas.vue'
 
 export default {
   components: {

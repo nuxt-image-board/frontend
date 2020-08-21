@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import Notification from '~/components/ui/Notification.vue'
-import SearchResult from '~/components/page/search/Result.vue'
+import Notification from '@/components/ui/Notification.vue'
+import SearchResult from '@/components/page/search/Result.vue'
 
 export default {
   components: {

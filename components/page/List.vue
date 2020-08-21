@@ -73,13 +73,13 @@
 </template>
 
 <script>
-import Notification from '~/components/ui/Notification.vue'
-import SelectForm from '~/components/ui/SelectForm.vue'
-import Wiki from '~/components/ui/Wiki.vue'
-import NotifyRegister from '~/components/ui/NotifyRegister.vue'
-import Pagination from '~/components/ui/Pagination.vue'
-import ListResult from '~/components/page/list/Result.vue'
-import SearchResult from '~/components/page/search/Result.vue'
+import Notification from '@/components/ui/Notification.vue'
+import SelectForm from '@/components/ui/SelectForm.vue'
+import Wiki from '@/components/ui/Wiki.vue'
+import NotifyRegister from '@/components/ui/NotifyRegister.vue'
+import Pagination from '@/components/ui/Pagination.vue'
+import ListResult from '@/components/page/list/Result.vue'
+import SearchResult from '@/components/page/search/Result.vue'
 
 export default {
   components: {
