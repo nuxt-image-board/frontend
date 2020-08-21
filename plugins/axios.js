@@ -19,6 +19,7 @@ export default function ({ $axios, ssrContext, store }) {
     defaultCache
   })
   $axios.onRequest((config) => {
+    config.headers.common['X-Requested-With'] = '***REMOVED***_Client'
     if (store.$auth.loggedIn) {
       config.headers.common.Authorization = 'Bearer ' + store.$auth.user.apiKey
     } else {
