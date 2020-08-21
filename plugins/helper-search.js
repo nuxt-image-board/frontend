@@ -17,6 +17,13 @@ class API {
     }
   }
 
+  async getMylistResults (apiEndpoint, pageID, sortID) {
+    const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'i' : 'l'
+    const order = [0, 2, 4].includes(sortID) ? 'd' : 'a'
+    const params = { page: pageID, sort, order }
+    return await this.requestResults(apiEndpoint, params)
+  }
+
   async getSearchResults (apiEndpoint, pageID, sortID, targetID) {
     const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'c' : (sortID <= 5) ? 'l' : 'n'
     const order = [0, 2, 4, 6].includes(sortID) ? 'd' : 'a'

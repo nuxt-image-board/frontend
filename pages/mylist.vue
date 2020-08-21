@@ -5,24 +5,32 @@
         <div class="column is-8">
           <Notification
             icon="info"
-            :title="$auth.user.name+' さんのマイリスト (' + count + '件)'"
+            :title="pageTitle"
           />
         </div>
         <div class="column is-8">
-          <div class="columns is-touch is-centered is-vcentered">
+          <div class="columns is-centered is-vcentered">
             <div class="column is-8">
-              <SelectForm :sortMethod="String(SelectedSort)" class="is-fullwidth" :options="SortOptions" @onSelectChanged="updateSelect" />
+              <SelectForm
+                class="is-fullwidth"
+                :options="sortMethods"
+                :sortMethod="String(sortID)"
+                @onSelectChanged="updateSelect"
+              />
             </div>
           </div>
         </div>
       </div>
-      <div class="columns is-centered is-multiline is-mobile">
-        <div v-for="result in results" :key="result.illustID" class="column is-12-mobile is-6-touch is-3-desktop">
-          <SearchResult :result="result" />
+      <div
+        class="columns is-centered is-vcentered is-multiline is-mobile"
+        :class="{'is-gapless': $store.state.user.colSize < 6 && !$store.state.user.isPC}"
+      >
+        <div v-for="result in results" :key="result.illustID" :class="colSize">
+          <Result :result="result" />
         </div>
       </div>
       <client-only v-if="$store.state.user.useInfinity">
-        <infinite-loading @infinite="infiniteHandler">
+        <infinite-loading @infinite="addNextpage">
           <div slot="no-more">
             最終ページまで読み込みました
           </div>
@@ -32,8 +40,8 @@
         </infinite-loading>
       </client-only>
       <Pagination
-        v-if="!$store.state.user.useInfinity"
-        :current-page-from-prop="SelectedPage"
+        v-else
+        :current-page-from-prop="pageID"
         :total-page="totalPage"
         @onPageChanged="updatePage"
       />
@@ -44,49 +52,37 @@
 <script>
 import Notification from '@/components/ui/Notification.vue'
 import SelectForm from '@/components/ui/SelectForm.vue'
-import SearchResult from '@/components/page/search/Result.vue'
 import Pagination from '@/components/ui/Pagination.vue'
+import Result from '@/components/page/search/Result.vue'
 
 export default {
   components: {
     Notification,
     SelectForm,
     Pagination,
-    SearchResult
+    Result
   },
-  async asyncData ({ $axios, $auth, route, error }) {
-    const endpoint = `/mylist/${$auth.user.mylist.id}`
-    const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
-    const sortNum = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
-    const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
-    const sort = (sortNum <= 1) ? 'd'
-      : (sortNum <= 3) ? 'i'
-        : 'l'
-    const params = { sort, order, page }
-    const response = await $axios.get(endpoint, { params })
-    if (response.data.status !== 200) {
-      return {
-        endpoint,
-        results: [],
-        count: 0,
-        SelectedPage: page,
-        totalPage: 0,
-        SelectedSort: sortNum
-      }
+  async asyncData ({ $searchApi, $axios, $auth, route, error }) {
+    const apiEndpoint = `/mylist/${$auth.user.mylist.id}`
+    const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
+    const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
+    const resp = await $searchApi.getMylistResults(apiEndpoint, pageID, sortID)
+    if (!resp) {
+      error({ statusCode: 404 })
     }
-    const data = response.data.data
     return {
-      endpoint,
-      results: data.imgs,
-      count: data.count,
-      SelectedPage: page,
-      totalPage: data.pages,
-      SelectedSort: sortNum
+      apiEndpoint,
+      pageID,
+      sortID,
+      tabTitle: $auth.user.name,
+      pageTitle: `${$auth.user.name}さんのマイリスト (${resp.count}件)`,
+      results: resp.imgs,
+      totalPage: resp.pages
     }
   },
   data () {
     return {
-      SortOptions: [
+      sortMethods: [
         { text: 'マイリスト登録日が新しい順', value: 0 },
         { text: 'マイリスト登録日が古い順', value: 1 },
         { text: '投稿が新しい順', value: 2 },
@@ -111,74 +107,45 @@ export default {
       ]
     }
   },
-  watch: {
-    '$route' (to, from) {
-      this.SelectedPage = isFinite(to.query.page) ? parseInt(to.query.page) : 1
-      this.getData()
+  computed: {
+    colSize () {
+      const colSize = this.$store.state.user.colSize
+      if (colSize) {
+        return `column is-${colSize}`
+      }
+      return 'column is-12-mobile is-6-touch is-3-desktop'
     }
   },
   methods: {
-    async infiniteHandler ($state) {
-      if (this.loading) {
-        return
-      }
-      try {
-        this.loading = true
-        this.SelectedPage += 1
-        const page = this.SelectedPage
-        const sortNum = parseInt(this.SelectedSort)
-        const endpoint = `/mylist/${this.$auth.user.mylist.id}`
-        const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
-        const sort = (sortNum <= 1) ? 'd'
-          : (sortNum <= 3) ? 'i'
-            : 'l'
-        const params = { sort, order, page }
-        const response = await this.$axios.get(endpoint, { params })
-        if (response.data.status === 200) {
-          this.results = this.results.concat(response.data.data.imgs)
-          // 読み込みが終わって、まだ読み込めればloaded()を呼ぶ
-          $state.loaded()
-        } else {
-          $state.complete()
-        }
-      } catch (error) {
-        // もう読み込めなければcomplete()を呼ぶ
-        $state.complete()
-      } finally {
-        this.loading = false
-      }
-    },
-    async getData () {
-      this.results = []
-      const page = this.SelectedPage
-      const sortNum = parseInt(this.SelectedSort)
-      const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
-      const sort = (sortNum <= 1) ? 'd'
-        : (sortNum <= 3) ? 'i'
-          : 'l'
-      const params = { sort, order, page }
-      const endpoint = `/mylist/${this.$auth.user.mylist.id}`
-      const response = await this.$axios.get(endpoint, { params })
-      if (response.data.status === 200) {
-        this.results = response.data.data.imgs
+    async addNextpage ($state) {
+      this.pageID += 1
+      const resp = await this.$searchApi.getMylistResults(this.apiEndpoint, this.pageID, this.sortID)
+      if (resp) {
+        this.results = this.results.concat(resp.imgs)
+        $state.loaded()
       } else {
-        this.results = []
+        $state.complete()
       }
     },
-    updateSelect (newSort) {
-      this.SelectedSort = newSort
-      this.SelectedPage = 1205
-      this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: 1, sort: newSort } })
+    async updateSelect (newSort) {
+      this.pageID = 1
+      this.sortID = parseInt(newSort)
+      const resp = await this.$searchApi.getMylistResults(this.apiEndpoint, this.pageID, this.sortID)
+      this.results = resp.imgs
+      this.$router.push({ path: this.$route.path, query: { ...this.$route.query, sort: newSort } })
+      this.$scrollTo('#top')
     },
-    updatePage (newPage) {
-      this.SelectedPage = newPage
+    async updatePage (newPage) {
+      this.pageID = newPage
+      const resp = await this.$searchApi.getMylistResults(this.apiEndpoint, this.pageID, this.sortID)
+      this.results = resp.imgs
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
       this.$scrollTo('#top')
     }
   },
   head () {
     return {
-      title: 'マイリスト'
+      title: this.tabTitle
     }
   }
 }
