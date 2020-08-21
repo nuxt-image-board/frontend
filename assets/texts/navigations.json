@@ -16,18 +16,18 @@
           "icon": "wallet"
         },
         {
-          "to": "/upload",
+          "to": "/upload/page",
           "title": "投稿",
           "icon": "upload"
         },
         {
-          "to": "/history_search",
+          "to": "/history/search",
           "require_product": 3,
           "title": "検索履歴",
           "icon": "history"
         },
         {
-          "to": "/history_illust",
+          "to": "/history/illust",
           "require_product": 3,
           "title": "閲覧履歴",
           "icon": "history"

@@ -63,8 +63,13 @@
           <br>
           <br>
           <div v-if="step < 2" class="field is-centered">
-            <nuxt-link to="/upload" class="button is-primary is-medium">
+            <nuxt-link to="/upload/page" class="button is-primary is-medium">
               URLから投稿する場合はこちら
+            </nuxt-link>
+          </div>
+          <div v-if="step < 2" class="field is-centered">
+            <nuxt-link to="/history/upload" class="button is-primary is-medium">
+              投稿履歴の確認はこちら
             </nuxt-link>
           </div>
         </div>
@@ -218,7 +223,7 @@ export default {
   },
   head () {
     return {
-      title: '画像からイラスト投稿'
+      title: 'イラスト投稿'
     }
   }
 }

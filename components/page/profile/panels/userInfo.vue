@@ -15,7 +15,7 @@
     <p class="panel-block">
       <nuxt-link
         class="button is-link is-outlined is-fullwidth"
-        to="/upload_history"
+        to="/history/upload"
       >
         投稿履歴確認
       </nuxt-link>
