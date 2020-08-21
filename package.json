@@ -43,6 +43,7 @@
     "nuxt-fontawesome": "^0.4.0",
     "nuxt-logrocket": "^1.2.10",
     "nuxt-precompress": "^0.4.9",
+    "nuxt-property-decorator": "^2.7.2",
     "nuxt-webfontloader": "^1.1.0",
     "shortid": "^2.2.15",
     "tui-editor": "^1.4.10",

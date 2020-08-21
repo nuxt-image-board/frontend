@@ -121,10 +121,10 @@ export default {
   */
   plugins: [
     '~plugins/axios',
-    '~plugins/search-page-helper',
     '~plugins/vue-scrollto',
     '~plugins/v-viewer',
     '~plugins/vue2-touch-events',
+    '~plugins/helper-search',
     '~plugins/mixin-login',
     '~plugins/mixin-layout',
     '~plugins/insert-search-history',
@@ -132,10 +132,10 @@ export default {
     { src: '~plugins/tui-editor', mode: 'client' },
     { src: '~plugins/vue-notification', mode: 'client' },
     { src: '~plugins/dynamic-marquee', mode: 'client' },
-    { src: '~plugins/vue-lazyload', ssr: false },
-    { src: '~plugins/vue-infinite-loading', ssr: false },
-    { src: '~plugins/vue-input-tag', ssr: false },
-    { src: '~plugins/vuex-persistedstate-localstorage', ssr: false },
+    { src: '~plugins/vue-lazyload', mode: 'client' },
+    { src: '~plugins/vue-infinite-loading', mode: 'client' },
+    { src: '~plugins/vue-input-tag', mode: 'client' },
+    { src: '~plugins/vuex-persistedstate-localstorage', mode: 'client' },
     { src: '~plugins/vuex-persistedstate-cookie' }
   ],
   /*
