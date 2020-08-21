@@ -126,6 +126,7 @@ export default {
     '~plugins/vue2-touch-events',
     '~plugins/helper-search',
     '~plugins/mixin-login',
+    '~plugins/mixin-illust',
     '~plugins/mixin-layout',
     '~plugins/insert-search-history',
     '~plugins/insert-illust-history',

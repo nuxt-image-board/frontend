@@ -104,11 +104,11 @@
                 </div>
               </div>
               <div class="column is-12 has-text-centered">
-                <a class="button is-primary is-large" @click="addStar()">
+                <a class="button is-primary is-large" @click="addStar(result.illustID); result.like += 1">
                   <Fas i="heart" style="margin-right:3px;" />
                   x{{ result.like }}
                 </a>
-                <a class="button is-primary is-large" @click="toggleBookmark()">
+                <a class="button is-primary is-large" @click="handleBookmark">
                   <Fas v-if="result.mylisted" i="bookmark" style="margin-right:3px;" />
                   <Far v-else i="bookmark" style="margin-right:3px;" />
                   x{{ result.mylist }}
@@ -314,58 +314,13 @@ export default {
         )
       }
     },
-    async addStar () {
-      const endpoint = '/arts/' + this.result.illustID + '/likes'
-      this.result.like += 1
-      await this.$axios.put(endpoint)
-    },
-    async toggleBookmark () {
-      if (!this.result.mylisted) {
-        this.$store.commit('user/addBookmark')
-        if (this.$store.state.user.isBookmarkAddable) {
-          this.result.mylist += 1
-        }
+    handleBookmark () {
+      this.toggleBookmark(!this.result.mylisted, this.result.illustID)
+      this.result.mylisted = !this.result.mylisted
+      if (this.result.mylisted) {
+        this.result.mylist += 1
       } else {
-        this.$store.commit('user/removeBookmark')
         this.result.mylist -= 1
-      }
-      if (this.$store.state.user.isBookmarkAddable || this.result.mylisted) {
-        await this.$axios.put(
-          `/mylist/${this.$auth.$state.user.mylist.id}`,
-          { illustID: this.result.illustID, action: this.result.mylisted ? 'remove' : 'add' }
-        )
-        if (!this.result.mylisted) {
-          this.$notify(
-            {
-              group: 'default',
-              type: 'success',
-              duration: 2000,
-              title: 'マイリスト',
-              text: 'マイリストに追加しました'
-            }
-          )
-        } else {
-          this.$notify(
-            {
-              group: 'default',
-              type: 'success',
-              duration: 2000,
-              title: 'マイリスト',
-              text: 'マイリストから削除しました'
-            }
-          )
-        }
-        this.result.mylisted = !this.result.mylisted
-      } else {
-        this.$notify(
-          {
-            group: 'default',
-            type: 'danger',
-            duration: 5000,
-            title: 'マイリスト',
-            text: 'マイリスト数の上限に達しました'
-          }
-        )
       }
     },
     getOGPThumb () {
