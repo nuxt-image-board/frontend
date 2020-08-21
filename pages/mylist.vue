@@ -11,7 +11,7 @@
         <div class="column is-8">
           <div class="columns is-touch is-centered is-vcentered">
             <div class="column is-8">
-              <SelectForm :sortMethod="String(SelectedSort)" class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+              <SelectForm :sortMethod="String(SelectedSort)" class="is-fullwidth" :options="SortOptions" @onSelectChanged="updateSelect" />
             </div>
           </div>
         </div>
@@ -35,7 +35,6 @@
         v-if="!$store.state.user.useInfinity"
         :current-page-from-prop="SelectedPage"
         :total-page="totalPage"
-        :send-mounted="false"
         @onPageChanged="updatePage"
       />
     </div>

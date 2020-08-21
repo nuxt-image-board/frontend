@@ -6,7 +6,7 @@
           <Notification :title="NotificationTitle" />
         </div>
         <div class="column is-one-third">
-          <SelectForm :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+          <SelectForm :options="SortOptions" @onSelectChanged="updateSelect" />
         </div>
       </div>
       <div class="columns is-centered is-multiline is-mobile">
@@ -17,7 +17,6 @@
       <Pagination
         :current-page-from-prop="SelectedPage"
         :total-page="totalPage"
-        :send-mounted="false"
         @onPageChanged="updatePage"
       />
     </div>

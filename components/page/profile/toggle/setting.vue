@@ -22,7 +22,6 @@
         <SelectForm
           :sortMethod="String(computedStore)"
           :options="items"
-          :send-mounted="false"
           :disabled="isDisabled"
           :isMedium="false"
           @onSelectChanged="setStore"

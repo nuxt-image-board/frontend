@@ -26,10 +26,6 @@ export default {
         ]
       }
     },
-    sendMounted: {
-      type: Boolean,
-      default: true
-    },
     sortMethod: {
       type: String,
       default: '0'
@@ -46,11 +42,6 @@ export default {
   data () {
     return {
       selectedType: this.sortMethod
-    }
-  },
-  mounted () {
-    if (this.sendMounted === '1') {
-      this.$emit('onSelectChanged', this.options[0].value)
     }
   },
   methods: {

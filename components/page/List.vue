@@ -8,7 +8,7 @@
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">
             <div class="column is-8">
-              <SelectForm :sortMethod="String(SelectedSort)" class="is-fullwidth" :options="SortOptions" :send-mounted="false" @onSelectChanged="updateSelect" />
+              <SelectForm :sortMethod="String(SelectedSort)" class="is-fullwidth" :options="SortOptions" @onSelectChanged="updateSelect" />
             </div>
             <div v-if="isSearchPage && !NotificationTitle.includes('キーワード')" class="column is-4">
               <NotifyRegister :notifyTitle="notifyTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
@@ -66,7 +66,6 @@
         v-if="!$store.state.user.useInfinity && filterKeyword === ''"
         :current-page-from-prop="SelectedPage"
         :total-page="totalPage"
-        :send-mounted="false"
         @onPageChanged="updatePage"
       />
     </div>
