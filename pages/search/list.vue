@@ -18,12 +18,13 @@ export default {
     List
   },
   async asyncData ({ $searchApi, $axios, $auth, route, error }) {
-    const baseTitle = '投稿者から検索'
-    const apiEndpoint = '/search/uploader'
+    const baseTitle = '一覧から検索'
+    const apiEndpoint = '/search/all'
     const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
-    const targetID = isFinite(route.params.id) ? parseInt(route.params.id) : 1
+    const targetID = 0
     const resp = await $searchApi.getSearchResults(apiEndpoint, pageID, sortID, targetID)
+    console.log(resp)
     if (!resp) {
       error({ statusCode: 404 })
     }
@@ -33,7 +34,7 @@ export default {
       sortID,
       targetID,
       tabTitle: resp.title,
-      pageTitle: `${baseTitle} ${resp.title} (${resp.count}件)`,
+      pageTitle: `${baseTitle} (${resp.count}件)`,
       results: resp.imgs,
       totalPage: resp.pages
     }

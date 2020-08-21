@@ -1,55 +1,46 @@
 <template>
   <List
-    :endpoint="endpoint"
-    :notification-title="NotificationTitle"
+    :api-endpoint="apiEndpoint"
+    :page-title="pageTitle"
+    :page-id-from-props="pageID"
+    :sort-id-from-props="sortID"
     :results-from-props="results"
-    :selected-page-from-props="SelectedPage"
-    :total-page="totalPage"
-    :is-search-page="isSearchPage"
-    :selected-sort-from-props="SelectedSort"
-    :notify-title="pageTitle"
+    :target-id="targetID"
+    :total-page-from-props="totalPage"
   />
 </template>
 
 <script>
-import List from '@/components/page/List.vue'
+import List from '@/components/page/search/SearchScreen.vue'
 
 export default {
-  validate ({ params }) {
-    return /^\d+$/.test(params.id)
-  },
   components: {
     List
   },
-  async asyncData ({ $axios, $auth, route, error }) {
-    const endpoint = '/search/character'
-    const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
-    const page = isFinite(route.query.page) ? parseInt(route.query.page) : 1
-    const sortNum = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
-    const order = [0, 2, 4].includes(sortNum) ? 'd' : 'a'
-    const sort = (sortNum <= 1) ? 'd'
-      : (sortNum <= 3) ? 'c'
-        : 'l'
-    const params = { sort, order, page, id }
-    const response = await $axios.get(endpoint, { params })
-    if (response.data.status !== 200) {
-      return error({ statusCode: 404, message: 'err' })
+  async asyncData ({ $searchApi, $axios, $auth, route, error }) {
+    const baseTitle = 'キャラから検索'
+    const apiEndpoint = '/search/character'
+    const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
+    const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
+    const targetID = isFinite(route.params.id) ? parseInt(route.params.id) : 1
+    const resp = await $searchApi.getSearchResults(apiEndpoint, pageID, sortID, targetID)
+    if (!resp) {
+      error({ statusCode: 404 })
     }
-    const data = response.data.data
     return {
-      endpoint,
-      pageTitle: `${data.title}`,
-      NotificationTitle: 'キャラクターから検索 ' + data.title + ' ' + data.count + '件',
-      results: data.imgs,
-      SelectedPage: page,
-      totalPage: data.pages,
-      SelectedSort: sortNum,
-      isSearchPage: true
+      apiEndpoint,
+      pageID,
+      sortID,
+      targetID,
+      tabTitle: resp.title,
+      pageTitle: `${baseTitle} ${resp.title} (${resp.count}件)`,
+      results: resp.imgs,
+      totalPage: resp.pages
     }
   },
   head () {
     return {
-      title: this.pageTitle
+      title: this.tabTitle
     }
   }
 }
