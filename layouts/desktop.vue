@@ -19,6 +19,28 @@
   </div>
 </template>
 
+<style>
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ffd8b2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ddaa77;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #4a1f0f;
+}
+</style>
+
 <script>
 import NavbarUp from '@/components/NavbarUp.vue'
 import NavbarDown from '@/components/NavbarDown.vue'
@@ -33,13 +55,47 @@ export default {
     NavbarDownMusic: () => import('@/components/NavbarDownMusic.vue'),
     BackToTop: () => import('@/components/ui/BackToTop.vue')
   },
-  created () {
-    this.showConsoleMessage()
+  data () {
+    return {
+      choices: [
+        '***REMOVED***ですか?',
+        '***REMOVED***ですか?',
+        '***REMOVED***ですか?',
+        '***REMOVED***ですか?',
+        '***REMOVED***ですか?',
+        'イラストですか?'
+      ],
+      msg: 'イラストですか?',
+      current: 0,
+      add: true
+    }
   },
   async mounted () {
     this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
     this.alertConnectionSpeed()
+    // setInterval(this.scrollPageTitle, 200)
+  },
+  created () {
+    this.showConsoleMessage()
+  },
+  methods: {
+    scrollPageTitle () {
+      if (this.add) {
+        document.title = 'ご注文は' + this.msg.slice(0, this.current)
+        this.current += 1
+        if (this.current === this.msg.length) {
+          this.add = !this.add
+        }
+      } else {
+        document.title = 'ご注文は' + this.msg.slice(0, this.current)
+        this.current -= 1
+        if (this.current === 0) {
+          this.msg = this.choices[Math.floor(Math.random() * this.choices.length)]
+          this.add = !this.add
+        }
+      }
+    }
   }
 }
 </script>

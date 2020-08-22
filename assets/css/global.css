@@ -11,6 +11,9 @@ body {
   background-image:
     url(~static/deco_right.svg),
     repeating-linear-gradient( to right, #ffe9dc, #ffe9dc 18px, #FFECE0 18px, #FFECE0 33px );
+    /*
+  cursor: url(~static/cursor.png), pointer;
+  */
 }
 
 /* Layout: iOSなどのため、最低高さを決める */

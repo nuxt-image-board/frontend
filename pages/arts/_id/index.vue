@@ -239,7 +239,7 @@ export default {
       result: {},
       isEditable: false,
       openZoom: false,
-      isZoomAllowed: true,
+      isZoomAllowed: false,
       waifuScale: '',
       isModalOpen: false
     }
