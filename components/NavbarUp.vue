@@ -31,22 +31,20 @@
               </div>
             </div>
             <div class="navbar-item">
-              <form method="get" action="/search/keyword">
-                <div class="field has-addons">
-                  <div class="control">
-                    <input v-model="keyword" name="query" class="input is-rounded" type="text" placeholder="Find an another god-art">
-                  </div>
-                  <div class="control">
-                    <nuxt-link
-                      :to="'/search/keyword?query='+keyword"
-                      class="button is-success is-rounded"
-                      @click.native="closeAll($event)"
-                    >
-                      <span><Fas i="search" /></span>
-                    </nuxt-link>
-                  </div>
+              <div class="field has-addons">
+                <div class="control">
+                  <input v-model="keyword" class="input is-rounded" type="text" placeholder="Find an another god-art">
                 </div>
-              </form>
+                <div class="control">
+                  <nuxt-link
+                    :to="'/search/keyword/'+keyword"
+                    class="button is-success is-rounded"
+                    @click.native="closeAll($event)"
+                  >
+                    <span><Fas i="search" /></span>
+                  </nuxt-link>
+                </div>
+              </div>
             </div>
           </div>
           <div class="navbar-start" style="flex-grow: 1; justify-content: center;">

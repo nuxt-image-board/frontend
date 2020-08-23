@@ -17,10 +17,10 @@ class API {
     }
   }
 
-  async getMylistResults (apiEndpoint, pageID, sortID) {
-    const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'i' : 'l'
-    const order = [0, 2, 4].includes(sortID) ? 'd' : 'a'
-    const params = { page: pageID, sort, order }
+  async getListResults (apiEndpoint, pageID, sortID, keyword) {
+    const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'c' : (sortID <= 5) ? 'l' : 'n'
+    const order = [0, 2, 4, 6].includes(sortID) ? 'd' : 'a'
+    const params = { page: pageID, sort, order, keyword }
     return await this.requestResults(apiEndpoint, params)
   }
 
@@ -31,10 +31,24 @@ class API {
     return await this.requestResults(apiEndpoint, params)
   }
 
-  async getListResults (apiEndpoint, pageID, sortID, keyword) {
-    const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'c' : (sortID <= 5) ? 'l' : 'n'
-    const order = [0, 2, 4, 6].includes(sortID) ? 'd' : 'a'
-    const params = { page: pageID, sort, order, keyword }
+  async getMultipleSearchResults (apiEndpoint, pageID, sortID, targetIDs) {
+    const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'c' : 'l'
+    const order = [0, 2, 4].includes(sortID) ? 'd' : 'a'
+    const params = { page: pageID, id: targetIDs, sort, order }
+    return await this.requestResults(apiEndpoint, params)
+  }
+
+  async getKeywordSearchResults (apiEndpoint, pageID, sortID, keyword) {
+    const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'c' : 'l'
+    const order = [0, 2, 4].includes(sortID) ? 'd' : 'a'
+    const params = { page: pageID, keyword, sort, order }
+    return await this.requestResults(apiEndpoint, params)
+  }
+
+  async getMylistResults (apiEndpoint, pageID, sortID) {
+    const sort = (sortID <= 1) ? 'd' : (sortID <= 3) ? 'i' : 'l'
+    const order = [0, 2, 4].includes(sortID) ? 'd' : 'a'
+    const params = { page: pageID, sort, order }
     return await this.requestResults(apiEndpoint, params)
   }
 }

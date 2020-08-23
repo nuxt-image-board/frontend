@@ -10,7 +10,7 @@
           :key="p.title"
           class="column is-6"
         >
-          <nuxt-link class="button is-fullwidth is-medium is-primary" :to="p.title != '投稿者' ? p.to : '#'">
+          <nuxt-link class="button is-fullwidth is-medium is-primary" :to="p.to">
             <Fas :i="p.icon" />&nbsp;{{ p.title }}
           </nuxt-link>
         </div>

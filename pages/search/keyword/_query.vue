@@ -4,29 +4,29 @@
     :page-title="pageTitle"
     :page-id-from-props="pageID"
     :sort-id-from-props="sortID"
-    :target-id="targetID"
+    :keyword="$route.params.query"
     :results-from-props="results"
     :total-page-from-props="totalPage"
   />
 </template>
 
 <script>
-import List from '@/components/page/search/MultipleSearchScreen.vue'
+import List from '@/components/page/search/KeywordSearchScreen.vue'
 
 export default {
   components: {
     List
   },
   async asyncData ({ $axios, $searchApi, route, redirect, error }) {
-    const baseTitle = '複合タグから検索'
-    const apiEndpoint = '/search/multiple/tag'
+    const baseTitle = 'キーワードから検索'
+    const apiEndpoint = '/search/keyword'
     const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
-    const targetID = route.query.query ? route.query.query : ''
-    if (!targetID) {
-      redirect('/search_form/multiple/tag')
+    const keyword = route.params.query ? route.params.query : ''
+    if (!keyword) {
+      redirect('/search_form/keyword')
     }
-    const resp = await $searchApi.getMultipleSearchResults(apiEndpoint, pageID, sortID, targetID)
+    const resp = await $searchApi.getKeywordSearchResults(apiEndpoint, pageID, sortID, keyword)
     if (!resp) {
       error({ statusCode: 404 })
     }
@@ -34,7 +34,7 @@ export default {
       apiEndpoint,
       pageID,
       sortID,
-      targetID,
+      keyword,
       tabTitle: resp.title,
       pageTitle: `${baseTitle} ${resp.title} (${resp.count}件)`,
       results: resp.imgs,
