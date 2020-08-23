@@ -175,6 +175,69 @@
             </div>
           </div>
         </div>
+        <div class="column is-12 has-text-centered">
+          <div class="box">
+            <p class="subtitle">
+              コメント一覧
+            </p>
+            <div v-for="c in comments" :key="c.comment.id">
+              <p class="has-text-weight-bold">
+                {{ c.comment.created }} by&nbsp;
+                <nuxt-link :to="'/search/uploader/'+c.user.id">
+                  {{ c.user.name }}
+                </nuxt-link>
+              </p>
+              <p>
+                {{ c.comment.body }}
+              </p>
+              <br>
+            </div>
+            <div class="field">
+              <p class="control">
+                <textarea
+                  v-model="commentArea"
+                  class="textarea"
+                  maxlength="500"
+                  rows="3"
+                  placeholder="e.g このイラスト好き, 神, 良い, 即マイリス行き, いいねした"
+                />
+              </p>
+            </div>
+            <div class="field">
+              <button
+                class="button is-medium is-info has-text-centered"
+                :disabled="commentArea.length < 1"
+                @click="openCommentConfirm = true"
+              >
+                投稿
+              </button>
+            </div>
+            <Modal
+              title="コメント投稿確認"
+              :isModalOpen="openCommentConfirm == true"
+              @modal-closed="openCommentConfirm = false"
+            >
+              <textarea
+                v-model="commentArea"
+                class="textarea"
+                maxlength="500"
+                rows="3"
+                readonly
+              />
+              <h2 class="has-text-centered">
+                投稿してよろしいですか?
+              </h2>
+              <div class="field has-text-centered">
+                <button
+                  class="button is-primary is-medium"
+                  @click="postNewComment"
+                >
+                  投稿する
+                </button>
+              </div>
+            </Modal>
+          </div>
+        </div>
       </div>
     </div>
     <div v-if="!$store.state.user.useViewer" class="modal" :class="{'is-active': isModalOpen}">
@@ -216,6 +279,7 @@ export default {
     const endpoint = '/arts/'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const response = await $axios.get(endpoint + id)
+    const comments = await $axios.get(`/arts/${id}/comments`)
     let isEditable = false
     let isTagEditable = false
     if (response.data.status !== 200) {
@@ -230,6 +294,7 @@ export default {
     }
     return {
       result: data,
+      comments: comments.data.data,
       isEditable,
       isTagEditable
     }
@@ -237,11 +302,14 @@ export default {
   data () {
     return {
       result: {},
+      comments: {},
       isEditable: false,
       openZoom: false,
+      openCommentConfirm: false,
       isZoomAllowed: false,
       waifuScale: '',
-      isModalOpen: false
+      isModalOpen: false,
+      commentArea: ''
     }
   },
   computed: {
@@ -297,6 +365,24 @@ export default {
       } else {
         window.open('data:' + mimeType + ';base64,' + window.Base64.encode(imageOrig.data), '_blank')
       }
+    },
+    async postNewComment () {
+      const resp = await this.$axios.post(`/arts/${this.result.illustID}/comments`, { comment: this.commentArea })
+      if (resp.data.status === 200) {
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 5000,
+            title: 'コメント',
+            text: 'コメントを投稿しました'
+          }
+        )
+        const resp = await this.$axios.get(`/arts/${this.result.illustID}/comments`)
+        this.comments = resp.data.data
+        this.commentArea = ''
+      }
+      this.openCommentConfirm = false
     },
     async requestWaifu2x () {
       const scale = this.waifuScale.substr(-1)
