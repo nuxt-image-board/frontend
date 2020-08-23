@@ -21,6 +21,11 @@
           "icon": "upload"
         },
         {
+          "to": "/history/upload",
+          "title": "投稿履歴",
+          "icon": "history"
+        },
+        {
           "to": "/history/search",
           "require_product": 3,
           "title": "検索履歴",

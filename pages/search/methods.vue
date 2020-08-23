@@ -75,6 +75,11 @@ export default {
           to: '/search/image',
           icon: 'image',
           title: '画像'
+        },
+        {
+          to: '/search_form/multiple/tag',
+          icon: 'tags',
+          title: '複合タグ'
         }
       ]
     }

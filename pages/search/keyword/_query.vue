@@ -28,7 +28,11 @@ export default {
     }
     const resp = await $searchApi.getKeywordSearchResults(apiEndpoint, pageID, sortID, keyword)
     if (!resp) {
-      error({ statusCode: 404 })
+      if (process.server) {
+        error({ statusCode: 404 })
+      } else {
+        redirect('/search_form/keyword?e=1')
+      }
     }
     return {
       apiEndpoint,

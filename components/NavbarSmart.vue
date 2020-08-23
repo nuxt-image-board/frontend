@@ -191,12 +191,13 @@ export default {
       openMenu: false,
       openSearch: false,
       searchItems: [
-        { icon: 'keyboard', name: 'キーワード', to: '/search/keyword?query=' },
         { icon: 'users', name: 'キャラ', to: '/list/character' },
         { icon: 'tags', name: 'タグ', to: '/list/tag' },
         { icon: 'paint-brush', name: '絵師', to: '/list/artist' },
+        { icon: 'keyboard', name: 'キーワード', to: '/search_form/keyword' },
+        { icon: 'image', name: '画像', to: '/search/image' },
         { icon: 'upload', name: '投稿者', to: '/list/uploader' },
-        { icon: 'image', name: '画像', to: '/search/image' }
+        { icon: 'plus-square', name: '更に', to: '/search/methods' }
       ],
       otherItems: [
         { icon: 'question-circle', name: 'ヘルプ', to: '/help' },

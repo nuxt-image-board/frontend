@@ -28,7 +28,11 @@ export default {
     }
     const resp = await $searchApi.getMultipleSearchResults(apiEndpoint, pageID, sortID, targetID)
     if (!resp) {
-      error({ statusCode: 404 })
+      if (process.server) {
+        error({ statusCode: 404 })
+      } else {
+        redirect('/search_form/multiple/tag?e=1')
+      }
     }
     return {
       apiEndpoint,

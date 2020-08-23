@@ -78,7 +78,6 @@ import Notification from '@/components/ui/Notification.vue'
 import SelectForm from '@/components/ui/SelectForm.vue'
 import Wiki from '@/components/ui/Wiki.vue'
 import NotifyRegister from '@/components/ui/NotifyRegister.vue'
-import Pagination from '@/components/ui/Pagination.vue'
 import Result from '@/components/page/search/Result.vue'
 
 export default {
@@ -87,7 +86,7 @@ export default {
     SelectForm,
     NotifyRegister,
     Wiki,
-    Pagination,
+    Pagination: () => import('@/components/ui/Pagination.vue'),
     Result
   },
   props: {

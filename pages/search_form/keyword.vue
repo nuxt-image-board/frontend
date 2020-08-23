@@ -40,6 +40,20 @@ export default {
       query: ''
     }
   },
+  watch: {
+    '$route' (to, from) {
+      if (this.$route.query.e) {
+        this.$notify({ group: 'default', type: 'danger', duration: 2000, title: 'キーワード検索', text: '一致する項目がありませんでした' })
+        this.$router.push('/search_form/keyword')
+      }
+    }
+  },
+  mounted () {
+    if (this.$route.query.e) {
+      this.$notify({ group: 'default', type: 'danger', duration: 2000, title: 'キーワード検索', text: '一致する項目がありませんでした' })
+      this.$router.push('/search_form/keyword')
+    }
+  },
   head () {
     return {
       title: 'キーワード検索'

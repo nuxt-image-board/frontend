@@ -77,6 +77,10 @@
               <span class="icon"><Fas i="image" /></span>
               <span>画像</span>
             </nuxt-link>
+            <nuxt-link to="/search/methods" class="navbar-item has-text-white" @click.native="closeAll($event)">
+              <span class="icon"><Fas i="plus-square" /></span>
+              <span>更に</span>
+            </nuxt-link>
           </div>
           <div class="navbar-end">
             <div class="navbar-item has-dropdown is-hoverable">

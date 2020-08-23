@@ -9,7 +9,7 @@
             </h4>
             <div class="box">
               <p class="subtitle">
-                検索対象タグ
+                検索対象タグ (5つまで)
               </p>
               <div v-if="tags.length > 0" class="field is-grouped is-grouped-multiline is-grouped-centered">
                 <div v-for="t in tags" :key="t.id">
@@ -29,7 +29,7 @@
             </div>
             <div class="box">
               <p class="subtitle">
-                タグ候補
+                タグ候補 (2文字以上)
               </p>
               <div class="field">
                 <div class="control">
@@ -55,6 +55,24 @@
                 </div>
               </div>
             </div>
+            <div class="box">
+              <p class="subtitle">
+                AND検索 / OR検索
+              </p>
+              <div class="field">
+                <div class="control has-text-centered">
+                  <input
+                    id="switchAndOr"
+                    v-model="isOr"
+                    type="checkbox"
+                    name="switchAndOr"
+                    disabled
+                    class="switch is-medium is-rounded is-info"
+                  >
+                  <label for="switchAndOr" />
+                </div>
+              </div>
+            </div>
             <div class="field is-centered">
               <button
                 class="button is-primary is-fullwidth is-large"
@@ -75,6 +93,7 @@
 export default {
   data () {
     return {
+      isOr: false,
       filterTag: '',
       finds: [],
       tags: []
@@ -82,7 +101,15 @@ export default {
   },
   watch: {
     filterTag (to, from) {
-      this.findTagsWithKeyword()
+      if (to.length > 1) {
+        this.findTagsWithKeyword()
+      }
+    },
+    '$route' (to, from) {
+      if (this.$route.query.e) {
+        this.$notify({ group: 'default', type: 'danger', duration: 2000, title: '複合タグ検索', text: '一致する項目がありませんでした' })
+        this.$router.push('/search_form/multiple/tag')
+      }
     }
   },
   methods: {

@@ -45,14 +45,13 @@
 <script>
 import Notification from '@/components/ui/Notification.vue'
 import SelectForm from '@/components/ui/SelectForm.vue'
-import Pagination from '@/components/ui/Pagination.vue'
 import Result from '@/components/page/search/Result.vue'
 
 export default {
   components: {
     Notification,
     SelectForm,
-    Pagination,
+    Pagination: () => import('@/components/ui/Pagination.vue'),
     Result
   },
   props: {
