@@ -24,14 +24,14 @@
           <button
             v-if="!$store.state.user.mutedArtists.includes(notifyTargetID)"
             class="button is-primary is-small"
-            @click="toggleArtistMute(true)"
+            @click="toggleMute(true, 2, notifyTargetID)"
           >
             この絵師をミュートする
           </button>
           <button
             v-else
             class="button is-primary is-small"
-            @click="toggleArtistMute(false)"
+            @click="toggleMute(false, 2, notifyTargetID)"
           >
             この絵師のミュートを解除する
           </button>
@@ -138,10 +138,10 @@ export default {
     },
     notifyTargetType () {
       switch (this.apiEndpoint) {
-        case 'artist':
+        case '/search/artist':
           return 2
-        case 'tag':
-        case 'character':
+        case '/search/tag':
+        case '/search/character':
           return 1
         default:
           return 0

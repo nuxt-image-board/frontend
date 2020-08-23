@@ -28,13 +28,13 @@ Vue.mixin({
       if (isAdd && this.$store.state.user.isBookmarkAddable) {
         this.$store.commit('user/addBookmark')
         await this.$axios.put(`/mylist/${this.$auth.$state.user.mylist.id}`, { illustID, action: 'add' })
-        this.$notify({ group: 'default', type: 'success', duration: 2000, title: 'ブックマーク', text: 'マイリストに追加しました' })
+        this.$notify({ group: 'default', type: 'success', duration: 2000, title: 'マイリスト', text: 'マイリストに追加しました' })
       } else if (!isAdd) {
         this.$store.commit('user/removeBookmark')
         await this.$axios.put(`/mylist/${this.$auth.$state.user.mylist.id}`, { illustID, action: 'remove' })
-        this.$notify({ group: 'default', type: 'success', duration: 2000, title: 'ブックマーク', text: 'マイリストから削除しました' })
+        this.$notify({ group: 'default', type: 'success', duration: 2000, title: 'マイリスト', text: 'マイリストから削除しました' })
       } else {
-        this.$notify({ group: 'default', type: 'success', duration: 2000, title: 'ブックマーク', text: 'マイリストから削除しました' })
+        this.$notify({ group: 'default', type: 'danger', duration: 2000, title: 'マイリスト', text: 'マイリスト数の上限に達しています' })
       }
     }
   }
