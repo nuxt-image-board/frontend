@@ -45,7 +45,7 @@
           <div class="field">
             <div class="file is-centered is-large has-name is-boxed">
               <label class="file-label">
-                <input class="file-input" type="file" accept="image/png,image/jpeg" @change="uploadImages">
+                <input class="file-input" type="file" multiple accept="image/png,image/jpeg" @change="uploadImages">
                 <span class="file-cta">
                   <span class="file-icon">
                     <Fas i="cloud-upload-alt" />
@@ -109,7 +109,7 @@ export default {
     },
     raiseError (msg) {
       this.$notify(
-        { group: 'default', type: 'danger', duration: 5000, title: msg }
+        { group: 'default', type: 'danger', duration: 5000, title: 'アップロード失敗', text: msg }
       )
     },
     async uploadImages (e) {
@@ -120,11 +120,16 @@ export default {
         this.uploaded = false
         return
       }
+      if (e.target.files.length > 20) {
+        this.raiseError('指定されたファイル数が多すぎます')
+        this.uploaded = false
+        return
+      }
       const tasks = []
-      console.log(tasks)
       for (let i = 0; i < e.target.files.length; i++) {
         tasks.push(this.createTask(e.target.files[i]))
       }
+      // 渡されたファイル数分リクエストを投げる
       let imageUrls = await Promise.all(tasks)
       imageUrls = imageUrls.filter(img => img !== 'error')
       if (imageUrls.length === 0) {
