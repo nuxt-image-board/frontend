@@ -5,7 +5,7 @@
       @dragenter="fileOnWindow = true"
     >
       <div
-        v-if="step == 0"
+        v-if="!uploaded"
         class="modal"
         :class="{'is-active': fileOnWindow}"
         @dragover.prevent
@@ -20,76 +20,61 @@
         </div>
       </div>
       <div class="columns is-centered is-vcentered" style="min-height:80vh;">
-        <div v-if="step == 0" class="column is-6 has-text-centered">
+        <div v-if="!uploaded" class="column is-6 has-text-centered">
           <h4 class="title">
             画像からイラスト投稿
           </h4>
-          <p>
-            <b>
-              投稿前には必ず
-              <nuxt-link to="/rules/illust">
-                イラスト投稿ルール
-              </nuxt-link>
-              をご確認ください!
-            </b>
-          </p>
-          <p>
-            ***REMOVED***
-            ***REMOVED***
-          </p>
-          <p>
-            ※JPGかJPEGかPNGのみ対応です
-          </p>
-          <br>
-          <div v-if="step < 2" class="field">
+          <div class="field">
+            <p>
+              <b>
+                投稿前には必ず
+                <nuxt-link to="/rules/illust">
+                  イラスト投稿ルール
+                </nuxt-link>
+                をご確認ください!
+              </b>
+            </p>
+            <p>
+              ***REMOVED***
+              ***REMOVED***
+            </p>
+            <p>
+              ※JPGかJPEGかPNGのみ対応です
+            </p>
+          </div>
+          <div class="field">
             <div class="file is-centered is-large has-name is-boxed">
               <label class="file-label">
-                <input class="file-input" type="file" accept="image/png,image/jpeg" :disabled="fileName != ''" @change="uploadImage">
+                <input class="file-input" type="file" accept="image/png,image/jpeg" @change="uploadImages">
                 <span class="file-cta">
-                  <span v-if="!fileName" class="file-icon">
+                  <span class="file-icon">
                     <Fas i="cloud-upload-alt" />
                   </span>
-                  <span v-if="!fileName" class="file-label">
+                  <span class="file-label">
                     画像を選択…
-                  </span>
-                  <span v-if="step == 1" class="button is-primary is-loading" />
-                  <span v-if="step == 1" class="file-label">
-                    ***REMOVED***で検索中...
                   </span>
                 </span>
               </label>
             </div>
           </div>
-          <br>
-          <br>
-          <div v-if="step < 2" class="field is-centered">
+          <div class="field is-centered">
             <nuxt-link to="/upload/page" class="button is-primary is-medium">
               URLから投稿する場合はこちら
             </nuxt-link>
           </div>
-          <div v-if="step < 2" class="field is-centered">
+          <div class="field is-centered">
             <nuxt-link to="/history/upload" class="button is-primary is-medium">
               投稿履歴の確認はこちら
             </nuxt-link>
           </div>
         </div>
-        <div v-if="results.length !== 0 && step < 2" class="column has-text-centered is-half">
-          <div class="container">
-            <div class="columns is-mobile is-multiline is-centered is-vcentered">
-              <div v-for="result in results" :key="result.illustID" class="column is-6-mobile is-4-desktop">
-                <Result :result="result" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div v-show="step > 1" class="column has-text-centered is-8">
+        <div v-else class="column has-text-centered is-8">
           <UploadScreen
             ref="uploadScreen"
-            @uploadComplete="resetUpload"
+            @uploadComplete="uploaded = !uploaded"
           />
           <br>
-          <br>
-          <button class="has-text-centered button is-primary is-warning" @click="step = 0">
+          <button class="has-text-centered button is-primary is-warning" @click="uploaded = !uploaded">
             戻る
           </button>
         </div>
@@ -100,13 +85,11 @@
 
 <script>
 import Fas from '@/components/ui/Fas.vue'
-import Result from '@/components/page/search/Result.vue'
 import UploadScreen from '@/components/page/upload/UploadScreen.vue'
 
 export default {
   components: {
     Fas,
-    Result,
     UploadScreen
   },
   data () {
@@ -116,109 +99,75 @@ export default {
       imageUrl: '',
       fileName: '',
       results: [],
-      step: 0
+      uploaded: false
     }
   },
   methods: {
     dropImage (e) {
       e.target.files = e.dataTransfer.files
-      this.uploadImage(e)
+      this.uploadImages(e)
     },
-    async uploadImage (e) {
+    raiseError (msg) {
+      this.$notify(
+        { group: 'default', type: 'danger', duration: 5000, title: msg }
+      )
+    },
+    async uploadImages (e) {
+      this.uploaded = true
       e.preventDefault()
-      // バリデーション
-      this.step = 1
-      this.results = []
       if (e.target.files.length === 0) {
-        this.$notify(
-          {
-            group: 'default',
-            type: 'danger',
-            duration: 5000,
-            title: '未対応のファイルです'
-          }
-        )
-        this.step = 0
-        this.fileName = ''
+        this.raiseError('未対応のファイルです')
+        this.uploaded = false
         return
       }
-      const imageFile = e.target.files[0]
-      this.fileName = imageFile.name
-      if (!this.fileName.includes('jpeg') && !this.fileName.includes('jpg') && !this.fileName.includes('png')) {
-        this.$notify(
-          {
-            group: 'default',
-            type: 'danger',
-            duration: 5000,
-            title: '未対応のファイルです'
-          }
-        )
-        this.step = 0
-        this.fileName = ''
+      const tasks = []
+      console.log(tasks)
+      for (let i = 0; i < e.target.files.length; i++) {
+        tasks.push(this.createTask(e.target.files[i]))
+      }
+      let imageUrls = await Promise.all(tasks)
+      imageUrls = imageUrls.filter(img => img !== 'error')
+      if (imageUrls.length === 0) {
+        this.raiseError('アップロードに失敗しました')
+        this.uploaded = false
         return
+      }
+      // 投稿画面を開く
+      this.$refs.uploadScreen.writeArtInfo(imageUrls)
+    },
+    createTask (imageFile) {
+      return new Promise((resolve) => {
+        const resp = this.uploadImage(imageFile)
+        resolve(resp)
+      })
+    },
+    async uploadImage (imageFile) {
+      // 画像ファイルでなければエラー
+      if (
+        !imageFile.name.includes('jpeg') &&
+        !imageFile.name.includes('jpg') &&
+        !imageFile.name.includes('png')
+      ) {
+        this.raiseError('未対応のファイルです')
+        return 'error'
       }
       // 検索APIに投げる
       const headers = { 'content-type': 'multipart/form-data' }
-      const data = new FormData()
-      data.append('file', imageFile)
+      const imgData = new FormData()
+      imgData.append('file', imageFile)
       try {
-        const resp = await this.$axios.post('/search/image', data, { headers })
-        if (resp.data.status === 200) {
-          this.results = resp.data.data.illusts
-          if (resp.data.data.illusts.length > 0) {
-            this.$notify(
-              {
-                group: 'default',
-                type: 'danger',
-                duration: 5000,
-                title: 'その画像は既に***REMOVED***に存在します'
-              }
-            )
-            this.step = 0
-            this.fileName = ''
-            return
-          }
+        const resp = await this.$axios.post('/search/image', imgData, { headers })
+        if (resp.data.data.illusts > 0) {
+          this.raiseError('その画像は既に***REMOVED***に存在します')
+          return 'error'
         }
-      } catch (error) {
-        this.$notify(
-          {
-            group: 'default',
-            type: 'danger',
-            duration: 5000,
-            title: '通信エラーが発生しました'
-          }
-        )
-        this.step = 0
-        this.fileName = ''
-        return
+        // 投稿APIに投げる
+        const resp2 = await this.$axios.post('/scrape/self', imgData, { headers })
+        return resp2.data.data.url
+      } catch {
+        this.raiseError('通信エラーが発生しました')
+        return 'error'
       }
-      // 投稿APIに投げる
-      try {
-        const resp = await this.$axios.post('/scrape/self', data, { headers })
-        if (resp.data.status === 200) {
-          this.imageUrl = resp.data.data.url
-        }
-      } catch (error) {
-        this.$notify(
-          {
-            group: 'default',
-            type: 'danger',
-            duration: 5000,
-            title: '通信エラーが発生しました'
-          }
-        )
-        this.step = 0
-        this.fileName = ''
-        return
-      }
-      this.step = 2
-      this.fileName = ''
-      // 投稿画面を開く
-      this.$refs.uploadScreen.writeArtInfo(this.imageUrl)
-    },
-    resetUpload () {
-      this.step = 0
-      this.fileName = ''
     }
   },
   head () {

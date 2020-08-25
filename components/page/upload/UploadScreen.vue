@@ -256,16 +256,16 @@ export default {
     removeEmoji (text) {
       return text.replace(/([\uE000-\uF8FF]|\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDDFF])/g, '')
     },
-    writeArtInfo (url) {
+    writeArtInfo (imageUrls) {
       this.illust = {
         title: '',
         caption: '',
-        imgs: [url],
+        imgs: imageUrls,
         tags: [],
         artist: '',
         source: '',
         R18: false,
-        imageUrl: url,
+        imageUrl: imageUrls[0],
         originUrl: '',
         originService: '独自'
       }
