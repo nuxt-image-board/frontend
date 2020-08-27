@@ -22,15 +22,7 @@
         LINEと既存アカウントを連携することで***REMOVED***のユーザー名/パスワードなしにログインできるようになります。
         アカウントを変えた場合は上記ボタンから再連携することができます。LINE連携では、公式に提供しているLINEログインを使用します。
         このログインでは、識別ID(事業者別ユーザーID)の取得を行います。メッセージを勝手に送信することはありません。
-        ***REMOVED***の連携に関する技術的詳細は
-        <a
-          href="https://qiita.com/TakahikoKawasaki/items/498ca08bbfcc341691fe"
-          target="_blank"
-          rel="nofollow noopener noreferrer"
-        >
-          OpenID Connectの説明
-        </a>
-        を一読ください。
+        ***REMOVED***の連携に関する技術的詳細は OpenID Connectの説明 を一読ください。
       </p>
     </Modal>
     <a class="panel-block" @click="modalType = 3">
