@@ -5,14 +5,14 @@
       :to="'/wiki/'+articleID"
       class="button is-link is-medium"
     >
-      Wikiで記事を見る
+      {{ $t('Wiki.read') }}
     </nuxt-link>
     <nuxt-link
       v-if="$store.state.user.obtainedProducts.includes(2)"
       :to="writeArticleLink"
       class="button is-primary is-medium"
     >
-      Wikiで記事を{{ articleID ? '編集' : '書く' }}
+      {{ articleID ? $t('Wiki.edit') : $t('Wiki.write') }}
     </nuxt-link>
   </div>
 </template>

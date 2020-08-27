@@ -19,7 +19,7 @@ export default {
     List
   },
   async asyncData ({ $searchApi, $axios, route, error }) {
-    const pageTitle = 'キャラから検索'
+    const pageTitle = 'character'
     const pageEndpoint = 'character'
     const apiEndpoint = '/catalog/characters'
     const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
@@ -42,7 +42,7 @@ export default {
   },
   head () {
     return {
-      title: this.pageTitle
+      title: this.pageTitle.charAt(0).toUpperCase() + this.pageTitle.slice(1)
     }
   }
 }

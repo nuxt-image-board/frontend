@@ -16,11 +16,18 @@ export const state = () => ({
   mutedArtists: [],
   mylistCount: 0,
   isBookmarkAddable: true,
-  isArtistMuteAddable: true
+  isArtistMuteAddable: true,
+  locale: 'ja'
 })
 
 // 状態を変更する処理は mutationとしてexportする
 export const mutations = {
+  setLocale (state, payload) {
+    state.locale = payload
+    if (process.client) {
+      location.reload()
+    }
+  },
   toggleSetting (state, path) {
     state[path] = !state[path]
   },

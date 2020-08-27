@@ -1,7 +1,9 @@
 <template>
   <List
     :api-endpoint="apiEndpoint"
+    :result-count="resultCount"
     :page-title="pageTitle"
+    :tab-title="tabTitle"
     :page-id-from-props="pageID"
     :sort-id-from-props="sortID"
     :keyword="$route.params.query"
@@ -18,7 +20,7 @@ export default {
     List
   },
   async asyncData ({ $axios, $searchApi, route, redirect, error }) {
-    const baseTitle = 'キーワードから検索'
+    const baseTitle = 'keyword'
     const apiEndpoint = '/search/keyword'
     const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
@@ -40,7 +42,8 @@ export default {
       sortID,
       keyword,
       tabTitle: resp.title,
-      pageTitle: `${baseTitle} ${resp.title} (${resp.count}件)`,
+      pageTitle: baseTitle,
+      resultCount: resp.count,
       results: resp.imgs,
       totalPage: resp.pages
     }

@@ -120,6 +120,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/i18n',
     '~plugins/axios',
     '~plugins/vue-scrollto',
     '~plugins/v-viewer',
@@ -270,7 +271,7 @@ export default {
     }
   },
   router: {
-    middleware: 'auth'
+    middleware: ['auth', 'i18n']
   },
   /*
   ** Axios module configuration

@@ -4,7 +4,7 @@
       <div class="container">
         <div class="navbar-brand">
           <a v-if="!$store.state.user.isLeftHanded" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
-            ***REMOVED***
+            {{ $t('site_name') }}
           </a>
           <a
             v-if="!$store.state.user.isLeftHanded && $store.state.user.useMusicPlayer"
@@ -39,13 +39,13 @@
             <Fas i="music" classes="has-text-white" />
           </a>
           <a v-if="$store.state.user.isLeftHanded" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
-            ***REMOVED***
+            {{ $t('site_name') }}
           </a>
         </div>
         <div class="navbar-end is-hidden-touch">
           <div class="navbar-item">
             <button class="button is-primary" @click="openMenu = !openMenu">
-              メニュー
+              {{ $t('NavbarUp.bar_items.menu') }}
             </button>
           </div>
         </div>
@@ -55,7 +55,7 @@
       <header class="quickview-header">
         <p class="has-text-white">
           <nuxt-link to="/" class="has-text-white" @click.native="openMenu = !openMenu">
-            ***REMOVED***
+            {{ $t('site_name') }}
           </nuxt-link>
         </p>
         <span class="delete" @click="openMenu = !openMenu" />
@@ -65,42 +65,42 @@
           <ul class="menu-list">
             <li class="menu-title">
               <p class="is-size-7 has-text-white">
-                ホーム
+                {{ $t('NavbarUp.smart_items.home') }}
               </p>
             </li>
             <li>
               <nuxt-link to="/" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="home" /></span>
-                <span>トップ</span>
+                <span>{{ $t('NavbarUp.smart_items.top') }}</span>
               </nuxt-link>
             </li>
             <li>
               <nuxt-link to="/news" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="bell" /></span>
-                <span>ニュース</span>
+                <span>{{ $t('NavbarUp.smart_items.news') }}</span>
               </nuxt-link>
             </li>
             <li class="menu-title">
               <p class="is-size-7 has-text-white">
-                イラスト
+                {{ $t('NavbarUp.smart_items.arts') }}
               </p>
             </li>
             <li>
               <nuxt-link to="/search/list" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="list" /></span>
-                <span>一覧</span>
+                <span>{{ $t('NavbarUp.bar_items.list') }}</span>
               </nuxt-link>
             </li>
             <li>
               <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="upload" /></span>
-                <span>投稿</span>
+                <span>{{ $t('NavbarUp.bar_items.upload') }}</span>
               </nuxt-link>
             </li>
             <li>
               <a class="has-text-white" @click="openSearch = !openSearch">
                 <span class="icon"><Fas i="search" /></span>
-                <span>検索</span>
+                <span>{{ $t('NavbarUp.smart_items.search') }}</span>
                 <Fas v-if="!openSearch" i="chevron-down" />
                 <Fas v-else i="chevron-up" />
               </a>
@@ -108,14 +108,14 @@
                 <li v-for="item in searchItems" :key="item.icon">
                   <nuxt-link :to="item.to" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                     <span class="icon"><Fas :i="item.icon" /></span>
-                    <span>{{ item.name }}</span>
+                    <span>{{ $t('NavbarUp.bar_items.'+item.name) }}</span>
                   </nuxt-link>
                 </li>
               </ul>
             </li>
             <li class="menu-title">
               <p class="is-size-7 has-text-white">
-                ユーザー
+                {{ $t('NavbarUp.smart_items.user') }}
               </p>
             </li>
             <li v-for="user in userNavigation" :key="user.name">
@@ -124,19 +124,19 @@
                   <Fas :i="user.icon" classes="has-text-white" />
                 </span>
                 <span>
-                  {{ user.title }}
+                  {{ $t('NavbarUp.dropdown_items.'+user.title) }}
                 </span>
               </nuxt-link>
             </li>
             <li class="menu-title">
               <p class="is-size-7 has-text-white">
-                その他
+                {{ $t('NavbarUp.smart_items.other') }}
               </p>
             </li>
             <li v-for="item in otherItems" :key="item.icon">
               <nuxt-link :to="item.to" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas :i="item.icon" /></span>
-                <span>{{ item.name }}</span>
+                <span>{{ $t('NavbarDown.'+item.name) }}</span>
               </nuxt-link>
             </li>
           </ul>
@@ -191,19 +191,19 @@ export default {
       openMenu: false,
       openSearch: false,
       searchItems: [
-        { icon: 'users', name: 'キャラ', to: '/list/character' },
-        { icon: 'tags', name: 'タグ', to: '/list/tag' },
-        { icon: 'paint-brush', name: '絵師', to: '/list/artist' },
-        { icon: 'keyboard', name: 'キーワード', to: '/search_form/keyword' },
-        { icon: 'image', name: '画像', to: '/search/image' },
-        { icon: 'upload', name: '投稿者', to: '/list/uploader' },
-        { icon: 'plus-square', name: '更に', to: '/search/methods' }
+        { icon: 'users', name: 'character', to: '/list/character' },
+        { icon: 'tags', name: 'tag', to: '/list/tag' },
+        { icon: 'paint-brush', name: 'artist', to: '/list/artist' },
+        { icon: 'keyboard', name: 'keyword', to: '/search_form/keyword' },
+        { icon: 'image', name: 'image', to: '/search/image' },
+        { icon: 'upload', name: 'uploader', to: '/list/uploader' },
+        { icon: 'plus-square', name: 'more_tab', to: '/search/methods' }
       ],
       otherItems: [
-        { icon: 'question-circle', name: 'ヘルプ', to: '/help' },
-        { icon: 'sitemap', name: 'リンク集', to: '/links' },
-        { icon: 'users', name: '利用規約', to: '/terms' },
-        { icon: 'pen-fancy', name: 'プライバシーポリシー', to: '/privacy' }
+        { icon: 'question-circle', name: 'help', to: '/help' },
+        { icon: 'sitemap', name: 'links', to: '/links' },
+        { icon: 'users', name: 'terms', to: '/terms' },
+        { icon: 'pen-fancy', name: 'privacy', to: '/privacy' }
       ]
     }
   },

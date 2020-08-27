@@ -3,7 +3,7 @@
     <div class="container is-widescreen">
       <div class="columns is-centered is-vcentered is-multiline">
         <div class="column is-8">
-          <Notification :title="pageTitle" />
+          <Notification :title="$t('SearchScreen.search_methods.'+pageTitle)" />
         </div>
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">
@@ -16,7 +16,7 @@
               />
             </div>
             <div class="column is-4">
-              <input v-model="keyword" class="input is-medium" type="text" placeholder="絞り込みキーワード">
+              <input v-model="keyword" class="input is-medium" type="text" :placeholder="$t('ListScreen.filer_keyword')">
             </div>
           </div>
         </div>
@@ -32,10 +32,10 @@
       <client-only v-if="$store.state.user.useInfinity">
         <infinite-loading @infinite="addNextpage">
           <div slot="no-more">
-            最終ページまで読み込みました
+            {{ $t('ListScreen.no_more_result') }}
           </div>
           <div slot="no-results">
-            最終ページまで読み込みました
+            {{ $t('ListScreen.no_more_result') }}
           </div>
         </infinite-loading>
       </client-only>
@@ -93,14 +93,14 @@ export default {
       results: this.resultsFromProps,
       keyword: this.keywordFromProps,
       sortMethods: [
-        { text: '投稿が新しい順', value: 0 },
-        { text: '投稿が古い順', value: 1 },
-        { text: '作品数が多い順', value: 2 },
-        { text: '作品数が少ない順', value: 3 },
-        { text: '累計いいね数が多い順', value: 4 },
-        { text: '累計いいね数が少ない順', value: 5 },
-        { text: '名前降順 (Z→A)', value: 6 },
-        { text: '名前昇順 (A→Z)', value: 7 }
+        { text: this.$t('ListScreen.sort.latest_art'), value: 0 },
+        { text: this.$t('ListScreen.sort.oldest_art'), value: 1 },
+        { text: this.$t('ListScreen.sort.amount_many'), value: 2 },
+        { text: this.$t('ListScreen.sort.amount_few'), value: 3 },
+        { text: this.$t('ListScreen.sort.most_liked'), value: 4 },
+        { text: this.$t('ListScreen.sort.least_liked'), value: 5 },
+        { text: this.$t('ListScreen.sort.z_to_a'), value: 6 },
+        { text: this.$t('ListScreen.sort.a_to_z'), value: 7 }
       ]
     }
   },

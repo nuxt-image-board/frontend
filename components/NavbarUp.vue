@@ -4,8 +4,15 @@
       <div class="container">
         <div class="navbar-brand">
           <nuxt-link to="/" class="navbar-item has-text-white" style="font-weight:bold;" @click.native="closeAll($event)">
-            ***REMOVED***
+            {{ $t('site_name') }}
+            {{ $store.state.user.locale }}
           </nuxt-link>
+          <button class="navbar-item button is-primary is-large" @click="$store.commit('user/setLocale', 'en')">
+            EN
+          </button>
+          <button class="navbar-item button is-primary is-large" @click="$store.commit('user/setLocale', 'ja')">
+            JA
+          </button>
           <span
             class="navbar-burger burger has-text-white"
             :class="{ 'is-active': openMenu }"
@@ -50,12 +57,12 @@
           <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
             <nuxt-link to="/search/list" class="navbar-item has-text-white" @click.native="closeAll($event)">
               <span class="icon"><Fas i="list" /></span>
-              <span>一覧</span>
+              <span>{{ $t('NavbarUp.bar_items.list') }}</span>
             </nuxt-link>
             <div v-for="(category,index) in searchCategories" :key="category.name" class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(index+1)">
                 <span class="icon"><Fas :i="category.icon" /></span>
-                <span>{{ category.name }}</span>
+                <span>{{ $t('NavbarUp.bar_items.'+category.name) }}</span>
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== index+1}">
                 <nuxt-link
@@ -69,17 +76,17 @@
                 </nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link :to="'/list/'+category.endpoint" class="dropdown-item has-text-white" @click.native="closeAll($event)">
-                  もっと見る
+                  {{ $t('NavbarUp.bar_items.more') }}
                 </nuxt-link>
               </div>
             </div>
             <nuxt-link to="/search/image" class="navbar-item has-text-white" @click.native="closeAll($event)">
               <span class="icon"><Fas i="image" /></span>
-              <span>画像</span>
+              <span>{{ $t('NavbarUp.bar_items.image') }}</span>
             </nuxt-link>
             <nuxt-link to="/search/methods" class="navbar-item has-text-white" @click.native="closeAll($event)">
               <span class="icon"><Fas i="plus-square" /></span>
-              <span>更に</span>
+              <span>{{ $t('NavbarUp.bar_items.more') }}</span>
             </nuxt-link>
           </div>
           <div class="navbar-end">
@@ -90,21 +97,21 @@
               </a>
               <div class="navbar-dropdown is-boxed" :class="{'is-hidden-touch': openTab !== 5}">
                 <nuxt-link
-                  v-for="user in userNavigation"
-                  :key="user.name"
+                  v-for="nav in userNavigation"
+                  :key="nav.name"
                   class="dropdown-item has-text-white pl-3"
-                  :to="user.to"
+                  :to="nav.to"
                   @click.native="closeAll($event)"
                 >
                   <span class="icon">
-                    <Fas :i="user.icon" classes="has-text-white" />
+                    <Fas :i="nav.icon" classes="has-text-white" />
                   </span>
-                  {{ user.title }}
+                  {{ $t('NavbarUp.dropdown_items.'+nav.title) }}
                 </nuxt-link>
                 <hr class="navbar-divider">
                 <nuxt-link class="dropdown-item has-text-white pl-3" to="/logout" @click.native="closeAll($event)">
                   <Fas i="sign-out-alt" classes="has-text-white" />
-                  ログアウト
+                  {{ $t('NavbarUp.dropdown_items.logout') }}
                 </nuxt-link>
               </div>
             </div>
@@ -129,10 +136,10 @@ export default {
       openTab: 0,
       keyword: '',
       searchCategories: [
-        { icon: 'users', name: 'キャラ', endpoint: 'character', items: this.$store.state.characters },
-        { icon: 'tags', name: 'タグ', endpoint: 'tag', items: this.$store.state.tags },
-        { icon: 'paint-brush', name: '絵師', endpoint: 'artist', items: this.$store.state.artists },
-        { icon: 'upload', name: '投稿者', endpoint: 'uploader', items: this.$store.state.uploaders }
+        { icon: 'users', name: 'character', endpoint: 'character', items: this.$store.state.characters },
+        { icon: 'tags', name: 'tag', endpoint: 'tag', items: this.$store.state.tags },
+        { icon: 'paint-brush', name: 'artist', endpoint: 'artist', items: this.$store.state.artists },
+        { icon: 'upload', name: 'uploader', endpoint: 'uploader', items: this.$store.state.uploaders }
       ]
     }
   },

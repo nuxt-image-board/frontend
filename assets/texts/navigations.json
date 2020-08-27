@@ -2,45 +2,45 @@
     "userNav": [
         {
           "to": "/profile",
-          "title": "マイページ",
+          "title": "mypage",
           "icon": "user"
         },
         {
           "to": "/mylist",
-          "title": "マイリスト",
+          "title": "mylist",
           "icon": "bookmark"
         },
         {
           "to": "/wallet",
-          "title": "ウォレット",
+          "title": "wallet",
           "icon": "wallet"
         },
         {
           "to": "/upload/page",
-          "title": "投稿",
+          "title": "upload",
           "icon": "upload"
         },
         {
           "to": "/history/upload",
-          "title": "投稿履歴",
+          "title": "history_upload",
           "icon": "history"
         },
         {
           "to": "/history/search",
           "require_product": 3,
-          "title": "検索履歴",
+          "title": "history_search",
           "icon": "history"
         },
         {
           "to": "/history/illust",
           "require_product": 3,
-          "title": "閲覧履歴",
+          "title": "history_illust",
           "icon": "history"
         },
         {
           "to": "/library",
           "require_product": 30,
-          "title": "図書室",
+          "title": "library",
           "icon": "history"
         }
     ]

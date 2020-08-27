@@ -3,7 +3,7 @@
     <div class="container is-widescreen">
       <div class="columns is-centered is-vcentered is-multiline">
         <div class="column is-8">
-          <Notification :title="pageTitle" />
+          <Notification :title="$t('SearchScreen.search_methods.'+pageTitle)+' '+tabTitle+' ('+resultCount+')'" />
         </div>
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">
@@ -15,8 +15,8 @@
                 @onSelectChanged="updateSelect"
               />
             </div>
-            <div v-if="!pageTitle.includes('キーワード')" class="column is-4">
-              <NotifyRegister :notifyTitle="pageTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
+            <div v-if="!apiEndpoint.includes('keyword')" class="column is-4">
+              <NotifyRegister :notifyTitle="tabTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
             </div>
           </div>
         </div>
@@ -26,14 +26,14 @@
             class="button is-primary is-small"
             @click="toggleMute(true, 2, notifyTargetID)"
           >
-            この絵師をミュートする
+            {{ $t('SearchScreen.mute_artist.not_muted') }}
           </button>
           <button
             v-else
             class="button is-primary is-small"
             @click="toggleMute(false, 2, notifyTargetID)"
           >
-            この絵師のミュートを解除する
+            {{ $t('SearchScreen.mute_artist.muted') }}
           </button>
         </div>
         <div v-if="hasWikiElement && !apiEndpoint.includes('all')" class="column is-12 has-text-centered">
@@ -56,10 +56,10 @@
       <client-only v-if="$store.state.user.useInfinity">
         <infinite-loading @infinite="addNextpage">
           <div slot="no-more">
-            最終ページまで読み込みました
+            {{ $t('SearchScreen.no_more_result') }}
           </div>
           <div slot="no-results">
-            最終ページまで読み込みました
+            {{ $t('SearchScreen.no_more_result') }}
           </div>
         </infinite-loading>
       </client-only>
@@ -91,7 +91,9 @@ export default {
   },
   props: {
     apiEndpoint: { type: String, default: '' },
+    tabTitle: { type: String, default: '' },
     pageTitle: { type: String, default: '' },
+    resultCount: { type: Number, default: 0 },
     pageIdFromProps: { type: Number, default: 1 },
     sortIdFromProps: { type: Number, default: 0 },
     targetId: { type: Number, default: 1 },
@@ -121,10 +123,10 @@ export default {
       results: this.resultsFromProps,
       hasWikiElement: true,
       sortMethods: [
-        { text: '投稿が新しい順', value: 0 },
-        { text: '投稿が古い順', value: 1 },
-        { text: 'いいね数が多い順', value: 4 },
-        { text: 'いいね数が少ない順', value: 5 }
+        { text: this.$t('SearchScreen.sort.latest_art'), value: 0 },
+        { text: this.$t('SearchScreen.sort.oldest_art'), value: 1 },
+        { text: this.$t('SearchScreen.sort.most_liked'), value: 4 },
+        { text: this.$t('SearchScreen.sort.least_liked'), value: 5 }
       ]
     }
   },
