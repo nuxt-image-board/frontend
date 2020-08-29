@@ -5,14 +5,7 @@
         <div class="navbar-brand">
           <nuxt-link to="/" class="navbar-item has-text-white" style="font-weight:bold;" @click.native="closeAll($event)">
             {{ $t('site_name') }}
-            {{ $store.state.user.locale }}
           </nuxt-link>
-          <button class="navbar-item button is-primary is-large" @click="$store.commit('user/setLocale', 'en')">
-            EN
-          </button>
-          <button class="navbar-item button is-primary is-large" @click="$store.commit('user/setLocale', 'ja')">
-            JA
-          </button>
           <span
             class="navbar-burger burger has-text-white"
             :class="{ 'is-active': openMenu }"
@@ -40,7 +33,7 @@
             <div class="navbar-item">
               <div class="field has-addons">
                 <div class="control">
-                  <input v-model="keyword" class="input is-rounded" type="text" placeholder="Find an another god-art">
+                  <input v-model="keyword" class="input is-rounded" type="text" placeholder="Find an another cute art">
                 </div>
                 <div class="control">
                   <nuxt-link

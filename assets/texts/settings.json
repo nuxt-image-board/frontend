@@ -73,6 +73,24 @@
             "description": "有効にすると、検索結果がツイッターのようにスクロールで次々出るようになります。次々出てくる分データ転送量を少し速く消費します。(つまりギガを食います)参考までに、検索結果のサムネイルは1枚辺りおよそ0.02MB(約100枚弱で1MB)です。"
         },
         {
+            "key": "locale",
+            "mobile_only": false,
+            "flag": false,
+            "class": "is-info",
+            "title": "Language",
+            "description": "This setting can change locale in this site. This feature is not completed, so not all will be translated. サイト内で使用する言語を変更します。翻訳が未完成なため、全く翻訳されないページも存在します。",
+            "items": [
+                {
+                    "text": "Japanese",
+                    "value": "ja"
+                },
+                {
+                    "text": "English",
+                    "value": "en"
+                }
+            ]
+        },
+        {
             "key": "useRaw",
             "mobile_only": false,
             "flag": false,
