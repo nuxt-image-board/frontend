@@ -1,74 +1,71 @@
 <template>
   <nav class="panel">
     <p class="panel-heading has-text-dark has-background-syaro">
-      アカウント設定
+      {{ $t('accountSettings.title') }}
     </p>
     <a class="panel-block" @click="modalType = 2">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      LINE連携
+      {{ $t('accountSettings.line_connect.title') }}
     </a>
-    <Modal title="LINE連携" :isModalOpen="modalType === 2" @modal-closed="modalType = 0">
+    <Modal :title="$t('accountSettings.line_connect.title')" :isModalOpen="modalType === 2" @modal-closed="modalType = 0">
       <h2 class="has-text-centered">
-        連携状態: {{ IS_LINE_CONNECTED }}
+        {{ $t('accountSettings.line_connect.title') }} {{ IS_LINE_CONNECTED }}
       </h2>
       <p class="subtitle has-text-centered" style="word-break:break-all">
         <a :href="LINE_CONNECT_URL">
-          <button class="button">連携する</button>
+          <button class="button">{{ $t('accountSettings.line_connect.button') }}</button>
         </a>
       </p>
       <p>
-        LINEと既存アカウントを連携することで***REMOVED***のユーザー名/パスワードなしにログインできるようになります。
-        アカウントを変えた場合は上記ボタンから再連携することができます。LINE連携では、公式に提供しているLINEログインを使用します。
-        このログインでは、識別ID(事業者別ユーザーID)の取得を行います。メッセージを勝手に送信することはありません。
-        ***REMOVED***の連携に関する技術的詳細は OpenID Connectの説明 を一読ください。
+        {{ $t('accountSettings.line_connect.sentence') }}
       </p>
     </Modal>
     <a class="panel-block" @click="modalType = 3">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      パスワード変更
+      {{ $t('accountSettings.change_password.title') }}
     </a>
-    <Modal title="パスワード変更" :isModalOpen="modalType === 3" @modal-closed="modalType = 0">
+    <Modal :title="$t('accountSettings.change_password.title')" :isModalOpen="modalType === 3" @modal-closed="modalType = 0">
       <form id="changePW" @submit.prevent="changePassword">
         <input id="userName" class="is-hidden" name="username" autocomplete="username" value="">
         <p class="has-text-centered">
-          現在のパスワード
+          {{ $t('accountSettings.change_password.form.current_password') }}
           <input
             v-model="passwordForm.old"
             minlength="5"
             maxlength="50"
             class="input"
             type="password"
-            placeholder="5文字以上50文字以下の英数字"
+            :placeholder="$t('accountSettings.change_password.form.password_rule')"
             autocomplete="current-password"
             required
           >
         </p>
         <p class="has-text-centered">
-          新しいパスワード
+          {{ $t('accountSettings.change_password.form.new_password') }}
           <input
             v-model="passwordForm.new"
             minlength="5"
             maxlength="50"
             class="input"
             type="password"
-            placeholder="5文字以上50文字以下の英数字"
+            :placeholder="$t('accountSettings.change_password.form.password_rule')"
             autocomplete="new-password"
             required
           >
         </p>
         <p class="has-text-centered">
-          新しいパスワード(再入力)
+          {{ $t('accountSettings.change_password.form.new_password_re') }}
           <input
             v-model="passwordForm.re"
             minlength="5"
             maxlength="50"
             class="input"
             type="password"
-            placeholder="5文字以上50文字以下の英数字"
+            :placeholder="$t('accountSettings.change_password.form.password_rule')"
             autocomplete="new-password"
             required
           >
@@ -79,7 +76,7 @@
             type="submit"
             :disabled="passwordForm.new !== passwordForm.re || passwordForm.new == ''"
           >
-            変更
+            {{ $t('accountSettings.change_password.form.change') }}
           </button>
         </p>
       </form>
@@ -88,29 +85,29 @@
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      APIキー確認
+      {{ $t('accountSettings.api_key.title') }}
     </a>
     <Modal title="***REMOVED***API" :isModalOpen="modalType === 4" @modal-closed="modalType = 0">
       <h2 class="has-text-centered">
-        APIキー
+        {{ $t('accountSettings.api_key.title') }}
       </h2>
       <p class="has-text-centered" style="word-break:break-all">
         {{ $auth.$state.user.apiKey }}
       </p>
       <div class="has-text-centered">
         <a class="button is-warning" disabled>
-          再発行 (要再ログイン)
+          {{ $t('accountSettings.api_key.reissue') }}
         </a>
       </div>
       <br>
-      <p>本サイトのAPIとはサイトを表示せずにサイト内のデータのみを直接提供するサービスのことです。Bot開発やデータ収集などが好きな開発者の方はどうぞご自由にご利用ください。</p>
-      <p>現在ドキュメントは存在しないので、使用方法は通信を眺めてお察しください。</p>
+      <p>{{ $t('accountSettings.api_key.sentence1') }}</p>
+      <p>{{ $t('accountSettings.api_key.sentence2') }}</p>
     </Modal>
     <nuxt-link class="panel-block" to="/logout">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      ログアウト
+      {{ $t('accountSettings.logout') }}
     </nuxt-link>
   </nav>
 </template>
