@@ -1,7 +1,7 @@
 <template>
   <nav class="panel">
     <p class="panel-heading has-text-dark has-background-chiya">
-      サイト設定
+      {{ $t('siteSettings.title') }}
     </p>
     <table class="table is-fullwidth centered-table">
       <tbody>
@@ -10,7 +10,7 @@
           v-show="(setting.mobile_only && !$store.state.user.isPC ) || !setting.mobile_only"
           :key="setting.key"
           :storeKey="setting.key"
-          :title="setting.title"
+          :title="$t('siteSettings.'+setting.key+'.title')"
           :items="setting.items"
           :isDisabled="setting.require_product ? (
             !$store.state.user.obtainedProducts.includes(setting.require_product) ? true : false) : false"
@@ -23,11 +23,11 @@
     <Modal
       v-for="setting in settings"
       :key="setting.key"
-      :title="setting.title"
+      :title="$t('siteSettings.'+setting.key+'.title')"
       :isModalOpen="setting.flag"
       @modal-closed="hideModal"
     >
-      {{ setting.description }}
+      {{ $t('siteSettings.'+setting.key+'.description') }}
     </Modal>
   </nav>
 </template>

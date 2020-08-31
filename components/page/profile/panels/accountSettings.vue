@@ -76,7 +76,7 @@
             type="submit"
             :disabled="passwordForm.new !== passwordForm.re || passwordForm.new == ''"
           >
-            {{ $t('accountSettings.change_password.form.change') }}
+            {{ $t('accountSettings.change_password.form.button') }}
           </button>
         </p>
       </form>
@@ -87,7 +87,7 @@
       </span>
       {{ $t('accountSettings.api_key.title') }}
     </a>
-    <Modal title="***REMOVED***API" :isModalOpen="modalType === 4" @modal-closed="modalType = 0">
+    <Modal :title="$t('accountSettings.api_key.title')" :isModalOpen="modalType === 4" @modal-closed="modalType = 0">
       <h2 class="has-text-centered">
         {{ $t('accountSettings.api_key.title') }}
       </h2>
@@ -132,7 +132,7 @@ export default {
   },
   computed: {
     IS_LINE_CONNECTED () {
-      return this.$auth.$state.user.lineConnect ? '連携済み' : '未連携'
+      return this.$auth.$state.user.lineConnect ? this.$t('accountSettings.line_connect.status.connected') : this.$t('accountSettings.line_connect.status.not_connected')
     }
   },
   created () {
@@ -161,7 +161,8 @@ export default {
             group: 'default',
             type: 'success',
             duration: 5000,
-            title: 'パスワードを変更しました'
+            title: this.$t('accountSettings.change_password.notify.title'),
+            text: this.$t('accountSettings.change_password.notify.text.changed')
           }
         )
         this.modalType = 0
@@ -171,7 +172,8 @@ export default {
             group: 'default',
             type: 'danger',
             duration: 5000,
-            title: '現在のパスワードが間違っています'
+            title: this.$t('accountSettings.change_password.notify.title'),
+            text: this.$t('accountSettings.change_password.notify.text.wrong')
           }
         )
       } else {
@@ -180,7 +182,8 @@ export default {
             group: 'default',
             type: 'danger',
             duration: 5000,
-            title: '変更できませんでした'
+            title: this.$t('accountSettings.change_password.notify.title'),
+            text: this.$t('accountSettings.change_password.notify.text.failed')
           }
         )
       }

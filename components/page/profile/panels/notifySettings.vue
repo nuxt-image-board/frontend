@@ -1,91 +1,72 @@
 <template>
   <nav class="panel">
     <p class="panel-heading has-text-dark has-background-rize">
-      通知設定
+      {{ $t('notifySettings.title') }}
     </p>
     <a class="panel-block" @click="modalType = 5">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      通知機能とは
+      {{ $t('notifySettings.about.title') }}
     </a>
-    <Modal title="通知機能について" :isModalOpen="modalType === 5" @modal-closed="modalType = 0">
-      <p>新着イラストが投稿された際にお知らせする機能です。</p>
-      <p>リアルタイムで通知されるので、量によっては目障りとなる可能性もあります。</p>
-      <p>現在ブラウザ通知とLINE通知のみ設定可能です。</p>
+    <Modal :title="$t('notifySettings.about.title')" :isModalOpen="modalType === 5" @modal-closed="modalType = 0">
+      <p>{{ $t('notifySettings.about.sentence') }}</p>
     </Modal>
     <a class="panel-block" @click="modalType = 7">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      ブラウザ通知設定
+      {{ $t('notifySettings.browser.title') }}
     </a>
-    <Modal title="ブラウザ通知設定" :isModalOpen="modalType === 7" @modal-closed="modalType = 0">
+    <Modal :title="$t('notifySettings.browser.title')" :isModalOpen="modalType === 7" @modal-closed="modalType = 0">
       <h2 class="has-text-centered">
-        通知状態: {{ IS_BROWSER_NOTIFY_ENABLED }}
+        {{ $t('notifySettings.connect_status.title') }} {{ IS_BROWSER_NOTIFY_ENABLED }}
       </h2>
       <p class="subtitle has-text-centered" style="word-break:break-all">
         <button class="button is-primary is-large" @click="popUpOneSignal()">
-          設定する
+          {{ $t('notifySettings.connect_status.button.setup') }}
         </button>
         <br>
         <br>
         <button class="button is-warning is-small" @click="resetOneSignal()">
-          初期化する
+          {{ $t('notifySettings.connect_status.button.reset') }}
         </button>
       </p>
-      <p>
-        設定すると、今使っているブラウザまたはアプリに通知ができるようになります。
-        「設定する」を押すと 通知してもいいかの確認画面が出るので、許可を押してください。
-        「設定する」ボタンを押してもなんの反応もない場合は、お手数ですがリロードをお願いします。
-        この通知は使うスマホ、パソコン、タブレット毎に設定が要ります。合計5台まで設定可能です。
-        5台を超えて設定する場合は一度初期化してから、改めて各デバイスで設定してください。
-        この機能は Appleのせいで、iOS(iPhone/iPad等)で使うことができません。
-      </p>
+      <p>{{ $t('notifySettings.browser.sentence') }}</p>
     </Modal>
     <a class="panel-block" @click="modalType = 8">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      LINE通知設定
+      {{ $t('notifySettings.line.title') }}
     </a>
-    <Modal title="LINE通知設定" :isModalOpen="modalType === 8" @modal-closed="modalType = 0">
+    <Modal :title="$t('notifySettings.line.title')" :isModalOpen="modalType === 8" @modal-closed="modalType = 0">
       <h2 class="has-text-centered">
-        通知状態: {{ IS_LINE_NOTIFY_CONNECTED }}
+        {{ $t('notifySettings.connect_status.title') }} {{ IS_LINE_NOTIFY_CONNECTED }}
       </h2>
       <p class="subtitle has-text-centered" style="word-break:break-all">
         <a :href="NOTIFY_CONNECT_URL" target="_blank" rel="noopener noreferrer" class="button is-primary is-large">
-          設定する
+          {{ $t('notifySettings.connect_status.button.setup') }}
         </a>
       </p>
-      <p>
-        設定すると、LINEに通知が送れるようになります。
-        通知には、LINE Notifyが使用されます。<b>***REMOVED***Botではありません。</b>
-        好きなグループで利用できますが、サイトの閲覧にはアカウントが必要なため
-        <b>1:1でLINE Notifyから通知を受け取る</b>を選ぶことをおすすめします。
-        アカウントを変えた場合は上記ボタンから再連携することができます。
-      </p>
+      <p>{{ $t('notifySettings.line.sentence') }}</p>
     </Modal>
     <a class="panel-block" @click="modalType = 9">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
       </span>
-      Twitter通知設定(未実装)
+      {{ $t('notifySettings.twitter.title') }}
     </a>
-    <Modal title="Twitter通知設定" :isModalOpen="modalType === 9" @modal-closed="modalType = 0">
+    <Modal :title="$t('notifySettings.twitter.title')" :isModalOpen="modalType === 9" @modal-closed="modalType = 0">
       <h2 class="has-text-centered">
-        通知状態: {{ IS_TWITTER_CONNECTED }}
+        {{ $t('notifySettings.connect_status.title') }} {{ IS_TWITTER_CONNECTED }}
       </h2>
       <p class="subtitle has-text-centered" style="word-break:break-all">
         <a :href="TWITTER_CONNECT_URL" target="_blank" rel="noopener noreferrer" class="button is-primary is-large" disabled="true">
-          設定する
+          {{ $t('notifySettings.connect_status.button.setup') }}
         </a>
       </p>
-      <p>
-        設定すると、Twitterに通知が送れるようになります。
-        通知には、***REMOVED***BotによるDMが使用されます。
-        アカウントを変えた場合は上記ボタンから再連携することができます。
-      </p>
+      <p>{{ $t('notifySettings.twitter.sentence') }}</p>
     </Modal>
   </nav>
 </template>
@@ -106,14 +87,14 @@ export default {
   },
   computed: {
     IS_LINE_NOTIFY_CONNECTED () {
-      return this.$auth.$state.user.lineNotify ? '設定済み' : '未設定'
+      return this.$auth.$state.user.lineNotify ? this.$t('notifySettings.connect_status.connected') : this.$t('notifySettings.connect_status.not_connected')
     },
     IS_TWITTER_CONNECTED () {
-      return '未設定'
+      return this.$t('notifySettings.connect_status.not_connected')
     },
     IS_BROWSER_NOTIFY_ENABLED () {
       if (this.$auth.$state.user.oneSignalNotify == null) {
-        return '未設定'
+        return this.$t('notifySettings.connect_status.not_connected')
       }
       const count = this.$auth.$state.user.oneSignalNotify.split(',').length
       return `${count}台設定済み`

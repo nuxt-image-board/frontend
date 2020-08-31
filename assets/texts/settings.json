@@ -4,81 +4,61 @@
             "key": "acceptR18",
             "mobile_only": false,
             "flag": false,
-            "class": "is-danger",
-            "title": "R18表示",
-            "description": "有効にすると、18禁イラストがモザイク無しに表示されるようになります。あなたが18歳以上、かつ性的コンテンツを不快に思わない場合のみ有効にしてください。"
+            "class": "is-danger"
         },
         {
             "key": "isPC",
             "mobile_only": false,
             "flag": false,
-            "class": "is-info",
-            "title": "PC版メニュー",
-            "description": "有効にすると、PC用のメニューが表示されるようになります。スマホで有効にしても使用できないことはないですが、PCを使っている場合にのみ有効にすることをおすすめします。"
+            "class": "is-info"
         },
         {
             "key": "isLeftHanded",
             "mobile_only": true,
             "flag": false,
-            "class": "is-info",
-            "title": "左利きメニュー",
-            "description": "有効にすると、メニューの位置が左になり、スワイプメニューが左から出るようになります。メニューが左にないと違和感があるという方はご利用ください。"
+            "class": "is-info"
         },
         {
             "key": "useSwipe",
             "mobile_only": true,
             "flag": false,
-            "class": "is-info",
-            "title": "スワイプメニュー",
-            "description": "有効にすると、スワイプした際に横からメニューが出てくるようになります。邪魔な場合は無効にしてください。"
+            "class": "is-info"
         },
         {
             "key": "useBottom",
             "mobile_only": true,
             "flag": false,
-            "class": "is-info",
-            "title": "下部メニュー",
-            "description": "有効にすると、下部に常時メニューを表示します。邪魔な場合は無効にしてください。"
+            "class": "is-info"
         },
         {
             "key": "useBack",
             "mobile_only": true,
             "flag": false,
-            "class": "is-info",
-            "title": "戻るボタン",
-            "description": "有効にすると、戻るボタンが左下に表示されるようになります。iOSをご利用の方は有効にしてください。"
+            "class": "is-info"
         },
         {
             "key": "useJump",
             "mobile_only": false,
             "flag": false,
-            "class": "is-info",
-            "title": "ジャンプボタン",
-            "description": "有効にすると、ページ上部に戻るためのジャンプボタンが右下に出るようになります。"
+            "class": "is-info"
         },
         {
             "key": "useWebP",
             "mobile_only": false,
             "flag": false,
-            "class": "is-info",
-            "title": "WebP使用",
-            "description": "有効にすると、次世代画像形式で画像が表示されるようになります。Appleは次世代画像形式のことがキライみたいで、いつも未対応で、開発者の頭イタイイタイなのだった。ワイ「トホホ……Appleくんかっこいいのにブラウザはイタイイタイなんだから……」(iOSやMacで有効にすると画像が真っ白になります Android/Windowsでのみ有効にしてください。)"
+            "class": "is-info"
         },
         {
             "key": "useInfinity",
             "mobile_only": false,
             "flag": false,
-            "class": "is-info",
-            "title": "無限スクロール",
-            "description": "有効にすると、検索結果がツイッターのようにスクロールで次々出るようになります。次々出てくる分データ転送量を少し速く消費します。(つまりギガを食います)参考までに、検索結果のサムネイルは1枚辺りおよそ0.02MB(約100枚弱で1MB)です。"
+            "class": "is-info"
         },
         {
             "key": "locale",
             "mobile_only": false,
             "flag": false,
             "class": "is-info",
-            "title": "Language",
-            "description": "This setting can change locale in this site. This feature is not completed, so not all will be translated. サイト内で使用する言語を変更します。翻訳が未完成なため、全く翻訳されないページも存在します。",
             "items": [
                 {
                     "text": "Japanese",
@@ -95,27 +75,21 @@
             "mobile_only": false,
             "flag": false,
             "require_product": 4,
-            "class": "is-info",
-            "title": "RAW画質",
-            "description": "有効にすると、常に最高画質のイラストが表示されます。データ転送量がものすごく増え、読み込みに時間がかかるようになります。利用にはショップでの購入が必要です。"
+            "class": "is-info"
         },
         {
             "key": "useSakura",
             "mobile_only": false,
             "flag": false,
             "require_product": 5,
-            "class": "is-info",
-            "title": "花びら背景",
-            "description": "有効にすると、背景に某公式サイトのような花びらが出るようになります。若干重いのでスペックに不安がある場合は有効にしないでください。(アプリもどきから起動している場合はリロードするまで出てきません) 利用にはショップでの購入が必要です。"
+            "class": "is-info"
         },
         {
             "key": "useViewer",
             "mobile_only": false,
             "flag": false,
             "require_product": 15,
-            "class": "is-info",
-            "title": "画像ビューア",
-            "description": "有効にすると、イラストページで原寸表示時、回転・反転・拡大ができるようになります。利用にはショップでの購入が必要です。"
+            "class": "is-info"
         },
         {
             "key": "colSize",
@@ -123,8 +97,6 @@
             "flag": false,
             "require_product": 16,
             "class": "is-info",
-            "title": "表示列数",
-            "description": "検索結果に表示する列数を変更します。利用にはショップでの購入が必要です。",
             "items": [
                 {
                     "text": "2列",
@@ -149,9 +121,7 @@
             "mobile_only": false,
             "flag": false,
             "require_product": 17,
-            "class": "is-info",
-            "title": "UsagiPlayer",
-            "description": "有効にすると、サイト内で音楽プレイヤーが使用できるようになります。利用にはショップでの購入が必要です。"
+            "class": "is-info"
         }
     ]
 }

@@ -1,23 +1,23 @@
 <template>
   <nav class="panel">
     <p class="panel-heading has-text-dark has-background-chino">
-      ストレージ情報
+      {{ $t('storageInfo.title') }}
     </p>
     <p class="panel-block">
-      ストレージ使用割合: {{ usage_percent }}%
+      {{ $t('storageInfo.usage_percent') }} {{ usage_percent }}%
     </p>
     <p class="panel-block">
-      ストレージ使用量(概算値): {{ formatBytes(usage) }}
+      {{ $t('storageInfo.usage_bytes') }} {{ formatBytes(usage) }}
     </p>
     <p class="panel-block">
-      利用可能容量(概算値): {{ formatBytes(quota) }}
+      {{ $t('storageInfo.useable_bytes') }} {{ formatBytes(quota) }}
     </p>
     <p class="panel-block">
       <button
         class="button is-danger is-outlined is-fullwidth"
         @click="deleteCache"
       >
-        一時データ削除
+        {{ $t('storageInfo.delete_button') }}
       </button>
     </p>
   </nav>
