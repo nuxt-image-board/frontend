@@ -26,11 +26,11 @@ export default {
   data () {
     return {
       bottom_buttons: [
-        { to: '/search/list', icon: 'home', title: 'ﾎｰﾑ' },
-        { to: '/search/methods', icon: 'search', title: '検索' },
-        { to: '/upload', icon: 'upload', title: '投稿' },
-        { to: '/mylist', icon: 'bookmark', title: 'ﾏｲﾘｽﾄ' },
-        { to: '/profile', icon: 'user', title: '設定' }
+        { to: '/search/list', icon: 'home', title: this.$t('NavbarSmartDown.home') },
+        { to: '/search/methods', icon: 'search', title: this.$t('NavbarSmartDown.search') },
+        { to: '/upload', icon: 'upload', title: this.$t('NavbarSmartDown.upload') },
+        { to: '/mylist', icon: 'bookmark', title: this.$t('NavbarSmartDown.mylist') },
+        { to: '/profile', icon: 'user', title: this.$t('NavbarSmartDown.settings') }
       ]
     }
   }

@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container">
       <h4 class="title has-text-centered">
-        検索方法
+        {{ $t('methods.title') }}
       </h4>
       <div class="columns is-mobile is-multiline">
         <div
@@ -11,12 +11,12 @@
           class="column is-6"
         >
           <nuxt-link class="button is-fullwidth is-medium is-primary" :to="p.to">
-            <Fas :i="p.icon" />&nbsp;{{ p.title }}
+            <Fas :i="p.icon" />&nbsp;{{ $t('methods.methods.'+p.title) }}
           </nuxt-link>
         </div>
       </div>
       <h4 class="subtitle has-text-centered">
-        検索履歴
+        {{ $t('methods.history') }}
       </h4>
       <div class="columns is-mobile is-multiline">
         <div
@@ -49,37 +49,37 @@ export default {
         {
           to: '/search/keyword?query=',
           icon: 'keyboard',
-          title: 'ワード'
+          title: 'keyword'
         },
         {
           to: '/list/character',
           icon: 'users',
-          title: 'キャラ'
+          title: 'character'
         },
         {
           to: '/list/tag',
           icon: 'tags',
-          title: 'タグ'
+          title: 'tag'
         },
         {
           to: '/list/artist',
           icon: 'paint-brush',
-          title: '絵師'
+          title: 'artist'
         },
         {
           to: '/list/uploader',
           icon: 'user',
-          title: '投稿者'
+          title: 'uploader'
         },
         {
           to: '/search/image',
           icon: 'image',
-          title: '画像'
+          title: 'image'
         },
         {
           to: '/search_form/multiple/tag',
           icon: 'tags',
-          title: '複合タグ'
+          title: 'multiple_tag'
         }
       ]
     }
