@@ -17,7 +17,7 @@
           <div class="container has-text-centered is-vcentered">
             <form class="box" method="post" @submit="register">
               <h3 class="title has-text-centered">
-                新規登録
+                {{ $t('gate.text.register') }}
               </h3>
               <h3 class="subtitle has-text-centered">
                 {{ welcomeMsg }}
@@ -28,8 +28,8 @@
                     v-model="form.username"
                     name="display_id"
                     type="text"
-                    aria-label="表示名(日本語可)"
-                    placeholder="表示名(日本語可)"
+                    :aria-label="$t('gate.register_form.user_name')"
+                    :placeholder="$t('gate.register_form.user_name')"
                     maxlength="20"
                     class="input"
                     autocomplete="nickname"
@@ -44,10 +44,10 @@
                 <div class="control has-icons-left">
                   <input
                     v-model="form.displayID"
-                    aria-label="ログインID(英数字)"
                     name="user_id"
                     type="text"
-                    placeholder="ログインID(英数字)"
+                    :aria-label="$t('gate.register_form.user_id')"
+                    :placeholder="$t('gate.register_form.user_id')"
                     pattern="[a-zA-Z0-9]+"
                     maxlength="20"
                     class="input"
@@ -65,8 +65,8 @@
                     v-model="form.password"
                     name="user_passwd"
                     type="password"
-                    aria-label="パスワード(英数字)"
-                    placeholder="パスワード(英数字)"
+                    :aria-label="$t('gate.register_form.password')"
+                    :placeholder="$t('gate.register_form.password')"
                     pattern="[a-zA-Z0-9]+"
                     maxlength="20"
                     class="input"
@@ -84,7 +84,8 @@
                     v-model="form.password_re"
                     name="user_passwd_re"
                     type="password"
-                    placeholder="パスワード(再入力)"
+                    :aria-label="$t('gate.register_form.password_re')"
+                    :placeholder="$t('gate.register_form.password_re')"
                     pattern="[a-zA-Z0-9]+"
                     maxlength="20"
                     class="input"
@@ -102,7 +103,8 @@
                     v-model="form.inviteCode"
                     name="inv_code"
                     type="text"
-                    placeholder="招待コード"
+                    :aria-label="$t('gate.register_form.invite_code')"
+                    :placeholder="$t('gate.register_form.invite_code')"
                     pattern="[a-zA-Z0-9]+"
                     maxlength="10"
                     class="input"
@@ -118,22 +120,22 @@
                 <div class="control has-text-centered">
                   <label class="checkbox">
                     <input v-model="form.agreeTerms" type="checkbox">
-                    <nuxt-link to="terms">利用規約</nuxt-link> に同意する
+                    <nuxt-link to="terms">{{ $t('gate.register_form.agree_tos') }}</nuxt-link>
                   </label>
                 </div>
               </div>
               <div class="field">
                 <button :disabled="!filled" class="button is-block is-info is-medium is-fullwidth">
-                  登録 <Fas i="sign-in-alt" />
+                  {{ $t('gate.button.register') }} <Fas i="sign-in-alt" />
                 </button>
               </div>
             </form>
             <p class="has-text-grey">
               <nuxt-link to="/login">
-                ログインはこちら
+                {{ $t('gate.mini_button.login') }}
               </nuxt-link> &nbsp;·&nbsp;
               <a :href="CONTACT" target="_blank" rel="noopener noreferrer">
-                問い合わせはこちら
+                {{ $t('gate.mini_button.contact_us') }}
               </a>
             </p>
           </div>

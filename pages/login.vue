@@ -17,14 +17,14 @@
           <div class="container has-text-centered is-vcentered">
             <form class="box" method="post" @submit="login">
               <h3 class="title has-text-centered">
-                ログイン
+                {{ $t('gate.text.login') }}
               </h3>
               <h3 class="subtitle has-text-centered">
                 {{ welcomeMsg }}
               </h3>
               <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                  <label for="login_id" class="label">ユーザーID:</label>
+                  <label for="login_id" class="label">{{ $t('gate.login_form.user_id') }}</label>
                 </div>
                 <div class="field-body">
                   <div class="field">
@@ -49,7 +49,7 @@
               </div>
               <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                  <label for="login_key" class="label">パスワード:</label>
+                  <label for="login_key" class="label">{{ $t('gate.login_form.password') }}</label>
                 </div>
                 <div class="field-body">
                   <div class="field">
@@ -76,12 +76,12 @@
                 <div class="columns">
                   <div class="column is-6">
                     <button class="button is-block is-link is-medium is-fullwidth">
-                      ログイン <Fas i="sign-in-alt" />
+                      {{ $t('gate.button.login') }} <Fas i="sign-in-alt" />
                     </button>
                   </div>
                   <div class="column is-6">
                     <a :href="LINE_LOGIN_URL" target="_blank" rel="noopener noreferrer" class="button is-block has-text-white is-medium is-fullwidth" style="background-color: #1a8607;">
-                      LINEでログイン <Fas i="sign-in-alt" />
+                      {{ $t('gate.button.login_with_line') }} <Fas i="sign-in-alt" />
                     </a>
                   </div>
                 </div>
@@ -89,10 +89,10 @@
             </form>
             <p class="has-text-grey">
               <nuxt-link to="/register">
-                新規登録はこちら
+                {{ $t('gate.mini_button.register') }}
               </nuxt-link> &nbsp;·&nbsp;
               <a :href="CONTACT" target="_blank" rel="noopener noreferer nofollow">
-                ログイン出来ない場合
+                {{ $t('gate.mini_button.contact_us') }}
               </a>
             </p>
           </div>
@@ -170,8 +170,8 @@ export default {
             group: 'default',
             type: 'warning',
             duration: 2000,
-            title: 'ログイン',
-            text: '認証中'
+            title: this.$t('gate.notify.login_steps.title'),
+            text: this.$t('gate.notify.login_steps.authorizating')
           }
         )
         await this.$auth.loginWith('local', { data: this.form })
@@ -183,8 +183,8 @@ export default {
             group: 'default',
             type: 'danger',
             duration: 2000,
-            title: 'ログイン',
-            text: '認証失敗'
+            title: this.$t('gate.notify.login_steps.title'),
+            text: this.$t('gate.notify.login_steps.authorize_failed')
           }
         )
         this.notificationDeleted = false

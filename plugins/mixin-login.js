@@ -39,8 +39,8 @@ Vue.mixin({
           group: 'default',
           type: 'warning',
           duration: 2000,
-          title: 'ログイン',
-          text: 'ショップ読込中'
+          title: this.$t('gate.notify.login_steps.title'),
+          text: this.$t('gate.notify.login_steps.loading_shop')
         }
       )
       const assets = await this.$axios.get('/toymoney/users/assets')
@@ -53,8 +53,8 @@ Vue.mixin({
           group: 'default',
           type: 'warning',
           duration: 2000,
-          title: 'ログイン',
-          text: 'マイリスト読込中'
+          title: this.$t('gate.notify.login_steps.title'),
+          text: this.$t('gate.notify.login_steps.loading_mylist')
         }
       )
       const mylistCount = await this.$axios.get(`/mylist/${this.$auth.user.mylist.id}`)
@@ -72,8 +72,8 @@ Vue.mixin({
             group: 'default',
             type: 'warning',
             duration: 2000,
-            title: 'ログイン',
-            text: 'ミュート読込中'
+            title: this.$t('gate.notify.login_steps.title'),
+            text: this.$t('gate.notify.login_steps.loading_mute')
           }
         )
         const muteData = await this.$axios.get('mute/list')
@@ -86,8 +86,8 @@ Vue.mixin({
             group: 'default',
             type: 'success',
             duration: 2000,
-            title: 'ログイン',
-            text: '準備完了'
+            title: this.$t('gate.notify.login_steps.title'),
+            text: this.$t('gate.notify.login_steps.load_complete')
           }
         )
       }

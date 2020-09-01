@@ -32,10 +32,10 @@
       <client-only v-if="$store.state.user.useInfinity">
         <infinite-loading @infinite="addNextpage">
           <div slot="no-more">
-            最終ページまで読み込みました
+            {{ $t('SearchScreen.no_more_result') }}
           </div>
           <div slot="no-results">
-            最終ページまで読み込みました
+            {{ $t('SearchScreen.no_more_result') }}
           </div>
         </infinite-loading>
       </client-only>

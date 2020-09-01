@@ -10,15 +10,15 @@
                 <span>PYON Wallet</span>
               </p>
               <p class="title has-text-centered">
-                所持: {{ money }} PYON
+                {{ $t('wallet.having') }} {{ money }} PYON
               </p>
             </article>
             <article class="tile is-child notification has-background-cocoa">
               <p class="title">
-                ボーナス
+                {{ $t('wallet.bonus.title') }}
               </p>
               <p class="subtitle">
-                もっと稼ぎたい? ならボーナスガチャを回しましょう!
+                {{ $t('wallet.bonus.description') }}
               </p>
               <div v-for="b in bonus" :key="b.id" class="columns is-centered is-vcentered">
                 <div class="column is-9">
@@ -29,12 +29,12 @@
                     {{ b.description }}
                   </p>
                   <p v-if="!b.receivable" class="is-size-6 has-text-weight-bold">
-                    {{ '次回受取可能日:' + b.next_receivable.slice(0, 10) }}
+                    {{ $t('wallet.bonus.next_receivable') + b.next_receivable.slice(0, 10) }}
                   </p>
                 </div>
                 <div class="column is-3">
                   <button class="button is-info is-fullwidth" :disabled="!b.receivable" @click="claimAirdrop(b.id)">
-                    {{ b.receivable ? '受け取る' : '受け取り済み' }}
+                    {{ b.receivable ? $t('wallet.bonus.receive') : $t('wallet.bonus.received') }}
                   </button>
                 </div>
               </div>
@@ -44,7 +44,7 @@
         <div class="tile is-parent is-vertical">
           <article class="tile is-child notification has-background-cocoa">
             <p class="title">
-              取引履歴
+              {{ $t('wallet.transaction_history.title') }}
             </p>
             <div v-for="t in transaction" :key="t.id" class="columns is-vcentered is-centered">
               <div class="column is-half has-text-centered">
@@ -67,7 +67,7 @@
             <div class="columns is-vcentered is-centered" style="height:100%">
               <div class="column is-6">
                 <Fas i="shopping-cart" classes="has-text-white" />
-                <span> ショップへ</span>
+                <span> {{ $t('wallet.go_to_shop') }}</span>
               </div>
             </div>
           </nuxt-link>

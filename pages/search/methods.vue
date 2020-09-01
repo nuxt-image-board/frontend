@@ -83,6 +83,11 @@ export default {
         }
       ]
     }
+  },
+  head () {
+    return {
+      title: '検索方法'
+    }
   }
 }
 </script>

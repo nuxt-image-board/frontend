@@ -2,20 +2,17 @@
   <section class="section">
     <div class="container is-widescreen">
       <h1 class="title has-text-centered">
-        ショップ
+        {{ $t('shop.title') }}
       </h1>
       <div class="columns is-centered">
         <div class="column is-6 is-centered has-text-centered">
           <p>
-            イラストを登録することにより、PYONと呼ばれる特別なボーナスポイントを獲得できます。
-            これは、このサイトの情報量を高め、より検索エンジンとしてふさわしい状態を保つのに協力した方々への報酬であり、
-            PYONを交換することで閲覧をより快適にすることができます。
-            PYONはイラスト投稿の他に デイリーボーナスで入手することもできます。
+            {{ $t('shop.description') }}
           </p>
         </div>
       </div>
       <h4 class="subtitle has-text-centered">
-        あなたは現在 {{ money }} PYON を所持しています。
+        {{ $t('shop.currently_have', [money]) }}
       </h4>
       <div class="columns is-centered">
         <div class="column is-8">
@@ -23,12 +20,12 @@
             <table class="table is-fullwidth is-striped">
               <thead>
                 <tr>
-                  <th>商品</th>
+                  <th>{{ $t('shop.table_head.product') }}</th>
                   <th style="min-width:200px;">
-                    説明
+                    {{ $t('shop.table_head.description') }}
                   </th>
-                  <th>価格</th>
-                  <th>取引</th>
+                  <th>{{ $t('shop.table_head.price') }}</th>
+                  <th>{{ $t('shop.table_head.transaction') }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -44,7 +41,7 @@
                       :disabled="obtainedProducts.includes(p.id) || money < p.price"
                       @click="buyProduct(p.id, p.price)"
                     >
-                      {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? '残高不足' : '購入する' ) : '購入済み' }}
+                      {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? $t('shop.not_enough') : $t('shop.buy') ) : $t('shop.bought') }}
                     </button>
                   </td>
                 </tr>
@@ -69,7 +66,7 @@
                     :disabled="obtainedProducts.includes(p.id) || money < p.price"
                     @click="buyProduct(p.id, p.price)"
                   >
-                    {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? '残高不足' : '購入する' ) : '購入済み' }}
+                    {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? $t('shop.not_enough') : $t('shop.buy') ) : $t('shop.bought') }}
                   </button>
                 </p>
                 <br>

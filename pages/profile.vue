@@ -27,7 +27,7 @@
       <br>
       <div class="column is-12">
         <button class="button is-danger is-small" @click="modalType = 6">
-          退会する
+          退会する / Delete account
         </button>
         <Modal title="退会" :isModalOpen="modalType === 6" @modal-closed="modalType = 0; destroyStep = 0">
           <h2 class="has-text-centered">

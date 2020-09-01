@@ -25,10 +25,10 @@
       <client-only v-if="$store.state.user.useInfinity">
         <infinite-loading @infinite="addNextpage">
           <div slot="no-more">
-            最終ページまで読み込みました
+            {{ $t('SearchScreen.no_more_result') }}
           </div>
           <div slot="no-results">
-            最終ページまで読み込みました
+            {{ $t('SearchScreen.no_more_result') }}
           </div>
         </infinite-loading>
       </client-only>
@@ -85,10 +85,10 @@ export default {
       totalPage: this.totalPageFromProps,
       results: this.resultsFromProps,
       sortMethods: [
-        { text: '投稿が新しい順', value: 0 },
-        { text: '投稿が古い順', value: 1 },
-        { text: 'いいね数が多い順', value: 4 },
-        { text: 'いいね数が少ない順', value: 5 }
+        { text: this.$t('SearchScreen.sort.latest_art'), value: 0 },
+        { text: this.$t('SearchScreen.sort.oldest_art'), value: 1 },
+        { text: this.$t('SearchScreen.sort.most_liked'), value: 4 },
+        { text: this.$t('SearchScreen.sort.least_liked'), value: 5 }
       ]
     }
   },
