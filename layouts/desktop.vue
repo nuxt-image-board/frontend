@@ -19,30 +19,6 @@
   </div>
 </template>
 
-<style>
-@media (min-width: 600px) {
-  /* width */
-  ::-webkit-scrollbar {
-    width: 15px;
-  }
-
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #ffd8b2;
-  }
-
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #ddaa77;
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #4a1f0f;
-  }
-}
-</style>
-
 <script>
 import NavbarUp from '@/components/NavbarUp.vue'
 import NavbarDown from '@/components/NavbarDown.vue'
