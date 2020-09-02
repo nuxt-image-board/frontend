@@ -5,11 +5,11 @@
         <div class="columns is-centered">
           <div class="column is-6 has-text-centered">
             <h4 class="title">
-              複合タグ検索
+              {{ $t('search_form.multiple.tag.title') }}
             </h4>
             <div class="box">
               <p class="subtitle">
-                検索対象タグ (5つまで)
+                {{ $t('search_form.multiple.tag.target') }}
               </p>
               <div v-if="tags.length > 0" class="field is-grouped is-grouped-multiline is-grouped-centered">
                 <div v-for="t in tags" :key="t.id">
@@ -24,12 +24,12 @@
                 </div>
               </div>
               <p v-else class="is-size-6">
-                タグを選択してください
+                {{ $t('search_form.multiple.tag.select') }}
               </p>
             </div>
             <div class="box">
               <p class="subtitle">
-                タグ候補 (2文字以上)
+                {{ $t('search_form.multiple.tag.options') }}
               </p>
               <div class="field">
                 <div class="control">
@@ -57,7 +57,7 @@
             </div>
             <div class="box">
               <p class="subtitle">
-                AND検索 / OR検索
+                {{ $t('search_form.multiple.tag.and_or') }}
               </p>
               <div class="field">
                 <div class="control has-text-centered">
@@ -79,7 +79,7 @@
                 :disabled="tags.length < 1 || tags.length > 5"
                 @click="$router.push('/search/multiple/tag?query='+ tags.map(t=>t.id).join(','))"
               >
-                検索する
+                {{ $t('search_form.multiple.tag.search_button') }}
               </button>
             </div>
           </div>
@@ -107,7 +107,13 @@ export default {
     },
     '$route' (to, from) {
       if (this.$route.query.e) {
-        this.$notify({ group: 'default', type: 'danger', duration: 2000, title: '複合タグ検索', text: '一致する項目がありませんでした' })
+        this.$notify({
+          group: 'default',
+          type: 'danger',
+          duration: 2000,
+          title: this.$t('search_form.multiple.tag.title'),
+          text: this.$t('search_form.multiple.tag.notify.no_match')
+        })
         this.$router.push('/search_form/multiple/tag')
       }
     }

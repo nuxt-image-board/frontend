@@ -20,24 +20,26 @@
 </template>
 
 <style>
-/* width */
-::-webkit-scrollbar {
-  width: 15px;
-}
+@media (min-width: 600px) {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 15px;
+  }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #ffd8b2;
-}
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #ffd8b2;
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #ddaa77;
-}
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ddaa77;
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #4a1f0f;
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #4a1f0f;
+  }
 }
 </style>
 

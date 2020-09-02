@@ -47,7 +47,7 @@ export default {
     return {
       page_buttons: [
         {
-          to: '/search/keyword?query=',
+          to: '/search_form/keyword',
           icon: 'keyboard',
           title: 'keyword'
         },

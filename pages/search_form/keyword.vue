@@ -5,10 +5,10 @@
         <div class="columns is-centered">
           <div class="column is-6 has-text-centered">
             <h4 class="title">
-              キーワード検索
+              {{ $t('search_form.keyword.title') }}
             </h4>
             <p>
-              検索したいキーワードを入力してください
+              {{ $t('search_form.keyword.description') }}
             </p>
             <input
               v-model="query"
@@ -22,7 +22,7 @@
               :disabled="!!!query"
               @click="$router.push(`/search/keyword/${query}`)"
             >
-              検索
+              {{ $t('search_form.keyword.search_button') }}
             </button>
             <br>
             <br>
@@ -43,20 +43,32 @@ export default {
   watch: {
     '$route' (to, from) {
       if (this.$route.query.e) {
-        this.$notify({ group: 'default', type: 'danger', duration: 2000, title: 'キーワード検索', text: '一致する項目がありませんでした' })
+        this.$notify({
+          group: 'default',
+          type: 'danger',
+          duration: 2000,
+          title: this.$t('search_form.keyword.title'),
+          text: this.$t('search_form.keyword.notify.no_match')
+        })
         this.$router.push('/search_form/keyword')
       }
     }
   },
   mounted () {
     if (this.$route.query.e) {
-      this.$notify({ group: 'default', type: 'danger', duration: 2000, title: 'キーワード検索', text: '一致する項目がありませんでした' })
+      this.$notify({
+        group: 'default',
+        type: 'danger',
+        duration: 2000,
+        title: this.$t('search_form.keyword.title'),
+        text: this.$t('search_form.keyword.notify.no_match')
+      })
       this.$router.push('/search_form/keyword')
     }
   },
   head () {
     return {
-      title: 'キーワード検索'
+      title: this.$t('search_form.keyword.title')
     }
   }
 }

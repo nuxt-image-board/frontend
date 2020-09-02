@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container is-widescreen">
       <h1 class="title has-text-centered">
-        ニュース
+        {{ $t('news.title') }}
       </h1>
       <div class="columns is-centered">
         <div class="column is-8">
@@ -11,32 +11,32 @@
               <thead>
                 <tr>
                   <th align="center">
-                    種別
+                    {{ $t('news.table_head.type') }}
                   </th>
                   <th align="center">
-                    タイトル
+                    {{ $t('news.table_head.title') }}
                   </th>
                   <th align="center">
-                    日付
+                    {{ $t('news.table_head.date') }}
                   </th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="n in news" :key="n.id">
                   <td v-if="n.color == 0" class="has-background-info has-text-white" align="center">
-                    お知らせ
+                    {{ $t('news.types.info') }}
                   </td>
                   <td v-if="n.color == 1" class="has-background-primary has-text-white" align="center">
-                    メモ
+                    {{ $t('news.types.memo') }}
                   </td>
                   <td v-if="n.color == 2" class="has-background-success has-text-white" align="center">
-                    アプデ
+                    {{ $t('news.types.update') }}
                   </td>
                   <td v-if="n.color == 3" class="has-background-warning has-text-white-dark" align="center">
-                    告知
+                    {{ $t('news.types.announce') }}
                   </td>
                   <td v-if="n.color == 4" class="has-background-danger has-text-white" align="center">
-                    重要
+                    {{ $t('news.types.important') }}
                   </td>
                   <td align="center">
                     <nuxt-link :to="'/news/'+n.id">
