@@ -367,6 +367,7 @@ export default {
       }
     },
     async postNewComment () {
+      this.openCommentConfirm = false
       const resp = await this.$axios.post(`/arts/${this.result.illustID}/comments`, { comment: this.commentArea })
       if (resp.data.status === 200) {
         this.$notify(
@@ -382,7 +383,6 @@ export default {
         this.comments = resp.data.data
         this.commentArea = ''
       }
-      this.openCommentConfirm = false
     },
     async requestWaifu2x () {
       const scale = this.waifuScale.substr(-1)
