@@ -39,7 +39,7 @@ Vue.mixin({
     alertConnectionSpeed () {
       const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection
       if (connection) {
-        if (connection.downlink < 5) {
+        if (connection.downlink < 3) {
           this.$notify(
             {
               group: 'default',

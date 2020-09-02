@@ -26,7 +26,6 @@ export default {
     const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
     const targetID = isFinite(route.params.id) ? parseInt(route.params.id) : 1
     const resp = await $searchApi.getSearchResults(apiEndpoint, pageID, sortID, targetID)
-    console.log(resp)
     if (!resp) {
       error({ statusCode: 404 })
     }

@@ -14,23 +14,17 @@
         <div class="modal-background" />
         <div class="modal-content">
           <p class="title has-text-centered has-text-white">
-            ドロップで画像検索
+            {{ $t('search_image.drop_image') }}
           </p>
         </div>
       </div>
       <div class="columns is-centered is-vcentered" style="min-height:80vh;">
         <div class="column has-text-centered">
           <h4 class="title">
-            画像検索
+            {{ $t('search_image.title') }}
           </h4>
           <p>
-            画像を選ぶと***REMOVED***のDBから検索します
-          </p>
-          <p>
-            存在しない場合はSauceNAOから検索します
-          </p>
-          <p>
-            ※JPGかJPEGかPNGのみ対応です
+            {{ $t('search_image.description') }}
           </p>
           <br>
           <div class="field">
@@ -42,14 +36,14 @@
                     <Fas i="cloud-upload-alt" />
                   </span>
                   <span v-if="!fileName" class="file-label">
-                    画像を選択…
+                    {{ $t('search_image.select_image') }}
                   </span>
                   <span v-if="fileName" class="button is-primary is-loading" />
                   <span v-if="step == 1" class="file-label">
-                    ***REMOVED***で検索中...
+                    {{ $t('search_image.searching_***REMOVED***') }}
                   </span>
                   <span v-if="step == 2" class="file-label">
-                    SauceNaoで検索中...
+                    {{ $t('search_image.searching_saucenao') }}
                   </span>
                 </span>
                 <span v-if="fileName" class="file-name has-text-centered has-background-white">
@@ -60,7 +54,7 @@
           </div>
           <div v-if="hash && !fileName" class="column has-text-centered">
             <span>
-              ハッシュ値: {{ hash }}
+              {{ $t('search_image.hash_value') }} {{ hash }}
             </span>
           </div>
         </div>
