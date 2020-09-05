@@ -426,7 +426,11 @@ export default {
           // 一旦ディープコピーしてくる(しないとパラメータが全部おなじになる)
           const numberedParams = JSON.parse(JSON.stringify(params))
           numberedParams.originUrl = this.illust.originUrl + '?page=' + page
-          numberedParams.imageUrl = this.illust.imageUrl + '?page=' + page
+          if (this.illust.originService !== '独自') {
+            numberedParams.imageUrl = this.illust.imageUrl + '?page=' + page
+          } else {
+            numberedParams.imageUrl = this.illust.imgs[page - 1] + '?page=' + page
+          }
           if (page !== 1) {
             numberedParams.title = this.illust.title + ` (${page})`
           }
