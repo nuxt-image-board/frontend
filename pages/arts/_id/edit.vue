@@ -185,9 +185,8 @@ export default {
     Modal
   },
   async asyncData ({ $axios, $auth, route, error }) {
-    const endpoint = '/arts/'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
-    const response = await $axios.get(endpoint + id)
+    const response = await $axios.get(`/arts/${id}`)
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }

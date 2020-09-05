@@ -175,6 +175,34 @@
             </div>
           </div>
         </div>
+        <div v-if="related.imgs.length > 1" class="column has-text-centered" :class="{'is-6': (result.group.length > 0), 'is-12': (result.group.length == 0)}">
+          <div class="box">
+            <p class="subtitle">
+              同一絵師のイラスト
+            </p>
+            <div class="horizontal-container">
+              <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
+                <nuxt-link :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`" :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }">
+                  <img class="vertical-centered" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-if="result.group.length > 0" class="column is-6 has-text-centered">
+          <div class="box">
+            <p class="subtitle">
+              同一グループのイラスト
+            </p>
+            <div class="horizontal-container">
+              <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
+                <nuxt-link :to="`/arts/${i.illustID}`">
+                  <img class="vertical-centered" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="column is-12 has-text-centered">
           <div class="box">
             <p class="subtitle">
@@ -257,6 +285,28 @@
 
 <style lang="scss">
 @import "~viewerjs/dist/viewer";
+
+.horizontal-container {
+    white-space: nowrap;
+    overflow-x: scroll;
+}
+
+.horizontal-item {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  margin: 3px;
+}
+
+.vertical-centered {
+  position: absolute;  /*要素を浮かす*/
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
 </style>
 
 <script>
@@ -276,25 +326,22 @@ export default {
     Fas
   },
   async asyncData ({ $axios, $auth, route, error }) {
-    const endpoint = '/arts/'
     const id = isFinite(route.params.id) ? parseInt(route.params.id) : 1
-    const response = await $axios.get(endpoint + id)
-    const comments = await $axios.get(`/arts/${id}/comments`)
-    let isEditable = false
-    let isTagEditable = false
+    const response = await $axios.get(`/arts/${id}`)
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }
-    const data = response.data.data
-    if (data.user.id === $auth.$state.user.userID || $auth.$state.user.permission === 9) {
-      isEditable = true
-    }
-    if ($auth.$state.user.permission > 1) {
-      isTagEditable = true
-    }
+    const comments = await $axios.get(`/arts/${id}/comments`)
+    const result = response.data.data
+    const grouped = (result.group.length > 0) ? await $axios.get(`/search/tag?id=${result.group[0][0]}`) : { data: { data: null } }
+    const related = await $axios.get(`/search/artist?id=${result.artist.id}`)
+    const isEditable = (result.user.id === $auth.$state.user.userID || $auth.$state.user.permission === 9)
+    const isTagEditable = ($auth.$state.user.permission > 1)
     return {
-      result: data,
       comments: comments.data.data,
+      related: related.data.data,
+      grouped: grouped.data.data,
+      result,
       isEditable,
       isTagEditable
     }
