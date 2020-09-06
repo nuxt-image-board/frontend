@@ -1,0 +1,69 @@
+[
+    {
+        "url": "for-newbies",
+        "categories": [
+            "about-gcir",
+            "requirements"
+        ]
+    },
+    {
+        "url": "about-gcir",
+        "sub-category": true,
+        "articles": [
+            "what-is-gcir",
+            "is-gcir-free",
+            "why-invite-only",
+            "dmca-request",
+            "publish-on-other-sites"
+        ]
+    },
+    {
+        "url": "requirements",
+        "sub-category": true,
+        "articles": [
+            "not-working",
+            "recommended-requirements",
+            "can-i-use-from-features",
+            "works-too-slow",
+            "not-smart-display"
+        ]
+    },
+    {
+        "url": "register",
+        "articles": [
+            "how-to-register",
+            "does-minor-can-use"
+        ]
+    },
+    {
+        "url": "id-password-login",
+        "articles": [
+            "what-is-uid",
+            "how-to-get-uid",
+            "how-to-change-uid",
+            "how-to-change-password",
+            "forgot-uid",
+            "forgot-password-logined",
+            "forgot-password-logouted",
+            "can-I-use-after-upgraded",
+            "how-to-logout"
+        ]
+    },
+    {
+        "url": "about-search",
+        "articles": [
+            "what-is-mute",
+            "maximum-mutes-exceeded",
+            "what-is-multiple-tag-search",
+            "what-is-image-search"
+        ]
+    },
+    {
+        "url": "about-upload",
+        "articles": [
+            "what-can-i-upload",
+            "upload-guidelines",
+            "what-is-r-18"
+        ]
+    }
+]
