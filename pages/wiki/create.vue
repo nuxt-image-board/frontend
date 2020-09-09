@@ -28,19 +28,8 @@
   </section>
 </template>
 
-<style>
-@import 'tui-editor/dist/tui-editor.css';
-@import 'tui-editor/dist/tui-editor-contents.css';
-@import 'codemirror/lib/codemirror.css';
-</style>
-
 <script>
-import { Editor } from '@toast-ui/vue-editor'
-
 export default {
-  components: {
-    Editor
-  },
   async asyncData ({ $axios, route, store, error, redirect }) {
     if (!store.state.user.obtainedProducts.includes(2)) {
       redirect('/shop')

@@ -310,10 +310,31 @@
 </style>
 
 <script>
+import Vue from 'vue'
+import Viewer from 'v-viewer'
 import SocialShare from '@/components/ui/SocialShare.vue'
 import Modal from '@/components/ui/Modal.vue'
 import Far from '@/components/ui/Far.vue'
 import Fas from '@/components/ui/Fas.vue'
+
+Vue.use(
+  Viewer, {
+    defaultOptions: {
+      button: false,
+      navbar: false,
+      title: false,
+      toolbar: true,
+      tooltip: true,
+      movable: true,
+      zoomable: true,
+      rotatable: true,
+      scalable: true,
+      transition: true,
+      fullscreen: true,
+      keyboard: true
+    }
+  }
+)
 
 export default {
   validate ({ params }) {
