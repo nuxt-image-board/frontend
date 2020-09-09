@@ -70,8 +70,8 @@
         "url": "about-pyon",
         "articles": [
             "what-is-pyon",
-            "how-to-use-pyon",
-            "how-to-get-pyon"
+            "how-to-get-pyon",
+            "pyon-expiration"
         ]
     },
     {
@@ -106,14 +106,14 @@
         "articles": [
             "can-i-suggests-translations",
             "can-you-add-another-language",
-            "who-is-translators",
+            "who-is-translating",
             "can-i-get-pyon-with-translate"
         ]
     },
     {
         "url": "about-cancel-account",
         "articles": [
-            "how-to-cancel-accounts",
+            "how-to-cancel-account",
             "what-happens-after-cancel"
         ]
     },
@@ -179,6 +179,7 @@
         "articles": [
             "can-i-find-vulnerabilities",
             "can-i-use-scrapers",
+            "can-i-use-apis",
             "api-key-expiration",
             "api-response-too-bad"
         ]
