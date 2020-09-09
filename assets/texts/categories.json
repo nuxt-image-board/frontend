@@ -14,7 +14,8 @@
             "is-gcir-free",
             "why-invite-only",
             "dmca-request",
-            "publish-on-other-sites"
+            "publish-on-other-sites",
+            "use-guidelines"
         ]
     },
     {
@@ -43,7 +44,6 @@
             "how-to-change-uid",
             "how-to-change-password",
             "forgot-uid",
-            "forgot-password-logined",
             "forgot-password-logouted",
             "can-I-use-after-upgraded",
             "how-to-logout"
@@ -64,6 +64,123 @@
             "what-can-i-upload",
             "upload-guidelines",
             "what-is-r-18"
+        ]
+    },
+    {
+        "url": "about-pyon",
+        "articles": [
+            "what-is-pyon",
+            "how-to-use-pyon",
+            "how-to-get-pyon"
+        ]
+    },
+    {
+        "url": "about-likes",
+        "articles": [
+            "what-is-likes",
+            "what-is-likes-effects",
+            "can-i-delete-likes",
+            "likes-limitations"
+        ]
+    },
+    {
+        "url": "about-bookmarks",
+        "articles": [
+            "what-is-bookmark",
+            "maximum-bookmarks-exceeded",
+            "can-i-publish-bookmarks",
+            "can-i-separate-bookmarks"
+        ]
+    },
+    {
+        "url": "about-notifies",
+        "articles": [
+            "what-is-notify",
+            "what-is-line-notify",
+            "what-is-web-notify",
+            "what-is-twitter-notify"
+        ]
+    },
+    {
+        "url": "about-translations",
+        "articles": [
+            "can-i-suggests-translations",
+            "can-you-add-another-language",
+            "who-is-translators",
+            "can-i-get-pyon-with-translate"
+        ]
+    },
+    {
+        "url": "about-cancel-account",
+        "articles": [
+            "how-to-cancel-accounts",
+            "what-happens-after-cancel"
+        ]
+    },
+    {
+        "url": "about-securities",
+        "articles": [
+            "how-you-prevent-hackings",
+            "how-you-use-personal-infos"
+        ]
+    },
+    {
+        "url": "about-sources",
+        "hidden-on-logout": true,
+        "articles": [
+            "what-is-sources",
+            "what-is-pixiv",
+            "what-is-twitter",
+            "what-is-danbooru",
+            "what-is-niconico-seiga"
+        ]
+    },
+    {
+        "url": "about-bots",
+        "hidden-on-logout": true,
+        "articles": [
+            "what-is-bots",
+            "what-is-buhibuhi",
+            "what-is-pixiiv",
+            "how-bot-names-decided",
+            "will-you-make-another-bots"
+        ]
+    },
+    {
+        "url": "about-pwa",
+        "articles": [
+            "what-is-pwa",
+            "how-to-install-pwa"
+        ]
+    },
+    {
+        "url": "about-usagi-player",
+        "hidden-on-logout": true,
+        "articles": [
+            "what-is-usagi-player",
+            "is-usagi-player-legal",
+            "is-usagi-player-good",
+            "is-usagi-player-bad"
+        ]
+    },
+    {
+        "url": "related-services",
+        "articles": [
+            "what-is-***REMOVED***-gacha",
+            "what-is-***REMOVED***-april",
+            "what-is-***REMOVED***bu",
+            "what-is-gochisobu",
+            "what-is-gochisebu"
+        ]
+    },
+    {
+        "url": "for-developers",
+        "hidden-on-logout": true,
+        "articles": [
+            "can-i-find-vulnerabilities",
+            "can-i-use-scrapers",
+            "api-key-expiration",
+            "api-response-too-bad"
         ]
     }
 ]

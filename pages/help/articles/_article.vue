@@ -7,9 +7,7 @@
             <p class="column is-10 is-size-2">
               {{ article.title }}
             </p>
-            <div v-for="b in article.body" :key="b">
-              <p class="column" v-html="b" />
-            </div>
+            <p v-for="b in article.body" :key="b" class="column is-12" v-html="b" />
           </div>
           <div class="columns is-centered has-text-centered is-multiline">
             <div class="column is-12">
@@ -19,19 +17,19 @@
             </div>
             <div class="column is-12">
               <p class="is-size-7">
-                0名の方が役に立ったと言っています
+                {{ yakunitatta }}名の方が役に立ったと言っています
               </p>
               <p class="is-size-7">
-                0名の方が役に立たなかったと言っています
+                {{ yakunitatanakatta }}名の方が役に立たなかったと言っています
               </p>
             </div>
             <div class="column is-6">
-              <p class="button is-primary">
+              <button class="button is-primary" @click="yakunitatta += 1">
                 役に立った
-              </p>
-              <p class="button is-secondary">
+              </button>
+              <button class="button is-secondary" @click="yakunitatta += 1">
                 役に立たなかった
-              </p>
+              </button>
             </div>
           </div>
         </div>
@@ -45,11 +43,15 @@ export default {
   auth: false,
   data () {
     return {
-      article: this.$t(this.$route.params.article)
+      article: this.$t(this.$route.params.article),
+      yakunitatta: 0,
+      yakunitatanakatta: 0
     }
   },
   mounted () {
     console.log(this.article)
+    this.yakunitatta = Math.floor(Math.random() * 51)
+    this.yakunitatanakatta = Math.floor(Math.random() * 4)
     if (typeof (this.article) !== 'object') {
       this.$router.go(-1)
     }

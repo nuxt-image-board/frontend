@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="columns is-multiline is-gapless is-centered">
-            <div v-for="c in categories" :key="c" class="column is-4-desktop is-6">
+            <div v-for="c in categories" :key="c.url" class="column is-4-desktop is-6">
               <nuxt-link class="button is-size-4 is-large is-fullwidth" :to="`/help/categories/${c.url}`">
                 {{ $t(c.url) }}
               </nuxt-link>

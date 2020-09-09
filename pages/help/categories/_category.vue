@@ -29,9 +29,12 @@
           <!-- サブカテゴリがない場合 -->
           <div v-else class="columns is-multiline is-centered has-text-centered">
             <div v-for="a in category.articles" :key="a" class="column is-6">
-              <p class="button is-medium is-fullwidth">
+              <nuxt-link
+                :to="`/help/articles/${a}`"
+                class="button is-medium is-fullwidth"
+              >
                 {{ $t(a).title }}
-              </p>
+              </nuxt-link>
             </div>
           </div>
         </div>
