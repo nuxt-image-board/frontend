@@ -9,12 +9,12 @@
                 何かお困りですか?
               </p>
             </div>
-            <div class="column is-8">
+            <div v-if="1 === 0" class="column is-8">
               <input type="text" class="input is-medium" placeholder="検索ワードをご入力ください(パスワード, パスワード, パスワードなど)">
             </div>
             <div class="column is-8 box has-text-centered">
               <p class="subtitle">
-                たぶんよくある質問
+                たぶんすごくよくある質問
               </p>
               <p v-for="f in faq" :key="f" class="is-size-6">
                 <nuxt-link :to="`/help/articles/${f}`">
@@ -44,7 +44,7 @@ export default {
   data () {
     return {
       categories: categories.filter(c => !c['sub-category']),
-      faq: ['a', 'b', 'c', 'd', 'e']
+      faq: ['forgot-password-logouted', 'forgot-password-logouted', 'forgot-password-logouted']
     }
   },
   head () {

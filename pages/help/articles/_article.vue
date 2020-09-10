@@ -1,14 +1,21 @@
 <template>
   <section class="section">
     <div class="container is-widescreen">
-      <div class="columns is-centered">
+      <div class="columns is-multiline is-centered">
         <div class="column is-9 box">
           <div class="columns is-multiline is-centered has-text-centered">
             <p class="column is-10 is-size-4">
               {{ article.title }}
             </p>
             <p v-for="b in article.body" :key="b" class="column is-12" v-html="b" />
+            <div class="column is-10">
+              <button class="button is-info is-large is-fullwidth" @click="$router.back(-1)">
+                戻る
+              </button>
+            </div>
           </div>
+        </div>
+        <div class="column is-9">
           <div class="columns is-centered has-text-centered is-multiline">
             <div class="column is-12">
               <p class="is-size-5">
@@ -31,11 +38,6 @@
                 役に立たなかった
               </button>
             </div>
-            <div class="column is-10">
-              <button class="button is-info is-large is-fullwidth" @click="$router.back(-1)">
-                戻る
-              </button>
-            </div>
           </div>
         </div>
       </div>
@@ -54,7 +56,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.article)
     this.yakunitatta = Math.floor(Math.random() * 51)
     this.yakunitatanakatta = Math.floor(Math.random() * 4)
     if (typeof (this.article) !== 'object') {
