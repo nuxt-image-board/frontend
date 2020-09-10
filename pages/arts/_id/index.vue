@@ -98,7 +98,14 @@
                       <span class="tag">
                         <Fas i="broadcast-tower" />
                       </span>
-                      <a class="tag is-link" :href="result.originUrl">{{ result.originService }}</a>
+                      <a
+                        class="tag is-link"
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        :href="result.originUrl"
+                      >
+                        {{ result.originService }}
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -183,7 +190,7 @@
             <div class="horizontal-container">
               <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
                 <nuxt-link :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`" :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }">
-                  <img class="vertical-centered" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                  <img class="vertical-centered" decoding="async" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
                 </nuxt-link>
               </div>
             </div>
@@ -197,7 +204,7 @@
             <div class="horizontal-container">
               <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
                 <nuxt-link :to="`/arts/${i.illustID}`">
-                  <img class="vertical-centered" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                  <img class="vertical-centered" decoding="async" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
                 </nuxt-link>
               </div>
             </div>
@@ -300,7 +307,7 @@
 }
 
 .vertical-centered {
-  position: absolute;  /*要素を浮かす*/
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
