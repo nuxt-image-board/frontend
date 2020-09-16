@@ -11,14 +11,14 @@
         </div>
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">
-            <div class="column is-7-desktop">
+            <div class="column is-8-desktop">
               <SelectForm
                 :options="sortMethods"
                 :sortMethod="String(sortID)"
                 @onSelectChanged="updateSelect"
               />
             </div>
-            <div class="column is-centered has-text-centered-touch is-12-mobile is-5-tablet is-5-desktop has-text-right">
+            <div class="column is-centered has-text-centered-touch is-12-mobile is-6-tablet is-4-desktop has-text-right">
               <Wiki
                 :apiEndpoint="apiEndpoint"
                 :articleTitle="tabTitle"

@@ -1,39 +1,67 @@
 <template>
   <div>
-    <NotifyRegister
-      v-if="!apiEndpoint.includes('keyword')"
-      :notifyTitle="articleTitle"
-      :notifyTargetType="targetType"
-      :notifyTargetID="targetID"
-    />
-    <button
-      v-if="apiEndpoint.includes('artist') && !$store.state.user.mutedArtists.includes(targetID)"
-      class="button is-primary is-large"
-      @click="toggleMute(true, 2, targetID)"
-    >
-      <Fas i="eye" classes="is-size-4" />
-    </button>
-    <button
-      v-if="apiEndpoint.includes('artist') && $store.state.user.mutedArtists.includes(targetID)"
-      class="button is-primary is-large"
-      @click="toggleMute(false, 2, targetID)"
-    >
-      <Fas i="eye-slash" classes="is-size-4" />
-    </button>
-    <nuxt-link
-      v-if="$store.state.user.obtainedProducts.includes(2) && !apiEndpoint.includes('all')"
-      :to="writeArticleLink"
-      class="button is-primary is-large"
-    >
-      <Fas i="pen-square" classes="is-size-4" />
-    </nuxt-link>
-    <nuxt-link
-      v-if="articleID && !apiEndpoint.includes('all')"
-      :to="'/wiki/'+articleID"
-      class="button is-primary is-large"
-    >
-      <Fas i="file-alt" classes="is-size-4" />
-    </nuxt-link>
+    <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+      <NotifyRegister
+        v-if="!apiEndpoint.includes('keyword')"
+        class="control"
+        :notifyTitle="articleTitle"
+        :notifyTargetType="targetType"
+        :notifyTargetID="targetID"
+      />
+      <div v-if="apiEndpoint.includes('artist') && !$store.state.user.mutedArtists.includes(targetID)" class="control">
+        <div class="tags has-addons">
+          <span class="tag icon is-medium">
+            <Fas i="eye" classes="is-size-6" />
+          </span>
+          <span
+            class="tag is-link is-medium"
+            @click="toggleMute(true, 2, targetID)"
+          >
+            表示切替
+          </span>
+        </div>
+      </div>
+      <div
+        v-if="apiEndpoint.includes('artist') && $store.state.user.mutedArtists.includes(targetID)"
+        class="control"
+        @click="toggleMute(false, 2, targetID)"
+      >
+        <div class="tags has-addons">
+          <span class="tag icon is-medium">
+            <Fas i="eye-slash" classes="is-size-6" />
+          </span>
+          <span class="tag is-link is-medium">
+            表示切替
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+      <nuxt-link
+        v-if="$store.state.user.obtainedProducts.includes(2) && !apiEndpoint.includes('all')"
+        :to="writeArticleLink"
+        class="control"
+      >
+        <div class="tags has-addons">
+          <span class="tag icon is-medium">
+            <Fas i="pen-square" classes="is-size-6" />
+          </span>
+          <span class="tag is-link is-medium">記事編集</span>
+        </div>
+      </nuxt-link>
+      <nuxt-link
+        v-if="articleID && !apiEndpoint.includes('all')"
+        :to="'/wiki/'+articleID"
+        class="control"
+      >
+        <div class="tags has-addons">
+          <span class="tag icon is-medium">
+            <Fas i="file-alt" classes="is-size-6" />
+          </span>
+          <span class="tag is-link is-medium">記事閲覧</span>
+        </div>
+      </nuxt-link>
+    </div>
   </div>
 </template>
 

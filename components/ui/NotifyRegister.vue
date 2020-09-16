@@ -1,13 +1,19 @@
 <template>
   <span>
-    <button
-      class="button is-primary is-large"
+    <div
       :disabled="!isFetchFinished"
       @click="notifyButtonPressed"
     >
-      <Fas v-if="isNotifyEnabled" i="bell" classes="is-size-4" />
-      <Far v-else i="bell" classes="is-size-4" />
-    </button>
+      <div class="tags has-addons">
+        <span class="tag icon is-medium">
+          <Fas v-if="isNotifyEnabled" i="bell" classes="is-size-6" />
+          <Far v-else i="bell" classes="is-size-6" />
+        </span>
+        <span class="tag is-link is-medium">
+          通知切替
+        </span>
+      </div>
+    </div>
     <Modal :title="'通知登録: ' + notifyTitle" :isModalOpen="notifyPopup" @modal-closed="notifyPopup = false">
       <h4 class="has-text-centered">
         新着イラスト通知を有効にしますか?
