@@ -2,8 +2,10 @@
   <section class="section">
     <div class="container is-widescreen">
       <div class="columns is-centered is-vcentered is-multiline">
-        <div class="column is-8">
-          <Notification :title="$t('SearchScreen.search_methods.'+pageTitle)+' '+tabTitle+' ('+resultCount+')'" />
+        <div class="column is-6">
+          <Notification>
+            {{ $t('SearchScreen.search_methods.'+pageTitle)+' '+tabTitle+' ('+resultCount+')' }}
+          </Notification>
         </div>
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">

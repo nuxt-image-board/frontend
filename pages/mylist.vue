@@ -3,10 +3,9 @@
     <div class="container is-widescreen">
       <div class="columns is-centered is-vcentered is-multiline">
         <div class="column is-8">
-          <Notification
-            icon="info"
-            :title="pageTitle"
-          />
+          <Notification>
+            {{ pageTitle }}
+          </Notification>
         </div>
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">

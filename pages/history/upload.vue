@@ -3,7 +3,9 @@
     <div class="container is-widescreen">
       <div class="columns is-centered">
         <div class="column is-two-third">
-          <Notification :title="NotificationTitle" />
+          <Notification>
+            {{ NotificationTitle }}
+          </Notification>
         </div>
         <div class="column is-one-third">
           <SelectForm :options="SortOptions" @onSelectChanged="updateSelect" />

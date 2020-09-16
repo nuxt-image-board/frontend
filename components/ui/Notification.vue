@@ -2,7 +2,7 @@
   <div v-if="!deletedInComponent" class="subtitle notification" :class="`${classes}`">
     <button v-if="deletable" class="delete" @click="pushDeleted()" />
     <span v-if="icon"><Fas :i="icon" /></span>
-    <span>{{ title }}</span>
+    <span><slot /></span>
   </div>
 </template>
 
@@ -14,10 +14,6 @@ export default {
     Fas
   },
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
     icon: {
       type: String,
       default: 'info'

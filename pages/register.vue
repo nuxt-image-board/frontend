@@ -4,11 +4,12 @@
       <Notification
         icon="info"
         :deletable="notificationDeletable"
-        :title="notificationText"
         classes="is-danger"
         :deleted="notificationDeleted"
         @deleted-event="deletedEvent"
-      />
+      >
+        {{ notificationText }}
+      </Notification>
       <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
           <img src="logo.png" alt="***REMOVED*** logo">
