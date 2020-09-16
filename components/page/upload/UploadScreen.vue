@@ -293,6 +293,9 @@ export default {
         case url.includes('seiga.nicovideo.jp'):
           endpoint += 'seiga'
           break
+        case url.includes('booth.pm'):
+          endpoint += 'booth'
+          break
         case url.includes('danbooru.donmai.us'):
           endpoint += 'danbooru'
           break
@@ -365,6 +368,9 @@ export default {
           break
         case this.illust.originUrl.includes('nicovideo'):
           this.illust.originService = 'ニコニコ静画'
+          break
+        case this.illust.originUrl.includes('booth'):
+          this.illust.originService = 'Booth'
           break
         case this.illust.originUrl.includes('danbooru'):
           this.illust.originService = 'Danbooru'
