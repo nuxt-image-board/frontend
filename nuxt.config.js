@@ -227,7 +227,11 @@ export default {
           'faStepForward',
           'faTools',
           'faMusic',
-          'faTimesCircle'
+          'faTimesCircle',
+          'faFileAlt',
+          'faPenSquare',
+          'faEye',
+          'faEyeSlash'
         ]
       },
       {
@@ -236,7 +240,7 @@ export default {
       },
       {
         set: '@fortawesome/free-regular-svg-icons', // Brand icons
-        icons: ['faBookmark']
+        icons: ['faBookmark', 'faBell']
       }
     ]
   },

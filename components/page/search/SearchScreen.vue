@@ -2,49 +2,31 @@
   <section class="section">
     <div class="container is-widescreen">
       <div class="columns is-centered is-vcentered is-multiline">
-        <div class="column is-6">
+        <div class="column is-8">
           <Notification>
-            {{ $t('SearchScreen.search_methods.'+pageTitle)+' '+tabTitle+' ('+resultCount+')' }}
+            {{ $t('SearchScreen.search_methods.'+pageTitle) }}
+            {{ tabTitle }}
+            {{ `(${resultCount})` }}
           </Notification>
         </div>
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">
-            <div class="column is-8">
+            <div class="column is-7-desktop">
               <SelectForm
-                class="is-fullwidth"
                 :options="sortMethods"
                 :sortMethod="String(sortID)"
                 @onSelectChanged="updateSelect"
               />
             </div>
-            <div v-if="!apiEndpoint.includes('keyword')" class="column is-4">
-              <NotifyRegister :notifyTitle="tabTitle" :notifyTargetType="notifyTargetType" :notifyTargetID="notifyTargetID" />
+            <div class="column is-centered has-text-centered-touch is-12-mobile is-5-tablet is-5-desktop has-text-right">
+              <Wiki
+                :apiEndpoint="apiEndpoint"
+                :articleTitle="tabTitle"
+                :targetType="notifyTargetType"
+                :targetID="notifyTargetID"
+              />
             </div>
           </div>
-        </div>
-        <div v-if="apiEndpoint.includes('artist')" class="column is-12 has-text-centered">
-          <button
-            v-if="!$store.state.user.mutedArtists.includes(notifyTargetID)"
-            class="button is-primary is-small"
-            @click="toggleMute(true, 2, notifyTargetID)"
-          >
-            {{ $t('SearchScreen.mute_artist.not_muted') }}
-          </button>
-          <button
-            v-else
-            class="button is-primary is-small"
-            @click="toggleMute(false, 2, notifyTargetID)"
-          >
-            {{ $t('SearchScreen.mute_artist.muted') }}
-          </button>
-        </div>
-        <div v-if="hasWikiElement && !apiEndpoint.includes('all')" class="column is-12 has-text-centered">
-          <Wiki
-            :articleTitle="pageTitle"
-            :articleTargetType="notifyTargetType"
-            :articleTargetID="notifyTargetID"
-            @noWikiContent="hasWikiElement = false"
-          />
         </div>
       </div>
       <div
@@ -79,14 +61,12 @@
 import Notification from '@/components/ui/Notification.vue'
 import SelectForm from '@/components/ui/SelectForm.vue'
 import Wiki from '@/components/ui/Wiki.vue'
-import NotifyRegister from '@/components/ui/NotifyRegister.vue'
 import Result from '@/components/page/search/Result.vue'
 
 export default {
   components: {
     Notification,
     SelectForm,
-    NotifyRegister,
     Wiki,
     Pagination: () => import('@/components/ui/Pagination.vue'),
     Result
@@ -124,6 +104,7 @@ export default {
       totalPage: this.totalPageFromProps,
       results: this.resultsFromProps,
       hasWikiElement: true,
+      articleID: null,
       sortMethods: [
         { text: this.$t('SearchScreen.sort.latest_art'), value: 0 },
         { text: this.$t('SearchScreen.sort.oldest_art'), value: 1 },

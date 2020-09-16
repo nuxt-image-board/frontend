@@ -1,16 +1,14 @@
 <template>
-  <div class="field has-text-centered">
-    <input
-      id="notifyButton"
-      v-model="notifyEnabled"
-      name="notifyButton"
-      class="is-checkradio is-success is-medium"
-      type="checkbox"
+  <span>
+    <button
+      class="button is-primary is-large"
       :disabled="!isFetchFinished"
-      @click="openNotifyPopup"
+      @click="notifyButtonPressed"
     >
-    <label class="content" for="notifyButton">新着通知</label>
-    <Modal :title="'通知登録: ' + notifyTitle" :isModalOpen="notifyPopup" @modal-closed="closeNotifyPopup">
+      <Fas v-if="isNotifyEnabled" i="bell" classes="is-size-4" />
+      <Far v-else i="bell" classes="is-size-4" />
+    </button>
+    <Modal :title="'通知登録: ' + notifyTitle" :isModalOpen="notifyPopup" @modal-closed="notifyPopup = false">
       <h4 class="has-text-centered">
         新着イラスト通知を有効にしますか?
       </h4>
@@ -62,15 +60,19 @@
         </button>
       </p>
     </Modal>
-  </div>
+  </span>
 </template>
 
 <script>
 import Modal from '@/components/ui/Modal.vue'
+import Fas from '@/components/ui/Fas.vue'
+import Far from '@/components/ui/Far.vue'
 
 export default {
   components: {
-    Modal
+    Modal,
+    Fas,
+    Far
   },
   props: {
     notifyTitle: {
@@ -88,8 +90,9 @@ export default {
   },
   data () {
     return {
-      notifyEnabled: false,
       notifyPopup: false,
+      isFetchFinished: false,
+      isNotifyEnabled: false,
       notifySelection: {
         web: false,
         line: false,
@@ -99,14 +102,6 @@ export default {
         web: !!this.$auth.$state.user.oneSignalNotify,
         line: !!this.$auth.$state.user.lineNotify,
         twitter: false
-      },
-      isFetchFinished: false
-    }
-  },
-  watch: {
-    notifyEnabled (val) {
-      if (val === false) {
-        this.unregisterNotify()
       }
     }
   },
@@ -122,6 +117,13 @@ export default {
     }
   },
   methods: {
+    notifyButtonPressed () {
+      if (this.isNotifyEnabled) {
+        this.unregisterNotify()
+      } else {
+        this.notifyPopup = true
+      }
+    },
     registerNotify () {
       let notifyMethod = 0
       for (const key in this.notifySelection) {
@@ -130,6 +132,7 @@ export default {
         }
         notifyMethod += 1
       }
+      this.isNotifyEnabled = true
       this.notifyPopup = false
     },
     unregisterNotify () {
@@ -141,6 +144,8 @@ export default {
         }
         notifyMethod += 1
       }
+      this.isNotifyEnabled = false
+      this.notifyPopup = false
     },
     async fetchNotify () {
       const params = {
@@ -151,18 +156,9 @@ export default {
       for (const key in resp.data.data) {
         this.notifySelection[key] = resp.data.data[key]
         if (resp.data.data[key] === true) {
-          this.notifyEnabled = true
+          this.isNotifyEnabled = true
         }
       }
-    },
-    openNotifyPopup () {
-      if (!this.notifyEnabled) {
-        this.notifyPopup = true
-      }
-    },
-    closeNotifyPopup () {
-      this.notifyEnabled = false
-      this.notifyPopup = false
     },
     async requestRegisterNotify (notifyMethod) {
       const params = {
@@ -173,18 +169,7 @@ export default {
       if (!isNaN(this.notifyTargetID)) {
         params.id = this.notifyTargetID
       }
-      const resp = await this.$axios.post('/notify/register', params)
-      if (resp.data.status !== 200) {
-        this.$notify(
-          {
-            group: 'default',
-            type: 'danger',
-            duration: 5000,
-            title: '通知登録エラー',
-            text: 'ページを再読み込みしてください'
-          }
-        )
-      }
+      await this.$axios.post('/notify/register', params)
     },
     async requestUnregisterNotify (notifyMethod) {
       const params = {
@@ -195,7 +180,6 @@ export default {
       if (!isNaN(this.notifyTargetID)) {
         params.id = this.notifyTargetID
       }
-      // 失敗しようが知らん。
       await this.$axios.post('/notify/unregister', params)
     }
   }
