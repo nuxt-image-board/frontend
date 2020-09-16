@@ -111,11 +111,15 @@
                 </div>
               </div>
               <div class="column is-12 has-text-centered">
-                <a class="button is-primary is-large" @click="addStar(result.illustID); result.like += 1">
+                <span class="button is-primary is-medium">
+                  <Fas i="eye" style="margin-right:3px;" />
+                  x{{ result.view }}
+                </span>
+                <a class="button is-primary is-medium" @click="addStar(result.illustID); result.like += 1">
                   <Fas i="heart" style="margin-right:3px;" />
                   x{{ result.like }}
                 </a>
-                <a class="button is-primary is-large" @click="handleBookmark">
+                <a class="button is-primary is-medium" @click="handleBookmark">
                   <Fas v-if="result.mylisted" i="bookmark" style="margin-right:3px;" />
                   <Far v-else i="bookmark" style="margin-right:3px;" />
                   x{{ result.mylist }}
@@ -365,6 +369,7 @@ export default {
     const related = await $axios.get(`/search/artist?id=${result.artist.id}`)
     const isEditable = (result.user.id === $auth.$state.user.userID || $auth.$state.user.permission === 9)
     const isTagEditable = ($auth.$state.user.permission > 1)
+    await $axios.put(`/arts/${id}/view`)
     return {
       comments: comments.data.data,
       related: related.data.data,

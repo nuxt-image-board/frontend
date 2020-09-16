@@ -8,7 +8,7 @@
         :notifyTargetType="targetType"
         :notifyTargetID="targetID"
       />
-      <div v-if="apiEndpoint.includes('artist') && !$store.state.user.mutedArtists.includes(targetID)" class="control">
+      <a v-if="apiEndpoint.includes('artist') && !$store.state.user.mutedArtists.includes(targetID)" class="control">
         <div class="tags has-addons">
           <span class="tag icon is-medium">
             <Fas i="eye" classes="is-size-6" />
@@ -20,8 +20,8 @@
             表示切替
           </span>
         </div>
-      </div>
-      <div
+      </a>
+      <a
         v-if="apiEndpoint.includes('artist') && $store.state.user.mutedArtists.includes(targetID)"
         class="control"
         @click="toggleMute(false, 2, targetID)"
@@ -34,7 +34,7 @@
             表示切替
           </span>
         </div>
-      </div>
+      </a>
     </div>
     <div class="field is-grouped is-grouped-centered is-grouped-multiline">
       <nuxt-link

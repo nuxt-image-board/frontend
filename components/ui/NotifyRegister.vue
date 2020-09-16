@@ -1,6 +1,6 @@
 <template>
   <span>
-    <div
+    <a
       :disabled="!isFetchFinished"
       @click="notifyButtonPressed"
     >
@@ -13,7 +13,7 @@
           通知切替
         </span>
       </div>
-    </div>
+    </a>
     <Modal :title="'通知登録: ' + notifyTitle" :isModalOpen="notifyPopup" @modal-closed="notifyPopup = false">
       <h4 class="has-text-centered">
         新着イラスト通知を有効にしますか?

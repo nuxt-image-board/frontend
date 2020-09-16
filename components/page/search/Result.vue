@@ -26,6 +26,16 @@
       </nuxt-link>
     </div>
     <div v-if="!$store.state.user.colSize || $store.state.user.colSize >= 6 || $store.state.user.isPC" class="card-footer">
+      <nuxt-link :to="artAddress" class="card-footer-item">
+        <span class="icon is-small">
+          <Fas i="eye" />
+        </span>
+        <span>
+          x{{ result.view ? result.view : 100 }}
+        </span>
+      </nuxt-link>
+    </div>
+    <div v-if="!$store.state.user.colSize || $store.state.user.colSize >= 6 || $store.state.user.isPC" class="card-footer">
       <a class="card-footer-item" @click="addStar(result.illustID); result.like += 1">
         <span class="icon is-small">
           <Fas i="heart" />
