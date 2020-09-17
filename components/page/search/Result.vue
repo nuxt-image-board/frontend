@@ -1,12 +1,15 @@
 <template>
   <div class="card">
-    <div class="card-image">
-      <div v-if="$store.state.user.isPC" class="column is-hidden-touch is-8-fullhd is-8-desktop is-6-widescreen is-v-centered">
-        <span class="tag is-link">{{ result.date }}</span><br>
-        <nuxt-link :to="artistAddress">
-          <span class="tag is-info">{{ result.artist.name }}</span>
+    <header class="is-hidden-touch has-text-centered">
+      <p>
+        <span class="tag is-link">{{ result.date }}</span>
+        <br>
+        <nuxt-link class="tag is-info" :to="artistAddress">
+          <span>{{ result.artist.name }}</span>
         </nuxt-link>
-      </div>
+      </p>
+    </header>
+    <div class="card-image">
       <nuxt-link :to="artAddress">
         <figure class="image">
           <img
@@ -25,48 +28,31 @@
         </figure>
       </nuxt-link>
     </div>
-    <div v-if="!$store.state.user.colSize || $store.state.user.colSize >= 6 || $store.state.user.isPC" class="card-footer">
-      <nuxt-link :to="artAddress" class="card-footer-item">
-        <span class="icon is-small">
-          <Fas i="eye" />
-        </span>
-        <span>
-          x{{ result.view ? result.view : 100 }}
-        </span>
-      </nuxt-link>
-    </div>
-    <div v-if="!$store.state.user.colSize || $store.state.user.colSize >= 6 || $store.state.user.isPC" class="card-footer">
-      <a class="card-footer-item" @click="addStar(result.illustID); result.like += 1">
-        <span class="icon is-small">
-          <Fas i="heart" />
-        </span>
-        <span>
-          x{{ result.like }}
-        </span>
-      </a>
-      <a class="card-footer-item" @click="handleBookmark">
-        <span v-if="result.mylisted" class="icon is-small">
-          <Fas i="bookmark" />
-        </span>
-        <span v-else class="icon is-small">
-          <Far i="bookmark" />
-        </span>
-        <span>
-          x{{ result.mylist }}
-        </span>
-      </a>
-    </div>
+    <footer class="is-hidden-touch has-text-centered">
+      <span class="is-size-6">
+        <Fas i="eye" />
+      </span>
+      <span>{{ result.view ? result.view : 0 }}</span>
+      &nbsp;
+      <span class="is-size-6">
+        <Fas i="heart" />
+      </span>
+      <span>{{ result.like }}</span>
+      &nbsp;
+      <span class="is-size-6">
+        <Fas i="bookmark" />
+      </span>
+      <span>{{ result.mylist }}</span>
+    </footer>
   </div>
 </template>
 
 <script>
 import Fas from '@/components/ui/Fas.vue'
-import Far from '@/components/ui/Far.vue'
 
 export default {
   components: {
-    Fas,
-    Far
+    Fas
   },
   props: {
     result: {
