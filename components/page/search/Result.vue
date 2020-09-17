@@ -1,15 +1,31 @@
 <template>
   <div class="card">
-    <header class="is-hidden-touch has-text-centered">
-      <p>
-        <span class="tag is-link">{{ result.date }}</span>
-        <br>
-        <nuxt-link class="tag is-info" :to="artistAddress">
-          <span>{{ result.artist.name }}</span>
-        </nuxt-link>
-      </p>
-    </header>
     <div class="card-image">
+      <header class="is-hidden-touch">
+        <p>
+          <span class="tag is-link">{{ result.date }}</span>
+          <br>
+          <nuxt-link class="tag is-info" :to="artistAddress">
+            <span>{{ result.artist.name }}</span>
+          </nuxt-link>
+          <br>
+          &nbsp;
+          <span class="is-size-6">
+            <Fas i="eye" />
+          </span>
+          <span>{{ result.view ? result.view : 0 }}</span>
+          &nbsp;
+          <span class="is-size-6">
+            <Fas i="heart" />
+          </span>
+          <span>{{ result.like }}</span>
+          &nbsp;
+          <span class="is-size-6">
+            <Fas i="bookmark" />
+          </span>
+          <span>{{ result.mylist }}</span>
+        </p>
+      </header>
       <nuxt-link :to="artAddress">
         <figure class="image">
           <img
@@ -28,22 +44,6 @@
         </figure>
       </nuxt-link>
     </div>
-    <footer class="is-hidden-touch has-text-centered">
-      <span class="is-size-6">
-        <Fas i="eye" />
-      </span>
-      <span>{{ result.view ? result.view : 0 }}</span>
-      &nbsp;
-      <span class="is-size-6">
-        <Fas i="heart" />
-      </span>
-      <span>{{ result.like }}</span>
-      &nbsp;
-      <span class="is-size-6">
-        <Fas i="bookmark" />
-      </span>
-      <span>{{ result.mylist }}</span>
-    </footer>
   </div>
 </template>
 
