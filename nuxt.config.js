@@ -231,7 +231,8 @@ export default {
           'faFileAlt',
           'faPenSquare',
           'faEye',
-          'faEyeSlash'
+          'faEyeSlash',
+          'faCrown'
         ]
       },
       {

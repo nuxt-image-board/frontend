@@ -47,6 +47,11 @@ export default {
     return {
       page_buttons: [
         {
+          to: '/ranking',
+          icon: 'crown',
+          title: 'ranking'
+        },
+        {
           to: '/search_form/keyword',
           icon: 'keyboard',
           title: 'keyword'

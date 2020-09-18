@@ -52,6 +52,10 @@
               <span class="icon"><Fas i="list" /></span>
               <span>{{ $t('NavbarUp.bar_items.list') }}</span>
             </nuxt-link>
+            <nuxt-link to="/ranking/monthly?sort=0" class="navbar-item has-text-white" @click.native="closeAll($event)">
+              <span class="icon"><Fas i="crown" /></span>
+              <span>{{ $t('NavbarUp.bar_items.ranking') }}</span>
+            </nuxt-link>
             <div v-for="(category,index) in searchCategories" :key="category.name" class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link has-text-white" @click="changeTab(index+1)">
                 <span class="icon"><Fas :i="category.icon" /></span>
@@ -73,10 +77,6 @@
                 </nuxt-link>
               </div>
             </div>
-            <nuxt-link to="/search/image" class="navbar-item has-text-white" @click.native="closeAll($event)">
-              <span class="icon"><Fas i="image" /></span>
-              <span>{{ $t('NavbarUp.bar_items.image') }}</span>
-            </nuxt-link>
             <nuxt-link to="/search/methods" class="navbar-item has-text-white" @click.native="closeAll($event)">
               <span class="icon"><Fas i="plus-square" /></span>
               <span>{{ $t('NavbarUp.bar_items.more') }}</span>
