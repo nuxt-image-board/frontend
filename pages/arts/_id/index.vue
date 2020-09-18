@@ -302,6 +302,19 @@
     overflow-x: scroll;
 }
 
+.horizontal-container::-webkit-scrollbar {
+  height: 8px;
+}
+.horizontal-container::-webkit-scrollbar-track {
+  margin: 0 2px;
+  background: #ccc;
+  border-radius: 5px;
+}
+.horizontal-container::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: #666;
+}
+
 .horizontal-item {
   position: relative;
   width: 150px;
