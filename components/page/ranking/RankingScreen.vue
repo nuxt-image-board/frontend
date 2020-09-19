@@ -3,7 +3,16 @@
     <div class="columns is-centered is-multiline">
       <div class="column is-8">
         <Notification>
-          {{ pageTitle }} 2020/09
+          {{ pageTitle }}
+          <span v-if="apiEndpoint.includes('monthly')">
+            {{ `${today.getFullYear()}/${today.getMonth()+1}` }}
+          </span>
+          <span v-if="apiEndpoint.includes('weekly')">
+            {{ `${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()} ~ ${week_ago.getFullYear()}/${week_ago.getMonth()+1}/${week_ago.getDate()}` }}
+          </span>
+          <span v-if="apiEndpoint.includes('daily')">
+            {{ `${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}` }}
+          </span>
         </Notification>
       </div>
       <div class="column is-8">
@@ -62,8 +71,23 @@
           class="columns is-multiline is-centered"
           :class="{'is-gapless': $store.state.user.colSize < 6 && !$store.state.user.isPC}"
         >
-          <div v-for="index in 10" :key="index" :class="colSize">
-            <Result :rankNo="index" />
+          <div v-for="(r,index) in results" :key="r.illustID" :class="colSize">
+            <Result
+              :rankNo="index+1"
+              :artistID="r.artistID"
+              :artistName="r.artist.name"
+              :illustID="r.illustID"
+              :illustExtension="r.extension"
+              :illustTitle="r.title"
+              :illustLike="r.like"
+              :illustView="r.view"
+              :illustNsfw="r.nsfw"
+            />
+          </div>
+          <div v-if="results.length === 0">
+            <p class="is-size-4">
+              指定した期間のランキング情報が見つけられませんでした
+            </p>
           </div>
         </div>
         <client-only v-if="$store.state.user.useInfinity">
@@ -111,17 +135,7 @@ export default {
     resultsFromProps: {
       type: Array,
       default: () => {
-        return [
-          {
-            illustID: 0,
-            date: '2020-12-04',
-            like: 0,
-            nsfw: false,
-            artist: {
-              name: 'NoData'
-            }
-          }
-        ]
+        return []
       }
     }
   },
@@ -131,11 +145,12 @@ export default {
       sortID: this.sortIdFromProps,
       totalPage: this.totalPageFromProps,
       results: this.resultsFromProps,
+      today: new Date(),
+      week_ago: new Date(),
       sortMethods: [
-        { text: this.$t('SearchScreen.sort.most_liked'), value: 4 },
-        { text: '閲覧数が多い順', value: 5 }
+        { text: this.$t('SearchScreen.sort.most_liked'), value: 0 },
+        { text: '閲覧数が多い順', value: 1 }
       ],
-      rankID: 1,
       rankMethods: [
         { text: '月間', value: 1 },
         { text: '週間', value: 2 },
@@ -162,6 +177,18 @@ export default {
     }
   },
   computed: {
+    rankID () {
+      switch (this.apiEndpoint) {
+        case '/ranking/monthly':
+          return 1
+        case '/ranking/weekly':
+          return 2
+        case '/ranking/daily':
+          return 3
+        default:
+          return 0
+      }
+    },
     colSize () {
       const colSize = this.$store.state.user.colSize
       if (colSize) {
@@ -169,6 +196,9 @@ export default {
       }
       return 'column is-12-mobile is-6-touch is-3-desktop'
     }
+  },
+  mounted () {
+    this.week_ago.setDate(this.week_ago.getDate() - 7)
   },
   methods: {
     async addNextpage ($state) {
@@ -181,24 +211,24 @@ export default {
         $state.complete()
       }
     },
-    updateSort (newSort) {
+    async updateSort (newSort) {
       this.pageID = 1
       this.sortID = parseInt(newSort)
-      // 新しいソートでデータ取得
-      // this.results = resp.imgs
+      const resp = await this.$searchApi.getRankingResults(this.apiEndpoint, this.pageID, this.sortID)
+      this.results = resp.imgs
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, sort: newSort } })
       this.$scrollTo('#top')
     },
     updateRange (newRange) {
       switch (newRange) {
-        case 1:
-          this.$router.push({ path: '/ranking/monthly', query: { sort: 0 } })
+        case '1':
+          this.$router.push({ path: '/ranking/monthly', query: { sort: this.sortID } })
           break
-        case 2:
-          this.$router.push({ path: '/ranking/weekly', query: { sort: 0 } })
+        case '2':
+          this.$router.push({ path: '/ranking/weekly', query: { sort: this.sortID } })
           break
-        case 3:
-          this.$router.push({ path: '/ranking/daily', query: { sort: 0 } })
+        case '3':
+          this.$router.push({ path: '/ranking/daily', query: { sort: this.sortID } })
           break
       }
       this.$scrollTo('#top')

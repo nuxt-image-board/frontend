@@ -51,4 +51,10 @@ class API {
     const params = { page: pageID, sort, order }
     return await this.requestResults(apiEndpoint, params)
   }
+
+  async getRankingResults (apiEndpoint, pageID, sortID) {
+    const sort = (sortID === 0) ? 'likes' : 'views'
+    const params = { page: pageID }
+    return await this.requestResults(apiEndpoint + '/' + sort, params)
+  }
 }

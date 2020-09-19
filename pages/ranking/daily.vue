@@ -19,13 +19,10 @@ export default {
     RankingScreen
   },
   async asyncData ({ $searchApi, $axios, $auth, route, error }) {
-    const apiEndpoint = '/ranking/monthly'
+    const apiEndpoint = '/ranking/daily'
     const pageID = isFinite(route.query.page) ? parseInt(route.query.page) : 1
     const sortID = isFinite(route.query.sort) ? parseInt(route.query.sort) : 0
     const resp = await $searchApi.getRankingResults(apiEndpoint, pageID, sortID)
-    if (!resp) {
-      error({ statusCode: 404 })
-    }
     return {
       apiEndpoint,
       pageID,
@@ -36,7 +33,7 @@ export default {
   },
   data () {
     return {
-      pageTitle: '月間ランキング'
+      pageTitle: '日間ランキング'
     }
   },
   head () {
