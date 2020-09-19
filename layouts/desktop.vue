@@ -51,7 +51,7 @@ export default {
   async mounted () {
     this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
-    this.alertConnectionSpeed()
+    // this.alertConnectionSpeed()
     // setInterval(this.scrollPageTitle, 200)
   },
   created () {

@@ -60,7 +60,7 @@ export default {
   async mounted () {
     this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
-    this.alertConnectionSpeed()
+    // this.alertConnectionSpeed()
   },
   methods: {
     showAndHide () {
