@@ -33,9 +33,9 @@
 </template>
 
 <script>
-import { settings } from '~/assets/texts/settings.json'
 import Modal from '@/components/ui/Modal.vue'
 import Setting from '@/components/page/profile/toggle/setting.vue'
+import { settings } from '~/assets/texts/settings.json'
 
 export default {
   components: {

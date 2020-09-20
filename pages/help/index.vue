@@ -22,7 +22,7 @@
           </div>
           <div class="columns is-multiline is-gapless is-centered">
             <div v-for="c in categories" :key="c.url" class="column is-4-desktop is-6">
-              <nuxt-link v-if="!c['hidden-on-logout'] || (c['hidden-on-logout'] && $auth.loggedIn)" class="button is-size-4 is-large is-fullwidth" :to="`/help/categories/${c.url}`">
+              <nuxt-link v-if="!c['hidden-on-logout'] || (c['hidden-on-logout'] && $store.state.auth.loggedIn)" class="button is-size-4 is-large is-fullwidth" :to="`/help/categories/${c.url}`">
                 {{ $t(c.url) }}
               </nuxt-link>
               <button v-else class="button is-size-4 is-large is-fullwidth" disabled>

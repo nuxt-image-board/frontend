@@ -2,7 +2,7 @@ const envPath = `config/.env.${process.env.NODE_ENV || 'local'}`
 require('dotenv').config({ path: envPath })
 
 export default {
-  mode: 'universal',
+  ssr: true,
   /*
   ** Headers of the page
   */
@@ -36,8 +36,7 @@ export default {
       { rel: 'preconnect dns-prefetch', href: '//cdn.jsdelivr.net' },
       { rel: 'preconnect dns-prefetch', href: '//cdn.lr-ingest.io' },
       { rel: 'preconnect dns-prefetch', href: '//cdn.onesignal.com' },
-      { rel: 'preconnect dns-prefetch', href: '//onesignal.com' },
-      { rel: 'dns-prefetch', href: '//***REMOVED***' }
+      { rel: 'preconnect dns-prefetch', href: '//onesignal.com' }
     ]
   },
   /*
