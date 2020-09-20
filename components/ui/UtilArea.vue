@@ -17,7 +17,7 @@
             class="tag is-link is-medium"
             @click="toggleMute(true, 2, targetID)"
           >
-            表示切替
+            {{ $t('UtilArea.toggle_show') }}
           </span>
         </div>
       </a>
@@ -31,7 +31,7 @@
             <Fas i="eye-slash" classes="is-size-6" />
           </span>
           <span class="tag is-link is-medium">
-            表示切替
+            {{ $t('UtilArea.toggle_show') }}
           </span>
         </div>
       </a>
@@ -46,7 +46,7 @@
           <span class="tag icon is-medium">
             <Fas i="pen-square" classes="is-size-6" />
           </span>
-          <span class="tag is-link is-medium">記事編集</span>
+          <span class="tag is-link is-medium">{{ $t('UtilArea.edit_article') }}</span>
         </div>
       </nuxt-link>
       <nuxt-link
@@ -58,7 +58,7 @@
           <span class="tag icon is-medium">
             <Fas i="file-alt" classes="is-size-6" />
           </span>
-          <span class="tag is-link is-medium">記事閲覧</span>
+          <span class="tag is-link is-medium">{{ $t('UtilArea.show_article') }}</span>
         </div>
       </nuxt-link>
     </div>

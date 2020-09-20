@@ -20,10 +20,11 @@
             <div class="tile is-parent is-vertical">
               <article class="tile is-child notification has-background-cocoa">
                 <p class="title">
-                  Alpha
+                  Contact us
                 </p>
                 <div class="content">
-                  <p>表示崩れやバグが発生するかもです。何か気になることがあれば<a :href="CONTACT">問い合わせ等</a>から、ご連絡ください。</p>
+                  <p><a :href="CONTACT">何か問題や質問などがあればこちらからお問い合わせください!</a></p>
+                  <p><a :href="CONTACT">You can contact us from here!</a></p>
                 </div>
               </article>
               <article class="tile is-child notification has-background-cocoa">

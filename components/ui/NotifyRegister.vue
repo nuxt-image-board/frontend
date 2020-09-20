@@ -10,7 +10,7 @@
           <Far v-else i="bell" classes="is-size-6" />
         </span>
         <span class="tag is-link is-medium">
-          通知切替
+          {{ $t('UtilArea.toggle_notify') }}
         </span>
       </div>
     </a>

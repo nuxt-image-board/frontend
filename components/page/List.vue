@@ -37,7 +37,7 @@
           </button>
         </div>
         <div v-if="hasWikiElement && !endpoint.includes('all') && !endpoint.includes('catalog')" class="column is-12 has-text-centered">
-          <Wiki
+          <UtilArea
             :articleTitle="notifyTitle"
             :articleTargetType="notifyTargetType"
             :articleTargetID="notifyTargetID"
@@ -77,7 +77,7 @@
 <script>
 import Notification from '@/components/ui/Notification.vue'
 import SelectForm from '@/components/ui/SelectForm.vue'
-import Wiki from '@/components/ui/Wiki.vue'
+import UtilArea from '@/components/ui/UtilArea.vue'
 import NotifyRegister from '@/components/ui/NotifyRegister.vue'
 import Pagination from '@/components/ui/Pagination.vue'
 import ListResult from '@/components/page/list/Result.vue'
@@ -88,7 +88,7 @@ export default {
     Notification,
     SelectForm,
     NotifyRegister,
-    Wiki,
+    UtilArea,
     Pagination,
     ListResult,
     SearchResult

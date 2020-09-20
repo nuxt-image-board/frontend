@@ -22,26 +22,21 @@
       <div class="columns is-centered is-vcentered" style="min-height:80vh;">
         <div v-if="!uploaded" class="column is-6 has-text-centered">
           <h4 class="title">
-            画像からイラスト投稿
+            {{ $t('upload_by_image.title') }}
           </h4>
-          <div class="field">
-            <p>
-              <b>
-                投稿前には必ず
-                <nuxt-link to="/rules/illust">
-                  イラスト投稿ルール
-                </nuxt-link>
-                をご確認ください!
-              </b>
-            </p>
-            <p>
-              ***REMOVED***
-              ***REMOVED***
-            </p>
-            <p>
-              ※JPGかJPEGかPNGのみ対応です
-            </p>
-          </div>
+          <p>
+            {{ $t('upload_by_image.description') }}
+          </p>
+          <p>
+            <b>
+              投稿前には必ず
+              <nuxt-link to="/help/articles/upload-guidelines">
+                イラスト投稿ルール / Upload guidelines
+              </nuxt-link>
+              をご確認ください!
+            </b>
+          </p>
+          <br>
           <div class="field">
             <div class="file is-centered is-large has-name is-boxed">
               <label class="file-label">
@@ -51,20 +46,24 @@
                     <Fas i="cloud-upload-alt" />
                   </span>
                   <span class="file-label">
-                    画像を選択…
+                    {{ $t('upload_by_image.buttons.select_image') }}
                   </span>
                 </span>
               </label>
             </div>
+            <p class="help">
+              {{ $t('upload_by_image.supported_extensions') }}
+            </p>
           </div>
+          <br>
           <div class="field is-centered">
             <nuxt-link to="/upload/page" class="button is-primary is-medium">
-              URLから投稿する場合はこちら
+              {{ $t('upload_by_image.buttons.upload_by_page') }}
             </nuxt-link>
           </div>
           <div class="field is-centered">
             <nuxt-link to="/history/upload" class="button is-primary is-medium">
-              投稿履歴の確認はこちら
+              {{ $t('upload_by_image.buttons.upload_history') }}
             </nuxt-link>
           </div>
         </div>

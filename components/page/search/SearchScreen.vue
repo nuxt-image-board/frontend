@@ -19,7 +19,7 @@
               />
             </div>
             <div class="column is-centered has-text-centered-touch is-12-mobile is-6-tablet is-4-desktop has-text-right">
-              <Wiki
+              <UtilArea
                 :apiEndpoint="apiEndpoint"
                 :articleTitle="tabTitle"
                 :targetType="notifyTargetType"
@@ -60,14 +60,14 @@
 <script>
 import Notification from '@/components/ui/Notification.vue'
 import SelectForm from '@/components/ui/SelectForm.vue'
-import Wiki from '@/components/ui/Wiki.vue'
+import UtilArea from '@/components/ui/UtilArea.vue'
 import Result from '@/components/page/search/Result.vue'
 
 export default {
   components: {
     Notification,
     SelectForm,
-    Wiki,
+    UtilArea,
     Pagination: () => import('@/components/ui/Pagination.vue'),
     Result
   },

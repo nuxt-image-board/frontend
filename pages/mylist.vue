@@ -82,12 +82,12 @@ export default {
   data () {
     return {
       sortMethods: [
-        { text: 'マイリスト登録日が新しい順', value: 0 },
-        { text: 'マイリスト登録日が古い順', value: 1 },
-        { text: '投稿が新しい順', value: 2 },
-        { text: '投稿が古い順', value: 3 },
-        { text: 'いいね数が多い順', value: 4 },
-        { text: 'いいね数が少ない順', value: 5 }
+        { text: this.$t('SearchScreen.sort.latest_mylist'), value: 0 },
+        { text: this.$t('SearchScreen.sort.oldest_mylist'), value: 1 },
+        { text: this.$t('SearchScreen.sort.latest_art'), value: 2 },
+        { text: this.$t('SearchScreen.sort.oldest_art'), value: 3 },
+        { text: this.$t('SearchScreen.sort.most_liked'), value: 4 },
+        { text: this.$t('SearchScreen.sort.least_liked'), value: 5 }
       ],
       results: [
         {

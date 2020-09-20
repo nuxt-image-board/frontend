@@ -5,29 +5,31 @@
         {{ rankNo }}位
       </p>
     </div>
-    <div class="card-content">
-      <nuxt-link :to="`/arts/${illustID}`" class="card-image">
-        <figure class="image">
-          <img
-            v-if="(!illustNsfw || $store.state.user.acceptR18) && !$store.state.user.mutedArtists.includes(artistID)"
-            v-lazy="previewAddress"
-            src="~/assets/images/loading.png"
-          >
-          <img
-            v-else-if="illustNsfw && !$store.state.user.mutedArtists.includes(artistID)"
-            src="~/assets/images/blocked_r18.png"
-          >
-          <img
-            v-else
-            src="~/assets/images/blocked_muted.png"
-          >
-        </figure>
-      </nuxt-link>
+    <nuxt-link :to="`/arts/${illustID}`" class="card-image">
+      <figure class="image">
+        <img
+          v-if="(!illustNsfw || $store.state.user.acceptR18) && !$store.state.user.mutedArtists.includes(artistID)"
+          v-lazy="previewAddress"
+          src="~/assets/images/loading.png"
+        >
+        <img
+          v-else-if="illustNsfw && !$store.state.user.mutedArtists.includes(artistID)"
+          src="~/assets/images/blocked_r18.png"
+        >
+        <img
+          v-else
+          src="~/assets/images/blocked_muted.png"
+        >
+      </figure>
+    </nuxt-link>
+    <div v-if="$store.state.user.isPC" class="card-content">
       <nuxt-link :to="`/search/artist/${artistID}`">
         <p>{{ artistName }}</p>
       </nuxt-link>
-      <p>{{ illustTitle }}</p>
-      <p>いいね数: {{ illustLike }} 閲覧数: {{ illustView }}</p>
+      <p>
+        {{ illustTitle }}
+      </p>
+      <p>{{ $t('RankingScreen.like_count') }}: {{ illustLike }} {{ $t('RankingScreen.view_count') }}: {{ illustView }}</p>
     </div>
   </div>
 </template>

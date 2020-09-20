@@ -21,7 +21,7 @@
         </Notification>
       </div>
       <div class="column is-8">
-        <div class="columns is-centered is-vcentered is-mobile">
+        <div class="columns is-centered is-vcentered">
           <div class="column is-8">
             <SelectForm
               :options="sortMethods"
@@ -73,7 +73,7 @@
       </div>
       <div class="column is-10 has-image-centered">
         <div
-          class="columns is-multiline is-centered"
+          class="columns is-multiline is-mobile is-centered"
           :class="{'is-gapless': $store.state.user.colSize < 6 && !$store.state.user.isPC}"
         >
           <div v-for="(r,index) in results" :key="r.illustID" :class="colSize">
