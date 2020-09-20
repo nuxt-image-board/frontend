@@ -3,14 +3,19 @@
     <div class="columns is-centered is-multiline">
       <div class="column is-8">
         <Notification>
-          {{ pageTitle }}
           <span v-if="apiEndpoint.includes('monthly')">
+            {{ $t('RankingScreen.sort.monthly') }}
+            {{ $t('RankingScreen.title') }}
             {{ `${today.getFullYear()}/${today.getMonth()+1}` }}
           </span>
           <span v-if="apiEndpoint.includes('weekly')">
+            {{ $t('RankingScreen.sort.weekly') }}
+            {{ $t('RankingScreen.title') }}
             {{ `${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()} ~ ${week_ago.getFullYear()}/${week_ago.getMonth()+1}/${week_ago.getDate()}` }}
           </span>
           <span v-if="apiEndpoint.includes('daily')">
+            {{ $t('RankingScreen.sort.daily') }}
+            {{ $t('RankingScreen.title') }}
             {{ `${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}` }}
           </span>
         </Notification>
@@ -63,7 +68,7 @@
       </div>
       <div class="column is-8 has-text-centered">
         <p>
-          ※期間中に集計したいいね/閲覧数を表示しています。未実装なため過去のランキングは閲覧できません。
+          {{ $t('RankingScreen.note') }}
         </p>
       </div>
       <div class="column is-10 has-image-centered">
@@ -86,7 +91,7 @@
           </div>
           <div v-if="results.length === 0">
             <p class="is-size-4">
-              指定した期間のランキング情報が見つけられませんでした
+              {{ $t('RankingScreen.not_found') }}
             </p>
           </div>
         </div>
@@ -149,12 +154,12 @@ export default {
       week_ago: new Date(),
       sortMethods: [
         { text: this.$t('SearchScreen.sort.most_liked'), value: 0 },
-        { text: '閲覧数が多い順', value: 1 }
+        { text: this.$t('SearchScreen.sort.most_viewed'), value: 1 }
       ],
       rankMethods: [
-        { text: '月間', value: 1 },
-        { text: '週間', value: 2 },
-        { text: '日間', value: 3 }
+        { text: this.$t('RankingScreen.sort.monthly'), value: 1 },
+        { text: this.$t('RankingScreen.sort.weekly'), value: 2 },
+        { text: this.$t('RankingScreen.sort.daily'), value: 3 }
       ],
       rankYearID: 1,
       rankYearMethods: [
@@ -197,7 +202,7 @@ export default {
       return 'column is-12-mobile is-6-touch is-3-desktop'
     }
   },
-  mounted () {
+  created () {
     this.week_ago.setDate(this.week_ago.getDate() - 7)
   },
   methods: {

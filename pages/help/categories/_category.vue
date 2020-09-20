@@ -40,7 +40,7 @@
           <div class="columns is-centered">
             <div class="column is-10">
               <button class="button is-info is-fullwidth is-large" @click="$router.back(-1)">
-                戻る
+                {{ $t('help.back') }}
               </button>
             </div>
           </div>

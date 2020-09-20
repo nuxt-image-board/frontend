@@ -10,7 +10,7 @@
             <p v-for="b in article.body" :key="b" class="column is-12" v-html="b" />
             <div class="column is-10">
               <button class="button is-info is-large is-fullwidth" @click="$router.back(-1)">
-                戻る
+                {{ $t('help.back') }}
               </button>
             </div>
           </div>
@@ -19,23 +19,23 @@
           <div class="columns is-centered has-text-centered is-multiline">
             <div class="column is-12">
               <p class="is-size-5">
-                この記事はお役に立ちましたか?
+                {{ $t('help.survey.title') }}
               </p>
             </div>
             <div class="column is-12">
               <p class="is-size-7">
-                {{ yakunitatta }}名の方が役に立ったと言っています
+                {{ $t('help.survey.helped', [yakunitatta]) }}
               </p>
               <p class="is-size-7">
-                {{ yakunitatanakatta }}名の方が役に立たなかったと言っています
+                {{ $t('help.survey.not_helped', [yakunitatanakatta]) }}
               </p>
             </div>
             <div class="column is-6">
               <button class="button is-primary" @click="yakunitatta += 1">
-                役に立った
+                {{ $t('help.survey.yes') }}
               </button>
               <button class="button is-secondary" @click="yakunitatta += 1">
-                役に立たなかった
+                {{ $t('help.survey.no') }}
               </button>
             </div>
           </div>

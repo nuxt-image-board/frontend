@@ -62,8 +62,9 @@
         "url": "about-upload",
         "articles": [
             "what-can-i-upload",
+            "what-is-r-18",
             "upload-guidelines",
-            "what-is-r-18"
+            "nsfw-guidelines"
         ]
     },
     {
@@ -165,6 +166,7 @@
     },
     {
         "url": "related-services",
+        "hidden-on-logout": true,
         "articles": [
             "what-is-***REMOVED***-gacha",
             "what-is-***REMOVED***-april",
