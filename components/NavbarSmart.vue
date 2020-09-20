@@ -92,6 +92,12 @@
               </nuxt-link>
             </li>
             <li>
+              <nuxt-link to="/ranking/monthly?sort=0" class="navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
+                <span class="icon"><Fas i="crown" /></span>
+                <span>{{ $t('NavbarUp.bar_items.ranking') }}</span>
+              </nuxt-link>
+            </li>
+            <li>
               <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
                 <span class="icon"><Fas i="upload" /></span>
                 <span>{{ $t('NavbarUp.bar_items.upload') }}</span>

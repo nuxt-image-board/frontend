@@ -21,7 +21,7 @@
           <Fas i="external-link-alt" />
         </span>
       </a>
-      <a v-if="link.includes('pixiv')" :href="'/scrape?url=' + link" target="_blank" class="card-footer-item">
+      <a v-if="link.includes('pixiv') || link.includes('seiga') || link.includes('danbooru')" :href="'/scrape?url=' + link" target="_blank" class="card-footer-item">
         <span class="icon is-small">
           <Fas i="plus-square" />
         </span>
