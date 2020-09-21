@@ -75,15 +75,25 @@
               </div>
               <div class="field">
                 <div class="columns">
-                  <div class="column is-6">
+                  <div class="column is-4">
                     <button class="button is-block is-link is-medium is-fullwidth">
                       {{ $t('gate.button.login') }} <Fas i="sign-in-alt" />
                     </button>
                   </div>
-                  <div class="column is-6">
+                  <div class="column is-4">
                     <a :href="LINE_LOGIN_URL" target="_blank" rel="noopener noreferrer" class="button is-block has-text-white is-medium is-fullwidth" style="background-color: #1a8607;">
                       {{ $t('gate.button.login_with_line') }} <Fas i="sign-in-alt" />
                     </a>
+                  </div>
+                  <div class="column is-4">
+                    <client-only>
+                      <vue-telegram-login
+                        mode="redirect"
+                        size="medium"
+                        telegram-login="***REMOVED***Bot"
+                        redirect-url="https://***REMOVED***/social/telegram/callback"
+                      />
+                    </client-only>
                   </div>
                 </div>
               </div>

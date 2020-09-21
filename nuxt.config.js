@@ -134,6 +134,7 @@ export default {
     { src: '~plugins/vue-lazyload', mode: 'client' },
     { src: '~plugins/vue-infinite-loading', mode: 'client' },
     { src: '~plugins/vue-input-tag', mode: 'client' },
+    { src: '~plugins/vue-telegram-login', mode: 'client' },
     { src: '~plugins/vuex-persistedstate-localstorage', mode: 'client' },
     { src: '~plugins/vuex-persistedstate-cookie' }
   ],

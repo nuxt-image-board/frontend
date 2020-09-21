@@ -22,6 +22,29 @@
         {{ $t('accountSettings.line_connect.sentence') }}
       </p>
     </Modal>
+    <a class="panel-block" @click="modalType = 5">
+      <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true" />
+      </span>
+      {{ $t('accountSettings.telegram_connect.title') }}
+    </a>
+    <Modal :title="$t('accountSettings.telegram_connect.title')" :isModalOpen="modalType === 5" @modal-closed="modalType = 0">
+      <h2 class="has-text-centered">
+        {{ $t('accountSettings.telegram_connect.title') }} {{ IS_TELEGRAM_CONNECTED }}
+      </h2>
+      <p class="subtitle has-text-centered" style="word-break:break-all">
+        <client-only>
+          <vue-telegram-login
+            mode="redirect"
+            telegram-login="***REMOVED***Bot"
+            redirect-url="https://***REMOVED***/social/telegram/connect"
+          />
+        </client-only>
+      </p>
+      <p>
+        {{ $t('accountSettings.telegram_connect.sentence') }}
+      </p>
+    </Modal>
     <a class="panel-block" @click="modalType = 3">
       <span class="panel-icon">
         <i class="fas fa-book" aria-hidden="true" />
