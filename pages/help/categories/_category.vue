@@ -20,7 +20,7 @@
                 v-for="a in categories.find(sub => sub.url === c).articles"
                 :key="a"
                 :to="`/help/articles/${a}`"
-                class="button is-medium is-fullwidth"
+                class="button is-medium is-fullwidth is-size-6-mobile"
               >
                 {{ $t(a).title }}
               </nuxt-link>
@@ -31,7 +31,7 @@
             <div v-for="a in category.articles" :key="a" class="column is-6">
               <nuxt-link
                 :to="`/help/articles/${a}`"
-                class="button is-medium is-fullwidth"
+                class="button is-medium is-fullwidth is-size-6-mobile"
               >
                 {{ $t(a).title }}
               </nuxt-link>
