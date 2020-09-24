@@ -58,9 +58,15 @@ Vue.mixin({
         }
       )
       const mylistCount = await this.$axios.get(`/mylist/${this.$auth.user.mylist.id}`)
-      this.$store.commit(
-        'user/updateSetting', { path: 'mylistCount', param: mylistCount.data.data.count }
-      )
+      if (mylistCount.data) {
+        this.$store.commit(
+          'user/updateSetting', { path: 'mylistCount', param: mylistCount.data.data.count }
+        )
+      } else {
+        this.$store.commit(
+          'user/updateSetting', { path: 'mylistCount', param: 0 }
+        )
+      }
       // ミュートしている情報を取得し、対応するリストにつっこむ
       if (
         this.$store.state.user.obtainedProducts.includes(9) ||
@@ -81,16 +87,16 @@ Vue.mixin({
         this.$store.commit(
           'user/setArtistMuteIds', muteData.data.data.artist
         )
-        this.$notify(
-          {
-            group: 'default',
-            type: 'success',
-            duration: 2000,
-            title: this.$t('gate.notify.login_steps.title'),
-            text: this.$t('gate.notify.login_steps.load_complete')
-          }
-        )
       }
+      this.$notify(
+        {
+          group: 'default',
+          type: 'success',
+          duration: 2000,
+          title: this.$t('gate.notify.login_steps.title'),
+          text: this.$t('gate.notify.login_steps.load_complete')
+        }
+      )
     }
   }
 })
