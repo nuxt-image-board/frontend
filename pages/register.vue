@@ -121,7 +121,9 @@
                 <div class="control has-text-centered">
                   <label class="checkbox">
                     <input v-model="form.agreeTerms" type="checkbox">
-                    <nuxt-link to="terms">{{ $t('gate.register_form.agree_tos') }}</nuxt-link>
+                    <a href="terms" target="_blank" rel="noopener noreferrer">
+                      {{ $t('gate.register_form.agree_tos') }}
+                    </a>
                   </label>
                 </div>
               </div>
