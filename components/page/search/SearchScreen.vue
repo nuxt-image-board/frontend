@@ -133,7 +133,7 @@ export default {
       }
     },
     notifyTargetID () {
-      return parseInt(this.$route.params.id)
+      return (this.$route.params.id ? parseInt(this.$route.params.id) : 0)
     }
   },
   methods: {
