@@ -206,7 +206,7 @@
               同一グループのイラスト
             </p>
             <div class="horizontal-container">
-              <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
+              <div v-for="i in grouped.imgs" :key="i.id" class="horizontal-item">
                 <nuxt-link :to="`/arts/${i.illustID}`">
                   <img class="vertical-centered" decoding="async" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
                 </nuxt-link>
