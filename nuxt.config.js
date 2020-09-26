@@ -9,6 +9,9 @@ export default {
   head: {
     titleTemplate: '%s | ' + process.env.SITE_NAME,
     title: process.env.SITE_NAME,
+    htmlAttrs: {
+      prefix: 'og: http://ogp.me/ns#'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1, minimal-ui' },
@@ -22,11 +25,9 @@ export default {
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
       { hid: 'og:url', property: 'og:url', content: 'https://***REMOVED***' },
-      { hid: 'og:image', property: 'og:image', content: process.env.SITE_OG_IMAGE },
       { name: 'twitter:card', content: 'summary' },
       { name: 'twitter:title', content: process.env.SITE_NAME },
-      { name: 'twitter:description', content: process.env.SITE_DESCRIPTION },
-      { name: 'twitter:image', content: process.env.SITE_OG_IMAGE }
+      { name: 'twitter:description', content: process.env.SITE_DESCRIPTION }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
