@@ -86,7 +86,10 @@ export default {
       },
       set (value) {
         this.$store.commit('user/updateSetting', { path: this.storeKey, param: value })
-        if (['isPC', 'useSakura', 'locale'].includes(this.storeKey)) {
+        if (this.storeKey === 'locale') {
+          this.$i18n.locale = value
+        }
+        if (['isPC', 'useSakura'].includes(this.storeKey)) {
           location.reload()
         } else if (this.storeKey === 'useMusicPlayer' && value === true) {
           this.$store.commit('user/updateSetting', { path: 'playerVideoIndex', param: 0 })

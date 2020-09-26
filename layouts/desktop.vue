@@ -51,12 +51,7 @@ export default {
   async mounted () {
     window.document.addEventListener(
       'keydown',
-      function (e) {
-        if (e.keyCode === 116) {
-          e.preventDefault()
-          return false
-        }
-      },
+      { handleEvent: this.blockBrowserReload },
       { passive: false }
     )
     this.insertBlossomLoader()
@@ -68,6 +63,12 @@ export default {
     this.showConsoleMessage()
   },
   methods: {
+    blockBrowserReload (e) {
+      if (e.keyCode === 116) {
+        e.preventDefault()
+        return false
+      }
+    },
     scrollPageTitle () {
       if (this.add) {
         document.title = 'ご注文は' + this.msg.slice(0, this.current)

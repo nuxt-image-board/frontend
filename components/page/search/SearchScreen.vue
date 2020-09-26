@@ -38,7 +38,7 @@
         </div>
       </div>
       <client-only v-if="$store.state.user.useInfinity">
-        <infinite-loading @infinite="addNextpage">
+        <infinite-loading :identifier="identifier" @infinite="addNextpage">
           <div slot="no-more">
             {{ $t('SearchScreen.no_more_result') }}
           </div>
@@ -104,6 +104,7 @@ export default {
       totalPage: this.totalPageFromProps,
       results: this.resultsFromProps,
       hasWikiElement: true,
+      identifier: false,
       articleID: null,
       sortMethods: [
         { text: this.$t('SearchScreen.sort.latest_art'), value: 0 },
@@ -136,6 +137,24 @@ export default {
       return (this.$route.params.id ? parseInt(this.$route.params.id) : 0)
     }
   },
+  mounted () {
+    const self = this
+    const myPath = this.$route.path
+    const myId = this.$route.params.id
+    window.document.addEventListener(
+      'keydown',
+      function (e) {
+        if (e.keyCode === 116) {
+          e.preventDefault()
+          if (self.$route.params.id === myId && self.$route.path === myPath) {
+            self.resetPage()
+          }
+          return false
+        }
+      },
+      { passive: false }
+    )
+  },
   methods: {
     async addNextpage ($state) {
       this.pageID += 1
@@ -161,6 +180,14 @@ export default {
       this.results = resp.imgs
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
       this.$scrollTo('#top')
+    },
+    async resetPage () {
+      this.pageID = 1
+      this.results = []
+      const resp = await this.$searchApi.getSearchResults(this.apiEndpoint, this.pageID, this.sortID, this.targetId, false)
+      this.results = resp.imgs
+      this.$scrollTo('#top')
+      this.identifier = !this.identifier
     }
   }
 }

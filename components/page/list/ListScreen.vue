@@ -32,7 +32,7 @@
         </div>
       </div>
       <client-only v-if="$store.state.user.useInfinity">
-        <infinite-loading @infinite="addNextpage">
+        <infinite-loading :identifier="identifier" @infinite="addNextpage">
           <div slot="no-more">
             {{ $t('ListScreen.no_more_result') }}
           </div>
@@ -58,6 +58,11 @@ import ListResult from '@/components/page/list/Result.vue'
 import Pagination from '@/components/ui/Pagination.vue'
 
 export default {
+  transition: {
+    leave (el, done) {
+      console.log(el)
+    }
+  },
   components: {
     Notification,
     SelectForm,
@@ -94,6 +99,7 @@ export default {
       totalPage: this.totalPageFromProps,
       results: this.resultsFromProps,
       keyword: this.keywordFromProps,
+      identifier: false,
       sortMethods: [
         { text: this.$t('ListScreen.sort.latest_art'), value: 0 },
         { text: this.$t('ListScreen.sort.oldest_art'), value: 1 },
@@ -135,6 +141,24 @@ export default {
       }
     }
   },
+  mounted () {
+    const self = this
+    const myPath = this.$route.path
+    const myId = this.$route.params.id
+    window.document.addEventListener(
+      'keydown',
+      function (e) {
+        if (e.keyCode === 116) {
+          e.preventDefault()
+          if (self.$route.params.id === myId && self.$route.path === myPath) {
+            self.resetPage()
+          }
+          return false
+        }
+      },
+      { passive: false }
+    )
+  },
   methods: {
     async addNextpage ($state) {
       this.pageID += 1
@@ -160,6 +184,14 @@ export default {
       this.results = resp.contents
       this.$router.push({ path: this.$route.path, query: { ...this.$route.query, page: newPage } })
       this.$scrollTo('#top')
+    },
+    async resetPage () {
+      this.pageID = 1
+      this.results = []
+      const resp = await this.$searchApi.getListResults(this.apiEndpoint, this.pageID, this.sortID, this.keyword, false)
+      this.results = resp.contents
+      this.$scrollTo('#top')
+      this.identifier = !this.identifier
     }
   }
 }
