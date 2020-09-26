@@ -21,7 +21,7 @@ main {
     min-height:97vh;
 }
 
-/* Layout: */
+/* Layout: PC版でのみスクロールバーの色を変える */
 @media (min-width: 600px) {
   /* width */
   body::-webkit-scrollbar {

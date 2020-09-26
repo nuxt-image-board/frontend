@@ -15,6 +15,7 @@
     "lintfix": "eslint --fix --ext .js,.vue"
   },
   "dependencies": {
+    "@creativebulma/bulma-tagsinput": "^1.0.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-brands-svg-icons": "^5.14.0",
     "@fortawesome/free-regular-svg-icons": "^5.14.0",

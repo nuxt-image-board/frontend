@@ -183,9 +183,12 @@ img[lazy='loaded'] {
 
 // Bulma全体を初期化
 @import "~bulma/bulma";
+// Bulma-extentionsの挿入
+@import '@creativebulma/bulma-tagsinput/src/sass/index';
+@import 'bulma-quickview/dist/css/bulma-quickview.min';
+@import 'bulma-switch/dist/css/bulma-switch.min';
+@import 'bulma-pageloader/dist/css/bulma-pageloader.min';
 // ***REMOVED***カラーの挿入
 @import "usagi";
 // このサイト内で全体的に使うCSSの挿入
 @import "global";
-// Bulma-Extensionsの挿入
-@import "bulma-extensions.min"
