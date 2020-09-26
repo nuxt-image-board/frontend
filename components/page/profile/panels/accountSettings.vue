@@ -156,6 +156,9 @@ export default {
   computed: {
     IS_LINE_CONNECTED () {
       return this.$auth.$state.user.lineConnect ? this.$t('accountSettings.line_connect.status.connected') : this.$t('accountSettings.line_connect.status.not_connected')
+    },
+    IS_TELEGRAM_CONNECTED () {
+      return this.$auth.$state.user.telegramConnect ? this.$t('accountSettings.telegram_connect.status.connected') : this.$t('accountSettings.telegram_connect.status.not_connected')
     }
   },
   created () {

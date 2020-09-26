@@ -6,18 +6,16 @@
     <div class="container is-widescreen has-text-centered">
       <div class="columns is-centered">
         <div class="column is-10">
-          <client-only>
-            <editor
-              ref="toastuiEditor"
-              class="has-background-white"
-              :options="editorOptions"
-              :visible="editorVisible"
-              :previewStyle="previewType"
-              :initialValue="initialValue"
-              height="500px"
-              initialEditType="wysiwyg"
-            />
-          </client-only>
+          <Editor
+            ref="toastuiEditor"
+            class="has-background-white"
+            :options="editorOptions"
+            :visible="editorVisible"
+            :previewStyle="previewType"
+            :initialValue="initialValue"
+            height="500px"
+            initialEditType="wysiwyg"
+          />
         </div>
       </div>
       <br>
@@ -30,6 +28,9 @@
 
 <script>
 export default {
+  components: {
+    Editor: () => (process.client) ? import('@toast-ui/vue-editor').then((module) => { return module.Editor }) : null
+  },
   async asyncData ({ $axios, route, store, error, redirect }) {
     if (!store.state.user.obtainedProducts.includes(2)) {
       redirect('/shop')

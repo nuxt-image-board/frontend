@@ -348,13 +348,7 @@ export default {
   buildDir: '.nuxt',
   build: {
     publicPath: process.env.CDN_ADDR,
-    postcss: {
-      preset: {
-        features: {
-          customProperties: false
-        }
-      }
-    }
+    extractCSS: true
   },
   vue: {
     devtools: (process.env.NODE_ENV !== 'production')

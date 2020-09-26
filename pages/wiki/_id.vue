@@ -4,9 +4,7 @@
       <div class="columns is-vcentered is-centered">
         <div class="column is-8">
           <div class="boxed has-background-white round-15" style="min-height: 70vh;">
-            <client-only>
-              <viewer :initialValue="article.body" />
-            </client-only>
+            <Viewer :initialValue="article.body" />
           </div>
         </div>
         <div class="column is-vcentered is-2">
@@ -75,7 +73,8 @@ import SocialShare from '@/components/ui/SocialShare.vue'
 
 export default {
   components: {
-    SocialShare
+    SocialShare,
+    Viewer: () => (process.client) ? import('@toast-ui/vue-editor').then((module) => { return module.Viewer }) : null
   },
   async asyncData ({ $axios, $auth, route, error }) {
     const endpoint = '/wiki'
