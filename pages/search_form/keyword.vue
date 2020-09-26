@@ -16,6 +16,7 @@
               name="query"
               class="input is-half"
               type="text"
+              @keyup.enter="$router.push('/search/keyword/'+query)"
             >
             <button
               class="button is-primary is-fullwidth is-large"

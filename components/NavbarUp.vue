@@ -33,7 +33,13 @@
             <div class="navbar-item">
               <div class="field has-addons">
                 <div class="control">
-                  <input v-model="keyword" class="input is-rounded" type="text" placeholder="Find an another cute art">
+                  <input
+                    v-model="keyword"
+                    class="input is-rounded"
+                    type="text"
+                    placeholder="Find an another cute art"
+                    @keyup.enter="$router.push('/search/keyword/'+keyword)"
+                  >
                 </div>
                 <div class="control">
                   <nuxt-link
