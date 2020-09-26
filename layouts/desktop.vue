@@ -49,6 +49,16 @@ export default {
     }
   },
   async mounted () {
+    window.document.addEventListener(
+      'keydown',
+      function (e) {
+        if (e.keyCode === 116) {
+          e.preventDefault()
+          return false
+        }
+      },
+      { passive: false }
+    )
     this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
     // this.alertConnectionSpeed()
