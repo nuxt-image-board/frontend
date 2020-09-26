@@ -435,7 +435,8 @@ export default {
       }
     },
     async downloadImage () {
-      const imageOrig = await this.$axios.get(
+      const wget = this.$axios.create()
+      const imageOrig = await wget.get(
         this.ImgOrigAddress,
         { responseType: 'blob', cache: true }
       )
