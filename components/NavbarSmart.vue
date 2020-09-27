@@ -98,12 +98,6 @@
               </nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/upload" class="has-text-white navbar-item is-hoverable has-text-white" @click.native="openMenu = !openMenu">
-                <span class="icon"><Fas i="upload" /></span>
-                <span>{{ $t('NavbarUp.bar_items.upload') }}</span>
-              </nuxt-link>
-            </li>
-            <li>
               <a class="has-text-white" @click="openSearch = !openSearch">
                 <span class="icon"><Fas i="search" /></span>
                 <span>{{ $t('NavbarUp.smart_items.search') }}</span>

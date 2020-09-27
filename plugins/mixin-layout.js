@@ -36,6 +36,45 @@ Vue.mixin({
         )
       } catch {}
     },
+    alertUnsupportedBrowser () {
+      const ua = window.navigator.userAgent
+      const baseNotify = {
+        group: 'default',
+        duration: 10000,
+        type: 'danger',
+        title: 'ok',
+        text: 'お使いの環境はサポート外です。ヘルプに記載のある推奨環境のご利用を強く推奨します。'
+      }
+      switch (true) {
+        case ua.includes('iPad'):
+          baseNotify.title = 'iPad? ごめん、それだとレイアウト壊れるよ'
+          break
+        case ua.includes('FBAN/FBIOS'):
+          baseNotify.title = 'Facebook内ブラウザ? うちは嫌いだなぁ'
+          break
+        case ua.includes('IAB') && ua.includes('Line'):
+          baseNotify.title = 'LINE内ブラウザ? 普通のブラウザ使って!'
+          break
+        case ua.includes('Android 4'):
+          baseNotify.title = 'Android 4? そろそろ厳しくない?スマホ買い替えて!'
+          break
+        case ua.includes('PlayStation 4'):
+          baseNotify.title = 'PS4? うーんたぶんちゃんと見れるのかな'
+          break
+        case ua.includes('Nintendo Switch'):
+          baseNotify.title = 'Switch? 別のデバイスにスイッチ!'
+          break
+        case ua.includes('Nintendo WiiU'):
+          baseNotify.title = 'Wii U? イカでもやってたの?'
+          break
+        case ua.includes('Nintendo 3DS'):
+          baseNotify.title = '3DS? 立体にはならないんだけど...'
+          break
+      }
+      if (baseNotify.title !== 'ok') {
+        this.$notify(baseNotify)
+      }
+    },
     alertConnectionSpeed () {
       const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection
       if (connection) {

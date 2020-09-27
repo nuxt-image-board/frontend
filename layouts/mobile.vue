@@ -60,6 +60,7 @@ export default {
   async mounted () {
     this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
+    this.alertUnsupportedBrowser()
     // this.alertConnectionSpeed()
   },
   methods: {

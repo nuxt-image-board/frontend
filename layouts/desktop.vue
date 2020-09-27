@@ -56,6 +56,7 @@ export default {
     )
     this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
+    this.alertUnsupportedBrowser()
     // this.alertConnectionSpeed()
     // setInterval(this.scrollPageTitle, 200)
   },
