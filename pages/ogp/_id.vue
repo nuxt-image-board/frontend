@@ -47,20 +47,12 @@ export default {
   validate ({ params }) {
     return /^\d+$/.test(params.id)
   },
-  computed: {
-    ImgAddress () {
-      return process.env.CDN_ENDPOINT +
-        'illusts/large/' +
-        this.result.illustID +
-        (this.$store.state.user.useWebP ? '.webp' : '.jpg')
-    }
-  },
   methods: {
     getOGPThumb () {
       if (this.result.nsfw) {
-        return process.env.CDN_ENDPOINT + 'core_sys' + require('~/assets/images/blocked_r18.png')
+        return require('~/assets/images/blocked_r18.png')
       } else {
-        return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.' + this.result.extension
+        return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
       }
     }
   },
