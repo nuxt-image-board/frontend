@@ -31,6 +31,7 @@
                     type="text"
                     :aria-label="$t('gate.register_form.user_name')"
                     :placeholder="$t('gate.register_form.user_name')"
+                    minlength="4"
                     maxlength="20"
                     class="input"
                     autocomplete="nickname"
@@ -50,6 +51,7 @@
                     :aria-label="$t('gate.register_form.user_id')"
                     :placeholder="$t('gate.register_form.user_id')"
                     pattern="[a-zA-Z0-9]+"
+                    minlength="4"
                     maxlength="20"
                     class="input"
                     autocomplete="username"
@@ -69,6 +71,7 @@
                     :aria-label="$t('gate.register_form.password')"
                     :placeholder="$t('gate.register_form.password')"
                     pattern="[a-zA-Z0-9]+"
+                    minlength="8"
                     maxlength="20"
                     class="input"
                     autocomplete="new-password"
@@ -88,6 +91,7 @@
                     :aria-label="$t('gate.register_form.password_re')"
                     :placeholder="$t('gate.register_form.password_re')"
                     pattern="[a-zA-Z0-9]+"
+                    minlength="8"
                     maxlength="20"
                     class="input"
                     autocomplete="new-password"
@@ -176,8 +180,7 @@ export default {
         password_re: '',
         inviteCode: '',
         agreeTerms: false
-      },
-      isFormInvalid: false
+      }
     }
   },
   computed: {
@@ -186,11 +189,11 @@ export default {
     },
     filled () {
       if (
-        this.form.displayID &&
-        this.form.username &&
-        this.form.password &&
-        this.form.password_re &&
-        this.form.inviteCode &&
+        this.form.displayID && this.form.displayID.length > 3 &&
+        this.form.username && this.form.username.length > 3 &&
+        this.form.password && this.form.password.length > 7 &&
+        this.form.password_re && this.form.password.length > 7 &&
+        this.form.inviteCode && this.form.inviteCode.length > 3 &&
         this.form.agreeTerms === true
       ) {
         return true
