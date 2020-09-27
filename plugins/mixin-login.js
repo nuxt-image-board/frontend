@@ -58,7 +58,7 @@ Vue.mixin({
         }
       )
       const mylistCount = await this.$axios.get(`/mylist/${this.$auth.user.mylist.id}`)
-      if (mylistCount.data) {
+      if (mylistCount.data.data) {
         this.$store.commit(
           'user/updateSetting', { path: 'mylistCount', param: mylistCount.data.data.count }
         )
