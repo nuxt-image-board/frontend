@@ -6,16 +6,18 @@
     <div class="container is-widescreen has-text-centered">
       <div class="columns is-centered">
         <div class="column is-10">
-          <Editor
-            ref="toastuiEditor"
-            class="has-background-white"
-            :options="editorOptions"
-            :visible="editorVisible"
-            :previewStyle="previewType"
-            :initialValue="initialValue"
-            height="500px"
-            initialEditType="wysiwyg"
-          />
+          <client-only>
+            <Editor
+              ref="toastuiEditor"
+              class="has-background-white"
+              :options="editorOptions"
+              :visible="editorVisible"
+              :previewStyle="previewType"
+              :initialValue="initialValue"
+              height="500px"
+              initialEditType="wysiwyg"
+            />
+          </client-only>
         </div>
       </div>
       <br>

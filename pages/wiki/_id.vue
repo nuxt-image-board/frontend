@@ -4,7 +4,9 @@
       <div class="columns is-vcentered is-centered">
         <div class="column is-8">
           <div class="boxed has-background-white round-15" style="min-height: 70vh;">
-            <Viewer :initialValue="article.body" />
+            <client-only>
+              <Viewer :initialValue="article.body" />
+            </client-only>
           </div>
         </div>
         <div class="column is-vcentered is-2">
