@@ -191,11 +191,46 @@
             <p class="subtitle">
               同一絵師のイラスト
             </p>
-            <div class="horizontal-container">
+            <div id="related-container" class="horizontal-container">
               <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
                 <nuxt-link :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`" :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }">
-                  <img class="vertical-centered" decoding="async" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                  <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
                 </nuxt-link>
+              </div>
+            </div>
+            <br>
+            <div v-if="!$store.state.user.isPC && related.imgs.length > 2" class="columns is-mobile is-centered has-text-centered">
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#related-container', -800)"
+                >
+                  &laquo;
+                </button>
+              </div>
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#related-container', -400)"
+                >
+                  &lsaquo;
+                </button>
+              </div>
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#related-container', 400)"
+                >
+                  &rsaquo;
+                </button>
+              </div>
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#related-container', 800)"
+                >
+                  &raquo;
+                </button>
               </div>
             </div>
           </div>
@@ -205,11 +240,46 @@
             <p class="subtitle">
               同一グループのイラスト
             </p>
-            <div class="horizontal-container">
+            <div id="grouped-container" class="horizontal-container">
               <div v-for="i in grouped.imgs" :key="i.id" class="horizontal-item">
                 <nuxt-link :to="`/arts/${i.illustID}`">
-                  <img class="vertical-centered" decoding="async" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                  <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
                 </nuxt-link>
+              </div>
+            </div>
+            <br>
+            <div v-if="!$store.state.user.isPC && grouped.imgs.length > 2" class="columns is-mobile is-centered has-text-centered">
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#grouped-container', -800)"
+                >
+                  &laquo;
+                </button>
+              </div>
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#grouped-container', -400)"
+                >
+                  &lsaquo;
+                </button>
+              </div>
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#grouped-container', 400)"
+                >
+                  &rsaquo;
+                </button>
+              </div>
+              <div class="column is-3">
+                <button
+                  class="button is-medium is-fullwidth is-size-5"
+                  @click="moveScroll('#grouped-container', 800)"
+                >
+                  &raquo;
+                </button>
               </div>
             </div>
           </div>
@@ -336,6 +406,7 @@
 <script>
 import Vue from 'vue'
 import Viewer from 'v-viewer'
+import axios from 'axios'
 import SocialShare from '@/components/ui/SocialShare.vue'
 import Modal from '@/components/ui/Modal.vue'
 import Far from '@/components/ui/Far.vue'
@@ -421,6 +492,9 @@ export default {
     }
   },
   methods: {
+    moveScroll (containerName, moveValue) {
+      this.$el.querySelector(containerName).scrollLeft += moveValue
+    },
     copyIllustID () {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(this.result.illustID)
@@ -435,8 +509,7 @@ export default {
       }
     },
     async downloadImage () {
-      const wget = this.$axios.create()
-      const imageOrig = await wget.get(
+      const imageOrig = await axios.get(
         this.ImgOrigAddress,
         { responseType: 'blob', cache: true }
       )
@@ -502,24 +575,6 @@ export default {
       } else {
         this.result.mylist -= 1
       }
-    },
-    getOGPThumb () {
-      if (this.result.nsfw) {
-        return require('~/assets/images/blocked_r18.png')
-      } else {
-        return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
-      }
-    }
-  },
-  head () {
-    return {
-      title: this.result.title,
-      meta: [
-        { hid: 'og:title', property: 'og:title', content: this.result.title + (this.result.nsfw ? '(R18)' : '') },
-        { hid: 'og:description', property: 'og:description', content: this.result.caption.slice(0, 20) + '...' },
-        { hid: 'og:url', property: 'og:url', content: `https://***REMOVED***/arts/${this.result.illustID}` },
-        { hid: 'og:image', property: 'og:image', content: this.getOGPThumb() }
-      ]
     }
   }
 }
