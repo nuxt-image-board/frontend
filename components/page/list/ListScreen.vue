@@ -146,7 +146,7 @@ export default {
     const myPath = this.$route.path
     const myId = this.$route.params.id
     window.document.addEventListener(
-      'keydown',
+      'keyup',
       function (e) {
         if (e.keyCode === 116) {
           e.preventDefault()
@@ -186,11 +186,10 @@ export default {
       this.$scrollTo('#top')
     },
     async resetPage () {
+      this.$scrollTo('#top')
       this.pageID = 1
-      this.results = []
       const resp = await this.$searchApi.getListResults(this.apiEndpoint, this.pageID, this.sortID, this.keyword, false)
       this.results = resp.contents
-      this.$scrollTo('#top')
       this.identifier = !this.identifier
     }
   }
