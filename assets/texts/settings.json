@@ -25,6 +25,12 @@
             "class": "is-info"
         },
         {
+            "key": "useFixed",
+            "mobile_only": false,
+            "flag": false,
+            "class": "is-info"
+        },
+        {
             "key": "useBottom",
             "mobile_only": true,
             "flag": false,

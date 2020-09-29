@@ -18,8 +18,9 @@
       @menu-event="changeMenu"
       @open-music="openSmartNav2 = true"
     />
+    <br v-if="$store.state.user.useFixed">
+    <br v-if="$store.state.user.useFixed">
     <main v-touch:swipe.right="showAndHide" v-touch:swipe.left="showAndHide2">
-      <br v-if="!$store.state.user.useSwipe">
       <transition name="page">
         <nuxt />
       </transition>

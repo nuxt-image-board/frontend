@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar">
+    <nav class="navbar" :class="{ 'is-fixed-top': $store.state.user.useFixed }">
       <div class="container">
         <div class="navbar-brand">
           <nuxt-link to="/" class="navbar-item has-text-white" style="font-weight:bold;" @click.native="closeAll($event)">

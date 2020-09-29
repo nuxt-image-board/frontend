@@ -5,6 +5,8 @@
       <notifications classes="my-notify" width="30%" position="top right" group="default" />
     </client-only>
     <NavbarUp />
+    <br v-if="$store.state.user.useFixed">
+    <br v-if="$store.state.user.useFixed">
     <main>
       <transition name="page">
         <nuxt />

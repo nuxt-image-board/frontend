@@ -21,6 +21,7 @@ Vue.mixin({
         useJump: this.$device.isDesktop,
         useBack: this.$device.isMacOS && !this.$device.isDesktop,
         useSwipe: !this.$device.isMacOS,
+        useFixed: this.$device.isMacOS,
         useBottom: !this.$device.isDesktop
       }
       for (const setting in defaultSettings) {

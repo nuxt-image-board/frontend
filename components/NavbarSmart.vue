@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="navbar" :class="{'is-fixed-top': !$store.state.user.useSwipe}">
+    <nav class="navbar" :class="{'is-fixed-top': $store.state.user.useFixed}">
       <div class="container">
         <div class="navbar-brand">
           <a v-if="!$store.state.user.isLeftHanded" class="navbar-item has-text-white" style="font-weight:bold;" @click="openMenu = !openMenu">
