@@ -1,7 +1,7 @@
 <template>
   <section class="section">
     <div class="container is-widescreen has-text-centered">
-      <div class="columns is-centered is-vcentered">
+      <div class="columns is-centered is-vcentered is-multiline">
         <div class="column is-4 is-centered">
           <userInfo />
         </div>
@@ -11,16 +11,17 @@
         <div v-if="!$device.isIos" class="column is-4 is-centered">
           <storageInfo />
         </div>
-      </div>
-      <div class="columns is-vcentered is-centered">
-        <div class="column is-4 is-centered">
-          <siteSettings />
-        </div>
         <div class="column is-4 is-centered">
           <accountSettings />
         </div>
         <div class="column is-4 is-vcentered has-text-centered" style="height:100%">
           <notifySettings />
+        </div>
+        <div class="column is-4 is-vcentered has-text-centered" style="height:100%">
+          <ipfsSettings />
+        </div>
+        <div class="column is-4 is-centered">
+          <siteSettings />
         </div>
       </div>
       <br>
@@ -59,6 +60,7 @@ import inviteInfo from '@/components/page/profile/panels/inviteInfo.vue'
 import siteSettings from '@/components/page/profile/panels/siteSettings.vue'
 import accountSettings from '@/components/page/profile/panels/accountSettings.vue'
 import notifySettings from '@/components/page/profile/panels/notifySettings.vue'
+import ipfsSettings from '@/components/page/profile/panels/ipfsSettings.vue'
 
 export default {
   components: {
@@ -68,7 +70,8 @@ export default {
     inviteInfo,
     siteSettings,
     accountSettings,
-    notifySettings
+    notifySettings,
+    ipfsSettings
   },
   data () {
     return {
