@@ -68,6 +68,15 @@
       </p>
       <p>{{ $t('notifySettings.twitter.sentence') }}</p>
     </Modal>
+    <a class="panel-block" @click="modalType = 10">
+      <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true" />
+      </span>
+      {{ $t('notifySettings.telegram.title') }}
+    </a>
+    <Modal :title="$t('notifySettings.telegram.title')" :isModalOpen="modalType === 10" @modal-closed="modalType = 0">
+      <p>{{ $t('notifySettings.telegram.sentence') }}</p>
+    </Modal>
   </nav>
 </template>
 

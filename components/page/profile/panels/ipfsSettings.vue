@@ -71,6 +71,20 @@
         適用
       </button>
     </Modal>
+    <a class="panel-block" @click="modalType = 0">
+      <span class="panel-icon">
+        <i class="fas fa-book" aria-hidden="true" />
+      </span>
+      {{ $t('ipfsSettings.pinning.title') }}
+    </a>
+    <Modal :title="$t('ipfsSettings.pinning.title')" :isModalOpen="modalType === 4" @modal-closed="modalType = 0">
+      <p>{{ $t('ipfsSettings.pinning.sentence') }}</p>
+      <p>APIキー: <input placeholder="yourPinataApiKey" class="input"></p>
+      <p>APIシークレットキー: <input placeholder="yourPinataSecretApiKey" class="input"></p>
+      <button class="button is-medium is-primary">
+        適用
+      </button>
+    </Modal>
   </nav>
 </template>
 
