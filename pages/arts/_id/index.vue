@@ -108,6 +108,21 @@
                       </a>
                     </div>
                   </div>
+                  <div v-for="replace in result.replace" :key="replace.illustID" class="control">
+                    <div class="tags has-addons">
+                      <span class="tag">
+                        <Fas i="broadcast-tower" />
+                      </span>
+                      <a
+                        class="tag is-link"
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        :href="replace.originUrl"
+                      >
+                        {{ replace.originService }}
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="column is-12 has-text-centered">
@@ -130,7 +145,7 @@
               <SocialShare :title="result.title" :url="result.originUrl" />
             </div>
             <div class="column is-12">
-              <div class="columns is-centered">
+              <div class="columns is-centered is-multiline">
                 <div v-if="isEditable" class="column is-4 has-text-centered">
                   <nuxt-link class="button is-success" :to="result.illustID + '/edit'">
                     データ編集
@@ -144,6 +159,11 @@
                 <div v-if="isTagEditable" class="column is-4 has-text-centered">
                   <nuxt-link class="button is-success" :to="result.illustID + '/edit_tag'">
                     タグ編集
+                  </nuxt-link>
+                </div>
+                <div v-if="result.replace.length > 0" class="column is-4 has-text-centered">
+                  <nuxt-link class="button is-success" :to="result.illustID + '/replace_history'">
+                    置き換え履歴
                   </nuxt-link>
                 </div>
               </div>
