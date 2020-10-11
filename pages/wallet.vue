@@ -63,7 +63,7 @@
               </div>
             </div>
           </article>
-          <nuxt-link to="/shop" class="tile is-child notification has-text-centered is-primary is-size-4">
+          <nuxt-link to="/shops" class="tile is-child notification has-text-centered is-primary is-size-4">
             <div class="columns is-vcentered is-centered" style="height:100%">
               <div class="column is-6">
                 <Fas i="shopping-cart" classes="has-text-white" />
