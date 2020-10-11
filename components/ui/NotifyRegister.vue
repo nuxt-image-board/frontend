@@ -5,11 +5,11 @@
       @click="notifyButtonPressed"
     >
       <div class="tags has-addons">
-        <span class="tag icon is-medium">
+        <span class="tag is-small">
           <Fas v-if="isNotifyEnabled" i="bell" classes="is-size-6" />
           <Far v-else i="bell" classes="is-size-6" />
         </span>
-        <span class="tag is-link is-medium">
+        <span class="tag is-link is-small">
           {{ $t('UtilArea.toggle_notify') }}
         </span>
       </div>

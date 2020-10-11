@@ -11,14 +11,14 @@
         </div>
         <div class="column is-8">
           <div class="columns is-centered is-vcentered">
-            <div class="column is-8-desktop">
+            <div class="column is-6-desktop">
               <SelectForm
                 :options="sortMethods"
                 :sortMethod="String(sortID)"
                 @onSelectChanged="updateSelect"
               />
             </div>
-            <div class="column is-centered has-text-centered-touch is-12-mobile is-6-tablet is-4-desktop has-text-right">
+            <div class="column is-centered has-text-centered-touch is-12-mobile is-6-tablet is-6-desktop has-text-right">
               <UtilArea
                 :apiEndpoint="apiEndpoint"
                 :articleTitle="tabTitle"
@@ -31,7 +31,7 @@
       </div>
       <div
         id="container"
-        class="columns is-centered is-vcentered is-multiline is-mobile pull-to-refresh-material2"
+        class="columns has-equal-height is-centered is-vcentered is-multiline is-mobile pull-to-refresh-material2"
         :class="{'is-gapless': $store.state.user.colSize < 6 && !$store.state.user.isPC}"
       >
         <div class="pull-to-refresh-material2__control">
@@ -52,8 +52,9 @@
             />
           </svg>
         </div>
-        <div v-for="result in results" :key="result.illustID" :class="colSize">
-          <Result :result="result" />
+        <div v-for="result in filteredResults" :key="result.illustID" :class="colSize">
+          <TextResult v-if="$store.state.user.useTextResult" :result="result" />
+          <Result v-else :result="result" />
         </div>
       </div>
       <client-only v-if="$store.state.user.useInfinity">
@@ -91,6 +92,7 @@ export default {
     SelectForm,
     UtilArea,
     Pagination: () => import('@/components/ui/Pagination.vue'),
+    TextResult: () => import('@/components/page/search/TextResult.vue'),
     Result
   },
   props: {
@@ -138,6 +140,13 @@ export default {
     }
   },
   computed: {
+    filteredResults () {
+      if (this.$store.state.user.acceptR18) {
+        return this.results
+      } else {
+        return this.results.filter(result => !result.nsfw)
+      }
+    },
     colSize () {
       const colSize = this.$store.state.user.colSize
       if (colSize) {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+    <div class="field is-grouped is-grouped-centered">
       <NotifyRegister
         v-if="!apiEndpoint.includes('keyword')"
         class="control"
@@ -8,45 +8,47 @@
         :notifyTargetType="targetType"
         :notifyTargetID="targetID"
       />
-      <a v-if="apiEndpoint.includes('artist') && !$store.state.user.mutedArtists.includes(targetID)" class="control">
+      <a
+        class="control"
+        @click="toggleAcceptR18()"
+      >
         <div class="tags has-addons">
-          <span class="tag icon is-medium">
-            <Fas i="eye" classes="is-size-6" />
+          <span class="tag is-small">
+            <Fas v-if="!$store.state.user.acceptR18" i="grin-beam" classes="is-size-6" />
+            <Fas v-else i="grin-hearts" classes="is-size-6" />
           </span>
-          <span
-            class="tag is-link is-medium"
-            @click="toggleMute(true, 2, targetID)"
-          >
+          <span class="tag is-link is-small">
             {{ $t('UtilArea.toggle_show') }}
           </span>
         </div>
       </a>
       <a
-        v-if="apiEndpoint.includes('artist') && $store.state.user.mutedArtists.includes(targetID)"
+        v-if="apiEndpoint.includes('artist')"
         class="control"
-        @click="toggleMute(false, 2, targetID)"
+        @click="toggleMuteWrapped"
       >
         <div class="tags has-addons">
-          <span class="tag icon is-medium">
-            <Fas i="eye-slash" classes="is-size-6" />
+          <span class="tag is-small">
+            <Fas v-if="$store.state.user.mutedArtists.includes(targetID)" i="eye-slash" classes="is-size-6" />
+            <Fas v-else i="eye" classes="is-size-6" />
           </span>
-          <span class="tag is-link is-medium">
+          <span class="tag is-link is-small">
             {{ $t('UtilArea.toggle_show') }}
           </span>
         </div>
       </a>
     </div>
-    <div class="field is-grouped is-grouped-centered is-grouped-multiline">
+    <div class="field is-grouped is-grouped-centered">
       <nuxt-link
         v-if="$store.state.user.obtainedProducts.includes(2) && !apiEndpoint.includes('all')"
         :to="writeArticleLink"
         class="control"
       >
         <div class="tags has-addons">
-          <span class="tag icon is-medium">
+          <span class="tag is-small">
             <Fas i="pen-square" classes="is-size-6" />
           </span>
-          <span class="tag is-link is-medium">{{ $t('UtilArea.edit_article') }}</span>
+          <span class="tag is-link is-small">{{ $t('UtilArea.edit_article') }}</span>
         </div>
       </nuxt-link>
       <nuxt-link
@@ -55,10 +57,10 @@
         class="control"
       >
         <div class="tags has-addons">
-          <span class="tag icon is-medium">
+          <span class="tag is-small">
             <Fas i="file-alt" classes="is-size-6" />
           </span>
-          <span class="tag is-link is-medium">{{ $t('UtilArea.show_article') }}</span>
+          <span class="tag is-link is-small">{{ $t('UtilArea.show_article') }}</span>
         </div>
       </nuxt-link>
     </div>
@@ -124,6 +126,13 @@ export default {
       if (resp.data.status === 200) {
         this.articleID = resp.data.articleID
         this.revision = resp.data.revision
+      }
+    },
+    toggleMuteWrapped () {
+      if (this.$store.state.user.mutedArtists.includes(this.targetID)) {
+        this.toggleMute(false, 2, this.targetID)
+      } else {
+        this.toggleMute(true, 2, this.targetID)
       }
     }
   }

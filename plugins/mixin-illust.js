@@ -36,6 +36,14 @@ Vue.mixin({
       } else {
         this.$notify({ group: 'default', type: 'danger', duration: 2000, title: 'マイリスト', text: 'マイリスト数の上限に達しています' })
       }
+    },
+    toggleAcceptR18 () {
+      this.$store.commit('user/toggleSetting', 'acceptR18')
+      if (this.$store.state.user.acceptR18) {
+        this.$notify({ group: 'default', type: 'success', duration: 2000, title: 'R18 / NSFW', text: '表示を有効にしました' })
+      } else {
+        this.$notify({ group: 'default', type: 'success', duration: 2000, title: 'R18 / NSFW', text: '表示を無効にしました' })
+      }
     }
   }
 })

@@ -34,7 +34,7 @@
           x{{ result.like }}
         </span>
       </a>
-      <a class="card-footer-item" @click="handleBookmark">
+      <a class="card-footer-item is-hidden-touch" @click="handleBookmark">
         <span v-if="result.mylisted" class="icon is-small">
           <Fas i="bookmark" />
         </span>

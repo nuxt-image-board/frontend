@@ -233,7 +233,9 @@ export default {
           'faPenSquare',
           'faEye',
           'faEyeSlash',
-          'faCrown'
+          'faCrown',
+          'faGrinBeam',
+          'faGrinHearts'
         ]
       },
       {
