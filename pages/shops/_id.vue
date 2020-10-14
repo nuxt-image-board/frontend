@@ -22,24 +22,24 @@
             </thead>
             <tbody>
               <tr class="is-size-5">
-                <td>x0</td>
-                <td>x0</td>
-                <td>x0</td>
+                <td>{{ greenStars }}</td>
+                <td>{{ redStars }}</td>
+                <td>{{ blueStars }}</td>
               </tr>
             </tbody>
           </table>
           <div v-else class="columns box mx-1 is-centered is-vcentered is-size-5">
             <div class="column is-4">
               <p>グリーンスター</p>
-              <p>x0</p>
+              <p>{{ greenStars }}</p>
             </div>
             <div class="column is-4">
               <p>レッドスター</p>
-              <p>x0</p>
+              <p>{{ redStars }}</p>
             </div>
             <div class="column is-4">
               <p>ブルースター</p>
-              <p>x0</p>
+              <p>{{ blueStars }}</p>
             </div>
           </div>
         </div>
@@ -66,10 +66,10 @@
                   <td>
                     <button
                       class="button is-primary"
-                      :disabled="obtainedProducts.includes(p.id) || money < p.price"
+                      :disabled="isButtonDisabled(p)"
                       @click="buyProduct(p.id, p.price)"
                     >
-                      {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? $t('shop.not_enough') : $t('shop.buy') ) : $t('shop.bought') }}
+                      {{ getButtonMessage(p) }}
                     </button>
                   </td>
                 </tr>
@@ -91,10 +91,10 @@
                 <p class="control">
                   <button
                     class="button is-primary"
-                    :disabled="obtainedProducts.includes(p.id) || money < p.price"
+                    :disabled="isButtonDisabled(p)"
                     @click="buyProduct(p.id, p.price)"
                   >
-                    {{ !obtainedProducts.includes(p.id) ? ( p.price > money ? $t('shop.not_enough') : $t('shop.buy') ) : $t('shop.bought') }}
+                    {{ getButtonMessage(p) }}
                   </button>
                 </p>
                 <br>
@@ -123,26 +123,65 @@ export default {
       const productIds = user.data.assets.map(a => a.id)
       const shopId = isFinite(route.params.id) ? parseInt(route.params.id) : 1
       const prod = await $axios.get(`/toymoney/machines/${shopId}`, { useCache: true })
+      const inventory = {}
+      user.data.assets.forEach((asset) => {
+        inventory[asset.id] = { limit: asset.limit, count: asset.count }
+      })
+      prod.data.products.forEach((product) => {
+        if (!inventory[product.id]) {
+          inventory[product.id] = { limit: product.inventory_limit, count: 0 }
+        }
+      })
       return {
         money: user.data.money,
         shopName: prod.data.name,
         shopDescription: prod.data.description,
         products: prod.data.products,
         obtainedProducts: productIds,
+        inventory,
         shopId
       }
     } catch (err) {
       return error({ statusCode: 502, message: 'err' })
     }
   },
+  computed: {
+    greenStars () {
+      return `x${this.inventory[18].count}`
+    },
+    redStars () {
+      return `x${this.inventory[19].count}`
+    },
+    blueStars () {
+      return `x${this.inventory[20].count}`
+    }
+  },
   methods: {
+    isButtonDisabled (product) {
+      if (this.money < product.price || (this.inventory[product.id].count >= this.inventory[product.id].limit)) {
+        return true
+      }
+      return false
+    },
+    getButtonMessage (product) {
+      if (this.money < product.price) {
+        return this.$t('shop.not_enough')
+      }
+      if (this.inventory[product.id].count < this.inventory[product.id].limit) {
+        return this.$t('shop.buy')
+      }
+      return this.$t('shop.bought')
+    },
     async buyProduct (productId, productPrice) {
       const resp = await this.$axios.post(`toymoney/machines/${this.shopId}/${productId}/buy`)
       if (resp.status === 200) {
-        this.obtainedProducts.push(productId)
-        this.$store.commit(
-          'user/setObtainedProducts', this.obtainedProducts
-        )
+        this.inventory[productId].count += 1
+        if (!this.obtainedProducts.includes(productId)) {
+          this.obtainedProducts.push(productId)
+          this.$store.commit(
+            'user/addObtainedProducts', productId
+          )
+        }
         this.money -= productPrice
       }
     }

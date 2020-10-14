@@ -67,6 +67,9 @@ export const mutations = {
   setObtainedProducts (state, obtainedProducts) {
     state.obtainedProducts = obtainedProducts
   },
+  addObtainedProducts (state, newProduct) {
+    state.obtainedProducts.push(newProduct)
+  },
   addArtistMute (state, artistID) {
     state.mutedArtists = state.mutedArtists.filter(artist => artist !== artistID)
     state.mutedArtists.push(artistID)
