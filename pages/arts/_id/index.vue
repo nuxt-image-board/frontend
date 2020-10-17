@@ -381,6 +381,14 @@
         ダウンロード
       </button>
     </div>
+    <button class="button has-text-centered is-large" @click="openStarMenu = true">
+      スターセレクト
+    </button>
+    <StarSelecter
+      :isModalOpen="openStarMenu == true"
+      :illustID="result.illustID"
+      @modal-closed="openStarMenu = false"
+    />
   </section>
 </template>
 
@@ -428,6 +436,7 @@ import Vue from 'vue'
 import Viewer from 'v-viewer'
 import axios from 'axios'
 import SocialShare from '@/components/ui/SocialShare.vue'
+import StarSelecter from '@/components/ui/StarSelecter.vue'
 import Modal from '@/components/ui/Modal.vue'
 import Far from '@/components/ui/Far.vue'
 import Fas from '@/components/ui/Fas.vue'
@@ -457,6 +466,7 @@ export default {
   },
   components: {
     SocialShare,
+    StarSelecter,
     Modal,
     Far,
     Fas
@@ -490,6 +500,7 @@ export default {
       isEditable: false,
       openZoom: false,
       openCommentConfirm: false,
+      openStarMenu: false,
       isZoomAllowed: false,
       waifuScale: '',
       isModalOpen: false,

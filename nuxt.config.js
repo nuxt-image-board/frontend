@@ -235,7 +235,8 @@ export default {
           'faEyeSlash',
           'faCrown',
           'faGrinBeam',
-          'faGrinHearts'
+          'faGrinHearts',
+          'faStar'
         ]
       },
       {

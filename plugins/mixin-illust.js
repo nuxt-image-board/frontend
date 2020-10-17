@@ -3,7 +3,7 @@ import Vue from 'vue'
 Vue.mixin({
   methods: {
     async addStar (illustID) {
-      await this.$axios.put(`/arts/${illustID}/likes`)
+      await this.$axios.put(`/arts/${illustID}/likes/0`)
     },
     async toggleMute (isAdd, targetType, targetID) {
       /*
