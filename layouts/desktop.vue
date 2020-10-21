@@ -15,6 +15,7 @@
     <BackToTop v-if="$store.state.user.useJump" />
     <client-only>
       <NavbarDownMusic v-if="$store.state.user.useMusicPlayer" />
+      <Live2dWidget />
     </client-only>
     <NavbarDown />
     <Offline />
@@ -32,6 +33,7 @@ export default {
     NavbarUp,
     NavbarDown,
     Offline,
+    Live2dWidget: () => import('@/components/ui/Live2dWidget.vue'),
     NavbarDownMusic: () => import('@/components/NavbarDownMusic.vue'),
     BackToTop: () => import('@/components/ui/BackToTop.vue')
   },
