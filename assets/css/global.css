@@ -12,9 +12,12 @@ body {
     url(~static/deco_right.svg),
     repeating-linear-gradient( to right, #ffe9dc, #ffe9dc 18px, #FFECE0 18px, #FFECE0 33px );
   overscroll-behavior-y: contain;
-  /*
-  cursor: url(~static/cursor.png), pointer;
-  */
+  cursor: url(~static/cursor_brown.png), auto !important;
+}
+
+/* Layout: マウスカーソル変更(警告: ボタンがすごく押しづらくなる)*/
+a, .button {
+  cursor: url(~static/cursor_brown2.png), pointer !important;
 }
 
 /* Layout: iOSなどのため、最低高さを決める */
