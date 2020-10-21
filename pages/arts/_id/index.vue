@@ -2,8 +2,8 @@
   <section class="section">
     <div class="container">
       <div class="columns is-vcentered is-centered is-multiline">
-        <div class="column is-12-mobile is-8-tablet is-6-desktop">
-          <figure v-if="!$store.state.user.useViewer" class="has-text-centered" @click="isModalOpen = !isModalOpen">
+        <div class="column is-12-mobile is-8-tablet is-7-desktop">
+          <figure v-if="!$store.state.user.useViewer" class="has-text-centered" @click="imageModalOpened = !imageModalOpened">
             <img
               v-lazy="$store.state.user.useRaw ? ImgOrigAddress : ImgAddress"
               class="thumb"
@@ -18,7 +18,7 @@
             >
           </figure>
         </div>
-        <div class="column is-12-mobile is-4-tablet is-6-desktop">
+        <div class="column is-12-mobile is-4-tablet is-5-desktop">
           <div class="box">
             <div class="columns is-centered is-multiline">
               <div class="column is-12 has-text-centered">
@@ -32,13 +32,13 @@
               <div class="column is-12 has-text-centered">
                 <div class="field is-centered is-multiline">
                   <nuxt-link v-for="tag in result.system" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
-                    <span class="tag is-danger">{{ tag[1] }}</span>&nbsp;
+                    <span class="tag is-danger scale">{{ tag[1] }}</span>&nbsp;
                   </nuxt-link>
                   <nuxt-link v-for="chara in result.chara" :key="chara[0]" :to="&quot;/search/character/&quot;+chara[0]">
-                    <span class="tag is-primary">{{ chara[1] }}</span>&nbsp;
+                    <span class="tag is-primary scale">{{ chara[1] }}</span>&nbsp;
                   </nuxt-link>
                   <nuxt-link v-for="tag in result.tag" :key="tag[1]" :to="&quot;/search/tag/&quot;+tag[0]">
-                    <span class="tag is-light" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
+                    <span class="tag is-light scale" :class="{'is-info': !tag[2], 'is-danger': tag[2]}">{{ tag[1] }}</span>&nbsp;
                   </nuxt-link>
                 </div>
                 <div v-if="result.group.length > 0">
@@ -73,7 +73,7 @@
                       <span class="tag is-link">{{ result.width }}x{{ result.height }}</span>
                     </div>
                   </div>
-                  <div class="control">
+                  <div class="control scale">
                     <div class="tags has-addons">
                       <span class="tag">
                         <Fas i="pen-fancy" />
@@ -83,7 +83,7 @@
                       </nuxt-link>
                     </div>
                   </div>
-                  <div class="control">
+                  <div class="control scale">
                     <div class="tags has-addons">
                       <span class="tag">
                         <Fas i="user-edit" />
@@ -93,7 +93,7 @@
                       </nuxt-link>
                     </div>
                   </div>
-                  <div class="control">
+                  <div class="control scale">
                     <div class="tags has-addons">
                       <span class="tag">
                         <Fas i="broadcast-tower" />
@@ -108,7 +108,7 @@
                       </a>
                     </div>
                   </div>
-                  <div v-for="replace in result.replace" :key="replace.illustID" class="control">
+                  <div v-for="replace in result.replace" :key="replace.illustID" class="control scale">
                     <div class="tags has-addons">
                       <span class="tag">
                         <Fas i="broadcast-tower" />
@@ -144,35 +144,11 @@
             <div class="column is-12 has-text-centered">
               <SocialShare :title="result.title" :url="result.originUrl" />
             </div>
-            <div class="column is-12">
-              <div class="columns is-centered is-multiline">
-                <div v-if="isEditable" class="column is-4 has-text-centered">
-                  <nuxt-link class="button is-success" :to="result.illustID + '/edit'">
-                    データ編集
-                  </nuxt-link>
-                </div>
-                <div class="column is-4 has-text-centered">
-                  <button class="button is-success" @click="copyIllustID">
-                    イラストIDをコピー
-                  </button>
-                </div>
-                <div v-if="isTagEditable" class="column is-4 has-text-centered">
-                  <nuxt-link class="button is-success" :to="result.illustID + '/edit_tag'">
-                    タグ編集
-                  </nuxt-link>
-                </div>
-                <div v-if="result.replace.length > 0" class="column is-4 has-text-centered">
-                  <nuxt-link class="button is-success" :to="result.illustID + '/replace_history'">
-                    置き換え履歴
-                  </nuxt-link>
-                </div>
-              </div>
-            </div>
-            <div v-if="isZoomAllowed" class="column is-12 has-text-centered">
-              <a class="button is-primary is-medium" @click="openZoom = true">
+            <div v-if="waifuAllowed" class="column is-12 has-text-centered">
+              <a class="button is-primary is-medium" @click="waifuAllowed = true">
                 壁紙サイズに拡大
               </a>
-              <Modal title="壁紙サイズに拡大" :isModalOpen="openZoom == true" @modal-closed="openZoom = false">
+              <Modal title="壁紙サイズに拡大" :isModalOpen="waifuModalOpened == true" @modal-closed="waifuModalOpened = false">
                 <h2 class="has-text-centered">
                   何倍にしますか?
                 </h2>
@@ -206,171 +182,229 @@
             </div>
           </div>
         </div>
-        <div v-if="related.imgs.length > 1" class="column has-text-centered" :class="{'is-6': (result.group.length > 0), 'is-12': (result.group.length == 0)}">
+        <div class="column is-12">
           <div class="box">
-            <p class="subtitle">
-              同一絵師のイラスト
-            </p>
-            <div id="related-container" class="horizontal-container">
-              <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
-                <nuxt-link :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`" :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }">
-                  <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
-                </nuxt-link>
-              </div>
-            </div>
-            <br>
-            <div v-if="!$store.state.user.isPC && related.imgs.length > 2" class="columns is-mobile is-centered has-text-centered">
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#related-container', -800)"
-                >
-                  &laquo;
-                </button>
-              </div>
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#related-container', -400)"
-                >
-                  &lsaquo;
-                </button>
-              </div>
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#related-container', 400)"
-                >
-                  &rsaquo;
-                </button>
-              </div>
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#related-container', 800)"
-                >
-                  &raquo;
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div v-if="result.group.length > 0" class="column is-6 has-text-centered">
-          <div class="box">
-            <p class="subtitle">
-              同一グループのイラスト
-            </p>
-            <div id="grouped-container" class="horizontal-container">
-              <div v-for="i in grouped.imgs" :key="i.id" class="horizontal-item">
-                <nuxt-link :to="`/arts/${i.illustID}`">
-                  <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
-                </nuxt-link>
-              </div>
-            </div>
-            <br>
-            <div v-if="!$store.state.user.isPC && grouped.imgs.length > 2" class="columns is-mobile is-centered has-text-centered">
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#grouped-container', -800)"
-                >
-                  &laquo;
-                </button>
-              </div>
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#grouped-container', -400)"
-                >
-                  &lsaquo;
-                </button>
-              </div>
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#grouped-container', 400)"
-                >
-                  &rsaquo;
-                </button>
-              </div>
-              <div class="column is-3">
-                <button
-                  class="button is-medium is-fullwidth is-size-5"
-                  @click="moveScroll('#grouped-container', 800)"
-                >
-                  &raquo;
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column is-12 has-text-centered">
-          <div class="box">
-            <p class="subtitle">
-              コメント一覧
-            </p>
-            <div v-for="c in comments" :key="c.comment.id">
-              <p class="has-text-weight-bold">
-                {{ c.comment.created }} by&nbsp;
-                <nuxt-link :to="'/search/uploader/'+c.user.id">
-                  {{ c.user.name }}
-                </nuxt-link>
-              </p>
-              <p>
-                {{ c.comment.body }}
-              </p>
-              <br>
-            </div>
-            <div class="field">
-              <p class="control">
-                <textarea
-                  v-model="commentArea"
-                  class="textarea"
-                  maxlength="500"
-                  rows="3"
-                  placeholder="e.g このイラスト好き, 神, 良い, 即マイリス行き, いいねした"
-                />
-              </p>
-            </div>
-            <div class="field">
-              <button
-                class="button is-medium is-info has-text-centered"
-                :disabled="commentArea.length < 1"
-                @click="openCommentConfirm = true"
-              >
-                投稿
-              </button>
-            </div>
-            <Modal
-              title="コメント投稿確認"
-              :isModalOpen="openCommentConfirm == true"
-              @modal-closed="openCommentConfirm = false"
+            <div
+              v-scroll:debounce="{fn: onScroll, debounce: 5 }"
+              class="tabs is-boxed is-centered is-fullwidth"
+              :class="{'horizontal-container': !$store.state.user.isPC}"
             >
-              <textarea
-                v-model="commentArea"
-                class="textarea"
-                maxlength="500"
-                rows="3"
-                readonly
-              />
-              <h2 class="has-text-centered">
-                投稿してよろしいですか?
-              </h2>
-              <div class="field has-text-centered">
-                <button
-                  class="button is-primary is-medium"
-                  @click="postNewComment"
+              <ul>
+                <li
+                  v-for="(tab,index) in tabData"
+                  :key="index"
+                  :class="{
+                    'is-active': tabId == index+1,
+                    'is-hidden': isHidden(tab.mode)
+                  }"
                 >
-                  投稿する
+                  <a @click="tabId = index+1">
+                    <span class="icon is-small">
+                      <Fas :i="tab.icon" />
+                    </span>
+                    <span>{{ tab.title }}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-contents">
+              <div v-if="tabId == 1" id="star-list" class="content has-text-centered">
+                <div class="columns is-centered is-mobile is-multiline">
+                  <div v-for="color in starColors" :key="color[0]" class="column is-8-touch is-5-tablet is-3-desktop">
+                    <div class="control">
+                      <div class="tags is-centered are-large has-addons has-addons-centered">
+                        <span class="tag is-info" :class="{'shine': result.star[starColorsDict[color[0]]] > 0}"><Fas :class="color[1]+' is-size-4'" i="star" /></span>
+                        <span class="tag is-success">x{{ result.star[starColorsDict[color[0]]] }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="button scale is-medium is-info" @click="starModalOpened = true">
+                  スターを付ける
                 </button>
+                <StarSelecter
+                  :isModalOpen="starModalOpened == true"
+                  :currentStars="result.star"
+                  :illustID="result.illustID"
+                  @modal-closed="starModalOpened = false"
+                />
               </div>
-            </Modal>
+              <div v-if="tabId == 2" id="comment-list" class="content has-text-centered">
+                <div v-if="comments">
+                  <p v-for="c in comments" :key="c.comment.id" class="mt-5">
+                    <span class="is-size-6 has-text-weight-bold">
+                      {{ c.comment.created }} by
+                      <nuxt-link :to="'/search/uploader/'+c.user.id">
+                        {{ c.user.name }}
+                      </nuxt-link>
+                    </span>
+                    <br>
+                    {{ c.comment.body }}
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="mt-5">
+                    <span class="is-size-5 has-text-weight-bold">
+                      まだコメントはありません
+                    </span>
+                  </p>
+                </div>
+                <div class="field mt-3">
+                  <p class="control">
+                    <textarea
+                      v-model="commentArea"
+                      class="textarea"
+                      maxlength="500"
+                      rows="3"
+                      placeholder="e.g このイラスト好き, 神, 良い, 即マイリス行き, いいねした"
+                    />
+                  </p>
+                </div>
+                <div class="field">
+                  <button
+                    class="button is-medium is-info has-text-centered"
+                    :disabled="commentArea.length < 1"
+                    @click="commentModalOpened = true"
+                  >
+                    投稿
+                  </button>
+                </div>
+                <Modal
+                  title="コメント投稿確認"
+                  :isModalOpen="commentModalOpened == true"
+                  @modal-closed="commentModalOpened = false"
+                >
+                  <textarea
+                    v-model="commentArea"
+                    class="textarea"
+                    maxlength="500"
+                    rows="3"
+                    readonly
+                  />
+                  <h2 class="has-text-centered">
+                    投稿してよろしいですか?
+                  </h2>
+                  <div class="field has-text-centered">
+                    <button
+                      class="button is-primary is-medium"
+                      @click="postNewComment"
+                    >
+                      投稿する
+                    </button>
+                  </div>
+                </Modal>
+              </div>
+              <div v-if="tabId == 3" id="related-artist-list" class="content">
+                <div id="related-container" class="horizontal-container">
+                  <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
+                    <nuxt-link :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`" :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }">
+                      <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+              <div v-if="tabId == 4" id="related-group-list" class="content">
+                <div v-if="grouped" class="horizontal-container">
+                  <div v-for="i in grouped.imgs" :key="i.id" class="horizontal-item">
+                    <nuxt-link :to="`/arts/${i.illustID}`">
+                      <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+              <div v-if="tabId == 5" id="replace-history" class="content">
+                <div class="columns is-centered is-multiline mx-2">
+                  <div class="column is-12 has-text-centered is-hidden-touch">
+                    <div class="columns is-vcentered is-centered">
+                      <div class="column is-2">
+                        掲載サイト
+                      </div>
+                      <div class="column is-3">
+                        タイトル
+                      </div>
+                      <div class="column is-3">
+                        説明文
+                      </div>
+                      <div class="column is-2">
+                        解像度
+                      </div>
+                      <div class="column is-2">
+                        サイズ
+                      </div>
+                    </div>
+                  </div>
+                  <div v-for="replace in result.replace" :key="replace.illustID" class="column is-12 has-text-centered">
+                    <div class="columns is-vcentered is-centered">
+                      <div class="column is-2 has-text-centered">
+                        <nuxt-link
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          :to="replace.originUrl"
+                        >
+                          <p class="is-size-4">
+                            {{ replace.originService }}
+                          </p>
+                        </nuxt-link>
+                      </div>
+                      <div class="column is-3 has-text-centered">
+                        <p class="is-size-6">
+                          {{ replace.title }}
+                        </p>
+                      </div>
+                      <div class="column is-3 has-text-centered">
+                        <p class="is-size-7">
+                          {{ replace.caption }}
+                        </p>
+                      </div>
+                      <div class="column is-2 has-text-centered">
+                        <p class="is-size-6">
+                          {{ replace.width }} x {{ replace.height }}
+                        </p>
+                      </div>
+                      <div class="column is-2 has-text-centered">
+                        <p class="is-size-6">
+                          {{ replace.filesize }}
+                        </p>
+                      </div>
+                    </div>
+                    <br v-if="!$store.state.user.isPC">
+                  </div>
+                </div>
+              </div>
+              <div v-if="tabId == 6" id="edit-history" class="content">
+                <p>置き換え履歴など</p>
+              </div>
+              <div v-if="tabId == 7" id="admin-list" class="content">
+                <div class="columns is-centered is-multiline">
+                  <div v-if="isEditable" class="column is-4 has-text-centered">
+                    <nuxt-link class="button is-success" :to="result.illustID + '/edit'">
+                      データ編集
+                    </nuxt-link>
+                  </div>
+                  <div class="column is-4 has-text-centered">
+                    <button class="button is-success" @click="copyIllustID">
+                      イラストIDをコピー
+                    </button>
+                  </div>
+                  <div v-if="isTagEditable" class="column is-4 has-text-centered">
+                    <nuxt-link class="button is-success" :to="result.illustID + '/edit_tag'">
+                      タグ編集
+                    </nuxt-link>
+                  </div>
+                  <div v-if="result.replace.length > 0" class="column is-4 has-text-centered">
+                    <nuxt-link class="button is-success" :to="result.illustID + '/replace_history'">
+                      置き換え履歴
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="!$store.state.user.useViewer" class="modal" :class="{'is-active': isModalOpen}">
-      <div class="modal-background" @click="isModalOpen = !isModalOpen" />
+    <div v-if="!$store.state.user.useViewer" class="modal" :class="{'is-active': imageModalOpened}">
+      <div class="modal-background" @click="imageModalOpened = !imageModalOpened" />
       <div class="modal-content">
         <p class="image">
           <img v-lazy="ImgOrigAddress" src="~/assets/images/loading.png">
@@ -381,14 +415,6 @@
         ダウンロード
       </button>
     </div>
-    <button class="button has-text-centered is-large" @click="openStarMenu = true">
-      スターセレクト
-    </button>
-    <StarSelecter
-      :isModalOpen="openStarMenu == true"
-      :illustID="result.illustID"
-      @modal-closed="openStarMenu = false"
-    />
   </section>
 </template>
 
@@ -434,6 +460,8 @@
 <script>
 import Vue from 'vue'
 import Viewer from 'v-viewer'
+import vuescroll from 'vue-scroll'
+import { debounce } from 'lodash'
 import axios from 'axios'
 import SocialShare from '@/components/ui/SocialShare.vue'
 import StarSelecter from '@/components/ui/StarSelecter.vue'
@@ -441,6 +469,9 @@ import Modal from '@/components/ui/Modal.vue'
 import Far from '@/components/ui/Far.vue'
 import Fas from '@/components/ui/Fas.vue'
 
+Vue.use(
+  vuescroll
+)
 Vue.use(
   Viewer, {
     defaultOptions: {
@@ -495,37 +526,71 @@ export default {
   },
   data () {
     return {
-      result: {},
-      comments: {},
       isEditable: false,
-      openZoom: false,
-      openCommentConfirm: false,
-      openStarMenu: false,
-      isZoomAllowed: false,
+      imageModalOpened: false,
+      starModalOpened: false,
+      waifuModalOpened: false,
+      waifuAllowed: false,
       waifuScale: '',
-      isModalOpen: false,
-      commentArea: ''
+      comments: {},
+      commentArea: '',
+      commentModalOpened: false,
+      tabId: 1,
+      tabData: [
+        { icon: 'star', title: 'スター一覧', mode: 0 },
+        { icon: 'comments', title: 'コメント一覧', mode: 0 },
+        { icon: 'image', title: '関連(同一絵師)', mode: 1 },
+        { icon: 'image', title: '関連(同一グループ)', mode: 2 },
+        { icon: 'image', title: '別名', mode: 4 },
+        { icon: 'tools', title: '操作履歴', mode: -1 },
+        { icon: 'tools', title: '管理パネル', mode: 3 }
+      ],
+      starColors: [
+        [0, 'has-text-syaro'],
+        [1, 'has-text-chiya'],
+        [2, 'has-text-cocoa'],
+        [3, 'has-text-chino']
+      ],
+      starColorsDict: {
+        0: 'yellow',
+        1: 'green',
+        2: 'red',
+        3: 'blue'
+      }
     }
   },
   computed: {
     ImgAddress () {
-      return process.env.CDN_ENDPOINT +
-        'illusts/large/' +
-        this.result.illustID +
-        (this.$store.state.user.useWebP ? '.webp' : '.jpg')
+      return `${process.env.CDN_ENDPOINT}illusts/orig/${this.result.illustID}.${(this.$store.state.user.useWebP ? 'webp' : 'jpg')}`
     },
     ImgOrigAddress () {
-      return process.env.CDN_ENDPOINT +
-        'illusts/orig/' +
-        this.result.illustID +
-        '.' +
-        this.result.extension
+      return `${process.env.CDN_ENDPOINT}illusts/orig/${this.result.illustID}.${this.result.extension}`
     }
   },
   methods: {
-    moveScroll (containerName, moveValue) {
-      this.$el.querySelector(containerName).scrollLeft += moveValue
+    isHidden (mode) {
+      switch (mode) {
+        case 1:
+          return this.related.imgs.length < 2
+        case 2:
+          return this.result.group.length < 2
+        case 3:
+          return this.$auth.$state.user.permission !== 9
+        case 4:
+          return this.result.replace
+        case -1:
+          return true
+        default:
+          return false
+      }
     },
+    onScroll (e, position) {
+      this.$store.commit('setBlockOpenMenu', true)
+      this.debounceUnblockMenu()
+    },
+    debounceUnblockMenu: debounce(function debounce (e) {
+      this.$store.commit('setBlockOpenMenu', false)
+    }, 500),
     copyIllustID () {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(this.result.illustID)
@@ -565,7 +630,7 @@ export default {
       }
     },
     async postNewComment () {
-      this.openCommentConfirm = false
+      this.commentModalOpened = false
       const resp = await this.$axios.post(`/arts/${this.result.illustID}/comments`, { comment: this.commentArea })
       if (resp.data.status === 200) {
         this.$notify(

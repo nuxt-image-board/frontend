@@ -74,7 +74,7 @@ export default {
       this.showSmartNav2()
     },
     showSmartNav () {
-      if (this.$store.state.user.useSwipe && !this.openSmartNav2) {
+      if (this.$store.state.user.useSwipe && !this.openSmartNav2 && !this.$store.state.blockOpenMenu) {
         if (!this.$store.state.user.isLeftHanded) {
           this.openSmartNav = false
         } else {
@@ -83,7 +83,7 @@ export default {
       }
     },
     hideSmartNav () {
-      if (this.$store.state.user.useSwipe && !this.openSmartNav2) {
+      if (this.$store.state.user.useSwipe && !this.openSmartNav2 && !this.$store.state.blockOpenMenu) {
         if (!this.$store.state.user.isLeftHanded) {
           this.openSmartNav = true
         } else {
@@ -95,7 +95,7 @@ export default {
       this.openSmartNav = value
     },
     showSmartNav2 () {
-      if (this.$store.state.user.useSwipe && !this.openSmartNav) {
+      if (this.$store.state.user.useSwipe && !this.openSmartNav && !this.$store.state.blockOpenMenu) {
         if (!this.$store.state.user.isLeftHanded) {
           this.openSmartNav2 = false
         } else {
@@ -104,7 +104,7 @@ export default {
       }
     },
     hideSmartNav2 () {
-      if (this.$store.state.user.useSwipe && !this.openSmartNav) {
+      if (this.$store.state.user.useSwipe && !this.openSmartNav && !this.$store.state.blockOpenMenu) {
         if (!this.$store.state.user.isLeftHanded) {
           this.openSmartNav2 = true
         } else {

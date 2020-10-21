@@ -13,6 +13,7 @@ export const state = () => ({
   searchHistory: [],
   illustHistory: [],
   obtainedProducts: [],
+  currentStars: {},
   mutedArtists: [],
   mylistCount: 0,
   isBookmarkAddable: true,
@@ -69,6 +70,9 @@ export const mutations = {
   },
   addObtainedProducts (state, newProduct) {
     state.obtainedProducts.push(newProduct)
+  },
+  setCurrentStars (state, currentStars) {
+    state.currentStars = currentStars
   },
   addArtistMute (state, artistID) {
     state.mutedArtists = state.mutedArtists.filter(artist => artist !== artistID)

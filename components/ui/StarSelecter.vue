@@ -15,10 +15,10 @@
           :key="color[0]"
           class="column is-3-desktop is-6-mobile rounded"
         >
-          <div class="box rounded is-large has-text-white has-background-space">
+          <div class="box shine big-shine rounded is-large has-text-white has-background-space">
             <Fas :class="color[1]+' is-size-5'" i="star" />
             <p class="is-size-5">
-              x 10
+              x {{ $store.state.user.currentStars[17+color[0]] && (color[0] > 0 ) ? $store.state.user.currentStars[17+color[0]].count : '∞' }}
             </p>
           </div>
         </div>
@@ -32,7 +32,7 @@
             ■
           </p>
         </button>
-        <button class="button is-size-4 has-background-space">
+        <button class="button is-size-4 has-background-space" @click="addStar(illustID, starId)">
           <Fas :class="starColors[starId][1] +' fa-lg'" i="star" />
           <p class="has-text-white">
             を付ける
@@ -66,6 +66,12 @@ export default {
     isModalOpen: {
       type: Boolean,
       default: false
+    },
+    currentStars: {
+      type: Object,
+      default: () => {
+        return { yellow: 0, green: 0, red: 0, blue: 0 }
+      }
     }
   },
   data () {
@@ -77,13 +83,34 @@ export default {
         [1, 'has-text-chiya'],
         [2, 'has-text-cocoa'],
         [3, 'has-text-chino']
-      ]
+      ],
+      starColorsDict: {
+        0: 'yellow',
+        1: 'green',
+        2: 'red',
+        3: 'blue'
+      }
     }
   },
   watch: {
     isModalOpen (newVal) {
       this.openMenu = newVal
     }
+  },
+  async mounted () {
+    const assets = await this.$axios.get('/toymoney/users/assets')
+    // 持っているプロダクトID一覧をセット
+    this.$store.commit(
+      'user/setObtainedProducts', assets.data.assets.map(a => a.id)
+    )
+    // 持っているカラースター一覧をセット
+    const inventory = {}
+    assets.data.assets.forEach((asset) => {
+      inventory[asset.id] = { limit: asset.limit, count: asset.count }
+    })
+    this.$store.commit(
+      'user/setCurrentStars', inventory
+    )
   },
   methods: {
     modalClosed () {
@@ -92,7 +119,24 @@ export default {
     },
     async addStar (illustID, likeType) {
       const resp = await this.$axios.put(`/arts/${illustID}/likes/${likeType}`)
-      console.log(resp)
+      if (resp.data.status === 200) {
+        this.currentStars[this.starColorsDict[likeType]] += 1
+        if (likeType !== 0) {
+          const newInventory = JSON.parse(JSON.stringify(this.$store.state.user.currentStars))
+          newInventory[17 + likeType].count -= 1
+          this.$store.commit(
+            'user/setCurrentStars', newInventory
+          )
+        }
+        this.$notify({
+          group: 'default',
+          type: 'success',
+          duration: 2000,
+          title: 'スター',
+          text: 'スターを消費しました'
+        })
+        this.modalClosed()
+      }
     },
     rollStarSelect () {
       if (this.starId >= (this.starColors.length - 1)) {

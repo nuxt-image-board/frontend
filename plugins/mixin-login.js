@@ -34,7 +34,7 @@ Vue.mixin({
       if (this.$device.isDesktop) {
         await this.$store.dispatch('getNavigations')
       }
-      // 所有している物のID一覧を保管する
+      // ウォレットAPIにつないで所有している物一覧を取得
       this.$notify(
         {
           group: 'default',
@@ -45,8 +45,17 @@ Vue.mixin({
         }
       )
       const assets = await this.$axios.get('/toymoney/users/assets')
+      // 持っているプロダクトID一覧をセット
       this.$store.commit(
         'user/setObtainedProducts', assets.data.assets.map(a => a.id)
+      )
+      // 持っているカラースター一覧をセット
+      const inventory = {}
+      assets.data.assets.forEach((asset) => {
+        inventory[asset.id] = { limit: asset.limit, count: asset.count }
+      })
+      this.$store.commit(
+        'user/setCurrentStars', inventory
       )
       // マイリストに入っているデータ数を取得する
       this.$notify(

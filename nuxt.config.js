@@ -236,7 +236,8 @@ export default {
           'faCrown',
           'faGrinBeam',
           'faGrinHearts',
-          'faStar'
+          'faStar',
+          'faComments'
         ]
       },
       {

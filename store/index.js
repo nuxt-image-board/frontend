@@ -4,7 +4,8 @@ export const state = () => ({
   characters: [],
   tags: [],
   artists: [],
-  uploaders: []
+  uploaders: [],
+  blockOpenMenu: false
 })
 
 // 状態を変更する処理は mutationとしてexportする
@@ -15,6 +16,9 @@ export const mutations = {
     state.tags = payload.tags
     state.artists = payload.artists
     state.uploaders = payload.uploaders
+  },
+  setBlockOpenMenu (state, payload) {
+    state.blockOpenMenu = payload
   }
 }
 
