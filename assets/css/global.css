@@ -199,11 +199,9 @@ table {
   animation: shine 3s infinite linear;
   -webkit-animation: shine 3s infinite linear;
 }
-
 .big-shine:before {
   width: 30px; height: 300px;
 }
-
 @keyframes shine {
   0% { left: -30%; }
   25% { left: 150%; }
@@ -215,6 +213,7 @@ table {
   100% { left: 150%; }
 }
 
+/* Helper: スケールアップ */
 .scale {
   transition-duration: 0.3s;
   backface-visibility:hidden;
