@@ -1,0 +1,7 @@
+.nuxt/
+node_modules/
+.vercel/
+config/
+.env
+static/OneSignalSDKWorker.js
+static/OneSignalSDKUpdaterWorker.js
