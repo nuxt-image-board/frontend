@@ -5,3 +5,4 @@ config/
 .env
 static/OneSignalSDKWorker.js
 static/OneSignalSDKUpdaterWorker.js
+.env_vercel
