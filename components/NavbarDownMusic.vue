@@ -11,7 +11,7 @@
         @paused="setPaused"
       />
       <div v-if="!minimized" class="navbar-end">
-        <a class="navbar-item has-text-centered has-bg">
+        <div class="navbar-item has-text-centered has-bg">
           <nav class="level">
             <div class="level-item">
               <a :href="nowPlaying" target="_blank" rel="noopener noreferrer" class="has-text-white" @click="$refs.musicPlayer.pause()">
@@ -25,34 +25,34 @@
             </div>
             <div class="level-item">
               <nav class="level is-mobile">
-                <div class="level-item has-text-centered" @click="$refs.musicPlayer.backward()">
+                <a class="level-item has-text-centered" @click="$refs.musicPlayer.backward()">
                   <Fas i="step-backward" classes="has-text-white" />
-                </div>
-                <div v-if="isPaused" class="level-item has-text-centered" @click="$refs.musicPlayer.play()">
+                </a>
+                <a v-if="isPaused" class="level-item has-text-centered" @click="$refs.musicPlayer.play()">
                   <Fas i="play" classes="has-text-white" />
-                </div>
-                <div v-else class="level-item has-text-centered" @click="$refs.musicPlayer.pause()">
+                </a>
+                <a v-else class="level-item has-text-centered" @click="$refs.musicPlayer.pause()">
                   <Fas i="pause" classes="has-text-white" />
-                </div>
-                <div class="level-item has-text-centered" @click="$refs.musicPlayer.forward()">
+                </a>
+                <a class="level-item has-text-centered" @click="$refs.musicPlayer.forward()">
                   <Fas i="step-forward" classes="has-text-white" />
-                </div>
-                <div class="level-item has-text-centered" @click="$refs.musicPlayer.openMenu = true">
+                </a>
+                <a class="level-item has-text-centered" @click="$refs.musicPlayer.openMenu = true">
                   <Fas i="tools" classes="has-text-white" />
-                </div>
-                <div class="level-item has-text-centered" @click="minimized = true">
+                </a>
+                <a class="level-item has-text-centered" @click="minimized = true">
                   <Fas i="times-circle" classes="has-text-white" />
-                </div>
+                </a>
               </nav>
             </div>
           </nav>
-        </a>
+        </div>
       </div>
     </nav>
-    <div v-if="minimized" style="position: fixed; bottom: -3px; right:-3px">
-      <a class="button has-bg" @click="minimized = false">
+    <div v-if="minimized" style="position: fixed; bottom: -3px; right:-3px;">
+      <button class="button has-bg" @click="minimized = false">
         <Fas i="music" classes="has-text-white" />
-      </a>
+      </button>
     </div>
   </div>
 </template>
@@ -75,6 +75,7 @@
 .has-bg {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+  border-color: transparent;
   pointer-events: auto;
   background-color: #955E4B;
 }
