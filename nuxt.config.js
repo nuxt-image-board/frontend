@@ -352,7 +352,6 @@ export default {
   },
   buildDir: '.nuxt',
   build: {
-    publicPath: process.env.CDN_ADDR,
     extractCSS: true
   },
   vue: {
