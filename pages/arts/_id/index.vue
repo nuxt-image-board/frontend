@@ -210,11 +210,19 @@
             <div class="tab-contents">
               <div v-if="tabId == 1" id="star-list" class="content has-text-centered">
                 <div class="columns is-centered is-mobile is-multiline">
-                  <div v-for="color in starColors" :key="color[0]" class="column is-8-touch is-5-tablet is-3-desktop">
+                  <div
+                    v-for="(star, index) in result.star"
+                    :key="index"
+                    class="column is-6-touch is-5-tablet is-3-desktop"
+                  >
                     <div class="control">
                       <div class="tags is-centered are-large has-addons has-addons-centered">
-                        <span class="tag is-info" :class="{'shine': result.star[starColorsDict[color[0]]] > 0}"><Fas :class="color[1]+' is-size-4'" i="star" /></span>
-                        <span class="tag is-success">x{{ result.star[starColorsDict[color[0]]] }}</span>
+                        <span class="tag is-info" :class="{'shine': star > 0}">
+                          <Fas :class="`${starColors[index]} is-size-4`" i="star" />
+                        </span>
+                        <span class="tag is-success">
+                          x{{ star }}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -224,8 +232,8 @@
                 </button>
                 <StarSelecter
                   :isModalOpen="starModalOpened == true"
-                  :currentStars="result.star"
                   :illustID="result.illustID"
+                  @add-star-success="updateStarDisplay"
                   @modal-closed="starModalOpened = false"
                 />
               </div>
@@ -546,17 +554,11 @@ export default {
         { icon: 'tools', title: '管理パネル', mode: 3 }
       ],
       starColors: [
-        [0, 'has-text-syaro'],
-        [1, 'has-text-chiya'],
-        [2, 'has-text-cocoa'],
-        [3, 'has-text-chino']
-      ],
-      starColorsDict: {
-        0: 'yellow',
-        1: 'green',
-        2: 'red',
-        3: 'blue'
-      }
+        'has-text-syaro',
+        'has-text-chiya',
+        'has-text-cocoa',
+        'has-text-chino'
+      ]
     }
   },
   computed: {
@@ -670,6 +672,23 @@ export default {
         this.result.mylist += 1
       } else {
         this.result.mylist -= 1
+      }
+    },
+    updateStarDisplay (starType) {
+      this.$set(this.result.star, starType, this.result.star[starType] + 1)
+      switch (starType) {
+        case 0:
+          this.result.like += 1
+          break
+        case 1:
+          this.result.like += 10
+          break
+        case 2:
+          this.result.like += 20
+          break
+        case 3:
+          this.result.like += 50
+          break
       }
     }
   }
