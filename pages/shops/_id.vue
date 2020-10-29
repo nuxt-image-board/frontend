@@ -66,8 +66,8 @@
                   <td>
                     <button
                       class="button is-primary"
-                      :disabled="isButtonDisabled(p)"
-                      @click="buyProduct(p.id, p.price)"
+                      :disabled="isButtonDisabled(p) || disableAll"
+                      @click="buyProduct(p.id, p.price, p.name)"
                     >
                       {{ getButtonMessage(p) }}
                     </button>
@@ -91,8 +91,8 @@
                 <p class="control">
                   <button
                     class="button is-primary"
-                    :disabled="isButtonDisabled(p)"
-                    @click="buyProduct(p.id, p.price)"
+                    :disabled="isButtonDisabled(p) || disableAll"
+                    @click="buyProduct(p.id, p.price, p.name)"
                   >
                     {{ getButtonMessage(p) }}
                   </button>
@@ -145,6 +145,11 @@ export default {
       return error({ statusCode: 502, message: 'err' })
     }
   },
+  data () {
+    return {
+      disableAll: false
+    }
+  },
   computed: {
     greenStars () {
       return `x${this.inventory[18].count}`
@@ -172,9 +177,19 @@ export default {
       }
       return this.$t('shop.bought')
     },
-    async buyProduct (productId, productPrice) {
+    async buyProduct (productId, productPrice, productName) {
+      this.disableAll = true
       const resp = await this.$axios.post(`toymoney/machines/${this.shopId}/${productId}/buy`)
       if (resp.status === 200) {
+        this.$notify(
+          {
+            group: 'default',
+            type: 'success',
+            duration: 2000,
+            title: 'ショップ',
+            text: `${productName}を購入しました`
+          }
+        )
         this.inventory[productId].count += 1
         if (!this.obtainedProducts.includes(productId)) {
           this.obtainedProducts.push(productId)
@@ -183,6 +198,7 @@ export default {
           )
         }
         this.money -= productPrice
+        this.disableAll = false
       }
     }
   },
