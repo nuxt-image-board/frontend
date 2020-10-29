@@ -130,7 +130,7 @@
                   <Fas i="eye" style="margin-right:3px;" />
                   x{{ result.view }}
                 </span>
-                <a class="button is-primary is-medium" @click="addStar(result.illustID); result.like += 1">
+                <a class="button is-primary is-medium" @click="addLike(result.illustID); result.like += 1; result.star[0] +=1">
                   <Fas i="heart" style="margin-right:3px;" />
                   x{{ result.like }}
                 </a>

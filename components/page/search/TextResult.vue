@@ -40,7 +40,7 @@
       </div>
     </div>
     <div v-if="!$store.state.user.colSize || $store.state.user.colSize >= 6 || $store.state.user.isPC" class="card-footer">
-      <a class="card-footer-item" @click="addStar(result.illustID); result.like += 1">
+      <a class="card-footer-item" @click="addLike(result.illustID); result.like += 1;">
         <span class="icon is-small">
           <Fas i="heart" />
         </span>
