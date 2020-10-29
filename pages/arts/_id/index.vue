@@ -305,8 +305,16 @@
               <div v-if="tabId == 3" id="related-artist-list" class="content">
                 <div id="related-container" class="horizontal-container">
                   <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
-                    <nuxt-link :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`" :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }">
-                      <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                    <nuxt-link
+                      :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`"
+                      :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }"
+                    >
+                      <img
+                        class="vertical-centered"
+                        decoding="async"
+                        :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
+                        :src="getThumbAddress(i.illustID)"
+                      >
                     </nuxt-link>
                   </div>
                 </div>
@@ -314,8 +322,16 @@
               <div v-if="tabId == 4" id="related-group-list" class="content">
                 <div v-if="grouped" class="horizontal-container">
                   <div v-for="i in grouped.imgs" :key="i.id" class="horizontal-item">
-                    <nuxt-link :to="`/arts/${i.illustID}`">
-                      <img class="vertical-centered" decoding="async" :class="{'blur': result.nsfw && !$store.state.user.acceptR18}" :src="`https://***REMOVED***/illusts/thumb/${i.illustID}.webp`">
+                    <nuxt-link
+                      :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`"
+                      :style="{ 'opacity': ( i.illustID == result.illustID ? 0.2 : 1.0) }"
+                    >
+                      <img
+                        class="vertical-centered"
+                        decoding="async"
+                        :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
+                        :src="getThumbAddress(i.illustID)"
+                      >
                     </nuxt-link>
                   </div>
                 </div>
@@ -570,6 +586,9 @@ export default {
     }
   },
   methods: {
+    getThumbAddress (illustID) {
+      return `${process.env.CDN_ENDPOINT}illusts/thumb/${illustID}.${(this.$store.state.user.useWebP ? 'webp' : 'jpg')}`
+    },
     isHidden (mode) {
       switch (mode) {
         case 1:
