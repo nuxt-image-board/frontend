@@ -303,7 +303,10 @@
                 </Modal>
               </div>
               <div v-if="tabId == 3" id="related-artist-list" class="content">
-                <div id="related-container" class="horizontal-container">
+                <div
+                  v-scroll:debounce="{fn: onScroll, debounce: 5 }"
+                  class="horizontal-container"
+                >
                   <div v-for="i in related.imgs" :key="i.id" class="horizontal-item">
                     <nuxt-link
                       :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`"
@@ -320,7 +323,11 @@
                 </div>
               </div>
               <div v-if="tabId == 4" id="related-group-list" class="content">
-                <div v-if="grouped" class="horizontal-container">
+                <div
+                  v-if="grouped"
+                  v-scroll:debounce="{fn: onScroll, debounce: 5 }"
+                  class="horizontal-container"
+                >
                   <div v-for="i in grouped.imgs" :key="i.id" class="horizontal-item">
                     <nuxt-link
                       :to="(i.illustID == result.illustID) ? '#' : `/arts/${i.illustID}`"
@@ -608,7 +615,7 @@ export default {
     },
     debounceUnblockMenu: debounce(function debounce (e) {
       this.$store.commit('setBlockOpenMenu', false)
-    }, 500),
+    }, 600),
     copyIllustID () {
       if (navigator.clipboard) {
         navigator.clipboard.writeText(this.result.illustID)
