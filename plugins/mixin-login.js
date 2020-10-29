@@ -21,8 +21,11 @@ Vue.mixin({
         useJump: this.$device.isDesktop,
         useBack: this.$device.isMacOS && !this.$device.isDesktop,
         useSwipe: !this.$device.isMacOS,
+        useInfinity: true,
         useFixed: this.$device.isMacOS,
-        useBottom: !this.$device.isDesktop
+        useBottom: !this.$device.isDesktop,
+        useChinoMascot: 'none',
+        acceptR18: false
       }
       for (const setting in defaultSettings) {
         this.$store.commit(

@@ -15,7 +15,7 @@
     <BackToTop v-if="$store.state.user.useJump" />
     <client-only>
       <NavbarDownMusic v-if="$store.state.user.useMusicPlayer" />
-      <Live2dWidget />
+      <Live2dWidget v-if="$store.state.user.useChinoMascot !== 'none'" />
     </client-only>
     <NavbarDown />
     <Offline />

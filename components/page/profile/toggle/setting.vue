@@ -89,7 +89,7 @@ export default {
         if (this.storeKey === 'locale') {
           this.$i18n.locale = value
         }
-        if (['isPC', 'useSakura'].includes(this.storeKey)) {
+        if (['isPC', 'useSakura', 'useChinoMascot'].includes(this.storeKey)) {
           location.reload()
         } else if (this.storeKey === 'useMusicPlayer' && value === true) {
           this.$store.commit('user/updateSetting', { path: 'playerVideoIndex', param: 0 })
