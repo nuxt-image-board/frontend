@@ -128,6 +128,11 @@ export default {
       return 'arts/' + this.randomIllust.illustID
     }
   },
+  mounted () {
+    if (this.$auth.loggedIn) {
+      this.$nuxt.setLayout(this.$store.state.user.isPC ? 'desktop' : 'mobile')
+    }
+  },
   head () {
     return {
       titleTemplate: '***REMOVED***'
