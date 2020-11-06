@@ -5,7 +5,7 @@
         <div class="column is-12-mobile is-8-tablet is-7-desktop">
           <figure v-if="!$store.state.user.useViewer" class="has-text-centered" @click="imageModalOpened = !imageModalOpened">
             <img
-              v-lazy="$store.state.user.useRaw ? ImgOrigAddress : getThumbAddress(result.illustID)"
+              v-lazy="$store.state.user.useRaw ? ImgOrigAddress : ImgLargeAddress"
               class="thumb"
               :class="{'blur': result.nsfw && !$store.state.user.acceptR18}"
             >
@@ -587,6 +587,13 @@ export default {
   computed: {
     ImgOrigAddress () {
       return `${process.env.CDN_ENDPOINT}illusts/orig/${this.result.illustID}.${this.result.extension}`
+    },
+    ImgLargeAddress () {
+      if (this.$store.state.user.useWebP) {
+        return `${process.env.CDN_ENDPOINT}illusts/large/${this.result.illustID}.webp`
+      } else {
+        return `${process.env.CDN_ENDPOINT}illusts/large/${this.result.illustID}.jpg`
+      }
     }
   },
   methods: {
