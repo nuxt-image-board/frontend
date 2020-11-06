@@ -18,7 +18,6 @@ export default {
   layout: 'default',
   created () {
     this.$auth.logout()
-    // どうしても消えない...
     this.$cookies.set('vuex', {})
     if (process.client) {
       localStorage.clear()

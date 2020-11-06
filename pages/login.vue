@@ -120,7 +120,6 @@ import { entries, placeholder } from '~/assets/texts/gate.json'
 
 export default {
   auth: false,
-  layout: 'gate',
   components: {
     Fas,
     Notification
