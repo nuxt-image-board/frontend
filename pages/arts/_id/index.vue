@@ -492,7 +492,7 @@
 import Vue from 'vue'
 import Viewer from 'v-viewer'
 import vuescroll from 'vue-scroll'
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import axios from 'axios'
 import SocialShare from '@/components/ui/SocialShare.vue'
 import StarSelecter from '@/components/ui/StarSelecter.vue'
