@@ -11,12 +11,14 @@ module.exports = {
     '@nuxtjs',
     'plugin:nuxt/recommended'
   ],
-  'ignorePatterns': [
+  ignorePatterns: [
     'node_modules/',
+    '.nuxt/',
+    '.vercel/',
+    '.vscode/',
     'dist/',
     'public/',
-    'static/',
-    'functions/nuxt'
+    'static/'
   ],
   rules: {
     'vue/attribute-hyphenation': 'off',

@@ -352,6 +352,7 @@ export default {
   },
   buildDir: '.nuxt',
   build: {
+    hardSource: true,
     extractCSS: true
   },
   vue: {
