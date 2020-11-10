@@ -1,0 +1,11 @@
+.git
+.vscode
+.vercel
+.nuxt
+node_modules
+.editorconfig
+.eslintrc.js
+.gitignore
+kamifubuki.js
+now.json
+README.md
