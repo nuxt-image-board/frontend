@@ -159,7 +159,6 @@ export default {
     'cookie-universal-nuxt',
     'nuxt-fontawesome',
     'nuxt-webfontloader',
-    'nuxt-device-detect',
     'nuxt-logrocket',
     'nuxt-precompress',
     '~modules/axCache'
