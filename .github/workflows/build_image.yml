@@ -25,7 +25,7 @@ jobs:
         uses: docker/setup-qemu-action@v1
         with:
           image: tonistiigi/binfmt:latest
-          platforms: arm64,arm
+          platforms: arm
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
@@ -50,7 +50,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          platforms: linux/amd64,linux/arm/v7
           push: true
           tags: |
             ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:latest
