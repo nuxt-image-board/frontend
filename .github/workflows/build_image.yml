@@ -15,15 +15,28 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ***REMOVED***-frontend
+      SKIP_SASS_BINARY_DOWNLOAD_FOR_CI: true
+      SKIP_NODE_SASS_TESTS: true
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: arm64,arm
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
+
+      - name: Cache Docker layers
+        uses: actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
@@ -42,3 +55,5 @@ jobs:
           tags: |
             ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:latest
             ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:${{ github.run_number }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
