@@ -47,5 +47,3 @@ jobs:
           tags: |
             ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:latest
             ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:${{ github.run_number }}
-          cache-from: type=registry,ref=ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:latest
-          cache-to: type=inline,mode=max
