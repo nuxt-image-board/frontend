@@ -1,11 +1,12 @@
 .git
+.github
 .vscode
 .vercel
 .nuxt
-node_modules
 .editorconfig
 .eslintrc.js
 .gitignore
+node_modules
 kamifubuki.js
 now.json
 README.md
