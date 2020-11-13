@@ -1,5 +1,5 @@
 # Nodeイメージの取得
-FROM 12.19.0-alpine3.12
+FROM node:12.19.0-alpine3.12
 # ワーキングディレクトリの指定
 WORKDIR /usr/local/app
 # モジュールを揃える(gitが要る)
