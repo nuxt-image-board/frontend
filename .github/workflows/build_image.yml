@@ -41,4 +41,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ secrets.GCR_USER }}/${{ env.IMAGE_NAME }}:latest
-            ghcr.io/${{ secrets.GCR_USER }}/${{ env.IMAGE_NAME }}:${{ env.GITHUB_RUN_NUMBER }}
+            ghcr.io/${{ secrets.GCR_USER }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
