@@ -8,20 +8,6 @@ Vue.mixin({
     return store.state.user.isPC ? 'desktop' : 'mobile'
   },
   methods: {
-    showConsoleMessage () {
-      if (process.client) {
-        console.clear()
-        console.log('%c***REMOVED***', 'color: blue; font-size: 30px')
-        console.log('We need developers!\nIf you are interested in develop ***REMOVED***, contact us from below.\n***REMOVED***')
-      }
-    },
-    insertBlossomLoader () {
-      if (this.$store.state.user.useSakura) {
-        const loader = document.createElement('script')
-        loader.setAttribute('src', 'https://***REMOVED***/blossom/blossom_loader.js')
-        document.body.appendChild(loader)
-      }
-    },
     async requestAndAlertDailyBonus () {
       try {
         await this.$axios.post('/toymoney/airdrops/1/claim', {}, { progress: false })

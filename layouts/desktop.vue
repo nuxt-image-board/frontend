@@ -1,7 +1,6 @@
 <template>
   <div id="top">
     <client-only>
-      <canvas id="js-background" width="0px" height="0px" />
       <notifications classes="my-notify" width="30%" position="top right" group="default" />
     </client-only>
     <NavbarUp />
@@ -15,7 +14,6 @@
     <BackToTop v-if="$store.state.user.useJump" />
     <client-only>
       <NavbarDownMusic v-if="$store.state.user.useMusicPlayer" />
-      <Live2dWidget v-if="$store.state.user.useChinoMascot !== 'none'" />
     </client-only>
     <NavbarDown />
     <Offline />
@@ -33,24 +31,8 @@ export default {
     NavbarUp,
     NavbarDown,
     Offline,
-    Live2dWidget: () => import('@/components/ui/Live2dWidget.vue'),
     NavbarDownMusic: () => import('@/components/NavbarDownMusic.vue'),
     BackToTop: () => import('@/components/ui/BackToTop.vue')
-  },
-  data () {
-    return {
-      choices: [
-        '***REMOVED***ですか?',
-        '***REMOVED***ですか?',
-        '***REMOVED***ですか?',
-        '***REMOVED***ですか?',
-        '***REMOVED***ですか?',
-        'イラストですか?'
-      ],
-      msg: 'イラストですか?',
-      current: 0,
-      add: true
-    }
   },
   async mounted () {
     window.document.addEventListener(
@@ -58,36 +40,14 @@ export default {
       { handleEvent: this.blockBrowserReload },
       { passive: false }
     )
-    this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
     this.alertUnsupportedBrowser()
-    // this.alertConnectionSpeed()
-    // setInterval(this.scrollPageTitle, 200)
-  },
-  created () {
-    this.showConsoleMessage()
   },
   methods: {
     blockBrowserReload (e) {
       if (e.keyCode === 116) {
         e.preventDefault()
         return false
-      }
-    },
-    scrollPageTitle () {
-      if (this.add) {
-        document.title = 'ご注文は' + this.msg.slice(0, this.current)
-        this.current += 1
-        if (this.current === this.msg.length) {
-          this.add = !this.add
-        }
-      } else {
-        document.title = 'ご注文は' + this.msg.slice(0, this.current)
-        this.current -= 1
-        if (this.current === 0) {
-          this.msg = this.choices[Math.floor(Math.random() * this.choices.length)]
-          this.add = !this.add
-        }
       }
     }
   }

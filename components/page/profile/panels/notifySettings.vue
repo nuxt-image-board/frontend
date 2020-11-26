@@ -51,32 +51,6 @@
       </p>
       <p>{{ $t('notifySettings.line.sentence') }}</p>
     </Modal>
-    <a class="panel-block" @click="modalType = 9">
-      <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true" />
-      </span>
-      {{ $t('notifySettings.twitter.title') }}
-    </a>
-    <Modal :title="$t('notifySettings.twitter.title')" :isModalOpen="modalType === 9" @modal-closed="modalType = 0">
-      <h2 class="has-text-centered">
-        {{ $t('notifySettings.connect_status.title') }} {{ IS_TWITTER_CONNECTED }}
-      </h2>
-      <p class="subtitle has-text-centered" style="word-break:break-all">
-        <a :href="TWITTER_CONNECT_URL" target="_blank" rel="noopener noreferrer" class="button is-primary is-large" disabled="true">
-          {{ $t('notifySettings.connect_status.button.setup') }}
-        </a>
-      </p>
-      <p>{{ $t('notifySettings.twitter.sentence') }}</p>
-    </Modal>
-    <a class="panel-block" @click="modalType = 10">
-      <span class="panel-icon">
-        <i class="fas fa-book" aria-hidden="true" />
-      </span>
-      {{ $t('notifySettings.telegram.title') }}
-    </a>
-    <Modal :title="$t('notifySettings.telegram.title')" :isModalOpen="modalType === 10" @modal-closed="modalType = 0">
-      <p>{{ $t('notifySettings.telegram.sentence') }}</p>
-    </Modal>
   </nav>
 </template>
 

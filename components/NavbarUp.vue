@@ -137,8 +137,7 @@ export default {
       searchCategories: [
         { icon: 'users', name: 'character', endpoint: 'character', items: this.$store.state.characters },
         { icon: 'tags', name: 'tag', endpoint: 'tag', items: this.$store.state.tags },
-        { icon: 'paint-brush', name: 'artist', endpoint: 'artist', items: this.$store.state.artists },
-        { icon: 'upload', name: 'uploader', endpoint: 'uploader', items: this.$store.state.uploaders }
+        { icon: 'paint-brush', name: 'artist', endpoint: 'artist', items: this.$store.state.artists }
       ]
     }
   },

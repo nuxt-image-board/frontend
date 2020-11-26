@@ -15,7 +15,7 @@
         <div class="modal-background" />
         <div class="modal-content">
           <p class="title has-text-centered has-text-white">
-            ドロップで画像投稿
+            ドロップで投稿画面へ
           </p>
         </div>
       </div>
@@ -25,13 +25,10 @@
             {{ $t('upload_by_image.title') }}
           </h4>
           <p>
-            {{ $t('upload_by_image.description') }}
-          </p>
-          <p>
             <b>
               投稿前には必ず
               <nuxt-link to="/help/articles/upload-guidelines">
-                イラスト投稿ルール / Upload guidelines
+                投稿ルール / Upload guidelines
               </nuxt-link>
               をご確認ください!
             </b>
@@ -56,11 +53,6 @@
             </p>
           </div>
           <br>
-          <div class="field is-centered">
-            <nuxt-link to="/upload/page" class="button is-primary is-medium">
-              {{ $t('upload_by_image.buttons.upload_by_page') }}
-            </nuxt-link>
-          </div>
           <div class="field is-centered">
             <nuxt-link to="/history/upload" class="button is-primary is-medium">
               {{ $t('upload_by_image.buttons.upload_history') }}
@@ -162,7 +154,7 @@ export default {
       try {
         const resp = await this.$axios.post('/search/image', imgData, { headers })
         if (resp.data.data.illusts > 0) {
-          this.raiseError('その画像は既に***REMOVED***に存在します')
+          this.raiseError('その画像は既に投稿されています')
           return 'error'
         }
         // 投稿APIに投げる

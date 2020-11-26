@@ -4,7 +4,6 @@ export const state = () => ({
   characters: [],
   tags: [],
   artists: [],
-  uploaders: [],
   blockOpenMenu: false
 })
 
@@ -15,7 +14,6 @@ export const mutations = {
     state.characters = payload.characters
     state.tags = payload.tags
     state.artists = payload.artists
-    state.uploaders = payload.uploaders
   },
   setBlockOpenMenu (state, payload) {
     state.blockOpenMenu = payload
@@ -32,17 +30,15 @@ export const actions = {
     // 他のファイルに依存する...
     if (rootState.user.isPC) {
       // コミットすることで状態変更が反映される
-      const [characters, tags, artists, uploaders] = await Promise.all([
+      const [characters, tags, artists] = await Promise.all([
         this.$axios.get('navigations/characters', { useCache: true }),
         this.$axios.get('navigations/tags', { useCache: true }),
-        this.$axios.get('navigations/artists', { useCache: true }),
-        this.$axios.get('navigations/uploaders', { useCache: true })
+        this.$axios.get('navigations/artists', { useCache: true })
       ])
       commit('setNavigations', {
         characters: characters.data.data,
         tags: tags.data.data,
-        artists: artists.data.data,
-        uploaders: uploaders.data.data
+        artists: artists.data.data
       })
     }
   }

@@ -144,42 +144,6 @@
             <div class="column is-12 has-text-centered">
               <SocialShare :title="result.title" :url="result.originUrl" />
             </div>
-            <div v-if="waifuAllowed" class="column is-12 has-text-centered">
-              <a class="button is-primary is-medium" @click="waifuAllowed = true">
-                壁紙サイズに拡大
-              </a>
-              <Modal title="壁紙サイズに拡大" :isModalOpen="waifuModalOpened == true" @modal-closed="waifuModalOpened = false">
-                <h2 class="has-text-centered">
-                  何倍にしますか?
-                </h2>
-                <div class="field has-addons has-addons-centered">
-                  <div class="control">
-                    <div class="select is-medium">
-                      <select v-model="waifuScale">
-                        <option>1.5倍</option>
-                        <option>2.0倍</option>
-                        <option>2.5倍</option>
-                        <option>3.0倍</option>
-                        <option>3.5倍</option>
-                        <option>4.0倍</option>
-                        <option>4.5倍</option>
-                        <option>5.0倍</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="control">
-                    <button class="button is-primary is-medium">
-                      実行
-                    </button>
-                  </div>
-                </div>
-                <p class="has-text-centered">
-                  機械学習(Waifu2x)の力でなるべく綺麗に拡大します。
-                  スマホ壁紙や、PCの壁紙にしたいときにご利用ください。
-                  この処理にはそれなりに時間がかかります。
-                </p>
-              </Modal>
-            </div>
           </div>
         </div>
         <div class="column is-12">
@@ -673,22 +637,6 @@ export default {
         const resp = await this.$axios.get(`/arts/${this.result.illustID}/comments`)
         this.comments = resp.data.data
         this.commentArea = ''
-      }
-    },
-    async requestWaifu2x () {
-      const scale = this.waifuScale.substr(-1)
-      const params = { cdn: this.ImgOrigAddress, size: scale }
-      const resp = await this.$axios.get('https://***REMOVED***/waifu2x', { params })
-      if (resp.statusCode === 204) {
-        this.$notify(
-          {
-            group: 'default',
-            type: 'success',
-            duration: 5000,
-            title: 'Waifu2x',
-            text: 'リクエストに成功しました'
-          }
-        )
       }
     },
     handleBookmark () {

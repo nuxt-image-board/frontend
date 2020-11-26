@@ -3,17 +3,6 @@ import Vue from 'vue'
 Vue.mixin({
   methods: {
     async postLoggedIn () {
-      // Aprilクッキーを焼く
-      this.$cookies.set(
-        '***REMOVED***',
-        'true',
-        {
-          path: '/',
-          domain: '***REMOVED***',
-          maxAge: 60 * 60 * 24 * 31 * 6,
-          secure: true
-        }
-      )
       // デフォルト設定代入
       const defaultSettings = {
         useWebP: !this.$device.isMacOS,

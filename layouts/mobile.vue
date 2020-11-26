@@ -1,7 +1,6 @@
 <template>
   <div id="top">
     <client-only>
-      <canvas id="js-background" width="0px" height="0px" />
       <notifications classes="my-notify-mobile" width="90%" position="top center" group="default" />
       <NavbarSmartMusic
         v-if="$store.state.user.useMusicPlayer"
@@ -55,14 +54,9 @@ export default {
       openSmartNav2: false
     }
   },
-  created () {
-    this.showConsoleMessage()
-  },
   async mounted () {
-    this.insertBlossomLoader()
     await this.requestAndAlertDailyBonus()
     this.alertUnsupportedBrowser()
-    // this.alertConnectionSpeed()
   },
   methods: {
     showAndHide () {

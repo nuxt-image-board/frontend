@@ -56,15 +56,6 @@ export default {
     return {
       openMenu: false
     }
-  },
-  created () {
-    if (process.client) {
-      console.clear()
-      console.log('%c***REMOVED***', 'color: blue; font-size: 30px')
-      console.log('Wow, you found secret message!')
-      console.log('Do you want invite?\nYou can get invite key with self-introduce.\nPlease input your email, and describe why you want to join.')
-      console.log('***REMOVED***')
-    }
   }
 }
 </script>

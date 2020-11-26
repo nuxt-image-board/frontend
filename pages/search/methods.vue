@@ -72,11 +72,6 @@ export default {
           title: 'artist'
         },
         {
-          to: '/list/uploader',
-          icon: 'user',
-          title: 'uploader'
-        },
-        {
           to: '/search/image',
           icon: 'image',
           title: 'image'
