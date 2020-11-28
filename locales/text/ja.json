@@ -1,0 +1,467 @@
+{
+  "site_name": "N board",
+  "langs": {
+    "en": "英語",
+    "ja": "日本語"
+  },
+  "gate": {
+    "text": {
+      "login": "ログイン",
+      "register": "新規登録"
+    },
+    "button": {
+      "login": "ログイン",
+      "login_with_line": "LINEでログイン",
+      "register": "新規登録"
+    },
+    "mini_button": {
+      "register": "新規登録はこちら",
+      "login": "ログインはこちら",
+      "contact_us": "パスワードを忘れた場合"
+    },
+    "login_form": {
+      "user_id": "ユーザーID: ",
+      "password": "パスワード: "
+    },
+    "register_form": {
+      "user_name": "表示名(日本語可 4~20字)",
+      "user_id": "ログインID(英数字 4~20字)",
+      "password": "パスワード(英数字 8~20字)",
+      "password_re": "パスワード(再入力)",
+      "invite_code": "招待コード",
+      "agree_tos": "利用規約に同意する"
+    },
+    "notify": {
+      "login_steps": {
+        "title": "ログイン",
+        "authorizating": "認証中",
+        "authorize_failed": "認証に失敗しました",
+        "loading_shop": "ショップ読込中",
+        "loading_mylist": "マイリスト読込中",
+        "loading_mute": "ミュート読込中",
+        "load_complete": "準備完了"
+      }
+    }
+  },
+  "NavbarUp": {
+    "bar_items": {
+      "menu": "メニュー",
+      "list": "一覧",
+      "ranking": "ランキング",
+      "keyword": "キーワード",
+      "character": "キャラ",
+      "tag": "タグ",
+      "artist": "絵師",
+      "uploader": "投稿者",
+      "more": "もっと",
+      "more_tab": "更に",
+      "image": "画像",
+      "upload": "投稿"
+    },
+    "dropdown_items": {
+      "mypage": "マイページ",
+      "mylist": "マイリスト",
+      "wallet": "ウォレット",
+      "upload": "投稿",
+      "history_upload": "投稿履歴",
+      "history_search": "検索履歴",
+      "history_illust": "閲覧履歴",
+      "logout": "ログアウト"
+    },
+    "smart_items": {
+      "home": "ホーム",
+      "top": "トップ",
+      "news": "ニュース",
+      "arts": "イラスト",
+      "search": "検索",
+      "user": "ユーザー",
+      "other": "その他"
+    }
+  },
+  "NavbarDown": {
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "help": "ヘルプ",
+    "links": "リンク集"
+  },
+  "NavbarSmartDown": {
+    "home": "ﾎｰﾑ",
+    "search": "検索",
+    "upload": "投稿",
+    "mylist": "ﾏｲﾘｽﾄ",
+    "settings": "設定"
+  },
+  "NavbarDownMusic": {
+    "loading": "読込中"
+  },
+  "methods": {
+    "title": "検索方法",
+    "history": "検索履歴",
+    "methods": {
+      "ranking": "ランキング",
+      "keyword": "ワード",
+      "character": "キャラ",
+      "tag": "タグ",
+      "artist": "絵師",
+      "uploader": "投稿者",
+      "image": "画像",
+      "multiple_tag": "複合タグ"
+    }
+  },
+  "SearchScreen": {
+    "mute_artist": {
+      "not_muted": "この絵師をミュートする",
+      "muted": "この絵師のミュートを解除する"
+    },
+    "search_methods": {
+      "list": "一覧から検索",
+      "uploader": "投稿者から検索",
+      "tag": "タグから検索",
+      "multiple_tag": "複合タグから検索",
+      "keyword": "キーワードから検索",
+      "character": "キャラクターから検索",
+      "artist": "絵師から検索"
+    },
+    "sort": {
+      "latest_art": "投稿が新しい順",
+      "oldest_art": "投稿が古い順",
+      "most_viewed": "閲覧数が多い順",
+      "least_viewed": "閲覧数が少ない順",
+      "most_liked": "いいね数が多い順",
+      "least_liked": "いいね数が少ない順",
+      "latest_mylist": "マイリスト登録日が新しい順",
+      "oldest_mylist": "マイリスト登録日が古い順"
+    },
+    "no_more_result": "最終ページまで読み込みました"
+  },
+  "UtilArea": {
+    "toggle_notify": "通知切替",
+    "toggle_show": "表示切替",
+    "show_article": "記事閲覧",
+    "edit_article": "記事編集"
+  },
+  "RankingScreen": {
+    "title": "ランキング",
+    "note": "※期間中に集計したいいね/閲覧数を表示しています。未実装なため過去のランキングは閲覧できません。",
+    "not_found": "指定した期間のランキング情報が見つけられませんでした",
+    "sort": {
+      "monthly": "月間",
+      "weekly": "週間",
+      "daily": "日間"
+    },
+    "like_count": "いいね数",
+    "view_count": "閲覧数"
+  },
+  "ListScreen": {
+    "filer_keyword": "絞り込みキーワード",
+    "sort": {
+      "latest_art": "投稿が新しい順",
+      "oldest_art": "投稿が古い順",
+      "amount_many": "投稿数が多い順",
+      "amount_few": "投稿数が少ない順",
+      "most_liked": "いいね数が多い順",
+      "least_liked": "いいね数が少ない順",
+      "z_to_a": "名前降順 (Z→A)",
+      "a_to_z": "名前昇順 (A→Z)"
+    },
+    "no_more_result": "最終ページまで読み込みました"
+  },
+  "Wiki": {
+    "read": "Wikiで記事を読む",
+    "write": "Wikiで記事を書く",
+    "edit": "Wikiで記事を編集"
+  },
+  "accountSettings": {
+    "title": "アカウント設定",
+    "line_connect": {
+      "title": "LINE連携",
+      "status": {
+        "connected": "連携済み",
+        "not_connected": "未連携"
+      },
+      "button": "連携する",
+      "sentence": "LINEと既存アカウントを連携することでNboardのユーザー名/パスワードなしにログインできるようになります。アカウントを変えた場合は上記ボタンから再連携することができます。LINE連携では、公式に提供されているLINEログインを使用します。このログインでは、識別ID(事業者別ユーザーID)の取得を行います。メッセージを勝手に送信することはありません。Nboardの連携に関する技術的詳細は OpenID Connectの説明 を一読ください。"
+    },
+    "telegram_connect": {
+      "title": "Telegram連携",
+      "status": {
+        "connected": "連携済み",
+        "not_connected": "未連携"
+      },
+      "sentence": "TelegramとNboardアカウントを連携することでNboardのユーザー名/パスワードなしにTelgramを用いてログインできるようになります。アカウントを変えた場合は上記ボタンから再連携することができます。Telegram連携では、公式に提供されているTelegramログインを使用します。このログインでは、氏名/ユーザー名/識別IDの取得を行いますが、そのうちサーバーに保管されるのは識別IDのみです。メッセージを勝手に送信することはありません。この連携に関する技術的詳細は Telegram Login Widget を一読ください。"
+    },
+    "change_password": {
+      "title": "パスワード変更",
+      "form" : {
+        "current_password": "現在のパスワード",
+        "new_password": "新しいパスワード",
+        "new_password_re": "新しいパスワード(再入力)",
+        "password_rule": "5文字以上50文字以下の英数字",
+        "button": "変更する"
+      },
+      "notify": {
+        "title": "パスワード",
+        "text": {
+          "changed": "パスワードを変更しました",
+          "wrong": "パスワードが間違っています",
+          "failed": "変更できませんでした"
+        }
+      }
+    },
+    "api_key": {
+      "title": "APIキー",
+      "reissue": "再発行 (要再ログイン)",
+      "sentence1": "本サイトのAPIとはサイトを表示せずにサイト内のデータのみを直接提供するサービスのことです。Bot開発やデータ収集などが好きな開発者の方はどうぞご自由にご利用ください。",
+      "sentence2": "現在ドキュメントは存在しないので、使用方法は通信を眺めてお察しください。"
+    },
+    "logout": "ログアウト"
+  },
+  "inviteInfo": {
+    "title": "招待情報",
+    "inviter": "招待者:",
+    "invited_count": "招待数:",
+    "invite_status": {
+      "title": "招待可否:",
+      "enabled": "可",
+      "disabled": "否"
+    },
+    "button": "招待する",
+    "your_invite_code": "あなたの招待コード",
+    "sentence1": "この招待コードを他の人に伝えることでNboardに新規登録してもらうことができます。",
+    "sentence2": "ただし、このコードを使い招待された人がなんらかの理由でBANされた場合、あなたにも罰則が付きます。つまり、あなたがそのユーザーの保証人になります。信頼できる人のみを招待してください。"
+  },
+  "notifySettings": {
+    "title": "通知設定",
+    "connect_status": {
+      "title": "通知状態:",
+      "connected": "設定済み",
+      "not_connected": "未設定",
+      "button": {
+        "setup": "設定する",
+        "reset": "初期化する"
+      }
+    },
+    "about": {
+      "title": "通知機能とは",
+      "sentence": "新着イラストが投稿された際にお知らせする機能です。リアルタイムで通知されるので、最新のイラストをいち早く知ることができます。現在ブラウザ通知とLINE通知のみ設定可能です。"
+    },
+    "browser": {
+      "title": "ブラウザ通知設定",
+      "sentence": "設定すると、今使っているブラウザまたはアプリに通知ができるようになります。「設定する」を押すと 通知してもいいかの確認画面が出るので、許可を押してください。「設定する」ボタンを押してもなんの反応もない場合は、お手数ですがリロードをお願いします。この通知は使うスマホ、パソコン、タブレット毎に設定が要ります。合計5台まで設定可能です。5台を超えて設定する場合は一度初期化してから、改めて各デバイスで設定してください。この機能は Appleのせいで、iOS(iPhone/iPad等)で使うことができません。"
+    },
+    "line": {
+      "title": "LINE通知設定",
+      "sentence": "設定すると、LINEに通知が送れるようになります。通知には、LINE Notifyが使用されます。NboardBotではありません。好きなグループで利用できますが、サイトの閲覧にはアカウントが必要なため1:1でLINE Notifyから通知を受け取るを選ぶことをおすすめします。アカウントを変えた場合は上記ボタンから再連携することができます。"
+    }
+  },
+  "siteSettings": {
+    "title": "サイト設定",
+    "acceptR18": {
+      "title": "R18表示",
+      "description": "有効にすると、18禁イラストがモザイク無しに表示されるようになります。あなたが18歳以上、かつ性的コンテンツを不快に思わない場合のみ有効にしてください。"
+    },
+    "useTextResult": {
+      "title": "タイトル付き結果",
+      "description": "有効にすると検索結果をタイトルおよび説明文付きで表示します。スマホで有効にすると画面をはみ出します。"
+    },
+    "isPC": {
+      "title": "PC版メニュー",
+      "description": "有効にすると、PC用のメニューが表示されるようになります。スマホでは有効にしないことをおすすめします。"
+    },
+    "isLeftHanded": {
+      "title": "左利きメニュー",
+      "description": "有効にすると、メニューの位置が左になり、スワイプメニューが左から出るようになります。メニューが左にないと違和感があるという方はご利用ください。"
+    },
+    "useSwipe": {
+      "title": "スワイプ式メニュー",
+      "description": "有効にすると、スワイプした際に横からメニューが出てくるようになります。邪魔な場合は無効にしてください"
+    },
+    "useFixed": {
+      "title": "上部メニュー",
+      "description": "有効にすると、上部に常時メニューを表示します。邪魔な場合は無効にしてください。"
+    },
+    "useBottom": {
+      "title": "下部メニュー",
+      "description": "有効にすると、下部に常時メニューを表示します。邪魔な場合は無効にしてください。"
+    },
+    "useBack": {
+      "title": "戻るボタン",
+      "description": "有効にすると、戻るボタンが左下に表示されるようになります。iOSをご利用の方は無効にしないでください。"
+    },
+    "useJump": {
+      "title": "ジャンプボタン",
+      "description": "有効にすると、ページ上部に戻るためのジャンプボタンが右下に出るようになります。"
+    },
+    "useWebP": {
+      "title": "WebP使用",
+      "description": "有効にすると、次世代画像形式で画像が表示されるようになり、データ転送量が減少します。iOSやMacでは未対応なため有効にしないでください。"
+    },
+    "useInfinity": {
+      "title": "無限スクロール",
+      "description": "有効にすると、検索結果がツイッターのようにスクロールで次々出るようになります。次々出てくる分データ転送量を少し速く消費します。(つまりギガを食います)参考までに、検索結果のサムネイルは1枚辺りおよそ0.02MB(約100枚弱で1MB)です。"
+    },
+    "locale": {
+      "title": "Language",
+      "description": "サイト内で使用する言語を変更します。翻訳が未完成なため、全く翻訳されないページも存在します。"
+    },
+    "useRaw": {
+      "title": "RAW画質",
+      "description": "有効にすると、常に最高画質のイラストが表示されます。データ転送量がものすごく増え、読み込みに時間がかかるようになります。利用にはショップでの購入が必要です。"
+    },
+    "useViewer": {
+      "title": "画像ビューア",
+      "description": "有効にすると、イラストページで原寸表示時、回転・反転・拡大ができるようになります。利用にはショップでの購入が必要です。"
+    },
+    "colSize": {
+      "title": "表示列数",
+      "description": "検索結果に表示する列数を変更します。利用にはショップでの購入が必要です。",
+      "items": {
+        "2_row": "2列",
+        "3_row": "3列",
+        "4_row": "4列",
+        "6_row": "6列"
+      }
+    },
+    "useMusicPlayer": {
+      "title": "UsagiPlayer",
+      "description": "有効にすると、サイト内で音楽プレイヤーが使用できるようになります。利用にはショップでの購入が必要です。"
+    }
+  },
+  "storageInfo": {
+    "title": "ストレージ情報",
+    "usage_percent": "ストレージ使用割合:",
+    "usage_bytes":  "ストレージ使用量(概算値):",
+    "useable_bytes": "利用可能容量(概算値):",
+    "delete_button": "一時データ削除"
+  },
+  "userInfo": {
+    "title": "ユーザー情報",
+    "user_name": "ユーザー名:",
+    "registered_date": "登録日:",
+    "upload_history_button": "投稿履歴確認"
+  },
+  "search_form": {
+    "multiple": {
+      "tag": {
+        "title": "複合タグ検索",
+        "target": "検索対象タグ (5つまで)",
+        "select": "タグを選択してください",
+        "options": "タグ候補 (2文字以上)",
+        "and_or": "AND検索 / OR検索",
+        "search_button": "検索する",
+        "notify": {
+          "no_match": "一致する項目がありませんでした"
+        }
+      }
+    },
+    "keyword": {
+      "title": "キーワード検索",
+      "description": "検索したいキーワードを入力してください",
+      "search_button": "検索する",
+      "notify": {
+        "no_match": "一致する項目がありませんでした"
+      }
+    }
+  },
+  "wallet": {
+    "having": "所持: ",
+    "bonus": {
+      "title": "ボーナス",
+      "description": "もっと稼ぎたい? ならボーナスガチャを回しましょう!",
+      "next_receivable": "次回受取可能日",
+      "receive": "受け取る",
+      "received": "受け取り済み",
+      "daily": {
+        "title": "日1ログボ",
+        "description": "1日1回必ず1POINTが貰えます"
+      },
+      "weekly": {
+        "title": "週1ガチャ",
+        "description": "73%で1POINT、20%で2POINT、 5%で5POINT、 2%で10POINTが出る週1ガチャ。ソシャゲ並に渋いです。"
+      },
+      "monthly": {
+        "title": "月1ガチャ",
+        "description": "85%で5POINT、10%で10POINT、4%で20POINT、1%で30POINTが出る月1ガチャ。ソシャゲよりも渋いです。"
+      }
+    },
+    "transaction_history": {
+      "title": "取引履歴",
+      "get": "獲得"
+    },
+    "go_to_shop": "ショップへ行く"
+  },
+  "shop": {
+    "title": "ショップ",
+    "description": "イラストの投稿や毎日のログインで、POINTと呼ばれる特別なボーナスポイントを獲得できます。POINTはサイトの機能やスターと引き換えすることができます。",
+    "currently_have": "あなたは現在 {0} POINT を所持しています。",
+    "table_head": {
+      "product": "商品",
+      "description": "説明",
+      "price": "価格",
+      "transaction": "取引"
+    },
+    "buy": "購入する",
+    "bought": "購入済み",
+    "not_enough": "残高不足"
+  },
+  "news": {
+    "title": "ニュース",
+    "table_head": {
+      "type": "種別",
+      "title": "タイトル",
+      "date": "日付"
+    },
+    "types": {
+      "info": "お知らせ",
+      "memo": "メモ",
+      "update": "アプデ",
+      "announce": "告知",
+      "important": "重要"
+    }
+  },
+  "search_image": {
+    "title": "画像検索",
+    "description": "画像を選ぶとNboardのDBから検索します。存在しない場合はSauceNAOから検索します。※JPGかJPEGかPNGのみ対応です",
+    "select_image": "画像を選択...",
+    "drop_image": "ドロップで画像検索",
+    "searching_n_board": "Nboardで検索中...",
+    "searching_saucenao": "SauceNaoで検索中...",
+    "hash_value": "ハッシュ値: "
+  },
+  "help": {
+    "title": "何かお困りですか?",
+    "frequently": {
+      "title": "たぶんすごくよくある質問",
+      "articles": {
+        "forgot-password-logouted": "パスワードを忘れました"
+      }
+    },
+    "survey": {
+      "title": "この記事はお役に立ちましたか?",
+      "helped": "{0}名の方が役に立ったと言っています",
+      "not_helped": "{0}名の方が役に立たなかったと言っています",
+      "yes": "役に立った",
+      "no": "役に立たなかった"
+    },
+    "back": "戻る"
+  },
+  "rankings": {
+    "title": "ランキング一覧",
+    "methods": {
+      "monthly_like": "月間いいね数ランキング",
+      "monthly_view": "月間閲覧数ランキング",
+      "weekly_like": "週間いいね数ランキング",
+      "weekly_view": "週間閲覧数ランキング",
+      "daily_like": "日間いいね数ランキング",
+      "daily_view": "日間閲覧数ランキング"
+    }
+  },
+  "upload_by_image": {
+    "title": "投稿",
+    "supported_extensions": "対応拡張子: JPG/JPEG/PNG",
+    "buttons": {
+      "select_image": "画像を選択",
+      "upload_history": "投稿履歴を見る"
+    }
+  }
+}

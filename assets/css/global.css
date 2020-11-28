@@ -9,7 +9,7 @@ body {
   background-position:
     right top;
   background-image:
-    repeating-linear-gradient( 100deg, #ffe9dc, #ffe9dc 18px, #FFECE0 18px, #FFECE0 33px );
+    repeating-linear-gradient( 120deg, #ffe9dc, #ffe9dc 18px, #FFECE0 18px, #FFECE0 33px );
   overscroll-behavior-y: contain;
 }
 

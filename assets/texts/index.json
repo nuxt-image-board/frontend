@@ -1,7 +1,8 @@
 {
-    "version": "α11 20/10/29 Build",
+    "version": "beta1",
     "hitokoto": {
-        "name": "***REMOVED***",
-        "message": "昼夜逆転勢です。"
+        "name": "ドマオー",
+        "message": "このサイトはデモサイトです! 不定期にリセットされます!!",
+        "icon": "1.png"
     }
 }

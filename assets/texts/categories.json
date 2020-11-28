@@ -2,21 +2,19 @@
     {
         "url": "for-newbies",
         "categories": [
-            "about-gcir",
+            "about-n-board",
             "requirements"
         ]
     },
     {
-        "url": "about-gcir",
+        "url": "about-n-board",
         "sub-category": true,
         "articles": [
-            "what-is-gcir",
-            "is-gcir-free",
+            "what-is-n-board",
             "why-invite-only",
             "dmca-request",
             "publish-on-other-sites",
-            "use-guidelines",
-            "how-to-see-nsfw-arts"
+            "use-guidelines"
         ]
     },
     {
@@ -33,8 +31,7 @@
     {
         "url": "register",
         "articles": [
-            "how-to-register",
-            "does-minor-can-use"
+            "how-to-register"
         ]
     },
     {
@@ -63,17 +60,15 @@
         "url": "about-upload",
         "articles": [
             "what-can-i-upload",
-            "what-is-r-18",
-            "upload-guidelines",
-            "nsfw-guidelines"
+            "upload-guidelines"
         ]
     },
     {
-        "url": "about-pyon",
+        "url": "about-point",
         "articles": [
-            "what-is-pyon",
-            "how-to-get-pyon",
-            "pyon-expiration"
+            "what-is-point",
+            "how-to-get-point",
+            "point-expiration"
         ]
     },
     {
@@ -99,8 +94,7 @@
         "articles": [
             "what-is-notify",
             "what-is-line-notify",
-            "what-is-web-notify",
-            "what-is-twitter-notify"
+            "what-is-web-notify"
         ]
     },
     {
@@ -109,7 +103,7 @@
             "can-i-suggests-translations",
             "can-you-add-another-language",
             "who-is-translating",
-            "can-i-get-pyon-with-translate"
+            "can-i-get-point-with-translate"
         ]
     },
     {
@@ -127,28 +121,6 @@
         ]
     },
     {
-        "url": "about-sources",
-        "hidden-on-logout": true,
-        "articles": [
-            "what-is-sources",
-            "what-is-pixiv",
-            "what-is-twitter",
-            "what-is-danbooru",
-            "what-is-niconico-seiga"
-        ]
-    },
-    {
-        "url": "about-bots",
-        "hidden-on-logout": true,
-        "articles": [
-            "what-is-bots",
-            "what-is-buhibuhi",
-            "what-is-pixiiv",
-            "how-bot-names-decided",
-            "will-you-make-another-bots"
-        ]
-    },
-    {
         "url": "about-pwa",
         "articles": [
             "what-is-pwa",
@@ -163,17 +135,6 @@
             "is-usagi-player-legal",
             "is-usagi-player-good",
             "is-usagi-player-bad"
-        ]
-    },
-    {
-        "url": "related-services",
-        "hidden-on-logout": true,
-        "articles": [
-            "what-is-***REMOVED***-gacha",
-            "what-is-***REMOVED***-april",
-            "what-is-***REMOVED***bu",
-            "what-is-gochisobu",
-            "what-is-gochisebu"
         ]
     },
     {

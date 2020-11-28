@@ -4,22 +4,22 @@
       <div class="columns box is-multiline is-centered is-vcentered has-text-centered">
         <div class="column is-6">
           <img
-            src="https://***REMOVED***/illusts/thumb/1.png"
+            src="https://placehold/jp/640x480.png"
             class="thumb"
           >
         </div>
         <div class="column is-6">
           <p class="title">
-            魔法少女は深淵になにをみるか？
+            Illust title
           </p>
           <p class="subtitle">
-            Ｃ８９の新刊表紙となっていますっ たぶんでるはず…書店で予約開始してますのでよろしければご覧くださいっ
+            Illust description
           </p>
           <p class="subtitle">
-            <a href="https://www.pixiv.net/users/40436" target="_blank" rel="noopener noreferrer">Artist: 彩電</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Artist: title</a>
           </p>
           <p class="subtitle">
-            <a href="https://www.pixiv.net/artworks/54265978" target="_blank" rel="noopener noreferrer">Source: Pixiv</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Source: title</a>
           </p>
           <p class="subtitle">
             This is dummy page only for OGP bots.
@@ -63,7 +63,7 @@ export default {
         { hid: 'description', name: 'description', content: this.result.caption.slice(0, 50) + '...' },
         { hid: 'og:title', property: 'og:title', content: this.result.title + (this.result.nsfw ? '(R18)' : '') },
         { hid: 'og:description', property: 'og:description', content: this.result.caption.slice(0, 50) + '...' },
-        { hid: 'og:url', property: 'og:url', content: `https://***REMOVED***/arts/${this.result.illustID}` },
+        { hid: 'og:url', property: 'og:url', content: `${process.env.SITE_URL}/arts/${this.result.illustID}` },
         { hid: 'og:image', property: 'og:image', content: this.getOGPThumb() },
         { hid: 'og:site_name', property: 'og:site_name', content: process.env.SITE_NAME },
         { hid: 'og:type', property: 'og:type', content: 'website' },

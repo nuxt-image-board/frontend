@@ -1,0 +1,471 @@
+{
+  "site_name": "N board",
+  "langs": {
+    "en": "English",
+    "ja": "Japanese"
+  },
+  "gate": {
+    "text": {
+      "login": "Login",
+      "register": "Register"
+    },
+    "button": {
+      "login": "Login",
+      "login_with_line": "Login with LINE",
+      "register": "Register"
+    },
+    "mini_button": {
+      "register": "Register",
+      "login": "Log in",
+      "contact_us": "Contact us"
+    },
+    "login_form": {
+      "user_id": "UserID: ",
+      "password": "Password: "
+    },
+    "register_form": {
+      "user_name": "Display Name(4~20)",
+      "user_id": "UserID (alphanumeric 4~20)",
+      "password": "Password (alphanumeric 8~20)",
+      "password_re": "Password (Retype)",
+      "invite_code": "Invite code",
+      "agree_tos": "I agree to ToS"
+    },
+    "notify": {
+      "login_steps": {
+        "title": "Login",
+        "authorizating": "Authorizating...",
+        "authorize_failed": "Failed to login!",
+        "loading_shop": "Loading shop products...",
+        "loading_mylist": "Loading mylist contents...",
+        "loading_mute": "Loading muted ids...",
+        "load_complete": "Load completed"
+      }
+    }
+  },
+  "NavbarUp": {
+    "bar_items": {
+      "menu": "Menu",
+      "list": "All",
+      "ranking": "Ranking",
+      "keyword": "Keyword",
+      "character": "Character",
+      "tag": "Tag",
+      "artist": "Artist",
+      "uploader": "Uploader",
+      "more": "More",
+      "more_tab": "More",
+      "image": "Image",
+      "upload": "Upload"
+    },
+    "dropdown_items": {
+      "mypage": "Profile",
+      "mylist": "Mylist",
+      "wallet": "Wallet",
+      "upload": "Upload",
+      "history_upload": "Upload history",
+      "history_search": "Search history",
+      "history_illust": "Browsing history",
+      "logout": "Logout"
+    },
+    "smart_items": {
+      "home": "Home",
+      "top": "Top",
+      "news": "News",
+      "arts": "Arts",
+      "search": "Search",
+      "user": "User",
+      "other": "Other"
+    }
+  },
+  "NavbarDown": {
+    "terms": "Terms of uses",
+    "privacy": "Privacy policy",
+    "help": "Help",
+    "links": "Links"
+  },
+  "NavbarSmartDown": {
+    "home": "Home",
+    "search": "Search",
+    "upload": "Upload",
+    "mylist": "Mylist",
+    "settings": "Settings"
+  },
+  "NavbarDownMusic": {
+    "loading": "Loading"
+  },
+  "methods": {
+    "title": "Search methods",
+    "history": "Search history",
+    "methods": {
+      "ranking": "Ranking",
+      "keyword": "Word",
+      "character": "Character",
+      "tag": "Tag",
+      "artist": "Artist",
+      "uploader": "Uploader",
+      "image": "Image",
+      "multiple_tag": "Multiple tags"
+    }
+  },
+  "SearchScreen": {
+    "mute_artist": {
+      "not_muted": "Enable mute for this artist",
+      "muted": "Disable mute for this artist"
+    },
+    "search_methods": {
+      "list": "Search from list: ",
+      "uploader": "Search by uploader: ",
+      "tag": "Search by tag: ",
+      "multiple_tag": "Search by multiple tags: ",
+      "keyword": "Search by keyword: ",
+      "character": "Search by character: ",
+      "artist": "Search by artist: "
+    },
+    "sort": {
+      "latest_art": "Latest",
+      "oldest_art": "Oldest",
+      "most_viewed": "Most viewed",
+      "least_viewed": "Least viewed",
+      "most_liked": "Most liked",
+      "least_liked": "Least liked",
+      "latest_mylist": "Latest mylisted",
+      "oldest_mylist": "Oldest mylisted"
+    },
+    "no_more_result": "You read all results"
+  },
+  "UtilArea": {
+    "toggle_notify": "Notify",
+    "toggle_show": "Hide",
+    "show_article": "Show wiki",
+    "edit_article": "Edit wiki"
+  },
+  "RankingScreen": {
+    "title": "Ranking",
+    "note": "Likes and views shown at this page are calcurated from ranking data. Old rankings are not yet implemented, sorry.",
+    "not_found": "No ranking data found at specified period",
+    "sort": {
+      "monthly": "Monthly",
+      "weekly": "Weekly",
+      "daily": "Daily"
+    },
+    "like_count": "Likes",
+    "view_count": "Views"
+  },
+  "ListScreen": {
+    "filer_keyword": "Filter: ex. irasutoya",
+    "sort": {
+      "latest_art": "Latest",
+      "oldest_art": "Oldest",
+      "amount_many": "Amount (Greater)",
+      "amount_few": "Amount (Less)",
+      "most_liked": "Most liked",
+      "least_liked": "Least liked",
+      "z_to_a": "A to Z",
+      "a_to_z": "Z to A"
+    },
+    "no_more_result": "You read all results"
+  },
+  "Wiki": {
+    "read": "Read article at Wiki",
+    "write": "Write article at Wiki",
+    "edit": "Edit article at Wiki"
+  },
+  "accountSettings": {
+    "title": "Account settings",
+    "line_connect": {
+      "title": "LINE Connect",
+      "status": {
+        "connected": "Connected",
+        "not_connected": "Not connected"
+      },
+      "button": "Connect",
+      "sentence": "By connecting your LINE account to N board account, you can login without using username and password. If you changed line account, you can reconnect by tapping the button again. LINE connect uses LINE Login API provided from LINE Official. N board uses only Identify ID of your LINE account. We won't send any message by this feature. To know how it works, You can search 'OpenID Connect' on google."
+    },
+    "telegram_connect": {
+      "title": "Telegram Connect",
+      "status": {
+        "connected": "Connected",
+        "not_connected": "Not connected"
+      },
+      "sentence": "By connecting your Telegram account to N board account, you can login N board with Telegram. You can reconnect if you changed telegram account. This feature uses Telegram login widget. The method can get your fullname, userID, and userName. But we stores and uses only your userID."
+    },
+    "change_password": {
+      "title": "Change password",
+      "form" : {
+        "current_password": "Current password",
+        "new_password": "New password",
+        "new_password_re": "New password (Retype)",
+        "password_rule": "5 to 50 alphanumeric characters",
+        "button": "Change"
+      },
+      "notify": {
+        "title": "Password",
+        "text": {
+          "changed": "Successfully changed password",
+          "wrong": "The current password is incorrect.",
+          "failed": "Failed to change password."
+        }
+      }
+    },
+    "api_key": {
+      "title": "API Key",
+      "reissue": "Reisssue (Requires relogin)",
+      "sentence1": "This API provides the all datas in the site directly. You can use freely for develop your bot or collecting datas to machine learning.",
+      "sentence2": "Currently, there are no documents for using. Please see network traffics with something tools, and use as is."
+    },
+    "logout": "Logout"
+  },
+  "inviteInfo": {
+    "title": "Invite info",
+    "inviter": "Inviter:",
+    "invited_count": "Invited count:",
+    "invite_status": {
+      "title": "Invite:",
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
+    "button": "Invite",
+    "your_invite_code": "Your invite code",
+    "sentence1": "By telling this invite code to otherone, the user can register to N board.",
+    "sentence2": "However, If the user you invited got BAN or any restriction, You will get restriction too. Invite only you can trust."
+  },
+  "notifySettings": {
+    "title": "Notify settings",
+    "connect_status": {
+      "title": "Notify status:",
+      "connected": "setuped",
+      "not_connected": "Not setuped",
+      "button": {
+        "setup": "Setup",
+        "reset": "Reset"
+      }
+    },
+    "about": {
+      "title": "About notify settings",
+      "sentence": "This feature can notify to you when new arts are added. The notifies will sent in real time, and you can know newest arts as early. Currently, this feature only supports browser and line."
+    },
+    "browser": {
+      "title": "Browser notify settings",
+      "sentence": "With this, you can get notifications with your browser app. When you tap「Setup」, it will ask you to accept notifications, and tap the Accept button. It you don't get anything after taps 「Setup」, please reload and try again. This setting is needed per your smartphone, computer and tablet. Total maximum devices is 5. If you want to change device after set 5 devices,  tap the reset button and accept the notifications on all devices again. This won't works on iOS or Mac devices."
+    },
+    "line": {
+      "title": "LINE notify settings",
+      "sentence": "With this, you can get notifications with your LINE app. The notify uses 'LINE Notify'. When you changed account, you can reconnect with tapping this button again."
+    }
+  },
+  "siteSettings": {
+    "title": "Site settings",
+    "acceptR18": {
+      "title": "Show NSFW images",
+      "description": "If enabled, nsfw images will be displayed without any mosaics. ENABLE ONLY YOU ARE OVER THAN 18 AND DON'T HATE NSFW CONTENTS"
+    },
+    "useTextResult": {
+      "title": "Text Result",
+      "description": "If enabled, search results will shown with title and description."
+    },
+    "isPC": {
+      "title": "PC version",
+      "description": "If enabled, page layouts will be optimised for PC. Don't enable this on smartphones."
+    },
+    "isLeftHanded": {
+      "title": "Left handed menu",
+      "description": "If enabled, menu buttons position will be on left side, and swipe menus will appear from left side."
+    },
+    "useSwipe": {
+      "title": "Swipe style menu",
+      "description": "If enabled, menus will appear when you swipe. Don't enable on iOS, since this will disturb system navigation."
+    },
+    "useFixed": {
+      "title": "Top menu",
+      "description": "If enabled, logo and hamburger button keeps showing at top. Disable if your phone screen is small."
+    },
+    "useBottom": {
+      "title": "Bottom menu",
+      "description": "If enabled, shortcuts will appear on bottom. Disable if your phone screen is small."
+    },
+    "useBack": {
+      "title": "Back button",
+      "description": "If enabled, back button will appear on bottom left. This may required if you are using iOS."
+    },
+    "useJump": {
+      "title": "Jump to top button",
+      "description": "If enabled, jump to top button will appear on bottom right."
+    },
+    "useWebP": {
+      "title": "Use WebP",
+      "description": "If enabled, image data transfers will be reduced by using WebP compress. This won't works on iOS or Mac."
+    },
+    "useInfinity": {
+      "title": "Infinity scroll",
+      "description": "If enabled, next page search results will be added when you scroll to bottom (Like twitter). It makes more data transfers than paginations method."
+    },
+    "locale": {
+      "title": "Language",
+      "description": "This setting can change locale in this site. This feature is not completed, so not all will be translated."
+    },
+    "useRaw": {
+      "title": "Raw resolution",
+      "description": "If enabled, always uses raw resolution images. (You need to purchase by POINT at shop page)"
+    },
+    "useSakura": {
+      "title": "Blossom BG",
+      "description": "If enabled, blossom particles from gochiusa official page, will shown at background. (You need to purchase by POINT at shop page)"
+    },
+    "useViewer": {
+      "title": "Image viewer",
+      "description": "If enabled, you can rotate, flip and zoom at illustration pages. (You need to purchase by POINT at shop page)"
+    },
+    "colSize": {
+      "title": "Display columns",
+      "description": "This can change display columns at result pages. (You need to purchase by POINT at shop page)",
+      "items": {
+        "2_row": "2列",
+        "3_row": "3列",
+        "4_row": "4列",
+        "6_row": "6列"
+      }
+    },
+    "useMusicPlayer": {
+      "title": "UsagiPlayer",
+      "description": "If enabled, you can use youtube music player in this site. (You need to purchase by POINT at shop page)"
+    }
+  },
+  "storageInfo": {
+    "title": "Storage info",
+    "usage_percent": "Storage usage rate: ",
+    "usage_bytes":  "Storage usage (estimated):",
+    "useable_bytes": "Available storage (estimated):",
+    "delete_button": "Delete temporary datas"
+  },
+  "userInfo": {
+    "title": "User info",
+    "user_name": "User name:",
+    "registered_date": "Registered date:",
+    "upload_history_button": "Upload history"
+  },
+  "search_form": {
+    "multiple": {
+      "tag": {
+        "title": "Multiple tag search",
+        "target": "Target tags (Max length: 5)",
+        "select": "Please select tags",
+        "options": "Input tag name to search (Min length: 2)",
+        "and_or": "AND search / OR search",
+        "search_button": "Search",
+        "notify": {
+          "no_match": "No matched results found"
+        }
+      }
+    },
+    "keyword": {
+      "title": "Keyword Search",
+      "description": "Input keyword to search.",
+      "search_button": "Search",
+      "notify": {
+        "no_match": "No matched results found"
+      }
+    }
+  },
+  "wallet": {
+    "having": "You have ",
+    "bonus": {
+      "title": "Bonus",
+      "description": "Need more POINT? You can get by rolling Gacha!",
+      "next_receivable": "Next receivable date: ",
+      "receive": "Receive",
+      "received": "Received",
+      "daily": {
+        "title": "日1ログボ",
+        "description": "1日1回必ず1POINTが貰えます"
+      },
+      "weekly": {
+        "title": "週1ガチャ",
+        "description": "73%で1POINT、20%で2POINT、 5%で5POINT、 2%で10POINTが出る週1ガチャ。ソシャゲ並に渋いです。"
+      },
+      "monthly": {
+        "title": "月1ガチャ",
+        "description": "85%で5POINT、10%で10POINT、4%で20POINT、1%で30POINTが出る月1ガチャ。ソシャゲよりも渋いです。"
+      }
+    },
+    "transaction_history": {
+      "title": "Transaction history",
+      "get": "got"
+    },
+    "go_to_shop": "Go to shop"
+  },
+  "shop": {
+    "title": "Shop",
+    "description": "You can get POINT with daily login, or publish arts. POINT can be traded to cool features useable in this website.",
+    "currently_have": "You currently have {0} POINT.",
+    "table_head": {
+      "product": "Product",
+      "description": "Description",
+      "price": "Price",
+      "transaction": "Transaction"
+    },
+    "purchase": "Purchase",
+    "bought": "Purchased",
+    "not_enough": "Not enough"
+  },
+  "news": {
+    "title": "News",
+    "table_head": {
+      "type": "Type",
+      "title": "Title",
+      "date": "Date"
+    },
+    "types": {
+      "info": "Info",
+      "memo": "Memo",
+      "update": "Update",
+      "announce": "Announce",
+      "important": "Important"
+    }
+  },
+  "search_image": {
+    "title": "Image Search",
+    "description": "After select image, it searches from N board database. If not found, it also searches with SauceNAO. (Supported formats: JPG, JPEG, and PNG)",
+    "select_image": "Select image...",
+    "drop_image": "Drop to search",
+    "searching_gochiira": "Searching with N board...",
+    "searching_saucenao": "Searching with SauceNao...",
+    "hash_value": "Hash: "
+  },
+  "help": {
+    "title": "How can I help you?",
+    "frequently": {
+      "title": "Really frequently asked questions:",
+      "articles": {
+        "forgot-password-logouted": "I forgot password!"
+      }
+    },
+    "survey": {
+      "title": "Did this article help you?",
+      "helped": "{0} people saids it did.",
+      "not_helped": "{0} people saids it didn't.",
+      "yes": "It helped me",
+      "no": "It didn't helped me"
+    },
+    "back": "Back"
+  },
+  "rankings": {
+    "title": "Ranking list",
+    "methods": {
+      "monthly_like": "Monthly like ranking",
+      "monthly_view": "Monthly view ranking",
+      "weekly_like": "Weekly like ranking",
+      "weekly_view": "Weekly view ranking",
+      "daily_like": "Daily like ranking",
+      "daily_view": "Daily view ranking"
+    }
+  },
+  "upload_by_image": {
+    "title": "Upload",
+    "supported_extensions": "Supported extensions: JPG/JPEG/PNG",
+    "buttons": {
+      "select_image": "Select image",
+      "upload_history": "Go to upload history"
+    }
+  }
+}

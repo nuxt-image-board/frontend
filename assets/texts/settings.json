@@ -90,13 +90,6 @@
             "class": "is-info"
         },
         {
-            "key": "useSakura",
-            "mobile_only": false,
-            "flag": false,
-            "require_product": 5,
-            "class": "is-info"
-        },
-        {
             "key": "useViewer",
             "mobile_only": false,
             "flag": false,
@@ -134,27 +127,6 @@
             "flag": false,
             "require_product": 17,
             "class": "is-info"
-        },
-        {
-            "key": "useChinoMascot",
-            "mobile_only": false,
-            "flag": false,
-            "require_product": 21,
-            "class": "is-info",
-            "items": [
-                {
-                    "text": "なし",
-                    "value": "none"
-                },
-                {
-                    "text": "魔法少女チノ",
-                    "value": "magical"
-                },
-                {
-                    "text": "ラビハ制服チノ",
-                    "value": "house"
-                }
-            ]
         }
     ]
 }

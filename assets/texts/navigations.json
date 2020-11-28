@@ -16,7 +16,7 @@
           "icon": "wallet"
         },
         {
-          "to": "/upload/page",
+          "to": "/upload",
           "title": "upload",
           "icon": "upload"
         },
