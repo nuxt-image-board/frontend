@@ -5,7 +5,7 @@
         商店街
       </h1>
       <p class="subtitle is-size-6 has-text-centered">
-        ***REMOVED***で使える様々なものを買える場所です
+        {{ SITE_NAME }}で使える様々なものを買える場所です
       </p>
       <div class="columns is-centered is-vcentered is-multiline">
         <nuxt-link
@@ -50,6 +50,11 @@ export default {
       return { machines: machines.data.machines }
     } catch (err) {
       return error({ statusCode: 502, message: 'err' })
+    }
+  },
+  computed: {
+    SITE_NAME () {
+      return process.env.SITE_NAME
     }
   },
   head () {

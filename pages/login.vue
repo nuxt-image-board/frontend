@@ -90,8 +90,8 @@
                       <vue-telegram-login
                         mode="redirect"
                         size="medium"
-                        telegram-login="***REMOVED***Bot"
-                        redirect-url="https://***REMOVED***/social/telegram/callback"
+                        :telegram-login="`${TELEGRAM_USERID}`"
+                        :redirect-url="`${SITE_URL}/social/telegram/callback`"
                       />
                     </client-only>
                   </div>
@@ -147,6 +147,12 @@ export default {
   computed: {
     CONTACT () {
       return process.env.CONTACT
+    },
+    SITE_URL () {
+      return process.env.SITE_URL
+    },
+    TELEGRAM_USERID () {
+      return process.env.TELEGRAM_USERID
     }
   },
   created () {

@@ -35,7 +35,7 @@
                 <div class="control">
                   <input
                     v-model="filterTag"
-                    placeholder="Ex. ***REMOVED***/ ラビハ制服"
+                    placeholder="Ex. irasutoya"
                     name="query"
                     class="input is-4"
                     type="text"

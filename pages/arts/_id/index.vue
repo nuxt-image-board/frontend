@@ -612,7 +612,7 @@ export default {
         const a = document.createElement('a')
         document.body.appendChild(a)
         a.href = imageUrl
-        a.download = `***REMOVED***_${this.result.illustID}.${this.result.extension}`
+        a.download = `${process.env.CDN_ENDPOINT}/illusts/orig/${this.result.illustID}.${this.result.extension}`
         a.click()
         a.remove()
         URL.revokeObjectURL(imageUrl)

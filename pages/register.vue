@@ -12,7 +12,7 @@
       </Notification>
       <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
-          <img src="logo.png" alt="***REMOVED*** logo">
+          <img src="logo.png" :alt="`${SITE_NAME} logo`">
         </div>
         <div class="column is-half">
           <div class="container has-text-centered is-vcentered">
@@ -185,6 +185,9 @@ export default {
   computed: {
     CONTACT () {
       return process.env.CONTACT
+    },
+    SITE_NAME () {
+      return process.env.SITE_NAME
     },
     filled () {
       if (

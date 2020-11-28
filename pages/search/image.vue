@@ -40,7 +40,7 @@
                   </span>
                   <span v-if="fileName" class="button is-primary is-loading" />
                   <span v-if="step == 1" class="file-label">
-                    {{ $t('search_image.searching_***REMOVED***') }}
+                    {{ $t('search_image.searching_n_board') }}
                   </span>
                   <span v-if="step == 2" class="file-label">
                     {{ $t('search_image.searching_saucenao') }}
@@ -171,7 +171,7 @@ export default {
               }
             })
             if (this.naoResults.length === 0) {
-              this.naoResults = [{ id: 0, thumbnail: '/not_found.png', link: 'https://***REMOVED***' }]
+              this.naoResults = [{ id: 0, thumbnail: '/not_found.png', link: '#' }]
             }
           }
         } catch (error) {

@@ -6,10 +6,10 @@
           <div class="tile is-parent">
             <article class="tile is-child notification has-background-cocoa">
               <p class="title">
-                ***REMOVED***
+                {{ $t('site_name') }}
               </p>
               <p class="subtitle">
-                ***REMOVED***
+                {{ $t('site_description') }}
               </p>
               <div class="content">
                 {{ version }}
@@ -24,7 +24,6 @@
                 </p>
                 <div class="content">
                   <p><a :href="CONTACT">何か問題や質問などがあればこちらからお問い合わせください!</a></p>
-                  <p><a :href="CONTACT">You can contact us from here!</a></p>
                 </div>
               </article>
               <article class="tile is-child notification has-background-cocoa">
@@ -35,7 +34,7 @@
                   <article class="media s-pulled-right">
                     <figure class="media-left">
                       <p class="image is-64x64">
-                        <img src="logo.png" alt="***REMOVED*** logo">
+                        <img src="logo.png" :alt="`${SITE_NAME} logo`">
                       </p>
                     </figure>
                     <div class="media-content">
@@ -121,6 +120,9 @@ export default {
     CONTACT () {
       return process.env.CONTACT
     },
+    SITE_NAME () {
+      return process.env.SITE_NAME
+    },
     RANDOM_ILLUST_SRC () {
       return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.randomIllust.illustID + '.' + (this.$store.state.user.useWebP ? 'webp' : 'jpg')
     },
@@ -135,7 +137,7 @@ export default {
   },
   head () {
     return {
-      titleTemplate: '***REMOVED***'
+      titleTemplate: this.$t('site_name')
     }
   }
 }
