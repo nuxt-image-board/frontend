@@ -42,9 +42,6 @@
                   <span v-if="step == 1" class="file-label">
                     {{ $t('search_image.searching_n_board') }}
                   </span>
-                  <span v-if="step == 2" class="file-label">
-                    {{ $t('search_image.searching_saucenao') }}
-                  </span>
                 </span>
                 <span v-if="fileName" class="file-name has-text-centered has-background-white">
                   {{ fileName }}
@@ -64,9 +61,6 @@
               <div v-for="result in results" :key="result.illustID" class="column is-6-mobile is-4-desktop">
                 <Result :result="result" />
               </div>
-              <div v-for="result in naoResults" :key="result.id" class="column is-6-mobile is-4-desktop">
-                <SimpleResult :link="result.link" :thumbnail="result.thumbnail" />
-              </div>
             </div>
           </div>
         </div>
@@ -78,13 +72,11 @@
 <script>
 import Fas from '@/components/ui/Fas.vue'
 import Result from '@/components/page/search/Result.vue'
-import SimpleResult from '@/components/page/search/SimpleResult.vue'
 
 export default {
   components: {
     Fas,
-    Result,
-    SimpleResult
+    Result
   },
   data () {
     return {
@@ -152,39 +144,6 @@ export default {
           }
         )
         this.hash = ''
-      }
-      if (this.results.length === 0) {
-        this.step += 1
-        try {
-          const resp = await this.$axios.post('/search/image/saucenao', data, { headers })
-          if (resp.data.status === 200) {
-            let result = resp.data.data.result.slice(0, 3)
-            result = result.filter((res) => { return parseFloat(res.header.similarity) > 50 })
-            this.naoResults = result.map(function (res, index) {
-              return {
-                id: index,
-                thumbnail: res.header.thumbnail,
-                link: res.data.ext_urls[0].replace(
-                  'https://www.pixiv.net/member_illust.php?mode=medium&illust_id=',
-                  'https://www.pixiv.net/artworks/'
-                )
-              }
-            })
-            if (this.naoResults.length === 0) {
-              this.naoResults = [{ id: 0, thumbnail: '/not_found.png', link: '#' }]
-            }
-          }
-        } catch (error) {
-          this.$notify(
-            {
-              group: 'default',
-              type: 'danger',
-              duration: 5000,
-              title: '通信エラーが発生しました'
-            }
-          )
-          this.naoResults = []
-        }
       }
       this.step = 0
       this.fileName = ''
