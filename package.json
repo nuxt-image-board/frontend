@@ -1,8 +1,8 @@
 {
-  "name": "***REMOVED***",
+  "name": "nuxt-image-board",
   "version": "1.0.0",
-  "description": "***REMOVED***イラストまとめサイト",
-  "author": "Omado",
+  "description": "A taggable private imageboard system made only for me and you",
+  "author": "Dosugamea",
   "private": true,
   "scripts": {
     "dev": "nuxt --hostname localhost",
