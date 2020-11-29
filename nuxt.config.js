@@ -30,7 +30,6 @@ export default {
       { name: 'twitter:description', content: process.env.SITE_DESCRIPTION }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'preconnect dns-prefetch', href: process.env.API_ENDPOINT },
       { rel: 'preconnect dns-prefetch', href: '//fonts.gstatic.com' },
       { rel: 'preconnect dns-prefetch', href: '//fonts.googleapis.com' },
