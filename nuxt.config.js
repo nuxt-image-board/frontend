@@ -24,14 +24,14 @@ export default {
       { hid: 'og:site_name', property: 'og:site_name', content: process.env.SITE_NAME },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:locale', property: 'og:locale', content: 'ja_JP' },
-      { hid: 'og:url', property: 'og:url', content: 'https://***REMOVED***' },
+      { hid: 'og:url', property: 'og:url', content: process.env.SITE_URL },
       { name: 'twitter:card', content: 'summary' },
       { name: 'twitter:title', content: process.env.SITE_NAME },
       { name: 'twitter:description', content: process.env.SITE_DESCRIPTION }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      { rel: 'preconnect dns-prefetch', href: '//***REMOVED***' },
+      { rel: 'preconnect dns-prefetch', href: process.env.API_ENDPOINT },
       { rel: 'preconnect dns-prefetch', href: '//fonts.gstatic.com' },
       { rel: 'preconnect dns-prefetch', href: '//fonts.googleapis.com' },
       { rel: 'preconnect dns-prefetch', href: '//cdn.jsdelivr.net' },
