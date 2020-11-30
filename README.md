@@ -2,15 +2,17 @@
 NuxtImageBoardのフロントエンドサイド(Nuxt.js/ SSR)  
 
 ## Screenshot
-
+Coming soon!
 
 ## Demo
 Coming soon!
 
 ## Deploy Setup
-
+Coming soon!
 
 ## Build Setup
+このサイトを動作させるにはバックエンドおよびToyMoneyサーバーが必要です。  
+詳細な手順は後日追加します
 ``` bash
 # 必須ライブラリをインストールする
 $ npm install
