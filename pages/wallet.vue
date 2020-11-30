@@ -7,10 +7,10 @@
             <article class="tile is-child notification has-background-cocoa">
               <p class="title has-text-centered">
                 <Fas i="wallet" />
-                <span>PYON Wallet</span>
+                <span>POINT Wallet</span>
               </p>
               <p class="title has-text-centered">
-                {{ $t('wallet.having') }} {{ money }} PYON
+                {{ $t('wallet.having') }} {{ money }} POINT
               </p>
             </article>
             <article class="tile is-child notification has-background-cocoa">
