@@ -14,7 +14,7 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ***REMOVED***-frontend
+      IMAGE_NAME: frontend
       SKIP_SASS_BINARY_DOWNLOAD_FOR_CI: true
       SKIP_NODE_SASS_TESTS: true
     steps:
@@ -45,7 +45,7 @@ jobs:
           platforms: linux/amd64,linux/arm/v7
           push: true
           tags: |
-            ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:latest
-            ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:${{ github.run_number }}
-          cache-from: type=registry,ref=ghcr.io/***REMOVED***/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/nuxt-image-board/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/nuxt-image-board/${{ env.IMAGE_NAME }}:${{ github.run_number }}
+          cache-from: type=registry,ref=ghcr.io/nuxt-image-board/${{ env.IMAGE_NAME }}:latest
           cache-to: type=inline,mode=max

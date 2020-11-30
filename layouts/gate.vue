@@ -26,7 +26,7 @@
                       <span class="icon">
                         <Fas i="home" />
                       </span>
-                      <span>{{ $t('gate.text.***REMOVED***_official') }}</span>
+                      <span>{{ $t('gate.text.link') }}</span>
                     </a>
                   </p>
                 </div>

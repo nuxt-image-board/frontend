@@ -41,7 +41,7 @@
       </Modal>
       <p class="has-text-centered">
         UsagiPlayerはYoutubeのプレイリストを再生するものです。
-        そのため、Youtubeにない動画は再生できません。また、***REMOVED***のサーバー上に音源は一切保管されていません。
+        そのため、Youtubeにない動画は再生できません。また、サーバー上に音源は一切保管されていません。
         システムを十分ご理解の上、ご利用ください。
       </p>
     </Modal>
@@ -98,7 +98,7 @@ export default {
           class: 'is-info',
           title: 'プレイリストID',
           placeholder: 'PL3w4YrAfCCwS2vEqSUXrCKnK-F4-SrYX-',
-          description: '再生するプレイリストのIDを指定します。デフォルトではDeyuii氏がまとめている***REMOVED***楽曲プレイリストを指定しています。リミックスリスト、削除された動画を含むプレイリストでは上手く動作しません。'
+          description: '再生するプレイリストのIDを指定します。リミックスリスト、削除された動画を含むプレイリストでは上手く動作しません。'
         },
         {
           key: 'playerRandomPlay',

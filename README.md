@@ -1,9 +1,16 @@
-# Web_v4
-***REMOVED***のフロントエンドサイド(Nuxt.js)  
-SSRなので、Productionで実行する場合は全ファイルを揃えて送る
+# frontend
+NuxtImageBoardのフロントエンドサイド(Nuxt.js/ SSR)  
+
+## Screenshot
+
+
+## Demo
+Coming soon!
+
+## Deploy Setup
+
 
 ## Build Setup
-
 ``` bash
 # 必須ライブラリをインストールする
 $ npm install

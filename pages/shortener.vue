@@ -11,7 +11,7 @@
               URLを入力すると ***REMOVED***/ランダム英数字4文字 に短縮します
             </h3>
             <div class="field">
-              <input v-model="url" class="input" type="text" placeholder="https://***REMOVED***">
+              <input v-model="url" class="input" type="text" placeholder="https://example.com">
             </div>
             <button class="button is-primary is-large" :disabled="IS_NOT_URL" @click="postUrl">
               短縮

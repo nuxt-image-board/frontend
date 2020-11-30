@@ -12,7 +12,7 @@
       </Notification>
       <div class="columns is-centered is-vcentered">
         <div class="column has-text-centered is-one-third-touch is-half-desktop has-image-centered">
-          <img src="logo.png" alt="***REMOVED*** logo">
+          <img src="logo.png" :alt="`${$t('site_name')} logo`">
         </div>
         <div class="column is-half">
           <div class="container has-text-centered is-vcentered">
@@ -165,7 +165,7 @@ export default {
       const REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_callback'
       const LINE_PARAMS = new URLSearchParams()
       LINE_PARAMS.append('response_type', 'code')
-      LINE_PARAMS.append('client_id', '***REMOVED***')
+      LINE_PARAMS.append('client_id', process.env.LINE_CLIENT_ID)
       LINE_PARAMS.append('state', CSRF)
       LINE_PARAMS.append('scope', 'profile openid')
       LINE_PARAMS.append('redirect_uri', REDIRECT_URI)

@@ -1,0 +1,8 @@
+{
+  "entries": [
+    "The imageboard system demo"
+  ],
+  "placeholder": [
+    ["nboard_admin", "nboard_password"]
+  ]
+}

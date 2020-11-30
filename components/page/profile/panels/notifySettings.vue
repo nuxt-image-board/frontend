@@ -90,7 +90,7 @@ export default {
       const NOTIFY_REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_notify_connect'
       const NOTIFY_PARAMS = new URLSearchParams()
       NOTIFY_PARAMS.append('response_type', 'code')
-      NOTIFY_PARAMS.append('client_id', '***REMOVED***')
+      NOTIFY_PARAMS.append('client_id', process.env.LINE_CLIENT_ID)
       NOTIFY_PARAMS.append('state', CSRF)
       NOTIFY_PARAMS.append('scope', 'notify')
       NOTIFY_PARAMS.append('redirect_uri', NOTIFY_REDIRECT_URI)
