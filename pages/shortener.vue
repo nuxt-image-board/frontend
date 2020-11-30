@@ -8,7 +8,7 @@
               URL短縮
             </h4>
             <h3 class="subtitle">
-              URLを入力すると ***REMOVED***/ランダム英数字4文字 に短縮します
+              URLを入力すると {{ DYNAMICLINK_ENDPOINT }}/ランダム英数字4文字 に短縮します
             </h3>
             <div class="field">
               <input v-model="url" class="input" type="text" placeholder="https://example.com">
@@ -66,16 +66,19 @@ export default {
         return true
       }
       return false
+    },
+    DYNAMICLINK_ENDPOINT () {
+      return process.env.DYNAMICLINK_ENDPOINT
     }
   },
   methods: {
     async postUrl (e) {
       try {
-        const key = '***REMOVED***'
+        const key = process.env.DYNAMICLINK_API_KEY
         const resp = await axios.post(
           `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${key}`,
           {
-            longDynamicLink: '***REMOVED***?link=' + encodeURI(this.url),
+            longDynamicLink: `${process.env.DYNAMICLINK_ENDPOINT}?link=${encodeURI(this.url)}`,
             suffix: { option: 'SHORT' }
           }
         )

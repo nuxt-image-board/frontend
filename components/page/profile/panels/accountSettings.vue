@@ -36,8 +36,8 @@
         <client-only>
           <vue-telegram-login
             mode="redirect"
-            telegram-login="***REMOVED***Bot"
-            redirect-url="https://***REMOVED***/social/telegram/connect"
+            :telegram-login="TELEGRAM_USERID"
+            :redirect-url="TELEGRAM_REDIRECT_ADDRESS"
           />
         </client-only>
       </p>
@@ -159,6 +159,12 @@ export default {
     },
     IS_TELEGRAM_CONNECTED () {
       return this.$auth.$state.user.telegramConnect ? this.$t('accountSettings.telegram_connect.status.connected') : this.$t('accountSettings.telegram_connect.status.not_connected')
+    },
+    TELEGRAM_USERID () {
+      return process.env.TELEGRAM_USERID
+    },
+    TELEGRAM_REDIRECT_ADDRESS () {
+      return process.env.SITE_URL + '/social/telegram/connect'
     }
   },
   created () {
@@ -168,7 +174,7 @@ export default {
       const LINE_REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_connect'
       const LINE_PARAMS = new URLSearchParams()
       LINE_PARAMS.append('response_type', 'code')
-      LINE_PARAMS.append('client_id', '***REMOVED***')
+      LINE_PARAMS.append('client_id', process.env.LINE_CLIENT_ID)
       LINE_PARAMS.append('state', CSRF)
       LINE_PARAMS.append('scope', 'profile openid')
       LINE_PARAMS.append('redirect_uri', LINE_REDIRECT_URI)

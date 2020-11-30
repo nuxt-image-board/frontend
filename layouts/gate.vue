@@ -22,7 +22,7 @@
               <div class="navbar-item">
                 <div class="field is-grouped">
                   <p class="control">
-                    <a href="https://***REMOVED***" class="button is-outlined">
+                    <a :href="$t('gate.text.link_address')" class="button is-outlined">
                       <span class="icon">
                         <Fas i="home" />
                       </span>
