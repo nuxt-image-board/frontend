@@ -171,7 +171,7 @@ export default {
     if (process.client) {
       const CSRF = Math.random().toString(36).slice(-8)
       const LINE_ENDPOINT = 'https://access.line.me/oauth2/v2.1/authorize'
-      const LINE_REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_connect'
+      const LINE_REDIRECT_URI = process.env.SITE_URL + '/line_connect'
       const LINE_PARAMS = new URLSearchParams()
       LINE_PARAMS.append('response_type', 'code')
       LINE_PARAMS.append('client_id', process.env.LINE_CLIENT_ID)

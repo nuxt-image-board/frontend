@@ -8,7 +8,7 @@ const THIRTY_MIN = 1000 * 60 * 30
 //
 // https://github.com/nuxt-community/axios-module/issues/99#issuecomment-586795315
 // https://github.com/kuitos/axios-extensions
-export default function ({ $axios, ssrContext, store }) {
+export default function ({ $config, $axios, ssrContext, store }) {
   const defaultCache = process.server
     ? ssrContext.$axCache
     : new LRU({ maxAge: THIRTY_MIN })
@@ -22,7 +22,7 @@ export default function ({ $axios, ssrContext, store }) {
     if (store.$auth.loggedIn) {
       config.headers.common.Authorization = 'Bearer ' + store.$auth.user.apiKey
     } else {
-      config.headers.common.Authorization = 'Bearer ' + process.env.API_KEY
+      config.headers.common.Authorization = 'Bearer ' + $config.API_KEY
     }
     config.headers.common.Accept = 'application/json'
   })

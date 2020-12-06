@@ -1,8 +1,11 @@
-const envPath = `config/.env.${process.env.NODE_ENV || 'local'}`
-require('dotenv').config({ path: envPath })
-
 export default {
   ssr: true,
+  /*
+  ** Read environment variables
+  */
+  privateRuntimeConfig: {
+    API_KEY: process.env.API_SSR_TOKEN
+  },
   /*
   ** Headers of the page
   */
@@ -30,7 +33,7 @@ export default {
       { name: 'twitter:description', content: process.env.SITE_DESCRIPTION }
     ],
     link: [
-      { rel: 'preconnect dns-prefetch', href: process.env.API_ENDPOINT },
+      { rel: 'preconnect dns-prefetch', href: process.env.API_CSR_ENDPOINT },
       { rel: 'preconnect dns-prefetch', href: '//fonts.gstatic.com' },
       { rel: 'preconnect dns-prefetch', href: '//fonts.googleapis.com' },
       { rel: 'preconnect dns-prefetch', href: '//cdn.jsdelivr.net' },
@@ -284,15 +287,9 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.API_ENDPOINT,
-    browserBaseURL: process.env.API_ENDPOINT,
+    baseURL: process.env.API_SSR_ENDPOINT,
+    browserBaseURL: process.env.API_CSR_ENDPOINT,
     proxyHeaders: true
-  },
-  /*
-  ** environment configuration
-  */
-  dotenv: {
-    filename: envPath
   },
   /*
   ** Tracking User activity
@@ -351,10 +348,10 @@ export default {
   buildDir: '.nuxt',
   build: {
     hardSource: true,
-    extractCSS: true
+    extractCSS: true,
+    publicPath: process.env.PUBLIC_PATH ? process.env.PUBLIC_PATH : '/_nuxt/'
   },
   vue: {
     devtools: (process.env.NODE_ENV !== 'production')
-  },
-  dev: (process.env.NODE_ENV !== 'production')
+  }
 }

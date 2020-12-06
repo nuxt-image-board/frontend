@@ -87,7 +87,7 @@ export default {
     if (process.client) {
       const CSRF = Math.random().toString(36).slice(-8)
       const NOTIFY_ENDPOINT = 'https://notify-bot.line.me/oauth/authorize'
-      const NOTIFY_REDIRECT_URI = process.env.OWN_ENDPOINT + 'line_notify_connect'
+      const NOTIFY_REDIRECT_URI = process.env.SITE_URL + '/line_notify_connect'
       const NOTIFY_PARAMS = new URLSearchParams()
       NOTIFY_PARAMS.append('response_type', 'code')
       NOTIFY_PARAMS.append('client_id', process.env.LINE_NOTIFY_CLIENT_ID)

@@ -87,7 +87,7 @@ export default {
     if (response.data.status !== 200) {
       return error({ statusCode: 404, message: 'err' })
     }
-    const shareUrl = process.env.OWN_ENDPOINT + 'wiki/' + articleID
+    const shareUrl = process.env.SITE_URL + '/wiki/' + articleID
     return {
       article: response.data.data,
       shareUrl
