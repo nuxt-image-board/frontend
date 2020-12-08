@@ -4,7 +4,28 @@ export default {
   ** Read environment variables
   */
   privateRuntimeConfig: {
-    API_KEY: process.env.API_SSR_TOKEN
+    API_KEY: process.env.API_SSR_TOKEN,
+    API_SSR_ENDPOINT: process.env.API_SSR_ENDPOINT || "https://nboard-api.domao.site"
+  },
+  publicRuntimeConfig: {
+    SITE_NAME: process.env.SITE_NAME || "N board",
+    SITE_NAME_FULL: process.env.SITE_NAME_FULL || "N board",
+    SITE_THEME_COLOR: process.env.THEME_COLOR || "",
+    SITE_BG_COLOR: process.env.SITE_BG_COLOR || "",
+    SITE_URL: process.env.SITE_URL || "https://nboard.domao.site",
+    SITE_DESCRIPTION: process.env.SITE_DESCRIPTION || "Just an test board",
+    API_CSR_ENDPOINT: process.env.API_CSR_ENDPOINT || "https://nboard-api.domao.site",
+    CDN_ENDPOINT: process.env.CDN_ENDPOINT || "https://nboard-api.domao.site/static/",
+    ONESIGNAL_ID: process.env.ONESIGNAL_ID || "",
+    LOGROCKET_ID: process.env.LOGROCKET_ID || "",
+    LINE_CLIENT_ID: process.env.LINE_CLIENT_ID || "",
+    LINE_NOTIFY_CLIENT_ID: process.env.LINE_NOTIFY_CLIENT_ID || "",
+    TELEGRAM_USER_ID: process.env.TELEGRAM_USER_ID || "",
+    DYNAMICLINK_ENDPOINT: process.env.DYNAMICLINK_ENDPOINT || "",
+    DYNAMICLINK_API_KEY: process.env.DYNAMICLINK_API_KEY || "",
+    CONTACT: process.env.LINK_CONTACT || "",
+    DMCA: process.env.LINK_DMCA || "",
+    PUBLIC_PATH: process.env.PUBLIC_PATH || "/_nuxt/"
   },
   /*
   ** Headers of the page
