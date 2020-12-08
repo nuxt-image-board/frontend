@@ -14,7 +14,8 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: frontend
+      IMAGE_NAME: nb-frontend
+      API_KEY: ${{ secrets.API_KEY }}
       SKIP_SASS_BINARY_DOWNLOAD_FOR_CI: true
       SKIP_NODE_SASS_TESTS: true
     steps:
@@ -25,27 +26,26 @@ jobs:
         uses: docker/setup-qemu-action@v1
         with:
           image: tonistiigi/binfmt:latest
-          platforms: arm
+          platforms: arm,arm64
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
-      - name: Login to GitHub Container Registry
+      - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
-          registry: ghcr.io
-          username: ${{ secrets.GCR_USER }}
-          password: ${{ secrets.GCR_PASS }}
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASS }}
 
-      - name: Build and push
+      - name: Build and push image
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: ./Dockerfile_arm
-          platforms: linux/amd64,linux/arm/v7
+          file: ./Dockerfile
           push: true
+          platforms: linux/386,linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64
           tags: |
-            ghcr.io/nuxt-image-board/${{ env.IMAGE_NAME }}:latest
-            ghcr.io/nuxt-image-board/${{ env.IMAGE_NAME }}:${{ github.run_number }}
-          cache-from: type=registry,ref=ghcr.io/nuxt-image-board/${{ env.IMAGE_NAME }}:latest
+            dosugamea/${{ env.IMAGE_NAME }}:latest
+            dosugamea/${{ env.IMAGE_NAME }}:${{ github.run_number }}
+          cache-from: type=registry,ref=dosugamea/${{ env.IMAGE_NAME }}:latest
           cache-to: type=inline,mode=max

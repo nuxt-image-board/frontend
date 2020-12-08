@@ -4,7 +4,7 @@ FROM node:14.15.0-alpine
 WORKDIR /usr/local/app
 # モジュールを揃える(gitが要る)
 COPY package.json ./
-RUN apk add --no-cache --virtual .build-dep git
+RUN apk add --no-cache --virtual .build-dep alpine-sdk python git
 RUN npm install --production --quiet
 # ビルド
 COPY . .
