@@ -15,7 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: nb-frontend
-      API_KEY: ${{ secrets.API_KEY }}
       SKIP_SASS_BINARY_DOWNLOAD_FOR_CI: true
       SKIP_NODE_SASS_TESTS: true
     steps:
