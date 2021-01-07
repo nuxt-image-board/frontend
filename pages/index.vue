@@ -108,7 +108,12 @@ export default {
     if (random.status !== 200) {
       return error({ statusCode: 502, message: 'err' })
     }
-    const randomIllust = random.data.data.imgs[0]
+    let randomIllust = {}
+    if (random.data.data.imgs.length > 0) {
+      randomIllust = random.data.data.imgs[0]
+    } else {
+      randomIllust = { illustID: 1 }
+    }
     return {
       randomIllust,
       newsHead,
