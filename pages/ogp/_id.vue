@@ -52,7 +52,7 @@ export default {
       if (this.result.nsfw) {
         return require('~/assets/images/blocked_r18.png')
       } else {
-        return process.env.CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
+        return this.$config.API_CDN_ENDPOINT + 'illusts/thumb/' + this.result.illustID + '.jpg'
       }
     }
   },

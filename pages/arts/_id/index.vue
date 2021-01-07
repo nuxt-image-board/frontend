@@ -551,19 +551,19 @@ export default {
   },
   computed: {
     ImgOrigAddress () {
-      return `${process.env.CDN_ENDPOINT}illusts/orig/${this.result.illustID}.${this.result.extension}`
+      return `${this.$config.API_CDN_ENDPOINT}illusts/orig/${this.result.illustID}.${this.result.extension}`
     },
     ImgLargeAddress () {
       if (this.$store.state.user.useWebP) {
-        return `${process.env.CDN_ENDPOINT}illusts/large/${this.result.illustID}.webp`
+        return `${this.$config.API_CDN_ENDPOINT}illusts/large/${this.result.illustID}.webp`
       } else {
-        return `${process.env.CDN_ENDPOINT}illusts/large/${this.result.illustID}.jpg`
+        return `${this.$config.API_CDN_ENDPOINT}illusts/large/${this.result.illustID}.jpg`
       }
     }
   },
   methods: {
     getThumbAddress (illustID) {
-      return `${process.env.CDN_ENDPOINT}illusts/thumb/${illustID}.${(this.$store.state.user.useWebP ? 'webp' : 'jpg')}`
+      return `${this.$config.API_CDN_ENDPOINT}illusts/thumb/${illustID}.${(this.$store.state.user.useWebP ? 'webp' : 'jpg')}`
     },
     isHidden (mode) {
       switch (mode) {
@@ -617,7 +617,7 @@ export default {
         const a = document.createElement('a')
         document.body.appendChild(a)
         a.href = imageUrl
-        a.download = `${process.env.CDN_ENDPOINT}/illusts/orig/${this.result.illustID}.${this.result.extension}`
+        a.download = `${this.$config.API_CDN_ENDPOINT}/illusts/orig/${this.result.illustID}.${this.result.extension}`
         a.click()
         a.remove()
         URL.revokeObjectURL(imageUrl)

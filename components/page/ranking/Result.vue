@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     previewAddress () {
-      return `${process.env.CDN_ENDPOINT}illusts/${(this.$store.state.user.useRaw ? 'orig' : 'thumb')}/${this.illustID}.${(this.$store.state.user.useRaw ? this.result.extension : (this.$store.state.user.useWebP ? 'webp' : 'jpg'))}`
+      return `${this.$config.API_CDN_ENDPOINT}illusts/${(this.$store.state.user.useRaw ? 'orig' : 'thumb')}/${this.illustID}.${(this.$store.state.user.useRaw ? this.result.extension : (this.$store.state.user.useWebP ? 'webp' : 'jpg'))}`
     }
   }
 }

@@ -80,7 +80,7 @@ export default {
   },
   data () {
     return {
-      previewAddress: process.env.CDN_ENDPOINT +
+      previewAddress: this.$config.API_CDN_ENDPOINT +
         'illusts/' +
         (this.$store.state.user.useRaw ? 'orig' : 'thumb') +
         '/' +

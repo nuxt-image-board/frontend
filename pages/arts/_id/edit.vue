@@ -250,7 +250,7 @@ export default {
   },
   computed: {
     ImgAddress () {
-      return process.env.CDN_ENDPOINT +
+      return this.$config.API_CDN_ENDPOINT +
         'illusts/large/' +
         this.illust.illustID +
         '.' +
